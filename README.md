@@ -24,4 +24,5 @@ git rm -r --cached Path/to/directories
 
 ### Autores
 * Rodrigo Lopes - rfa.lopes@campus.fct.unl.pt
+* André Candeias - js.mc.tic@gmail.com
 * TODO
