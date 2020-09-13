@@ -4,7 +4,7 @@
 
 ### Git Clone
 ```bash
-git clone https://github.com/rfa-lopes/CIAI.git
+git clone https://github.com/rfa-lopes/ASD.git
 ```
 
 ### TODO
