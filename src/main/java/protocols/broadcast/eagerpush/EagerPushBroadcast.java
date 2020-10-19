@@ -20,7 +20,7 @@ public class EagerPushBroadcast extends GenericProtocol {
     private static final Logger logger = LogManager.getLogger(EagerPushBroadcast.class);
 
     public static final String PROTOCOL_NAME = "EagerPush";
-    public static final short PROTOCOL_ID = 220;
+    public static final short PROTOCOL_ID = 200;
     private int t; //Fanout of the protocol
     private final Host myself; //My own address/port
     private final Set<Host> neighbours; //My known neighbours (a.k.a peers the membership protocol told me about)
@@ -77,21 +77,23 @@ public class EagerPushBroadcast extends GenericProtocol {
         if (delivered.add(msg.getMid())) {
             triggerNotification(new DeliverNotification(msg.getMid(), msg.getSender(), msg.getContent()));
 
-            List<Host> unshuffledGossiptTargets = new LinkedList<>(neighbours);
-            Collections.shuffle(unshuffledGossiptTargets);
-            Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(t,neighbours.size()));
-            gossipTargets.forEach(host -> {
-                if (!host.equals(from)) {
-                    logger.trace("Sent {} to {}", msg, host);
-                    sendMessage(msg, host);
-                }
-            });
+            if (neighbours.size() > 0) {
+                List<Host> unshuffledGossiptTargets = new LinkedList<>(neighbours);
+                Collections.shuffle(unshuffledGossiptTargets);
+                Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(t, neighbours.size()));
+                gossipTargets.forEach(host -> {
+                    if (!host.equals(from)) {
+                        logger.trace("Sent {} to {}", msg, host);
+                        sendMessage(msg, host);
+                    }
+                });
 
+            }
         }
     }
 
-    private  void uponNeighbourDown(NeighbourDown notification, short sourceProto) {
-        for(Host h: notification.getNeighbours()) {
+    private void uponNeighbourDown(NeighbourDown notification, short sourceProto) {
+        for (Host h : notification.getNeighbours()) {
             neighbours.remove(h);
             logger.info("Neighbour down: " + h);
         }
@@ -100,7 +102,7 @@ public class EagerPushBroadcast extends GenericProtocol {
     }
 
     private void uponNeighbourUp(NeighbourUp notification, short sourceProto) {
-        for(Host h: notification.getNeighbours()) {
+        for (Host h : notification.getNeighbours()) {
             neighbours.add(h);
             logger.info("New neighbour: " + h);
         }
