@@ -6,6 +6,7 @@ import protocols.apps.BroadcastApp;
 import protocols.broadcast.eagerpush.EagerPushBroadcast;
 import protocols.broadcast.flood.FloodBroadcast;
 import protocols.membership.full.SimpleFullMembership;
+import protocols.membership.partial.HyParView;
 import utils.InterfaceToIp;
 
 import java.net.InetAddress;
@@ -46,20 +47,23 @@ public class Main {
 
         // Application
         BroadcastApp broadcastApp = new BroadcastApp(myself, props, FloodBroadcast.PROTOCOL_ID);
+
         // Broadcast Protocol
         FloodBroadcast broadcast = new FloodBroadcast(props, myself);
-//        EagerPushBroadcast eagerPushBroadcast = new EagerPushBroadcast(props, myself);
+        //EagerPushBroadcast eagerPushBroadcast = new EagerPushBroadcast(props, myself);
+
         // Membership Protocol
-        SimpleFullMembership membership = new SimpleFullMembership(props, myself);
+        //SimpleFullMembership membership = new SimpleFullMembership(props, myself);
+        HyParView membership = new HyParView(props, myself);
 
         //Register applications in babel
-        babel.registerProtocol(broadcastApp);
-        babel.registerProtocol(broadcast/*eagerPushBroadcast*/);
+        //babel.registerProtocol(broadcastApp);
+        //babel.registerProtocol(broadcast/*eagerPushBroadcast*/);
         babel.registerProtocol(membership);
 
         //Init the protocols. This should be done after creating all protocols, since there can be inter-protocol
         //communications in this step.
-        broadcastApp.init(props);
+        //broadcastApp.init(props);
         /*eagerPushBroadcast*/broadcast.init(props);
         membership.init(props);
 
