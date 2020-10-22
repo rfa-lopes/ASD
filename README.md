@@ -1,6 +1,6 @@
 # Algoritmos e Sistemas Distribuído
 
-## Setup
+## Setup and Test
 
 ### Git Clone
 ```bash
