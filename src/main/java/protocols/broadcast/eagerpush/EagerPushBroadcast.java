@@ -77,10 +77,10 @@ public class EagerPushBroadcast extends GenericProtocol {
         if (delivered.add(msg.getMid())) {
             triggerNotification(new DeliverNotification(msg.getMid(), msg.getSender(), msg.getContent()));
 
-            if (neighbours.size() > 0) {
+            if (!neighbours.isEmpty()) {
                 List<Host> unshuffledGossiptTargets = new LinkedList<>(neighbours);
                 Collections.shuffle(unshuffledGossiptTargets);
-                Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(t, neighbours.size()));
+                Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(0, t));
                 gossipTargets.forEach(host -> {
                     if (!host.equals(from)) {
                         logger.trace("Sent {} to {}", msg, host);
