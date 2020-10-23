@@ -1,13 +1,24 @@
 # Algoritmos e Sistemas Distribuído
 
-## Setup
+## Setup and Test
 
 ### Git Clone
 ```bash
 git clone https://github.com/rfa-lopes/ASD.git
 ```
 
-### TODO
+### Compile
+```bash
+mvn package
+```
+
+### Run
+```bash
+java -jar target/asdProj.jar -conf config.properties port=5000
+```
+```bash
+java -jar target/asdProj.jar -conf config.properties port=5000 contact=127.0.0.1:5000
+```
 
 ---
 
@@ -23,6 +34,6 @@ git rm -r --cached Path/to/directories
 ```
 
 ### Autores
-* Rodrigo Lopes - rfa.lopes@campus.fct.unl.pt
-* André Candeias - js.mc.tic@gmail.com
-* TODO
+* Rodrigo Lopes - rfa.lopes@campus.fct.unl.pt - 50435
+* André Candeias - mb.candeias@campus.fct.unl.pt - 50647
+* Salvador Rosa Mendes - sr.mendes@campus.fct.unl.pt - 50503
