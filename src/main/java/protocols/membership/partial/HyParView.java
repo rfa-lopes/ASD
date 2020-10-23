@@ -49,7 +49,7 @@ public class HyParView extends GenericProtocol {
         this.k = Integer.parseInt(properties.getProperty("k", "5"));
         this.c = Integer.parseInt(properties.getProperty("c", "30"));
         this.arwl = Integer.parseInt(properties.getProperty("arwl", "4")); //TODO: QUAIS ESTES VALORES?
-        this.prwl = Integer.parseInt(properties.getProperty("arwl", "4")); //TODO: QUAIS ESTES VALORES?
+        this.prwl = Integer.parseInt(properties.getProperty("prwl", "4")); //TODO: QUAIS ESTES VALORES?
 
         smallActiveViewMaxSize  = (int) (Math.log(n) + c);
         smallActiveView = new HashSet<>(smallActiveViewMaxSize);
