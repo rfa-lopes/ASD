@@ -84,6 +84,7 @@ public class SimpleFullMembership extends GenericProtocol {
     }
 
     @Override
+    @SuppressWarnings("Duplicates") // PARA IGNORAR O CODIGO DUPLICADO (IF)
     public void init(Properties props) {
 
         //Inform the dissemination protocol about the channel we created in the constructor
