@@ -2,6 +2,7 @@ package protocols.broadcast.plumtree;
 
 import babel.core.GenericProtocol;
 import babel.exceptions.HandlerRegistrationException;
+import babel.generic.ProtoMessage;
 import babel.generic.ProtoRequest;
 import network.data.Host;
 import protocols.broadcast.common.BroadcastRequest;
@@ -25,7 +26,6 @@ public class PlumTree extends GenericProtocol {
     public static final String PROTOCOL_NAME = "PlumTree";
     public static final short PROTOCOL_ID = 690;
 
-    private int t; //Fanout of the protocol
     private final Host myself; //My own address/port
     private final Set<UUID> delivered; //Set of received messages (since we do not want to deliver the same msg twice)
 
@@ -56,17 +56,40 @@ public class PlumTree extends GenericProtocol {
         registerRequestHandler(BroadcastRequest.REQUEST_ID, this::uponBroadcastRequest);
 
         /*--------------------- Register Notification Handlers ----------------------------- */
-        //subscribeNotification(NeighbourUp.NOTIFICATION_ID, this::uponNeighbourUp);
-        //subscribeNotification(NeighbourDown.NOTIFICATION_ID, this::uponNeighbourDown);
-        //subscribeNotification(ChannelCreated.NOTIFICATION_ID, this::uponChannelCreated);
+        subscribeNotification(NeighbourUp.NOTIFICATION_ID, this::uponNeighbourUp);
+        subscribeNotification(NeighbourDown.NOTIFICATION_ID, this::uponNeighbourDown);
+        subscribeNotification(ChannelCreated.NOTIFICATION_ID, this::uponChannelCreated);
     }
+
+    private void uponChannelCreated(ChannelCreated notification, short sourceProto) {
+
+        //esta a registar o canal do eager push mas tambem sera necessario para lazy? duvida
+
+        int cId = notification.getChannelId();
+        // Allows this protocol to receive events from this channel.
+        registerSharedChannel(cId);
+        /*---------------------- Register Message Serializers ---------------------- */
+        registerMessageSerializer(cId, GossipMessage.MSG_ID, GossipMessage.serializer);
+        /*---------------------- Register Message Handlers -------------------------- */
+        try {
+            registerMessageHandler(cId, GossipMessage.MSG_ID, this::eagerPush, this::uponMsgFail);
+        } catch (HandlerRegistrationException e) {
+            logger.error("Error registering message handler (eager push): " + e.getMessage());
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        //Now we can start sending messages
+        channelReady = true;
+    }
+
 
     private void uponBroadcastRequest(BroadcastRequest request, short sourceProto) {
         if (!channelReady) return;
 
         GossipMessage message = new GossipMessage(request.getMsgId(), request.getSender(), sourceProto, request.getMsg());
 
-        eagerPush(message, getProtoId());
+        eagerPush(message, myself, getProtoId(), -1);
 
         lazyPush(request, getProtoId());
 
@@ -76,7 +99,29 @@ public class PlumTree extends GenericProtocol {
 
     }
 
-    private void eagerPush(GossipMessage message, short sourceProto){
+    private void uponNeighbourUp(NeighbourUp notification, short sourceProto) {
+        for (Host h : notification.getNeighbours()) {
+            eagerPushPeers.add(h);
+            logger.info("New eager peer: " + h);
+        }
+    }
+
+    private void uponNeighbourDown(NeighbourDown notification, short sourceProto) { //rever
+        for (Host h : notification.getNeighbours()) {
+            eagerPushPeers.remove(h);
+            lazyPushPeers.remove(h);
+            logger.info("Peer down: " + h);
+        }
+    }
+
+    private void uponMsgFail(ProtoMessage msg, Host host, short destProto,
+                             Throwable throwable, int channelId) {
+
+        //If a message fails to be sent, for whatever reason, log the message and the reason
+        logger.error("Message {} to {} failed, reason: {}", msg, host, throwable);
+    }
+
+    private void eagerPush(GossipMessage message, Host from, short sourceProto, int channelId) {
 
         for (Host h : eagerPushPeers) {
             if (h != myself) {
@@ -85,11 +130,11 @@ public class PlumTree extends GenericProtocol {
         }
     }
 
-    private void lazyPush(BroadcastRequest request, short sourceProto){
+    private void lazyPush(BroadcastRequest request, short sourceProto) {
 
         for (Host h : lazyPushPeers) {
             if (h != myself) {
-                lazyQueue.add(new LazyMessage(request.getMsgId(), request.getSender(), sourceProto));
+                lazyQueue.add(new LazyMessage(h, request.getMsgId(), request.getSender(), sourceProto));
             }
         }
 
@@ -97,16 +142,19 @@ public class PlumTree extends GenericProtocol {
 
     }
 
-    private void dispatch(){
-        //TODO
+    private void dispatch() {
+
+        for (LazyMessage lm : lazyQueue) {
+            sendMessage(lm, lm.getDestination());
+            lazyQueue.remove(lm);
+        }
     }
 
     @Override
-    public void init(Properties properties) throws HandlerRegistrationException, IOException {
-        //Nothing to do here, we just wait for event from the membership or the application and t can only change after overlay network changes
+    public void init(Properties properties) {
 
     }
 
-    //TODO: DISPATCH, CHANNEL CREATED, RECEIVE BOTH OF THEM AND INIT
+    //TODO: CHANNEL CREATED, RECEIVE BOTH OF THEM AND INIT
 
 }
