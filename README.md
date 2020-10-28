@@ -35,5 +35,5 @@ git rm -r --cached Path/to/directories
 
 ### Autores
 * Rodrigo Lopes - rfa.lopes@campus.fct.unl.pt - 50435
-* André Candeias - mb.candeias@campus.fct.unl.pt - 50647
+* Miguel Candeias - mb.candeias@campus.fct.unl.pt - 50647
 * Salvador Rosa Mendes - sr.mendes@campus.fct.unl.pt - 50503
