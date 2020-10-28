@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import protocols.apps.BroadcastApp;
 import protocols.broadcast.eagerpush.EagerPushBroadcast;
 import protocols.broadcast.flood.FloodBroadcast;
+import protocols.membership.cyclon.CyclonMembership;
 import protocols.membership.full.SimpleFullMembership;
 import protocols.membership.partial.HyParView;
 import utils.InterfaceToIp;
@@ -46,29 +47,51 @@ public class Main {
         logger.info("Hello, I am {}", myself);
 
         // Application
-        BroadcastApp broadcastApp = new BroadcastApp(myself, props, FloodBroadcast.PROTOCOL_ID);
+        BroadcastApp broadcastApp = new BroadcastApp(myself, props, EagerPushBroadcast.PROTOCOL_ID);
+
+        CyclonMembership membership = new CyclonMembership(props,myself);
+
+
+        EagerPushBroadcast broadcast = new EagerPushBroadcast(props, myself, membership);
+
+        babel.registerProtocol(broadcast);
+
+        babel.registerProtocol(membership);
+
+        babel.registerProtocol(broadcastApp);
+
+        broadcastApp.init(props);
+
+        broadcast.init(props);
+
+        membership.init(props);
+
+        babel.start();
+
+
+        // broadcastApp.init(props);
+
 
         // Broadcast Protocol
-        FloodBroadcast broadcast = new FloodBroadcast(props, myself);
-        //EagerPushBroadcast eagerPushBroadcast = new EagerPushBroadcast(props, myself);
+//        FloodBroadcast broadcast = new FloodBroadcast(props, myself);
+
+       // /*eagerPushBroadcast*/broadcast.init(props);
+
 
         // Membership Protocol
         //SimpleFullMembership membership = new SimpleFullMembership(props, myself);
-        HyParView membership = new HyParView(props, myself);
-
+//        HyParView membership = new HyParView(props, myself);
         //Register applications in babel
-        //babel.registerProtocol(broadcastApp);
+       // babel.registerProtocol(broadcastApp);
         //babel.registerProtocol(broadcast/*eagerPushBroadcast*/);
-        babel.registerProtocol(membership);
 
         //Init the protocols. This should be done after creating all protocols, since there can be inter-protocol
         //communications in this step.
         //broadcastApp.init(props);
-        /*eagerPushBroadcast*/broadcast.init(props);
-        membership.init(props);
+        //babel.registerProtocol(broadcast);
 
         //Start babel and protocol threads
-        babel.start();
+
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> logger.info("Goodbye")));
 

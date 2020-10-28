@@ -20,7 +20,7 @@ public class GossipMessage extends ProtoMessage {
 
     @Override
     public String toString() {
-        return "FloodMessage{" +
+        return "GossipMessage{" +
                 "mid=" + mid +
                 '}';
     }
