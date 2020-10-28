@@ -10,41 +10,41 @@ import java.io.IOException;
 public class ForwardJoinMessage extends ProtoMessage {
     public final static short MSG_ID = 9002;
     private final Host newNode;
-    private final int arwl;
+    private final int ttl;
 
-    public ForwardJoinMessage(Host newNode, int arwl) {
+    public ForwardJoinMessage(Host newNode, int ttl) {
         super(MSG_ID);
         this.newNode = newNode;
-        this.arwl = arwl;
+        this.ttl = ttl;
     }
 
     public Host getNewNode() {
         return newNode;
     }
 
-    public int getArwl(){
-        return arwl;
+    public int getTTL(){
+        return ttl;
     }
 
     @Override
     public String toString() {
         return "ForwardJoinMessage{" +
                 "newNode=" + newNode +
-                " | ARWL=" + arwl +
+                " | TTL=" + ttl +
                 '}';
     }
 
     public static ISerializer<ForwardJoinMessage> serializer = new ISerializer<>() {
         @Override
         public void serialize(ForwardJoinMessage forwardJoinMessage, ByteBuf out) throws IOException {
-            out.writeInt(forwardJoinMessage.getArwl());
+            out.writeInt(forwardJoinMessage.getTTL());
             Host.serializer.serialize(forwardJoinMessage.getNewNode(), out);
         }
 
         @Override
         public ForwardJoinMessage deserialize(ByteBuf in) throws IOException {
-            int arwl = in.readInt();
-            return new ForwardJoinMessage(Host.serializer.deserialize(in), arwl);
+            int ttl = in.readInt();
+            return new ForwardJoinMessage(Host.serializer.deserialize(in), ttl);
         }
     };
 }
