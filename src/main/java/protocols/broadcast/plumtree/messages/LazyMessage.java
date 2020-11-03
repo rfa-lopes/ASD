@@ -4,7 +4,6 @@ import babel.generic.ProtoMessage;
 import io.netty.buffer.ByteBuf;
 import network.ISerializer;
 import network.data.Host;
-import protocols.broadcast.eagerpush.messages.GossipMessage;
 
 import java.io.IOException;
 import java.util.UUID;

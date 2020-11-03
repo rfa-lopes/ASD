@@ -3,21 +3,17 @@ package protocols.broadcast.plumtree;
 import babel.core.GenericProtocol;
 import babel.exceptions.HandlerRegistrationException;
 import babel.generic.ProtoMessage;
-import babel.generic.ProtoRequest;
 import network.data.Host;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import protocols.broadcast.common.BroadcastRequest;
 import protocols.broadcast.common.DeliverNotification;
 import protocols.broadcast.eagerpush.messages.GossipMessage;
 import protocols.broadcast.plumtree.messages.LazyMessage;
-import protocols.broadcast.plumtree.messages.PlumMessage;
 import protocols.membership.common.notifications.ChannelCreated;
 import protocols.membership.common.notifications.NeighbourDown;
 import protocols.membership.common.notifications.NeighbourUp;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.io.IOException;
 import java.util.*;
 
 public class PlumTree extends GenericProtocol {
@@ -85,13 +81,14 @@ public class PlumTree extends GenericProtocol {
 
 
     private void uponBroadcastRequest(BroadcastRequest request, short sourceProto) {
+
         if (!channelReady) return;
 
         GossipMessage message = new GossipMessage(request.getMsgId(), request.getSender(), sourceProto, request.getMsg());
 
         eagerPush(message, myself, getProtoId(), -1);
 
-        lazyPush(request, getProtoId());
+        lazyPush(message, getProtoId());
 
         triggerNotification(new DeliverNotification(message.getMid(), message.getSender(), message.getContent()));
 
@@ -130,11 +127,11 @@ public class PlumTree extends GenericProtocol {
         }
     }
 
-    private void lazyPush(BroadcastRequest request, short sourceProto) {
+    private void lazyPush(GossipMessage message, short sourceProto) {
 
         for (Host h : lazyPushPeers) {
             if (h != myself) {
-                lazyQueue.add(new LazyMessage(h, request.getMsgId(), request.getSender(), sourceProto));
+                lazyQueue.add(new LazyMessage(h, message.getMid(), myself, sourceProto));
             }
         }
 
@@ -148,6 +145,37 @@ public class PlumTree extends GenericProtocol {
             sendMessage(lm, lm.getDestination());
             lazyQueue.remove(lm);
         }
+
+    }
+
+    private void Receive(GossipMessage message, Host from, short sourceProto, int channelId) {
+        logger.trace("Received {} from {}", message, from);
+
+        if (received.contains(message.getMid())) {
+            eagerPushPeers.remove(from);
+            lazyPushPeers.add(from);
+
+            sendMessage(new LazyMessage(message.getSender(), message.getMid(), myself, sourceProto), message.getSender());
+        } else {
+            triggerNotification(new DeliverNotification(message.getMid(), message.getSender(), message.getContent()));
+
+            received.add(message.getMid());
+
+            eagerPush(message, myself, sourceProto, channelId);
+            lazyPush(message, sourceProto);
+
+            eagerPushPeers.add(message.getSender());
+            lazyPushPeers.remove(message.getSender());
+
+            //opcional optimize
+        }
+
+    }
+
+    //receive Prune
+    private void Receive(LazyMessage message, Host from, short sourceProto, int channelId) {
+        eagerPushPeers.remove(from);
+        lazyPushPeers.add(from);
     }
 
     @Override
