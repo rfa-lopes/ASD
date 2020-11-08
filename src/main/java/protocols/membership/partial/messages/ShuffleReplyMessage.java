@@ -3,25 +3,38 @@ package protocols.membership.partial.messages;
 import babel.generic.ProtoMessage;
 import io.netty.buffer.ByteBuf;
 import network.ISerializer;
+import network.data.Host;
+import protocols.membership.full.messages.SampleMessage;
+
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ShuffleReplyMessage extends ProtoMessage {
 
     public final static short MSG_ID = 9007;
+    private Set<Host> sample;
 
-    public ShuffleReplyMessage() {
+    public ShuffleReplyMessage(Set<Host> sample) {
         super(MSG_ID);
+        this.sample = sample;
     }
 
     public static ISerializer<ShuffleReplyMessage> serializer = new ISerializer<>() {
         @Override
         public void serialize(ShuffleReplyMessage shuffleReplyMessage, ByteBuf out) throws IOException {
-
+            out.writeInt(shuffleReplyMessage.sample.size());
+            for (Host h : shuffleReplyMessage.sample)
+                Host.serializer.serialize(h, out);
         }
 
         @Override
         public ShuffleReplyMessage deserialize(ByteBuf in) throws IOException {
-            return new ShuffleReplyMessage();
+            int size = in.readInt();
+            Set<Host> subset = new HashSet<>(size);
+            for (int i = 0; i < size; i++)
+                subset.add(Host.serializer.deserialize(in));
+            return new ShuffleReplyMessage(subset);
         }
     };
 }

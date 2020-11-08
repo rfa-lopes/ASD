@@ -17,7 +17,7 @@ mvn package
 java -jar target/asdProj.jar -conf config.properties port=5000
 ```
 ```bash
-java -jar target/asdProj.jar -conf config.properties port=5000 contact=127.0.0.1:5000
+java -jar target/asdProj.jar -conf config.properties port=5001 contact=127.0.0.1:5000
 ```
 
 ---

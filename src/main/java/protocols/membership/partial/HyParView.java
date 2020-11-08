@@ -208,6 +208,7 @@ public class HyParView extends GenericProtocol {
     //--------------------------
 
     private void uponReceiveNeighbor(NeighborMessage neighborMessage, Host peer, short sourceProto, int channelId) {
+        logger.debug("Received {} from {}", neighborMessage, peer);
         boolean isPriority = neighborMessage.isPriority();
         if (isPriority)
             addNodeActiveView(peer);
@@ -223,12 +224,14 @@ public class HyParView extends GenericProtocol {
     }
 
     private void uponReceiveReject(RejectMessage rejectMessage, Host peer, short sourceProto, int channelId) {
+        logger.debug("Received {} from {}", rejectMessage, peer);
         passiveView.remove(peer); //Para não escolher o mesmo (?)
         attemptPassiveViewConnection();
         passiveView.add(peer);
     }
 
     private void uponReceiveShuffle(ShuffleMessage shuffleMessage, Host peer, short sourceProto, int channelId) {
+        logger.debug("Received {} from {}", shuffleMessage, peer);
         int newTtl = shuffleMessage.getTtl() - 1;
         shuffleMessage.setTtl(shuffleMessage.getTtl() - 1);
 
@@ -236,28 +239,36 @@ public class HyParView extends GenericProtocol {
             Host random = getRandomFromSet(activeView, peer); //Except peer
             sendMessage(shuffleMessage, random);
         }else{
-            //TODO: Pagina 8 - 4.4 - ". Otherwise, node q accepts the ...
-            //Shuffle request and send back, using a temporary TCP connection, a ShuffleReply message
-            //that includes a number of nodes selected at random from q’s passive view equal to the number of
-            //nodes received in the Shuffle request."
+            int numberOfNodesReceived = shuffleMessage.getPassiveViewSample().size();
+            Set<Host> sample = getSampleFromSet(passiveView, numberOfNodesReceived);
+            openConnection(peer); //Temporary connection
+            sendMessage(new ShuffleReplyMessage(sample), peer);
+            closeConnection(peer);
         }
+
+        //TODO: 4.4- Then, both nodes integrate the elements they received in the Shuffle/ShuffleReply message ...
+        //into their passive views (naturally, they exclude their own identifier and nodes that are part
+        //of the active or passive views). Because the passive view has a fixed length, it might get full; in
+        //that case, some identifiers will have to be removed in order to free space to include the new ones.
+        //A node will first attempt to remove identifiers sent to the peer. If no such identifiers remain in
+        //the passive view, it will remove identifiers at random.
     }
 
     private void uponReceiveReplyShuffle(ShuffleReplyMessage shuffleReplyMessage, Host peer, short sourceProto, int channelId) {
+        logger.debug("Received {} from {}", shuffleReplyMessage, peer);
         //TODO
     }
 
     //********************************* TIMERS FUNCTIONS ******************************************************
 
     private void uponShuffleTimer(ShuffleTimer shuffleTimer, long timerId) {
-
+        logger.debug("Timer Shuffle");
         if (!activeView.isEmpty()) {
             Set<Host> activeViewSample = getSampleFromSet(activeView, ka);
             Set<Host> passiveViewSample = getSampleFromSet(passiveView, kp);
 
             Host randomNeighbor = getRandomFromSet(activeView);
             sendMessage(new ShuffleMessage(activeViewSample, passiveViewSample, arwl), randomNeighbor);
-
         }
 
     }
