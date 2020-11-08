@@ -149,21 +149,22 @@ public class HyParView extends GenericProtocol {
         activeView.add(newNode);
     }
 
-    private void uponReceiveForwardJoin(ForwardJoinMessage forwardJoinoinMessage, Host sender, short sourceProto, int channelId) {
-        logger.debug("Received {} from {}", forwardJoinoinMessage, sender);
-        int timeToLive = forwardJoinoinMessage.getTTL();
-        Host newNode = forwardJoinoinMessage.getNewNode();
+    private void uponReceiveForwardJoin(ForwardJoinMessage forwardJoinMessage, Host sender, short sourceProto, int channelId) {
+        logger.debug("Received {} from {}", forwardJoinMessage, sender);
+
+        int timeToLive = forwardJoinMessage.getTTL();
+        Host newNode = forwardJoinMessage.getNewNode();
+
         if(timeToLive == 0 || activeView.size() == 0)
             addNodeActiveView(newNode);
-        else
-        if(timeToLive == prwl)
+        else if (timeToLive == prwl)
             addNodePassiveView(newNode);
 
-        ForwardJoinMessage forwardJoinMessage = new ForwardJoinMessage(newNode, timeToLive - 1);
+        ForwardJoinMessage newForwardJoinMessage = new ForwardJoinMessage(newNode, timeToLive - 1);
         for ( Host n : activeView)
             if(!n.equals(sender)) {
-                logger.debug("Send {} from {} to {}", forwardJoinMessage, myself, n);
-                sendMessage(forwardJoinMessage, n);
+                logger.debug("Send {} from {} to {}", newForwardJoinMessage, myself, n);
+                sendMessage(newForwardJoinMessage, n);
             }
     }
 
@@ -287,9 +288,9 @@ public class HyParView extends GenericProtocol {
         logger.error("Message {} to {} failed, reason: {}", joinMessage, newNode, throwable);
     }
 
-    private void uponReceiveForwardJoinFails(ForwardJoinMessage forwardJoinoinMessage, Host sender, short destProto, Throwable throwable, int channelId) {
+    private void uponReceiveForwardJoinFails(ForwardJoinMessage forwardJoinMessage, Host sender, short destProto, Throwable throwable, int channelId) {
         //TODO: Fails
-        logger.error("Message {} to {} failed, reason: {}", forwardJoinoinMessage, sender, throwable);
+        logger.error("Message {} to {} failed, reason: {}", forwardJoinMessage, sender, throwable);
     }
 
     private void uponReceiveDisconnectFails(DisconnectMessage disconnectMessage, Host peer, short destProto, Throwable throwable, int channelId) {
