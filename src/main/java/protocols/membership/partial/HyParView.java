@@ -282,6 +282,15 @@ public class HyParView extends GenericProtocol {
 
     //********************************* FAILS FUNCTIONS ******************************************************
 
+    //TODO: 4.5 View Update Procedures
+    /*Algorithm 1 depicts some basic manipulation primitives used to change contents of the passive
+    and active views. The important aspect to retain from these primitives is that nodes can pass
+    from the passive view to the active view in order to fill the active view (e.g. in reaction to node
+    failures). Nodes can be moved from the active view to the passive view whenever a correct node
+    has to be removed from the active view. Note that since links are symmetric, by removing a node
+    p from the active view of node q, q creates a “free slot” in p’s active view. By adding p to its
+    passive view, node q increases the probability of shuffling q with other nodes and, subsequently,
+    having p be target of Neighbor requests.*/
 
     private void uponReceiveJoinFails(JoinMessage joinMessage, Host newNode, short destProto, Throwable throwable, int channelId) {
         //TODO: Fails
