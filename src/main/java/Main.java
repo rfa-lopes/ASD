@@ -29,6 +29,16 @@ public class Main {
     //Default babel configuration file (can be overridden by the "-config" launch argument)
     private static final String DEFAULT_CONF = "babel_config.properties";
 
+    ////Membership Algorithms
+    private static final String CYCLON = "CYCLON";
+    private static final String HYPARVIEW = "HYPARVIEW";
+    private static final String FULL = "FULL";
+
+    //Broadcast Algorithms
+    private static final String PLUMTREE = "PLUMTREE";
+    private static final String EAGER = "EAGER";
+    private static final String FLOOD = "FLOOD";
+
     public static void main(String[] args) throws Exception {
 
         //Get the (singleton) babel instance
@@ -49,9 +59,7 @@ public class Main {
         logger.info("Hello, I am {}", myself);
 
         //Lets run the algorithms from props
-
         String broadcastAlgorithm = props.getProperty("broadcast");
-
         String membershipAlgorithm = props.getProperty("membership");
 
         // Application
@@ -59,21 +67,35 @@ public class Main {
 
         //Lets start by declaring that we will have two protocols - a membership one and a broadcast one
         GenericProtocol membership;
-
         GenericProtocol broadcast;
 
         //Initialize the protocol depending on the properties config file
         //FIXME ADJUST PLUMTREE to use one of the memberships and ADJUST HYPERVIEW to share its current neighbourhood
-        if (membershipAlgorithm.equals("cyclon")) {
-            membership = new CyclonMembership(props, myself);
-        } else {
-            membership = new HyParView(props, myself);
+
+        //Membership Algorithms
+        switch (membershipAlgorithm.toUpperCase()){
+            case CYCLON:
+                membership = new CyclonMembership(props, myself);
+                break;
+            case HYPARVIEW:
+                membership = new HyParView(props, myself);
+                break;
+            default:
+                membership = new SimpleFullMembership(props, myself);
+                break;
         }
 
-        if (broadcastAlgorithm.equals("eager")) {
-            broadcast = new EagerPushBroadcast(props, myself, membership);
-        } else {
-            broadcast = new PlumTree(props, myself);
+        //Broadcast Algorithms
+        switch (broadcastAlgorithm.toUpperCase()){
+            case EAGER:
+                broadcast = new EagerPushBroadcast(props, myself, membership);
+                break;
+            case PLUMTREE:
+                broadcast = new PlumTree(props, myself);
+                break;
+            default:
+                broadcast = new FloodBroadcast(props, myself);
+                break;
         }
 
         //Register the protocols in babel

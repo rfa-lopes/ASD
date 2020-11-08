@@ -20,6 +20,10 @@ public class ShuffleReplyMessage extends ProtoMessage {
         this.sample = sample;
     }
 
+    public Set<Host> getSample() {
+        return sample;
+    }
+
     public static ISerializer<ShuffleReplyMessage> serializer = new ISerializer<>() {
         @Override
         public void serialize(ShuffleReplyMessage shuffleReplyMessage, ByteBuf out) throws IOException {

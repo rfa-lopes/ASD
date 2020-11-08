@@ -24,21 +24,22 @@ public class HyParView extends GenericProtocol {
     public static final String PROTOCOL_NAME = "HyParView";
     public static final short PROTOCOL_ID = 9969;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final int k, c, arwl, prwl, ka, kp;
     private final int n = 10000; //TODO: QUANTO vale o n? Número de peers na rede?
 
 
-    private Host myself;
+    private final Host myself;
 
-    private int activeViewMaxSize;
-    private Set<Host> activeView;
+    private final int activeViewMaxSize;
+    private final Set<Host> activeView;
 
-    private int passiveViewMaxSize;
-    private Set<Host> passiveView;
+    private final int passiveViewMaxSize;
+    private final Set<Host> passiveView;
 
     private final int channelId; //Id of the created channel
 
-    private Random rnd ;
+    private final Random rnd ;
 
     public HyParView(Properties properties, Host myself) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
@@ -106,10 +107,9 @@ public class HyParView extends GenericProtocol {
 
     }
 
-
     @Override
     @SuppressWarnings("Duplicates") // PARA IGNORAR O CODIGO DUPLICADO (IF)
-    public void init(Properties properties) throws HandlerRegistrationException, IOException {
+    public void init(Properties properties) {
 
         //Inform the dissemination protocol about the channel we created in the constructor
         triggerNotification(new ChannelCreated(channelId));
@@ -118,8 +118,8 @@ public class HyParView extends GenericProtocol {
         if (properties.containsKey("contact")) {
             try {
                 String contact = properties.getProperty("contact");
-                String[] hostElems = contact.split(":");
-                Host contactHost = new Host(InetAddress.getByName(hostElems[0]), Short.parseShort(hostElems[1]));
+                String[] hostElements = contact.split(":");
+                Host contactHost = new Host(InetAddress.getByName(hostElements[0]), Short.parseShort(hostElements[1]));
                 openConnection(contactHost);
                 activeView.add(contactHost);
 
@@ -205,8 +205,6 @@ public class HyParView extends GenericProtocol {
         }
     }
 
-    //--------------------------
-
     private void uponReceiveNeighbor(NeighborMessage neighborMessage, Host peer, short sourceProto, int channelId) {
         logger.debug("Received {} from {}", neighborMessage, peer);
         boolean isPriority = neighborMessage.isPriority();
@@ -233,7 +231,7 @@ public class HyParView extends GenericProtocol {
     private void uponReceiveShuffle(ShuffleMessage shuffleMessage, Host peer, short sourceProto, int channelId) {
         logger.debug("Received {} from {}", shuffleMessage, peer);
         int newTtl = shuffleMessage.getTtl() - 1;
-        shuffleMessage.setTtl(shuffleMessage.getTtl() - 1);
+        shuffleMessage.setTtl(newTtl);
 
         if(newTtl > 0 && activeView.size() > 1){
             Host random = getRandomFromSet(activeView, peer); //Except peer
@@ -241,22 +239,30 @@ public class HyParView extends GenericProtocol {
         }else{
             int numberOfNodesReceived = shuffleMessage.getPassiveViewSample().size();
             Set<Host> sample = getSampleFromSet(passiveView, numberOfNodesReceived);
-            openConnection(peer); //Temporary connection
+            openConnection(peer); //Open Temporary connection
             sendMessage(new ShuffleReplyMessage(sample), peer);
-            closeConnection(peer);
+            closeConnection(peer);//Close Temporary connection
         }
+        //Then, both nodes integrate the elements they received in the Shuffle/ShuffleReply message into their passive views
+        Set<Host> mergeSample = shuffleMessage.getPassiveViewSample();
+        Set<Host> shuffleMessageActiveView = shuffleMessage.getActiveViewSample();
+        mergeSample.addAll(shuffleMessageActiveView);
 
-        //TODO: 4.4- Then, both nodes integrate the elements they received in the Shuffle/ShuffleReply message ...
-        //into their passive views (naturally, they exclude their own identifier and nodes that are part
-        //of the active or passive views). Because the passive view has a fixed length, it might get full; in
-        //that case, some identifiers will have to be removed in order to free space to include the new ones.
-        //A node will first attempt to remove identifiers sent to the peer. If no such identifiers remain in
-        //the passive view, it will remove identifiers at random.
+        //(naturally, they exclude their own identifier and nodes that are part of the active or passive views)
+        removeMySelfAndViews(mergeSample);
+
+        integrateElementsIntoPassiveView(mergeSample);
     }
 
     private void uponReceiveReplyShuffle(ShuffleReplyMessage shuffleReplyMessage, Host peer, short sourceProto, int channelId) {
         logger.debug("Received {} from {}", shuffleReplyMessage, peer);
-        //TODO
+
+        Set<Host> mergeSample = shuffleReplyMessage.getSample();
+
+        //(naturally, they exclude their own identifier and nodes that are part of the active or passive views)
+        removeMySelfAndViews(mergeSample);
+
+        integrateElementsIntoPassiveView(mergeSample);
     }
 
     //********************************* TIMERS FUNCTIONS ******************************************************
@@ -311,7 +317,7 @@ public class HyParView extends GenericProtocol {
         logger.error("Message {} to {} failed, reason: {}", shuffleReplyMessage, peer, throwable);
     }
 
-    /* --------------------------------- TCPChannel Events ---------------------------- */
+    /* ********************************* TCPChannel Events ********************************* */
 
     //If a connection is successfully established, this event is triggered. In this protocol, we want to add the
     //respective peer to the membership, and inform the Dissemination protocol via a notification.
@@ -385,11 +391,32 @@ public class HyParView extends GenericProtocol {
 
     private <V> V getRandomFromSet(Set<V> set, Host notThis) {
         List<V> setList = new ArrayList<>(set);
+        //noinspection SuspiciousMethodCalls
         setList.remove(notThis);
         return setList.get(rnd.nextInt(set.size()));
     }
 
     private <V> boolean isFull(Set<V> set, int maxSize){
         return set.size() == maxSize;
+    }
+
+    private <V> void removeRandomElements(Set<V> set, int nElements){
+        List<V> setList = new ArrayList<>(set);
+        for(int i = 0; i < nElements; i++)
+            setList.remove(rnd.nextInt(setList.size()));
+    }
+
+    private void integrateElementsIntoPassiveView(Set<Host> mergeSample) {
+        if(passiveView.size() + mergeSample.size() > passiveViewMaxSize)
+            //it will remove identifiers at random.
+            removeRandomElements(passiveView, mergeSample.size());
+        else
+            //Add all
+            passiveView.addAll(mergeSample);
+    }
+    private void removeMySelfAndViews(Set<Host> mergeSample) {
+        mergeSample.remove(myself);
+        mergeSample.removeAll(passiveView);
+        mergeSample.removeAll(activeView);
     }
 }
