@@ -4,7 +4,6 @@ import babel.generic.ProtoMessage;
 import io.netty.buffer.ByteBuf;
 import network.ISerializer;
 import network.data.Host;
-import protocols.broadcast.eagerpush.messages.GossipMessage;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -17,6 +16,7 @@ public class LazyMessage extends ProtoMessage {
     private final Host sender;
 
     private final short toDeliver;
+    private final Host destination;
 
     @Override
     public String toString() {
@@ -25,11 +25,12 @@ public class LazyMessage extends ProtoMessage {
                 '}';
     }
 
-    public LazyMessage(UUID mid, Host sender, short toDeliver) {
+    public LazyMessage(Host destination, UUID mid, Host sender, short toDeliver) {
         super(MSG_ID);
         this.mid = mid;
         this.sender = sender;
         this.toDeliver = toDeliver;
+        this.destination = destination;
     }
 
     public Host getSender() {
@@ -44,6 +45,8 @@ public class LazyMessage extends ProtoMessage {
         return toDeliver;
     }
 
+    public Host getDestination(){ return destination; }
+
     public static ISerializer<LazyMessage> serializer = new ISerializer<>() {
         @Override
         public void serialize(LazyMessage lazyMessage, ByteBuf out) throws IOException {
@@ -51,6 +54,7 @@ public class LazyMessage extends ProtoMessage {
             out.writeLong(lazyMessage.getMid().getLeastSignificantBits());
             Host.serializer.serialize(lazyMessage.getSender(), out);
             out.writeShort(lazyMessage.getToDeliver());
+            Host.serializer.serialize(lazyMessage.getDestination(), out);
         }
 
         @Override
@@ -60,8 +64,9 @@ public class LazyMessage extends ProtoMessage {
             UUID mid = new UUID(firstLong, secondLong);
             Host sender = Host.serializer.deserialize(in);
             short toDeliver = in.readShort();
+            Host destination = Host.serializer.deserialize(in);
 
-            return new LazyMessage(mid, sender, toDeliver);
+            return new LazyMessage(destination, mid, sender, toDeliver);
         }
     };
 

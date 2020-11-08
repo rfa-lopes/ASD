@@ -7,11 +7,12 @@ import network.data.Host;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocols.broadcast.common.BroadcastRequest;
-import protocols.broadcast.common.DeliverNotification;
 import protocols.broadcast.eagerpush.messages.GossipMessage;
 import protocols.membership.common.notifications.ChannelCreated;
 import protocols.membership.common.notifications.NeighbourDown;
 import protocols.membership.common.notifications.NeighbourUp;
+import protocols.membership.cyclon.CyclonMembership;
+import protocols.membership.partial.HyParView;
 
 import java.io.IOException;
 import java.util.*;
@@ -23,32 +24,54 @@ public class EagerPushBroadcast extends GenericProtocol {
     public static final short PROTOCOL_ID = 200;
     private int t; //Fanout of the protocol
     private final Host myself; //My own address/port
-    private final Set<Host> neighbours; //My known neighbours (a.k.a peers the membership protocol told me about)
+    private Set<Host> neighbors; //My known neighbours (a.k.a peers the membership protocol told me about)
     private final Set<UUID> delivered; //Set of received messages (since we do not want to deliver the same msg twice)
+
+    CyclonMembership cyclonMembership;
+    HyParView hyParView;
+
+    private int cId;
 
     //We can only start sending messages after the membership protocol informed us that the channel is ready
     private boolean channelReady;
 
-    public EagerPushBroadcast(Properties properties, Host myself) throws IOException, HandlerRegistrationException {
+    public EagerPushBroadcast(Properties properties, Host myself, GenericProtocol membership) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
         this.myself = myself;
-        neighbours = new HashSet<>();
+        neighbors = new HashSet<>();
         delivered = new HashSet<>();
         channelReady = false;
+
+        //Checks what is the typ+e of the membership we are using so that we can obtain our node frieds from the membership algorithm
+        if(membership instanceof CyclonMembership){
+            this.cyclonMembership = (CyclonMembership) membership;
+
+        }else{
+            this.hyParView = (HyParView) membership;
+        }
+
         t = 1;
 
         /*--------------------- Register Request Handlers ----------------------------- */
         registerRequestHandler(BroadcastRequest.REQUEST_ID, this::uponBroadcastRequest);
 
+
         /*--------------------- Register Notification Handlers ----------------------------- */
-        subscribeNotification(NeighbourUp.NOTIFICATION_ID, this::uponNeighbourUp);
-        subscribeNotification(NeighbourDown.NOTIFICATION_ID, this::uponNeighbourDown);
+//        subscribeNotification(NeighbourUp.NOTIFICATION_ID, this::uponNeighbourUp);
+//        subscribeNotification(NeighbourDown.NOTIFICATION_ID, this::uponNeighbourDown);
         subscribeNotification(ChannelCreated.NOTIFICATION_ID, this::uponChannelCreated);
+//        subscribeNotification(NeighborsReply.NOTIFICATION_ID, this::neighborReply);
+
 
     }
 
+//    private void neighborReply(NeighborsReply v, short i) {
+//        neighbours = v.getNeighbours();
+//        notify();
+//    }
+
     private void uponChannelCreated(ChannelCreated notification, short sourceProto) {
-        int cId = notification.getChannelId();
+        cId = notification.getChannelId();
         // Allows this protocol to receive events from this channel.
         registerSharedChannel(cId);
         /*---------------------- Register Message Serializers ---------------------- */
@@ -73,41 +96,46 @@ public class EagerPushBroadcast extends GenericProtocol {
     }
 
     private void uponEagerMessage(GossipMessage msg, Host from, short sourceProto, int channelId) {
-        logger.trace("Received {} from {}", msg, from);
+        logger.debug("Received {} from {}", msg, from);
         if (delivered.add(msg.getMid())) {
-            triggerNotification(new DeliverNotification(msg.getMid(), msg.getSender(), msg.getContent()));
+//            triggerNotification(new DeliverNotification(msg.getMid(), msg.getSender(), msg.getContent()));
+            //FIXME REFACTOR SO THAT EAGER PUSH CAN ALSO USE HYPARVIEW (ONLY NEED TO GET HYPAR VIEW NEIGHBORS SOMEHOW)
+            neighbors = new HashSet<>(cyclonMembership.getNeighbours());
 
-            if (neighbours.size() > 0) {
-                List<Host> unshuffledGossiptTargets = new LinkedList<>(neighbours);
+            t = (int) Math.ceil(Math.log(neighbors.size())) == 0 ? 1 : (int) Math.ceil(Math.log(neighbors.size()));
+
+            if (!neighbors.isEmpty()) {
+                List<Host> unshuffledGossiptTargets = new LinkedList<>(neighbors);
                 Collections.shuffle(unshuffledGossiptTargets);
-                Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(t, neighbours.size()));
+                Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(0, t));
                 gossipTargets.forEach(host -> {
-                    if (!host.equals(from)) {
-                        logger.trace("Sent {} to {}", msg, host);
-                        sendMessage(msg, host);
-                    }
+
+                    logger.debug("Sent {} to {}", msg, host);
+                    openConnection(host);
+                    sendMessage(msg, host);
+
                 });
 
             }
         }
     }
 
-    private void uponNeighbourDown(NeighbourDown notification, short sourceProto) {
-        for (Host h : notification.getNeighbours()) {
-            neighbours.remove(h);
-            logger.info("Neighbour down: " + h);
-        }
-        t = (int) Math.ceil(Math.log(neighbours.size()));
-
-    }
-
-    private void uponNeighbourUp(NeighbourUp notification, short sourceProto) {
-        for (Host h : notification.getNeighbours()) {
-            neighbours.add(h);
-            logger.info("New neighbour: " + h);
-        }
-        t = (int) Math.ceil(Math.log(neighbours.size()));
-    }
+//    private void uponNeighbourDown(NeighbourDown notification, short sourceProto) {
+//        for (Host h : notification.getNeighbours()) {
+//            neighbors.remove(h);
+//            logger.info("Neighbour down: " + h);
+//        }
+//        t = (int) Math.ceil(Math.log(neighbors.size()));
+//
+//    }
+//
+//    private void uponNeighbourUp(NeighbourUp notification, short sourceProto) {
+//        for (Host h : notification.getNeighbours()) {
+//            neighbors.add(h);
+//            logger.info("New neighbour: " + h);
+//        }
+//        t = (int) Math.ceil(Math.log(neighbors.size()));
+//    }
 
     private void uponBroadcastRequest(BroadcastRequest request, short sourceProto) {
         if (!channelReady) return;
@@ -116,7 +144,7 @@ public class EagerPushBroadcast extends GenericProtocol {
         GossipMessage msg = new GossipMessage(request.getMsgId(), request.getSender(), sourceProto, request.getMsg());
 
         //Call the same handler as when receiving a new GossipMessage (since the logic is the same)
-        uponEagerMessage(msg, myself, getProtoId(), -1);
+        uponEagerMessage(msg, myself, getProtoId(), cId);
 
     }
 
