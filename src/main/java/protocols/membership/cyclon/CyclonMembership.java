@@ -304,7 +304,6 @@ public class CyclonMembership extends GenericProtocol {
         }
     }
 
-    //smart this up with retries?
     private void uponInConnectionUp(InConnectionUp event, int channelId) {
         HostWithTime tofind = neigh.get(event.getNode());
         if (tofind == null) {

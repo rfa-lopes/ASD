@@ -12,6 +12,7 @@ import protocols.membership.common.notifications.ChannelCreated;
 import protocols.membership.common.notifications.NeighbourDown;
 import protocols.membership.common.notifications.NeighbourUp;
 import protocols.membership.cyclon.CyclonMembership;
+import protocols.membership.partial.HyParView;
 
 import java.io.IOException;
 import java.util.*;
@@ -25,20 +26,30 @@ public class EagerPushBroadcast extends GenericProtocol {
     private final Host myself; //My own address/port
     private Set<Host> neighbors; //My known neighbours (a.k.a peers the membership protocol told me about)
     private final Set<UUID> delivered; //Set of received messages (since we do not want to deliver the same msg twice)
+
     CyclonMembership cyclonMembership;
+    HyParView hyParView;
 
     private int cId;
 
     //We can only start sending messages after the membership protocol informed us that the channel is ready
     private boolean channelReady;
 
-    public EagerPushBroadcast(Properties properties, Host myself, CyclonMembership cyclonMembership) throws IOException, HandlerRegistrationException {
+    public EagerPushBroadcast(Properties properties, Host myself, GenericProtocol membership) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
         this.myself = myself;
         neighbors = new HashSet<>();
         delivered = new HashSet<>();
         channelReady = false;
-        this.cyclonMembership = cyclonMembership;
+
+        //Checks what is the typ+e of the membership we are using so that we can obtain our node frieds from the membership algorithm
+        if(membership instanceof CyclonMembership){
+            this.cyclonMembership = (CyclonMembership) membership;
+
+        }else{
+            this.hyParView = (HyParView) membership;
+        }
+
         t = 1;
 
         /*--------------------- Register Request Handlers ----------------------------- */
@@ -88,7 +99,9 @@ public class EagerPushBroadcast extends GenericProtocol {
         logger.debug("Received {} from {}", msg, from);
         if (delivered.add(msg.getMid())) {
 //            triggerNotification(new DeliverNotification(msg.getMid(), msg.getSender(), msg.getContent()));
+            //FIXME REFACTOR SO THAT EAGER PUSH CAN ALSO USE HYPARVIEW (ONLY NEED TO GET HYPAR VIEW NEIGHBORS SOMEHOW)
             neighbors = new HashSet<>(cyclonMembership.getNeighbours());
+
             t = (int) Math.ceil(Math.log(neighbors.size())) == 0 ? 1 : (int) Math.ceil(Math.log(neighbors.size()));
 
             if (!neighbors.isEmpty()) {

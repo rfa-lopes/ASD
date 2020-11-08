@@ -1,10 +1,12 @@
 import babel.core.Babel;
+import babel.core.GenericProtocol;
 import network.data.Host;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocols.apps.BroadcastApp;
 import protocols.broadcast.eagerpush.EagerPushBroadcast;
 import protocols.broadcast.flood.FloodBroadcast;
+import protocols.broadcast.plumtree.PlumTree;
 import protocols.membership.cyclon.CyclonMembership;
 import protocols.membership.full.SimpleFullMembership;
 import protocols.membership.partial.HyParView;
@@ -41,57 +43,55 @@ public class Main {
 
         //The Host object is an address/port pair that represents a network host. It is used extensively in babel
         //It implements equals and hashCode, and also includes a serializer that makes it easy to use in network messages
-        Host myself =  new Host(InetAddress.getByName(props.getProperty("address")),
+        Host myself = new Host(InetAddress.getByName(props.getProperty("address")),
                 Integer.parseInt(props.getProperty("port")));
 
         logger.info("Hello, I am {}", myself);
 
+        //Lets run the algorithms from props
+
+        String broadcastAlgorithm = props.getProperty("broadcast");
+
+        String membershipAlgorithm = props.getProperty("membership");
+
         // Application
         BroadcastApp broadcastApp = new BroadcastApp(myself, props, EagerPushBroadcast.PROTOCOL_ID);
 
-        CyclonMembership membership = new CyclonMembership(props,myself);
+        //Lets start by declaring that we will have two protocols - a membership one and a broadcast one
+        GenericProtocol membership;
 
+        GenericProtocol broadcast;
 
-        EagerPushBroadcast broadcast = new EagerPushBroadcast(props, myself, membership);
+        //Initialize the protocol depending on the properties config file
+        //FIXME ADJUST PLUMTREE to use one of the memberships and ADJUST HYPERVIEW to share its current neighbourhood
+        if (membershipAlgorithm.equals("cyclon")) {
+            membership = new CyclonMembership(props, myself);
+        } else {
+            membership = new HyParView(props, myself);
+        }
+
+        if (broadcastAlgorithm.equals("eager")) {
+            broadcast = new EagerPushBroadcast(props, myself, membership);
+        } else {
+            broadcast = new PlumTree(props, myself);
+        }
+
+        //Register the protocols in babel
+        babel.registerProtocol(broadcastApp);
 
         babel.registerProtocol(broadcast);
 
         babel.registerProtocol(membership);
 
-        babel.registerProtocol(broadcastApp);
-
+        //Initialize the app and the algorithms
         broadcastApp.init(props);
 
         broadcast.init(props);
 
         membership.init(props);
 
-        babel.start();
-
-
-        // broadcastApp.init(props);
-
-
-        // Broadcast Protocol
-//        FloodBroadcast broadcast = new FloodBroadcast(props, myself);
-
-       // /*eagerPushBroadcast*/broadcast.init(props);
-
-
-        // Membership Protocol
-        //SimpleFullMembership membership = new SimpleFullMembership(props, myself);
-//        HyParView membership = new HyParView(props, myself);
-        //Register applications in babel
-       // babel.registerProtocol(broadcastApp);
-        //babel.registerProtocol(broadcast/*eagerPushBroadcast*/);
-
-        //Init the protocols. This should be done after creating all protocols, since there can be inter-protocol
-        //communications in this step.
-        //broadcastApp.init(props);
-        //babel.registerProtocol(broadcast);
-
         //Start babel and protocol threads
-
+        babel.start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> logger.info("Goodbye")));
 
