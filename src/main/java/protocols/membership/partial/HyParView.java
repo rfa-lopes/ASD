@@ -139,7 +139,8 @@ public class HyParView extends GenericProtocol {
         }
     }
 
-    private void joinMembership() {
+    //********************************* JOIN *********************************
+    private void joinMembership() throws Exception {
         if(!contacts.isEmpty()) {
             Host contactHost = getRandomFromSet(contacts);
             openConnection(contactHost);
@@ -148,12 +149,10 @@ public class HyParView extends GenericProtocol {
             JoinMessage joinMessage = new JoinMessage();
             logger.debug("Send {} from {} to {}", joinMessage, myself, contactHost);
             sendMessage(joinMessage, contactHost);
-        }else{
-            logger.error("No contacts available to join membership");
-            System.exit(-1);
-        }
-    }
+        }else
+            throw new Exception();
 
+    }
 
     private void uponReceiveJoin(JoinMessage joinMessage, Host newNode, short sourceProto, int channelId) {
         logger.debug("Received {} from {}", joinMessage, newNode);
@@ -373,9 +372,7 @@ public class HyParView extends GenericProtocol {
                 isPriority = true;
 
             sendMessage(new NeighborMessage(isPriority), randomHost);
-        }else
-            joinMembership();
-
+        }
     }
 
     //If someone established a connection to me, this event is triggered. In this protocol we do nothing with this event.
