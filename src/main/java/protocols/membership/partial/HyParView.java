@@ -37,6 +37,8 @@ public class HyParView extends GenericProtocol {
     private final int passiveViewMaxSize;
     private final Set<Host> passiveView;
 
+    private final Set<Host> contacts;
+
     private final int channelId; //Id of the created channel
 
     private final Random rnd ;
@@ -60,6 +62,8 @@ public class HyParView extends GenericProtocol {
 
         passiveViewMaxSize = (int) (k * (Math.log(n) + c));
         passiveView = new HashSet<>(passiveViewMaxSize);
+
+        contacts = new HashSet<>(activeViewMaxSize);
 
         String cMetricsInterval = properties.getProperty("channel_metrics_interval", "10000"); //10 seconds
 
@@ -108,24 +112,24 @@ public class HyParView extends GenericProtocol {
     }
 
     @Override
-    @SuppressWarnings("Duplicates") // PARA IGNORAR O CODIGO DUPLICADO (IF)
+    @SuppressWarnings("Duplicates") // Ignore duplicate code (IF)
     public void init(Properties properties) {
 
         //Inform the dissemination protocol about the channel we created in the constructor
         triggerNotification(new ChannelCreated(channelId));
 
         //If there is a contact node, attempt to establish connection
-        if (properties.containsKey("contact")) {
+        if (properties.containsKey("contacts")) {
             try {
-                String contact = properties.getProperty("contact");
-                String[] hostElements = contact.split(":");
-                Host contactHost = new Host(InetAddress.getByName(hostElements[0]), Short.parseShort(hostElements[1]));
-                openConnection(contactHost);
-                activeView.add(contactHost);
+                String contactsProperty = properties.getProperty("contact");
+                String[] hosts = contactsProperty.split(",");
 
-                JoinMessage joinMessage = new JoinMessage();
-                logger.debug("Send {} from {} to {}", joinMessage, myself, contactHost);
-                sendMessage(joinMessage, contactHost);
+                String[] hostElements;
+                for(String host : hosts){
+                    hostElements = host.split(":");
+                    contacts.add(new Host(InetAddress.getByName(hostElements[0]), Short.parseShort(hostElements[1])));
+                }
+                joinMembership();
 
             } catch (Exception e) {
                 logger.error("Invalid contact on configuration: '" + properties.getProperty("contacts"));
@@ -134,6 +138,22 @@ public class HyParView extends GenericProtocol {
             }
         }
     }
+
+    private void joinMembership() {
+        if(!contacts.isEmpty()) {
+            Host contactHost = getRandomFromSet(contacts);
+            openConnection(contactHost);
+            activeView.add(contactHost);
+
+            JoinMessage joinMessage = new JoinMessage();
+            logger.debug("Send {} from {} to {}", joinMessage, myself, contactHost);
+            sendMessage(joinMessage, contactHost);
+        }else{
+            logger.error("No contacts available to join membership");
+            System.exit(-1);
+        }
+    }
+
 
     private void uponReceiveJoin(JoinMessage joinMessage, Host newNode, short sourceProto, int channelId) {
         logger.debug("Received {} from {}", joinMessage, newNode);
@@ -282,48 +302,31 @@ public class HyParView extends GenericProtocol {
 
     //********************************* FAILS FUNCTIONS ******************************************************
 
-    //TODO: 4.5 View Update Procedures
-    /*Algorithm 1 depicts some basic manipulation primitives used to change contents of the passive
-    and active views. The important aspect to retain from these primitives is that nodes can pass
-    from the passive view to the active view in order to fill the active view (e.g. in reaction to node
-    failures). Nodes can be moved from the active view to the passive view whenever a correct node
-    has to be removed from the active view. Note that since links are symmetric, by removing a node
-    p from the active view of node q, q creates a “free slot” in p’s active view. By adding p to its
-    passive view, node q increases the probability of shuffling q with other nodes and, subsequently,
-    having p be target of Neighbor requests.*/
-
-    private void uponReceiveJoinFails(JoinMessage joinMessage, Host newNode, short destProto, Throwable throwable, int channelId) {
-        //TODO: Fails
-        logger.error("Message {} to {} failed, reason: {}", joinMessage, newNode, throwable);
+    private void uponReceiveJoinFails(JoinMessage joinMessage, Host peer, short destProto, Throwable throwable, int channelId) {
+        logger.error("Message {} to {} failed, reason: {}", joinMessage, peer, throwable);
     }
 
-    private void uponReceiveForwardJoinFails(ForwardJoinMessage forwardJoinMessage, Host sender, short destProto, Throwable throwable, int channelId) {
-        //TODO: Fails
-        logger.error("Message {} to {} failed, reason: {}", forwardJoinMessage, sender, throwable);
+    private void uponReceiveForwardJoinFails(ForwardJoinMessage forwardJoinMessage, Host peer, short destProto, Throwable throwable, int channelId) {
+        logger.error("Message {} to {} failed, reason: {}", forwardJoinMessage, peer, throwable);
     }
 
     private void uponReceiveDisconnectFails(DisconnectMessage disconnectMessage, Host peer, short destProto, Throwable throwable, int channelId) {
-        //TODO: Fails
         logger.error("Message {} to {} failed, reason: {}", disconnectMessage, peer, throwable);
     }
 
     private void uponReceiveNeighborFails(NeighborMessage neighborMessage, Host peer, short destProto, Throwable throwable, int channelId) {
-        //TODO: Fails
         logger.error("Message {} to {} failed, reason: {}", neighborMessage, peer, throwable);
     }
 
     private void uponReceiveRejectFails(RejectMessage rejectMessage, Host peer, short destProto, Throwable throwable, int channelId) {
-        //TODO: Fails
         logger.error("Message {} to {} failed, reason: {}", rejectMessage, peer, throwable);
     }
 
     private void uponReceiveShuffleFails(ShuffleMessage shuffleMessage, Host peer, short destProto, Throwable throwable, int channelId) {
-        //TODO: Fails
         logger.error("Message {} to {} failed, reason: {}", shuffleMessage, peer, throwable);
     }
 
     private void uponReceiveShuffleReplyFails(ShuffleReplyMessage shuffleReplyMessage, Host peer, short destProto, Throwable throwable, int channelId) {
-        //TODO: Fails
         logger.error("Message {} to {} failed, reason: {}", shuffleReplyMessage, peer, throwable);
     }
 
@@ -333,6 +336,7 @@ public class HyParView extends GenericProtocol {
     //respective peer to the membership, and inform the Dissemination protocol via a notification.
     private void uponOutConnectionUp(OutConnectionUp event, int channelId) {
         logger.debug("Connection to {} is up", event.getNode());
+        contacts.remove(event.getNode());
     }
 
     //If an established connection is disconnected, remove the peer from the membership and inform the Dissemination
@@ -352,11 +356,9 @@ public class HyParView extends GenericProtocol {
     //Thus the peer will be in the pending set, and not in the membership (unless something is very wrong with our code)
     private void uponOutConnectionFailed(OutConnectionFailed<ProtoMessage> event, int channelId) {
         Host peer = event.getNode();
-        logger.debug("Connection to {} failed cause: {}", event.getNode(), event.getCause());
-
+        logger.debug("Connection to {} failed cause: {}", peer, event.getCause());
         activeView.remove(peer);
         passiveView.remove(peer);
-
         attemptPassiveViewConnection();
     }
 
@@ -371,7 +373,9 @@ public class HyParView extends GenericProtocol {
                 isPriority = true;
 
             sendMessage(new NeighborMessage(isPriority), randomHost);
-        }
+        }else
+            joinMembership();
+
     }
 
     //If someone established a connection to me, this event is triggered. In this protocol we do nothing with this event.
