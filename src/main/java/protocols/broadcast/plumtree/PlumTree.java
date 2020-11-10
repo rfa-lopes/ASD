@@ -28,7 +28,6 @@ public class PlumTree extends GenericProtocol {
     private final Set<Host> eagerPushPeers;
     private final Set<Host> lazyPushPeers;
     private final Queue<LazyMessage> lazyQueue;
-    private final Set<UUID> missing;
     private final Set<UUID> received;
 
 
@@ -43,7 +42,6 @@ public class PlumTree extends GenericProtocol {
         this.eagerPushPeers = new HashSet<>();
         this.lazyPushPeers = new HashSet<>();
         this.lazyQueue = new ArrayDeque<>();
-        this.missing = new HashSet<>();
         this.received = new HashSet<>();
 
         this.channelReady = false;
@@ -57,6 +55,7 @@ public class PlumTree extends GenericProtocol {
         subscribeNotification(ChannelCreated.NOTIFICATION_ID, this::uponChannelCreated);
     }
 
+    //FIXME: Rever
     private void uponChannelCreated(ChannelCreated notification, short sourceProto) {
 
         //esta a registar o canal do eager push mas tambem sera necessario para lazy? duvida
@@ -64,11 +63,14 @@ public class PlumTree extends GenericProtocol {
         int cId = notification.getChannelId();
         // Allows this protocol to receive events from this channel.
         registerSharedChannel(cId);
+
         /*---------------------- Register Message Serializers ---------------------- */
         registerMessageSerializer(cId, GossipMessage.MSG_ID, GossipMessage.serializer);
+        registerMessageSerializer(cId, LazyMessage.MSG_ID, LazyMessage.serializer);
+
         /*---------------------- Register Message Handlers -------------------------- */
         try {
-            registerMessageHandler(cId, GossipMessage.MSG_ID, this::eagerPush, this::uponMsgFail);
+            registerMessageHandler(cId, GossipMessage.MSG_ID, this::uponReceive, this::uponMsgFail);
         } catch (HandlerRegistrationException e) {
             logger.error("Error registering message handler (eager push): " + e.getMessage());
             e.printStackTrace();
@@ -80,6 +82,7 @@ public class PlumTree extends GenericProtocol {
     }
 
 
+    //TODO: acho que o meu uponReceive devia ser baseado nisto
     private void uponBroadcastRequest(BroadcastRequest request, short sourceProto) {
 
         if (!channelReady) return;
@@ -148,13 +151,16 @@ public class PlumTree extends GenericProtocol {
 
     }
 
-    private void Receive(GossipMessage message, Host from, short sourceProto, int channelId) {
+
+    //FIXME: Convert receive into one method and use .getClass with contains to see which type of message it is
+    private void receive(GossipMessage message, Host from, short sourceProto, int channelId) {
         logger.trace("Received {} from {}", message, from);
 
         if (received.contains(message.getMid())) {
             eagerPushPeers.remove(from);
             lazyPushPeers.add(from);
 
+            //send prune
             sendMessage(new LazyMessage(message.getSender(), message.getMid(), myself, sourceProto), message.getSender());
         } else {
             triggerNotification(new DeliverNotification(message.getMid(), message.getSender(), message.getContent()));
@@ -173,16 +179,24 @@ public class PlumTree extends GenericProtocol {
     }
 
     //receive Prune
-    private void Receive(LazyMessage message, Host from, short sourceProto, int channelId) {
+    private void receive(LazyMessage message, Host from, short sourceProto, int channelId) {
+
         eagerPushPeers.remove(from);
+
         lazyPushPeers.add(from);
+
+    }
+
+    private void uponReceive(ProtoMessage message, Host from, short sourceProto, int channelId) {
+        if (message.getClass().getName().contains("LazyMessage")) //this will be prune?
+            receive((LazyMessage) message, from, sourceProto, channelId);
+        else
+            receive((GossipMessage) message, from, sourceProto, channelId);
     }
 
     @Override
     public void init(Properties properties) {
 
     }
-
-    //TODO: CHANNEL CREATED, RECEIVE BOTH OF THEM AND INIT
 
 }
