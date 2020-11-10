@@ -19,6 +19,9 @@ java -jar target/asdProj.jar -conf config.properties port=5000
 ```bash
 java -jar target/asdProj.jar -conf config.properties port=5001 contacts=127.0.0.1:5000
 java -jar target/asdProj.jar -conf config.properties port=5002 contacts=127.0.0.1:5000
+java -jar target/asdProj.jar -conf config.properties port=5003 contacts=127.0.0.1:5000
+
+java -jar target/asdProj.jar -conf config.properties port=5002 contacts=127.0.0.1:5000
 java -jar target/asdProj.jar -conf config.properties port=5003 contacts=127.0.0.1:5001
 java -jar target/asdProj.jar -conf config.properties port=5004 contacts=127.0.0.1:5000,127.0.0.1:5001,127.0.0.1:5002
 java -jar target/asdProj.jar -conf config.properties port=5005 contacts=127.0.0.1:5002,127.0.0.1:5003,127.0.0.1:5004
