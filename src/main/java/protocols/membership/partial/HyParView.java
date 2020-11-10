@@ -55,16 +55,20 @@ public class HyParView extends GenericProtocol {
         //Get some configurations from the Properties object
         this.k = Integer.parseInt(properties.getProperty("k", "6"));
         this.c = Integer.parseInt(properties.getProperty("c", "1"));
-        this.arwl = Integer.parseInt(properties.getProperty("arwl", "4")); //TODO: QUAIS ESTES VALORES?
-        this.prwl = Integer.parseInt(properties.getProperty("prwl", "4")); //TODO: QUAIS ESTES VALORES?
-        this.ka = Integer.parseInt(properties.getProperty("ka", "1"));
-        this.kp = Integer.parseInt(properties.getProperty("kp", "2"));
+        this.arwl = Integer.parseInt(properties.getProperty("arwl", "6")); //TODO: QUAIS ESTES VALORES?
+        this.prwl = Integer.parseInt(properties.getProperty("prwl", "3")); //TODO: QUAIS ESTES VALORES?
+        this.ka = Integer.parseInt(properties.getProperty("ka", "3"));
+        this.kp = Integer.parseInt(properties.getProperty("kp", "4"));
         this.n = Integer.parseInt(properties.getProperty("n", "10"));
 
-        activeViewMaxSize = (int) (Math.log(n) + c);
+        if(properties.containsKey("activeMembershipSize"))
+            activeViewMaxSize = Integer.parseInt(properties.getProperty("activeMembershipSize"));
+        else activeViewMaxSize = (int) (Math.log(n) + c);
         activeView = new HashSet<>(activeViewMaxSize);
 
-        passiveViewMaxSize = (int) (k * (Math.log(n) + c));
+        if(properties.containsKey("passiveMembershipSize"))
+            passiveViewMaxSize = Integer.parseInt(properties.getProperty("passiveMembershipSize"));
+        else passiveViewMaxSize = (int) (k * (Math.log(n) + c));
         passiveView = new HashSet<>(passiveViewMaxSize);
 
         contacts = new HashSet<>(activeViewMaxSize);
@@ -158,6 +162,7 @@ public class HyParView extends GenericProtocol {
             logger.debug("Send {} from {} to {}", joinMessage, myself, contactHost);
             openConnection(contactHost);
             sendMessage(joinMessage, contactHost);
+            activeView.add(contactHost);
         }else
             throw new Exception();
 
@@ -168,33 +173,44 @@ public class HyParView extends GenericProtocol {
         if( isFull(activeView, activeViewMaxSize) )
             dropRandomElementFromActiveView();
 
+        activeView.add(newNode);
+
         ForwardJoinMessage forwardJoinMessage = new ForwardJoinMessage(newNode, arwl);
         for ( Host n : activeView) {
-            logger.debug("Send {} from {} to {}", forwardJoinMessage, myself, n);
-            openConnection(n);
-            sendMessage(forwardJoinMessage, n);
+            if(!n.equals(newNode)){
+                logger.debug("Send {} from {} to {}", forwardJoinMessage, myself, n);
+                openConnection(n);
+                sendMessage(forwardJoinMessage, n);
+            }
         }
-        activeView.add(newNode);
     }
 
     private void uponReceiveForwardJoin(ForwardJoinMessage forwardJoinMessage, Host sender, short sourceProto, int channelId) {
         logger.info("Received {} from {}", forwardJoinMessage, sender);
 
         int timeToLive = forwardJoinMessage.getTTL();
+
+        if(timeToLive < 0)
+            return;
+
         Host newNode = forwardJoinMessage.getNewNode();
 
-        if(timeToLive == 0 || activeView.size() == 1) //PAPER: activeView.size() == 0
+        if(timeToLive == 0 || activeView.size() == 0) //PAPER says ==1 (??)
             addNodeActiveView(newNode);
         else if (timeToLive == prwl)
             addNodePassiveView(newNode);
 
-        ForwardJoinMessage newForwardJoinMessage = new ForwardJoinMessage(newNode, timeToLive - 1);
-        for ( Host n : activeView)
-            if(!n.equals(sender)) {
-                logger.debug("Send {} from {} to {}", newForwardJoinMessage, myself, n);
-                openConnection(n);
-                sendMessage(newForwardJoinMessage, n);
-            }
+        if(!activeView.isEmpty()) {
+            ForwardJoinMessage newForwardJoinMessage = new ForwardJoinMessage(newNode, timeToLive - 1);
+            Host randomHost = getRandomFromSet(activeView, sender);
+
+            if(randomHost == null)
+                return ;
+
+            logger.debug("Send {} from {} to {}", newForwardJoinMessage, myself, randomHost);
+            openConnection(randomHost);
+            sendMessage(newForwardJoinMessage, randomHost);
+        }
     }
 
     private void dropRandomElementFromActiveView() {
@@ -202,7 +218,6 @@ public class HyParView extends GenericProtocol {
 
         DisconnectMessage disconnectMessage = new DisconnectMessage();
         logger.debug("Send {} from {} to {}", disconnectMessage, myself, randomHost);
-
         openConnection(randomHost);
         sendMessage(disconnectMessage, randomHost);
 
@@ -221,7 +236,7 @@ public class HyParView extends GenericProtocol {
     private void addNodePassiveView(Host node) {
         if(!node.equals(myself) && !activeView.contains(node) && !passiveView.contains(node)){
             if(isFull(passiveView, passiveViewMaxSize))
-                passiveView.remove( getRandomFromSet(passiveView));
+                passiveView.remove( getRandomFromSet(passiveView) );
             passiveView.add(node);
         }
     }
@@ -266,13 +281,16 @@ public class HyParView extends GenericProtocol {
 
         if(newTtl > 0 && activeView.size() > 1){
             Host random = getRandomFromSet(activeView, peer); //Except peer
-            openConnection(random);
-            sendMessage(shuffleMessage, random);
+            if(random != null) {
+                openConnection(random);
+                sendMessage(shuffleMessage, random);
+            }
         }else{
             int numberOfNodesReceived = shuffleMessage.getPassiveViewSample().size();
             Set<Host> sample = getSampleFromSet(passiveView, numberOfNodesReceived);
             openConnection(peer); //Open Temporary connection
             sendMessage(new ShuffleReplyMessage(sample), peer);
+            closeConnection(peer); //Close Temporary connection
         }
         //Then, both nodes integrate the elements they received in the Shuffle/ShuffleReply message into their passive views
         Set<Host> mergeSample = shuffleMessage.getPassiveViewSample();
@@ -356,6 +374,8 @@ public class HyParView extends GenericProtocol {
         Host peer = event.getNode();
         logger.debug("Connection to {} is down cause {}", peer, event.getCause());
 
+        passiveView.remove(peer);
+
         if(activeView.contains(peer)) {
             logger.debug("Remove {} from Active View", peer);
             activeView.remove(peer);
@@ -409,14 +429,16 @@ public class HyParView extends GenericProtocol {
     }
 
     private <V> V getRandomFromSet(Set<V> set) {
-        List<V> setList = new ArrayList<>(set);
-        return setList.get(rnd.nextInt(set.size()));
+        return getRandomFromSet(set, null);
     }
 
     private <V> V getRandomFromSet(Set<V> set, Host notThis) {
         List<V> setList = new ArrayList<>(set);
-        //noinspection SuspiciousMethodCalls
-        setList.remove(notThis);
+        if(notThis != null)
+            //noinspection SuspiciousMethodCalls
+            setList.remove(notThis);
+        if(setList.size() == 0)
+            return null;
         return setList.get(rnd.nextInt(setList.size()));
     }
 

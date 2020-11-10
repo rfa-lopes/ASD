@@ -4,7 +4,6 @@ import babel.generic.ProtoMessage;
 import io.netty.buffer.ByteBuf;
 import network.ISerializer;
 import network.data.Host;
-import protocols.membership.full.messages.SampleMessage;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -13,7 +12,7 @@ import java.util.Set;
 public class ShuffleReplyMessage extends ProtoMessage {
 
     public final static short MSG_ID = 9007;
-    private Set<Host> sample;
+    private final Set<Host> sample;
 
     public ShuffleReplyMessage(Set<Host> sample) {
         super(MSG_ID);
@@ -22,6 +21,13 @@ public class ShuffleReplyMessage extends ProtoMessage {
 
     public Set<Host> getSample() {
         return sample;
+    }
+
+    @Override
+    public String toString() {
+        return "ShuffleReplyMessage{" +
+                "sample=" + sample +
+                "}";
     }
 
     public static ISerializer<ShuffleReplyMessage> serializer = new ISerializer<>() {
