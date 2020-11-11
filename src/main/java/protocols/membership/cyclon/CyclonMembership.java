@@ -352,7 +352,9 @@ public class CyclonMembership extends GenericProtocol {
     //We are simply printing some information to present during runtime.
     private void uponInfoTime(InfoTimer timer, long timerId) {
         StringBuilder sb = new StringBuilder("Membership Metrics:\n");
-        sb.append("Membership: ").append(neigh).append("\n");
+        Set<Host> s = new HashSet<>();
+        neigh.values().forEach(h -> s.add(h.getHost()));
+        sb.append("Membership: ").append(s).append("\n");
 //        sb.append("PendingMembership: ").append(pending).append("\n");
         //getMetrics returns an object with the number of events of each type processed by this protocol.
         //It may or may not be useful to you, but at least you know it exists.

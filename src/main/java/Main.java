@@ -63,17 +63,16 @@ public class Main {
         String membershipAlgorithm = props.getProperty("membership");
 
         // Application
-        BroadcastApp broadcastApp = new BroadcastApp(myself, props, EagerPushBroadcast.PROTOCOL_ID);
 
         //Lets start by declaring that we will have two protocols - a membership one and a broadcast one
         GenericProtocol membership;
         GenericProtocol broadcast;
+        BroadcastApp broadcastApp;
 
         //Initialize the protocol depending on the properties config file
-        //FIXME ADJUST PLUMTREE to use one of the memberships and ADJUST HYPERVIEW to share its current neighbourhood
 
         //Membership Algorithms
-        switch (membershipAlgorithm.toUpperCase()){
+        switch (membershipAlgorithm.toUpperCase()) {
             case CYCLON:
                 membership = new CyclonMembership(props, myself);
                 break;
@@ -86,27 +85,35 @@ public class Main {
         }
 
         //Broadcast Algorithms
-        switch (broadcastAlgorithm.toUpperCase()){
+        switch (broadcastAlgorithm.toUpperCase()) {
             case EAGER:
                 broadcast = new EagerPushBroadcast(props, myself, membership);
+                broadcastApp = new BroadcastApp(myself, props, EagerPushBroadcast.PROTOCOL_ID);
                 break;
             case PLUMTREE:
                 broadcast = new PlumTree(props, myself);
+                broadcastApp = new BroadcastApp(myself, props, PlumTree.PROTOCOL_ID);
                 break;
             default:
                 broadcast = new FloodBroadcast(props, myself);
+                broadcastApp = new BroadcastApp(myself, props, FloodBroadcast.PROTOCOL_ID);
                 break;
         }
 
         //Register the protocols in babel
-        //babel.registerProtocol(broadcastApp);
+        babel.registerProtocol(broadcastApp);
         //babel.registerProtocol(broadcast);
         babel.registerProtocol(membership);
 
+        babel.registerProtocol(broadcast);
+
+
         //Initialize the app and the algorithms
-        //broadcastApp.init(props);
+        broadcastApp.init(props);
         //broadcast.init(props);
         membership.init(props);
+
+        broadcast.init(props);
 
         //Start babel and protocol threads
         babel.start();
