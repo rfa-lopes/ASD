@@ -126,9 +126,9 @@ public class HyParView extends GenericProtocol {
         triggerNotification(new ChannelCreated(channelId));
 
         //If there is a contact node, attempt to establish connection
-        if (properties.containsKey("contacts")) {
+        if (properties.containsKey("contact")) {
             try {
-                String contactsProperty = properties.getProperty("contacts");
+                String contactsProperty = properties.getProperty("contact");
                 String[] hosts = contactsProperty.split(",");
 
                 String[] hostElements;
@@ -139,7 +139,7 @@ public class HyParView extends GenericProtocol {
                 joinMembership();
 
             } catch (Exception e) {
-                logger.error("Invalid contact on configuration: '" + properties.getProperty("contacts"));
+                logger.error("Invalid contacts on configuration: '" + properties.getProperty("contact"));
                 e.printStackTrace();
                 System.exit(-1);
             }
@@ -155,7 +155,7 @@ public class HyParView extends GenericProtocol {
     }
 
     //********************************* JOIN *********************************
-    private void joinMembership() throws Exception {
+    private void joinMembership() {
         if(!contacts.isEmpty()) {
             Host contactHost = getRandomFromSet(contacts);
             JoinMessage joinMessage = new JoinMessage();
@@ -163,8 +163,10 @@ public class HyParView extends GenericProtocol {
             openConnection(contactHost);
             sendMessage(joinMessage, contactHost);
             activeView.add(contactHost);
-        }else
-            throw new Exception();
+        }else {
+            logger.error("Contacts unavailable.");
+            System.exit(-1);
+        }
 
     }
 
@@ -334,30 +336,37 @@ public class HyParView extends GenericProtocol {
 
     private void uponReceiveJoinFails(JoinMessage joinMessage, Host peer, short destProto, Throwable throwable, int channelId) {
         logger.debug("Message {} to {} failed, reason: {}", joinMessage, peer, throwable);
+        connectionFailed(peer);
     }
 
     private void uponReceiveForwardJoinFails(ForwardJoinMessage forwardJoinMessage, Host peer, short destProto, Throwable throwable, int channelId) {
         logger.error("Message {} to {} failed, reason: {}", forwardJoinMessage, peer, throwable);
+        connectionFailed(peer);
     }
 
     private void uponReceiveDisconnectFails(DisconnectMessage disconnectMessage, Host peer, short destProto, Throwable throwable, int channelId) {
         logger.error("Message {} to {} failed, reason: {}", disconnectMessage, peer, throwable);
+        connectionFailed(peer);
     }
 
     private void uponReceiveNeighborFails(NeighborMessage neighborMessage, Host peer, short destProto, Throwable throwable, int channelId) {
         logger.error("Message {} to {} failed, reason: {}", neighborMessage, peer, throwable);
+        connectionFailed(peer);
     }
 
     private void uponReceiveRejectFails(RejectMessage rejectMessage, Host peer, short destProto, Throwable throwable, int channelId) {
         logger.error("Message {} to {} failed, reason: {}", rejectMessage, peer, throwable);
+        connectionFailed(peer);
     }
 
     private void uponReceiveShuffleFails(ShuffleMessage shuffleMessage, Host peer, short destProto, Throwable throwable, int channelId) {
         logger.error("Message {} to {} failed, reason: {}", shuffleMessage, peer, throwable);
+        connectionFailed(peer);
     }
 
     private void uponReceiveShuffleReplyFails(ShuffleReplyMessage shuffleReplyMessage, Host peer, short destProto, Throwable throwable, int channelId) {
         logger.error("Message {} to {} failed, reason: {}", shuffleReplyMessage, peer, throwable);
+        connectionFailed(peer);
     }
 
     /* ********************************* TCPChannel Events ********************************* */
@@ -464,6 +473,15 @@ public class HyParView extends GenericProtocol {
         mergeSample.remove(myself);
         mergeSample.removeAll(passiveView);
         mergeSample.removeAll(activeView);
+    }
+
+    private void connectionFailed(Host peer){
+        passiveView.remove(peer);
+        if(activeView.contains(peer)) {
+            logger.debug("Remove {} from Active View", peer);
+            activeView.remove(peer);
+            attemptPassiveViewConnection();
+        }
     }
 
     /* --------------------------------- Metrics ---------------------------- */
