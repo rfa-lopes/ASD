@@ -48,30 +48,26 @@ public class HyParView extends GenericProtocol {
     public HyParView(Properties properties, Host myself) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
 
-        this.rnd = new Random();
+        rnd = new Random();
         this.myself = myself;
-        this.shuffleTime =  Integer.parseInt(properties.getProperty("shuffleTime", "5000"));
+        shuffleTime =  Integer.parseInt(properties.getProperty("shuffleTime", "5000"));
 
         //Get some configurations from the Properties object
-        this.k = Integer.parseInt(properties.getProperty("k", "6"));
-        this.c = Integer.parseInt(properties.getProperty("c", "1"));
-        this.arwl = Integer.parseInt(properties.getProperty("arwl", "6")); //TODO: QUAIS ESTES VALORES?
-        this.prwl = Integer.parseInt(properties.getProperty("prwl", "3")); //TODO: QUAIS ESTES VALORES?
-        this.ka = Integer.parseInt(properties.getProperty("ka", "3"));
-        this.kp = Integer.parseInt(properties.getProperty("kp", "4"));
-        this.n = Integer.parseInt(properties.getProperty("n", "10"));
+        k = Integer.parseInt(properties.getProperty("k", "6"));
+        c = Integer.parseInt(properties.getProperty("c", "1"));
+        arwl = Integer.parseInt(properties.getProperty("arwl", "6"));
+        prwl = Integer.parseInt(properties.getProperty("prwl", "3"));
+        ka = Integer.parseInt(properties.getProperty("ka", "3"));
+        kp = Integer.parseInt(properties.getProperty("kp", "4"));
+        n = Integer.parseInt(properties.getProperty("n", "10"));
 
-        if(properties.containsKey("activeMembershipSize"))
-            activeViewMaxSize = Integer.parseInt(properties.getProperty("activeMembershipSize"));
-        else activeViewMaxSize = (int) (Math.log(n) + c);
-        activeView = new HashSet<>(activeViewMaxSize);
+        this.activeViewMaxSize = Integer.parseInt(properties.getProperty("activeMembershipSize", Integer.toString((int) (Math.log(n) + c))));
+        this.activeView = new HashSet<>(activeViewMaxSize);
 
-        if(properties.containsKey("passiveMembershipSize"))
-            passiveViewMaxSize = Integer.parseInt(properties.getProperty("passiveMembershipSize"));
-        else passiveViewMaxSize = (int) (k * (Math.log(n) + c));
+        passiveViewMaxSize = Integer.parseInt(properties.getProperty("passiveMembershipSize", Integer.toString((int) (k * (Math.log(n) + c)))));
         passiveView = new HashSet<>(passiveViewMaxSize);
 
-        contacts = new HashSet<>(activeViewMaxSize);
+        contacts = new HashSet<>();
 
         String cMetricsInterval = properties.getProperty("channel_metrics_interval", "10000"); //10 seconds
 
@@ -119,7 +115,7 @@ public class HyParView extends GenericProtocol {
     }
 
     @Override
-    @SuppressWarnings("Duplicates") // Ignore duplicate code (IF)
+    // Ignore duplicate code (IF)
     public void init(Properties properties) {
 
         //Inform the dissemination protocol about the channel we created in the constructor
@@ -490,11 +486,13 @@ public class HyParView extends GenericProtocol {
     //We are simply printing some information to present during runtime.
     private void uponInfoTime(InfoTimer timer, long timerId) {
         StringBuilder sb = new StringBuilder("Membership Metrics:\n");
+        sb.append("\n");
         sb.append("Contacts: ").append(contacts).append("\n");
         sb.append("ActiveView: ").append(activeView).append("\n");
         sb.append("PassiveView: ").append(passiveView).append("\n");
         sb.append("activeViewMaxSize: ").append(activeViewMaxSize).append("\n");
         sb.append("passiveViewMaxSize: ").append(passiveViewMaxSize).append("\n");
+        sb.append("\n");
         //getMetrics returns an object with the number of events of each type processed by this protocol.
         //It may or may not be useful to you, but at least you know it exists.
         sb.append(getMetrics());
@@ -506,6 +504,7 @@ public class HyParView extends GenericProtocol {
     //Again, we are just showing some of the information you can get from the channel, and use how you see fit.
     //"getInConnections" and "getOutConnections" returns the currently established connection to/from me.
     //"getOldInConnections" and "getOldOutConnections" returns connections that have already been closed.
+    @SuppressWarnings("DuplicatedCode")
     private void uponChannelMetrics(ChannelMetrics event, int channelId) {
         StringBuilder sb = new StringBuilder("Channel Metrics:\n");
         sb.append("In channels:\n");
