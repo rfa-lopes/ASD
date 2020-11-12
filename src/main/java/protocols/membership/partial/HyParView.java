@@ -27,10 +27,10 @@ public class HyParView extends GenericProtocol {
     public static final short PROTOCOL_ID = 9069;
 
     @SuppressWarnings("FieldCanBeLocal")
-    private final int k, c, arwl, prwl, ka, kp, n;
+    private final int K, C, ARWL, PRWL, KA, KP, N;
 
-    private final int shuffleTime; //param: timeout for samples
-    private final int joinTime;
+    private final int SHUFFLE_TIME;
+    private final int JOIN_TIME;
 
     private final Host myself;
 
@@ -54,22 +54,22 @@ public class HyParView extends GenericProtocol {
 
         rnd = new Random();
         this.myself = myself;
-        shuffleTime =  Integer.parseInt(properties.getProperty("shuffleTime", "5000"));
-        joinTime = Integer.parseInt(properties.getProperty("joinTime", "3000"));
+        SHUFFLE_TIME =  Integer.parseInt(properties.getProperty("shuffleTime", "5000"));
+        JOIN_TIME = Integer.parseInt(properties.getProperty("joinTime", "3000"));
 
         //Get some configurations from the Properties object
-        k = Integer.parseInt(properties.getProperty("k", "6"));
-        c = Integer.parseInt(properties.getProperty("c", "1"));
-        arwl = Integer.parseInt(properties.getProperty("arwl", "6"));
-        prwl = Integer.parseInt(properties.getProperty("prwl", "3"));
-        ka = Integer.parseInt(properties.getProperty("ka", "3"));
-        kp = Integer.parseInt(properties.getProperty("kp", "4"));
-        n = Integer.parseInt(properties.getProperty("n", "10"));
+        K = Integer.parseInt(properties.getProperty("k", "6"));
+        C = Integer.parseInt(properties.getProperty("c", "1"));
+        ARWL = Integer.parseInt(properties.getProperty("arwl", "6"));
+        PRWL = Integer.parseInt(properties.getProperty("prwl", "3"));
+        KA = Integer.parseInt(properties.getProperty("ka", "3"));
+        KP = Integer.parseInt(properties.getProperty("kp", "4"));
+        N = Integer.parseInt(properties.getProperty("n", "10"));
 
-        this.activeViewMaxSize = Integer.parseInt(properties.getProperty("activeMembershipSize", Integer.toString((int) (Math.log(n) + c))));
+        this.activeViewMaxSize = Integer.parseInt(properties.getProperty("activeMembershipSize", Integer.toString((int) (Math.log(N) + C))));
         this.activeView = new HashSet<>(activeViewMaxSize);
 
-        passiveViewMaxSize = Integer.parseInt(properties.getProperty("passiveMembershipSize", Integer.toString((int) (k * (Math.log(n) + c)))));
+        passiveViewMaxSize = Integer.parseInt(properties.getProperty("passiveMembershipSize", Integer.toString((int) (K * (Math.log(N) + C)))));
         passiveView = new HashSet<>(passiveViewMaxSize);
 
         contacts = new HashSet<>();
@@ -114,12 +114,13 @@ public class HyParView extends GenericProtocol {
         registerTimerHandler(InfoTimer.TIMER_ID, this::uponInfoTime);
 
         /*-------------------- Register Channel Events ------------------------------- */
+        registerChannelEventHandler(channelId, OutConnectionUp.EVENT_ID, this::uponOutConnectionUp);
         registerChannelEventHandler(channelId, OutConnectionDown.EVENT_ID, this::uponOutConnectionDown);
         registerChannelEventHandler(channelId, OutConnectionFailed.EVENT_ID, this::uponOutConnectionFailed);
-        registerChannelEventHandler(channelId, OutConnectionUp.EVENT_ID, this::uponOutConnectionUp);
 
         registerChannelEventHandler(channelId, InConnectionUp.EVENT_ID, this::uponInConnectionUp);
         registerChannelEventHandler(channelId, InConnectionDown.EVENT_ID, this::uponInConnectionDown);
+
         registerChannelEventHandler(channelId, ChannelMetrics.EVENT_ID, this::uponChannelMetrics);
 
     }
@@ -143,7 +144,7 @@ public class HyParView extends GenericProtocol {
                     contacts.add(new Host(InetAddress.getByName(hostElements[0]), Short.parseShort(hostElements[1])));
                 }
 
-                joinMembership();
+                tryJoinMembershipRequest();
 
             } catch (Exception e) {
                 logger.error("Invalid contacts on configuration: '" + properties.getProperty("contact"));
@@ -153,7 +154,7 @@ public class HyParView extends GenericProtocol {
         }
 
         //Setup the timer used to send shuffle request (we registered its handler on the constructor)
-        setupPeriodicTimer(new ShuffleTimer(), this.shuffleTime, this.shuffleTime);
+        setupPeriodicTimer(new ShuffleTimer(), this.SHUFFLE_TIME, this.SHUFFLE_TIME);
 
         //Setup the timer to display protocol information (also registered handler previously)
         int pMetricsInterval = Integer.parseInt(properties.getProperty("protocol_metrics_interval", "10000"));
@@ -162,19 +163,16 @@ public class HyParView extends GenericProtocol {
     }
 
     //********************************* JOIN *********************************
-    private void joinMembership() {
+    private void tryJoinMembershipRequest() {
         if(!contacts.isEmpty()) {
             Host contactHost = getRandomFromSet(contacts);
             JoinMessage joinMessage = new JoinMessage();
+            openTemporaryConnection(contactHost);
             logger.debug("Send {} from {} to {}", joinMessage, myself, contactHost);
-
-            //temporaryConnections.add(contactHost);
-            openConnection(contactHost);
             sendMessage(joinMessage, contactHost);
-
             if(joinTimerId == -1) {
-                logger.debug("Setup Join Timer");
-                joinTimerId = setupPeriodicTimer(new JoinTimer(), this.joinTime, this.joinTime);
+                logger.debug("Setup Join Timer...");
+                joinTimerId = setupPeriodicTimer(new JoinTimer(), this.JOIN_TIME, this.JOIN_TIME);
             }
         }
     }
@@ -184,17 +182,16 @@ public class HyParView extends GenericProtocol {
         if( isFull(activeView, activeViewMaxSize) )
             dropRandomElementFromActiveView();
 
+        addNodeActiveView(newNode);
+
         JoinReplyMessage joinReply = new JoinReplyMessage();
-        activeView.add(newNode);
         logger.debug("Send {} from {} to {}", joinReply, myself, newNode);
-        openConnection(newNode);
         sendMessage(joinReply, newNode);
 
-        ForwardJoinMessage forwardJoinMessage = new ForwardJoinMessage(newNode, arwl);
-        for ( Host n : activeView) {
+        ForwardJoinMessage forwardJoinMessage = new ForwardJoinMessage(newNode, ARWL);
+        for ( Host n : activeView ) {
             if(!n.equals(newNode)){
                 logger.debug("Send {} from {} to {}", forwardJoinMessage, myself, n);
-                openConnection(n);
                 sendMessage(forwardJoinMessage, n);
             }
         }
@@ -202,8 +199,8 @@ public class HyParView extends GenericProtocol {
 
     private void uponReceiveJoinReply(JoinReplyMessage joinReplyMessage, Host contactHost, short sourceProto, int channelId) {
         logger.debug("Received {} from {}", joinReplyMessage, contactHost);
-        activeView.add(contactHost);
-        //temporaryConnections.remove(contactHost);
+        addNodeActiveView(contactHost);
+        temporaryConnections.remove(contactHost);
         logger.debug("Join Timer with timerID={} canceled.", joinTimerId);
         cancelTimer(joinTimerId);
     }
@@ -212,38 +209,28 @@ public class HyParView extends GenericProtocol {
         logger.debug("Received {} from {}", forwardJoinMessage, sender);
 
         int timeToLive = forwardJoinMessage.getTTL();
-
-        if(timeToLive < 0)
-            return;
-
         Host newNode = forwardJoinMessage.getNewNode();
 
         if(timeToLive == 0 || activeView.size() == 0) //PAPER says ==1 (??)
             addNodeActiveView(newNode);
-        else if (timeToLive == prwl)
-            addNodePassiveView(newNode);
+        else {
+            if (timeToLive == PRWL)
+                addNodePassiveView(newNode);
 
-        if(!activeView.isEmpty()) {
             ForwardJoinMessage newForwardJoinMessage = new ForwardJoinMessage(newNode, timeToLive - 1);
             Host randomHost = getRandomFromSet(activeView, sender);
 
-            if(randomHost == null)
-                return ;
-
             logger.debug("Send {} from {} to {}", newForwardJoinMessage, myself, randomHost);
-            openConnection(randomHost);
             sendMessage(newForwardJoinMessage, randomHost);
         }
     }
 
     private void dropRandomElementFromActiveView() {
         Host randomHost = getRandomFromSet(activeView);
-
         DisconnectMessage disconnectMessage = new DisconnectMessage();
         logger.debug("Send {} from {} to {}", disconnectMessage, myself, randomHost);
-        openConnection(randomHost);
         sendMessage(disconnectMessage, randomHost);
-
+        closeConnection(randomHost);
         activeView.remove(randomHost);
         passiveView.add(randomHost);
     }
@@ -252,21 +239,25 @@ public class HyParView extends GenericProtocol {
         if(!node.equals(myself) && !activeView.contains(node)){
             if(isFull(activeView, activeViewMaxSize))
                 dropRandomElementFromActiveView();
+            openConnection(node);
             activeView.add(node);
         }
     }
 
     private void addNodePassiveView(Host node) {
         if(!node.equals(myself) && !activeView.contains(node) && !passiveView.contains(node)){
-            if(isFull(passiveView, passiveViewMaxSize))
-                passiveView.remove( getRandomFromSet(passiveView) );
+            if(isFull(passiveView, passiveViewMaxSize)) {
+                Host randomHost = getRandomFromSet(passiveView);
+                passiveView.remove(randomHost);
+            }
             passiveView.add(node);
         }
     }
 
     private void uponReceiveDisconnect(DisconnectMessage disconnectMessage, Host peer, short sourceProto, int channelId) {
-        logger.debug("Received {} from {}", disconnectMessage, peer);
         if(activeView.contains(peer)){
+            logger.debug("Received {} from {}", disconnectMessage, peer);
+            closeConnection(peer);
             activeView.remove(peer);
             addNodePassiveView(peer);
         }
@@ -279,12 +270,12 @@ public class HyParView extends GenericProtocol {
             addNodeActiveView(peer);
         else{
             if (!isFull(activeView, activeViewMaxSize)){
-                //Aceita
+                //Accept
                 passiveView.remove(peer);
-                activeView.add(peer);
-
+                addNodeActiveView(peer);
             } else {
-                openConnection(peer);
+                //Reject
+                openTemporaryConnection(peer);
                 sendMessage(new RejectMessage(), peer);
             }
         }
@@ -313,8 +304,7 @@ public class HyParView extends GenericProtocol {
             Set<Host> sample = getSampleFromSet(passiveView, numberOfNodesReceived);
 
             //Open Temporary connection
-            temporaryConnections.add(peer);
-            openConnection(peer);
+            openTemporaryConnection(peer);
             sendMessage(new ShuffleReplyMessage(sample), peer);
         }
         //Then, both nodes integrate the elements they received in the Shuffle/ShuffleReply message into their passive views
@@ -342,33 +332,32 @@ public class HyParView extends GenericProtocol {
     //********************************* TIMERS FUNCTIONS ******************************************************
 
     private void uponJoinTimer(JoinTimer v, long timerId) {
-        logger.debug("Join Timer expired. Try again...");
-        joinMembership();
+        logger.info("Join Timer expired. Trying again...");
+        tryJoinMembershipRequest();
     }
 
     private void uponShuffleTimer(ShuffleTimer shuffleTimer, long timerId) {
-        logger.debug("Timer Shuffle...");
         if (!activeView.isEmpty()) {
-            Set<Host> activeViewSample = getSampleFromSet(activeView, ka);
-            Set<Host> passiveViewSample = getSampleFromSet(passiveView, kp);
+            logger.debug("Timer Shuffle...");
+            Set<Host> activeViewSample = getSampleFromSet(activeView, KA);
+            Set<Host> passiveViewSample = getSampleFromSet(passiveView, KP);
             Host randomNeighbor = getRandomFromSet(activeView);
-            ShuffleMessage shuffleMessage = new ShuffleMessage(activeViewSample, passiveViewSample, arwl);
-            logger.debug("Send {} from {} to {}", shuffleMessage, myself, randomNeighbor);
+            ShuffleMessage shuffleMessage = new ShuffleMessage(activeViewSample, passiveViewSample, ARWL);
             openConnection(randomNeighbor);
+            logger.debug("Send {} from {} to {}", shuffleMessage, myself, randomNeighbor);
             sendMessage(shuffleMessage, randomNeighbor);
         }
-
     }
 
     //********************************* FAILS FUNCTIONS ******************************************************
 
     private void uponReceiveJoinFails(JoinMessage joinMessage, Host peer, short destProto, Throwable throwable, int channelId) {
-        logger.debug("Message {} to {} failed, reason: {}", joinMessage, peer, throwable);
+        logger.error("Message {} to {} failed, reason: {}", joinMessage, peer, throwable);
         connectionFailed(peer);
     }
 
     private void uponReceiveJoinReplyFails(JoinReplyMessage joinReplyMessage, Host peer, short destProto, Throwable throwable, int channelId) {
-        logger.debug("Message {} to {} failed, reason: {}", joinReplyMessage, peer, throwable);
+        logger.error("Message {} to {} failed, reason: {}", joinReplyMessage, peer, throwable);
         connectionFailed(peer);
     }
 
@@ -414,7 +403,8 @@ public class HyParView extends GenericProtocol {
             //Close Temporary connections
             logger.debug("Temporary Out Connection down with peer: {}", peer);
             temporaryConnections.remove(peer);
-            closeConnection(peer);
+            if(!activeView.contains(peer))
+                closeConnection(peer);
         }
 
     }
@@ -427,6 +417,7 @@ public class HyParView extends GenericProtocol {
 
         if(activeView.contains(peer)) {
             logger.debug("Remove {} from Active View", peer);
+            closeConnection(peer);
             activeView.remove(peer);
             attemptPassiveViewConnection();
             passiveView.add(peer);
@@ -436,6 +427,7 @@ public class HyParView extends GenericProtocol {
     private void uponOutConnectionFailed(OutConnectionFailed<ProtoMessage> event, int channelId) {
         Host peer = event.getNode();
         logger.debug("Connection to {} failed cause: {}", peer, event.getCause());
+        closeConnection(peer);
         activeView.remove(peer);
         passiveView.remove(peer);
         attemptPassiveViewConnection();
@@ -451,8 +443,7 @@ public class HyParView extends GenericProtocol {
 
             logger.debug("Attempt passive view connection with: {}", randomHost);
             passiveView.remove(randomHost);
-            activeView.add(randomHost);
-            openConnection(randomHost);
+            addNodeActiveView(randomHost);
             sendMessage(new NeighborMessage(isPriority), randomHost);
         }
     }
@@ -526,6 +517,11 @@ public class HyParView extends GenericProtocol {
         }
     }
 
+    private void openTemporaryConnection(Host peer) {
+        temporaryConnections.add(peer);
+        openConnection(peer);
+    }
+
     /* --------------------------------- Metrics ---------------------------- */
 
     //If we setup the InfoTimer in the constructor, this event will be triggered periodically.
@@ -533,15 +529,16 @@ public class HyParView extends GenericProtocol {
     private void uponInfoTime(InfoTimer timer, long timerId) {
         StringBuilder sb = new StringBuilder("Membership Metrics:\n");
         sb.append("\n");
+        sb.append("\n");
         sb.append("Contacts: ").append(contacts).append("\n");
         sb.append("ActiveView: ").append(activeView).append("\n");
         sb.append("PassiveView: ").append(passiveView).append("\n");
         sb.append("activeViewMaxSize: ").append(activeViewMaxSize).append("\n");
         sb.append("passiveViewMaxSize: ").append(passiveViewMaxSize).append("\n");
-        sb.append("\n");
         //getMetrics returns an object with the number of events of each type processed by this protocol.
         //It may or may not be useful to you, but at least you know it exists.
         sb.append(getMetrics());
+        sb.append("\n");
         logger.info(sb);
     }
 
@@ -568,6 +565,8 @@ public class HyParView extends GenericProtocol {
                 c.getPeer(), c.getSentAppMessages(), c.getSentAppBytes(), c.getReceivedAppMessages(),
                 c.getReceivedAppBytes())));
         sb.setLength(sb.length() - 1);
+        sb.append("\n");
+        sb.append("\n");
         logger.info(sb);
     }
 
