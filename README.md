@@ -31,28 +31,28 @@ java -jar target/asdProj.jar -conf config.properties port=5007 contact=127.0.0.1
 
 ### Path
 ```bash
-ls ASD/
+$ ls ASD/
 config.properties deploy docker Dockerfile .....
 ```
 
 ### Send files to DI Cluster and Login with SSH
 ```bash
-scp -P 12034 -r ASD asd04@cluster.di.fct.unl.pt:.
+$ scp -P 12034 -r ASD asd04@cluster.di.fct.unl.pt:.
 asd04@cluster.di.fct.unl.pt's password: d!7F6Xtqf8N=#DHx
 
-ssh -p 12034 asd04@cluster.di.fct.unl.pt
+$ ssh -p 12034 asd04@cluster.di.fct.unl.pt
 asd04@cluster.di.fct.unl.pt's password: d!7F6Xtqf8N=#DHx
 ```
 
 ### Reserve
 ```bash
-oarsub -l nodes=2 -I
+$ oarsub -l nodes=2 -I
 ```
 
 ### Deploy
 ```bash
-sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh 
-./deploy/deploy.sh 5
+$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh 
+$ ./deploy/deploy.sh 5
 ```
 
 ---
