@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class ShuffleMessage extends ProtoMessage {
 
-    public final static short MSG_ID = 9006;
+    public final static short MSG_ID = 9007;
 
     private Set<Host> activeViewSample;
     private Set<Host> passiveViewSample;

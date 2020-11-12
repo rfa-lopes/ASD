@@ -7,7 +7,7 @@ import network.ISerializer;
 import java.io.IOException;
 
 public class RejectMessage extends ProtoMessage {
-    public final static short MSG_ID = 9005;
+    public final static short MSG_ID = 9006;
 
     public RejectMessage() {
         super(MSG_ID);

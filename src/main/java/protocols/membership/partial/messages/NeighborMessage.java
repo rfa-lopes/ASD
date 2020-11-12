@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class NeighborMessage extends ProtoMessage {
 
-    public final static short MSG_ID = 9004;
+    public final static short MSG_ID = 9005;
     private final boolean isPriority;
 
     public NeighborMessage(boolean isPriority) {

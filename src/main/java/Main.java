@@ -101,13 +101,13 @@ public class Main {
         }
 
         //Register the protocols in babel
-        babel.registerProtocol(broadcastApp);
-        babel.registerProtocol(broadcast);
+        //babel.registerProtocol(broadcastApp);
+        //babel.registerProtocol(broadcast);
         babel.registerProtocol(membership);
 
         //Initialize the app and the algorithms
-        broadcastApp.init(props);
-        broadcast.init(props);
+        //broadcastApp.init(props);
+        //broadcast.init(props);
         membership.init(props);
 
         //Start babel and protocol threads

@@ -2,11 +2,11 @@ package protocols.membership.partial.timers;
 
 import babel.generic.ProtoTimer;
 
-public class ShuffleTimer extends ProtoTimer {
+public class JoinTimer extends ProtoTimer {
 
-    public static final short TIMER_ID = 9009;
+    public static final short TIMER_ID = 9010;
 
-    public ShuffleTimer() {
+    public JoinTimer() {
         super(TIMER_ID);
     }
 
