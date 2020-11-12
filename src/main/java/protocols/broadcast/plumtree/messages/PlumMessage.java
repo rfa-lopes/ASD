@@ -18,7 +18,7 @@ public class PlumMessage extends GossipMessage {
 
     public PlumMessage(UUID mid, Host sender, short toDeliver, byte[] content, int round) {
 
-        super(mid, sender, toDeliver, content);
+        super(mid, sender, toDeliver, content, 20);
 
         this.round = round;
     }

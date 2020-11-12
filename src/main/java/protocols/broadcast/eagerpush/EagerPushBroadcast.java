@@ -7,6 +7,7 @@ import network.data.Host;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocols.broadcast.common.BroadcastRequest;
+import protocols.broadcast.common.DeliverNotification;
 import protocols.broadcast.eagerpush.messages.GossipMessage;
 import protocols.membership.common.notifications.ChannelCreated;
 import protocols.membership.common.notifications.NeighbourDown;
@@ -43,10 +44,10 @@ public class EagerPushBroadcast extends GenericProtocol {
         channelReady = false;
 
         //Checks what is the typ+e of the membership we are using so that we can obtain our node frieds from the membership algorithm
-        if(membership instanceof CyclonMembership){
+        if (membership instanceof CyclonMembership) {
             this.cyclonMembership = (CyclonMembership) membership;
 
-        }else{
+        } else {
             this.hyParView = (HyParView) membership;
         }
 
@@ -96,27 +97,38 @@ public class EagerPushBroadcast extends GenericProtocol {
     }
 
     private void uponEagerMessage(GossipMessage msg, Host from, short sourceProto, int channelId) {
-        logger.debug("Received {} from {}", msg, from);
+        logger.info("Received {} from {}", msg, from);
         if (delivered.add(msg.getMid())) {
-//            triggerNotification(new DeliverNotification(msg.getMid(), msg.getSender(), msg.getContent()));
-            //FIXME REFACTOR SO THAT EAGER PUSH CAN ALSO USE HYPARVIEW (ONLY NEED TO GET HYPAR VIEW NEIGHBORS SOMEHOW)
-            neighbors = new HashSet<>(cyclonMembership.getNeighbours());
+            //CHECKS MSG TTL FOR VALIDITY
+            if (msg.getTtl() > 0) {
 
-            t = (int) Math.ceil(Math.log(neighbors.size())) == 0 ? 1 : (int) Math.ceil(Math.log(neighbors.size()));
+                triggerNotification(new DeliverNotification(msg.getMid(), msg.getSender(), msg.getContent()));
 
-            if (!neighbors.isEmpty()) {
-                List<Host> unshuffledGossiptTargets = new LinkedList<>(neighbors);
-                Collections.shuffle(unshuffledGossiptTargets);
-                Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(0, t));
-                gossipTargets.forEach(host -> {
+                if (cyclonMembership != null) {
+                    neighbors = new HashSet<>(cyclonMembership.getNeighbours());
+                } else {
+                    neighbors = new HashSet<>(hyParView.getNeighbours());
+                }
 
-                    logger.debug("Sent {} to {}", msg, host);
-                    openConnection(host);
-                    sendMessage(msg, host);
+                t = (int) Math.ceil(Math.log(neighbors.size())) == 0 ? 1 : (int) Math.ceil(Math.log(neighbors.size()));
 
-                });
+                if (!neighbors.isEmpty()) {
+                    List<Host> unshuffledGossiptTargets = new LinkedList<>(neighbors);
+                    Collections.shuffle(unshuffledGossiptTargets);
+                    Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(0, t));
+                    gossipTargets.forEach(host -> {
 
+                        logger.info("Sent {} to {}", msg, host);
+                        openConnection(host);
+                        sendMessage(msg, host);
+
+                    });
+
+                }
+            }else {
+                logger.info("Message TTL expired");
             }
+//
         }
     }
 
@@ -141,7 +153,7 @@ public class EagerPushBroadcast extends GenericProtocol {
         if (!channelReady) return;
 
         //Create the message object.
-        GossipMessage msg = new GossipMessage(request.getMsgId(), request.getSender(), sourceProto, request.getMsg());
+        GossipMessage msg = new GossipMessage(request.getMsgId(), request.getSender(), sourceProto, request.getMsg(), 20);
 
         //Call the same handler as when receiving a new GossipMessage (since the logic is the same)
         uponEagerMessage(msg, myself, getProtoId(), cId);

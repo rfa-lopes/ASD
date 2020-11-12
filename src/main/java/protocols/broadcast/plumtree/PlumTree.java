@@ -87,7 +87,7 @@ public class PlumTree extends GenericProtocol {
 
         if (!channelReady) return;
 
-        GossipMessage message = new GossipMessage(request.getMsgId(), request.getSender(), sourceProto, request.getMsg());
+        GossipMessage message = new GossipMessage(request.getMsgId(), request.getSender(), sourceProto, request.getMsg(), 20);
 
         eagerPush(message, myself, getProtoId(), -1);
 

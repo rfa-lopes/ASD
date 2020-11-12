@@ -16,6 +16,7 @@ public class GossipMessage extends ProtoMessage {
 
     private final short toDeliver;
     private final byte[] content;
+    private final int ttl;
 
 
     @Override
@@ -25,12 +26,17 @@ public class GossipMessage extends ProtoMessage {
                 '}';
     }
 
-    public GossipMessage(UUID mid, Host sender, short toDeliver, byte[] content) {
+    public GossipMessage(UUID mid, Host sender, short toDeliver, byte[] content, int TTL) {
         super(MSG_ID);
         this.mid = mid;
         this.sender = sender;
         this.toDeliver = toDeliver;
         this.content = content;
+        this.ttl = TTL;
+    }
+
+    public int getTtl() {
+        return ttl;
     }
 
     public Host getSender() {
@@ -54,6 +60,7 @@ public class GossipMessage extends ProtoMessage {
         public void serialize(GossipMessage gossipMessage, ByteBuf out) throws IOException {
             out.writeLong(gossipMessage.mid.getMostSignificantBits());
             out.writeLong(gossipMessage.mid.getLeastSignificantBits());
+            out.writeInt(gossipMessage.ttl);
             Host.serializer.serialize(gossipMessage.sender, out);
             out.writeShort(gossipMessage.toDeliver);
             out.writeInt(gossipMessage.content.length);
@@ -66,6 +73,7 @@ public class GossipMessage extends ProtoMessage {
         public GossipMessage deserialize(ByteBuf in) throws IOException {
             long firstLong = in.readLong();
             long secondLong = in.readLong();
+            int ttl = in.readInt();
             UUID mid = new UUID(firstLong, secondLong);
             Host sender = Host.serializer.deserialize(in);
             short toDeliver = in.readShort();
@@ -74,7 +82,7 @@ public class GossipMessage extends ProtoMessage {
             if (size > 0)
                 in.readBytes(content);
 
-            return new GossipMessage(mid, sender, toDeliver, content);
+            return new GossipMessage(mid, sender, toDeliver, content, ttl);
         }
     };
 

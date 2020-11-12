@@ -524,4 +524,8 @@ public class HyParView extends GenericProtocol {
         sb.setLength(sb.length() - 1);
         logger.info(sb);
     }
+
+    public Set<Host> getNeighbours() {
+        return new HashSet<>(activeView);
+    }
 }
