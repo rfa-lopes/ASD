@@ -236,12 +236,15 @@ public class CyclonMembership extends GenericProtocol {
                     HostWithTime matched = new HostWithTime();
                     matched.setAge(-1);
 
-                    mySample.forEach(hos -> neigh.values().forEach(hos2 -> { //pick an element of neigh that is also in my sample
-                        if (hos.equals(hos2)) {
-                            matched.setHost(hos.getHost());
-                            matched.setAge(hos.getAge());
+                    for(HostWithTime h : mySample){
+                        for(HostWithTime h2 : neigh.values()){
+                            if (h.equals(h2)) {
+                                matched.setHost(h.getHost());
+                                matched.setAge(h.getAge());
+                                break;
+                            }
                         }
-                    }));
+                    }
 
                     HostWithTime h = null;
 
@@ -307,12 +310,14 @@ public class CyclonMembership extends GenericProtocol {
     private void uponInConnectionUp(InConnectionUp event, int channelId) {
         HostWithTime tofind = neigh.get(event.getNode());
         if (tofind == null) {
-            HostWithTime hostWithTime = new HostWithTime();
-            hostWithTime.setAge(0);
-            hostWithTime.setHost(event.getNode());
-            neigh.put(hostWithTime.getHost(), hostWithTime);
+            if(neigh.size()<subsetSize) {
+                HostWithTime hostWithTime = new HostWithTime();
+                hostWithTime.setAge(0);
+                hostWithTime.setHost(event.getNode());
+                neigh.put(hostWithTime.getHost(), hostWithTime);
 //        openConnection(hostWithTime.getHost());
-            logger.trace("Connection from {} is up", event.getNode());
+                logger.trace("Connection from {} is up", event.getNode());
+            }
         }
     }
 
