@@ -23,7 +23,7 @@ java -jar target/asdProj.jar -conf config.properties port=5003 contact=127.0.0.1
 java -jar target/asdProj.jar -conf config.properties port=5004 contact=127.0.0.1:5000
 java -jar target/asdProj.jar -conf config.properties port=5005 contact=127.0.0.1:5000
 java -jar target/asdProj.jar -conf config.properties port=5006 contact=127.0.0.1:5000
-java -jar target/asdProj.jar -conf config.properties port=5007 contact=127.0.0.1:5000,127.0.0.1:5001,127.0.0.1:5002
+java -jar target/asdProj.jar -conf config.properties port=5007 contact=127.0.0.1:5000,127.0.0.1:5001
 ```
 ---
 
