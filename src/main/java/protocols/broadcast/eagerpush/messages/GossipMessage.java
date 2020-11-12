@@ -39,6 +39,8 @@ public class GossipMessage extends ProtoMessage {
         return ttl;
     }
 
+    public void decreaseTTL(){}
+
     public Host getSender() {
         return sender;
     }

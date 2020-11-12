@@ -100,7 +100,7 @@ public class EagerPushBroadcast extends GenericProtocol {
         logger.info("Received {} from {}", msg, from);
         if (delivered.add(msg.getMid())) {
             //CHECKS MSG TTL FOR VALIDITY
-            if (msg.getTtl() > 0) {
+            if (msg.getTtl() > -1) {
 
                 triggerNotification(new DeliverNotification(msg.getMid(), msg.getSender(), msg.getContent()));
 
@@ -112,20 +112,22 @@ public class EagerPushBroadcast extends GenericProtocol {
 
                 t = (int) Math.ceil(Math.log(neighbors.size())) == 0 ? 1 : (int) Math.ceil(Math.log(neighbors.size()));
 
+                GossipMessage msg2 = new GossipMessage(msg.getMid(), msg.getSender(), msg.getToDeliver(), msg.getContent(), msg.getTtl() - 1);
+
                 if (!neighbors.isEmpty()) {
                     List<Host> unshuffledGossiptTargets = new LinkedList<>(neighbors);
                     Collections.shuffle(unshuffledGossiptTargets);
                     Set<Host> gossipTargets = new HashSet<>(unshuffledGossiptTargets.subList(0, t));
                     gossipTargets.forEach(host -> {
 
-                        logger.info("Sent {} to {}", msg, host);
+                        logger.info("Sent {} to {}", msg2, host);
                         openConnection(host);
-                        sendMessage(msg, host);
+                        sendMessage(msg2, host);
 
                     });
 
                 }
-            }else {
+            } else {
                 logger.info("Message TTL expired");
             }
 //
