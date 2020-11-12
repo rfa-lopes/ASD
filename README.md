@@ -9,7 +9,7 @@ git clone https://github.com/rfa-lopes/ASD.git
 
 ### Compile
 ```bash
-mvn package
+mvn clean package
 ```
 
 ### Run
