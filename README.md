@@ -1,6 +1,6 @@
 # Algoritmos e Sistemas Distribuído
 
-## Setup and Test
+## Setup and Test (Local)
 
 ### Git Clone
 ```bash
@@ -51,8 +51,14 @@ $ oarsub -l nodes=2 -I
 
 ### Deploy
 ```bash
-$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh 
-$ ./deploy/deploy.sh 5
+$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh deploy/setup.sh
+$ ./deploy/setup.sh 250
+$ ./deploy/deploy.sh 250
+```
+
+### Download files
+```bash
+$ scp -P 12034 -r asd04@cluster.di.fct.unl.pt:~/asdLogs .
 ```
 
 ---

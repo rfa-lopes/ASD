@@ -5,11 +5,11 @@
             <PatternLayout pattern="%highlight{%level{length=1}[%d{HH:mm:ss,SSS}] [%t]%logger{0}:} %msg%n"/>
         </Console>
 
-        <!--
-                <File name="asdLogs" fileName="logs/${sys:logFilename}.log" append="false" immediateFlush="true">
-                    <PatternLayout pattern="%highlight{%level{length=1}[%d{HH:mm:ss,SSS}] [%t]%logger{0}:} %msg%n"/>
-                </File>
-                -->
+
+        <File name="asdLogs" fileName="logs/${sys:logFilename}.log" append="false" immediateFlush="true">
+            <PatternLayout pattern="%highlight{%level{length=1}[%d{HH:mm:ss,SSS}] [%t]%logger{0}:} %msg%n"/>
+        </File>
+
 
     </Appenders>
 
@@ -18,19 +18,19 @@
         <Logger level="info" name="protocols.apps"/>
         <Logger level="info" name="protocols.overlays"/>
         <Logger level="debug" name="protocols.dissemination"/>
-        -->
+    -->
 
-        <Logger level="info" name="io.netty"/>
-        <Logger level="info" name="network"/>
-        <Logger level="info" name="channel"/>
-        <Logger level="info" name="babel"/>
+    <Logger level="info" name="io.netty"/>
+    <Logger level="info" name="network"/>
+    <Logger level="info" name="channel"/>
+    <Logger level="info" name="babel"/>
 
 
 
-        <Root level="debug">
-            <AppenderRef ref="Console" level="info"/>
-            <!--<AppenderRef ref="asdLogs" level="all"/>-->
-        </Root>
-    </Loggers>
+    <Root level="debug">
+        <AppenderRef ref="Console" level="info"/>
+        <AppenderRef ref="asdLogs" level="all"/>
+    </Root>
+</Loggers>
 
 </Configuration>
