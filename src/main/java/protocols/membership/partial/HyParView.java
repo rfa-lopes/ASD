@@ -259,6 +259,7 @@ public class HyParView extends GenericProtocol {
             logger.debug("Received {} from {}", disconnectMessage, peer);
             closeConnection(peer);
             activeView.remove(peer);
+            attemptPassiveViewConnection();
             addNodePassiveView(peer);
         }
     }
