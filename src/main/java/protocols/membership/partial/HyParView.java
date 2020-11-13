@@ -313,20 +313,12 @@ public class HyParView extends GenericProtocol {
         Set<Host> shuffleMessageActiveView = shuffleMessage.getActiveViewSample();
         mergeSample.addAll(shuffleMessageActiveView);
 
-        //(naturally, they exclude their own identifier and nodes that are part of the active or passive views)
-        removeMySelfAndViews(mergeSample);
-
         integrateElementsIntoPassiveView(mergeSample);
     }
 
     private void uponReceiveReplyShuffle(ShuffleReplyMessage shuffleReplyMessage, Host peer, short sourceProto, int channelId) {
         logger.debug("Received {} from {}", shuffleReplyMessage, peer);
-
         Set<Host> mergeSample = shuffleReplyMessage.getSample();
-
-        //(naturally, they exclude their own identifier and nodes that are part of the active or passive views)
-        removeMySelfAndViews(mergeSample);
-
         integrateElementsIntoPassiveView(mergeSample);
     }
 
@@ -495,16 +487,15 @@ public class HyParView extends GenericProtocol {
     }
 
     private void integrateElementsIntoPassiveView(Set<Host> mergeSample) {
+        //(naturally, they exclude their own identifier and nodes that are part of the active or passive views)
+        mergeSample.remove(myself);
+        mergeSample.removeAll(passiveView);
+        mergeSample.removeAll(activeView);
         if(passiveView.size() + mergeSample.size() > passiveViewMaxSize)
             //it will remove identifiers at random.
             removeRandomElements(passiveView, mergeSample.size());
         //Add all
         passiveView.addAll(mergeSample);
-    }
-    private void removeMySelfAndViews(Set<Host> mergeSample) {
-        mergeSample.remove(myself);
-        mergeSample.removeAll(passiveView);
-        mergeSample.removeAll(activeView);
     }
 
     private void connectionFailed(Host peer){
