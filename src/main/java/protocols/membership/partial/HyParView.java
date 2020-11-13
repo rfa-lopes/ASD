@@ -498,9 +498,8 @@ public class HyParView extends GenericProtocol {
         if(passiveView.size() + mergeSample.size() > passiveViewMaxSize)
             //it will remove identifiers at random.
             removeRandomElements(passiveView, mergeSample.size());
-        else
-            //Add all
-            passiveView.addAll(mergeSample);
+        //Add all
+        passiveView.addAll(mergeSample);
     }
     private void removeMySelfAndViews(Set<Host> mergeSample) {
         mergeSample.remove(myself);
