@@ -6,22 +6,22 @@ upon Init do
 
 upon Receive(Join, newNode) do
 	if isfull(activeView) then
-		Trigger dropRandomElementFromActiveView
-	Trigger addNodeActiveView(newNode)
+		trigger dropRandomElementFromActiveView
+	trigger addNodeActiveView(newNode)
 	Send(JoinReply, newNode, myself)
 	foreach n ∈ activeView and n ≠ newNode do
 		Send(ForwardJoin, n, newNode, ARWL, myself)
 
 upon Receive(JoinReply, contactNode) do
-	Trigger addNodeActiveView(newNode)
+	trigger addNodeActiveView(newNode)
 	Cancel Periodic Timer(JoinTimer, t)
 
 upon Receive(ForwardJoin, newNode, timeToLive, sender) do
 	if timeToLive==0 || #activeView==0 then
-		Trigger addNodeActiveView(newNode)
+		trigger addNodeActiveView(newNode)
 	else
 		if timeToLive==PRWL then
-			Trigger addNodePassiveView(newNode)
+			trigger addNodePassiveView(newNode)
 		n <− n ∈ activeView and n ≠ sender
 		Send(ForwardJoin, n, newNode, timeToLive-1, myself)
 
@@ -34,7 +34,7 @@ upon dropRandomElementFromActiveView do
 upon addNodeActiveView(node) do
 	if node ≠ myself and node ∉ activeView then
 		if isfull(activeView) then
-			Trigger dropRandomElementFromActiveView
+			trigger dropRandomElementFromActiveView
 		activeView <− activeView U node
 
 upon addNodePassiveView(node) do
@@ -47,21 +47,21 @@ upon addNodePassiveView(node) do
 upon Receive(Disconnect, peer) do
 	if peer ∈ activeView then
 		activeView <− activeView \ {peer}
-		addNodePassiveView(peer)
+		trigger addNodePassiveView(peer)
 
 upon Receive(Neighbor, peer, isPriority) do
 	if isPriority then
-		addNodeActiveView(peer)
+		trigger addNodeActiveView(peer)
 	else
 		if isfull(activeView) then
 			Send(Reject, peer, myself)
 		else
 			passiveView <− passiveView \ {peer}
-			addNodeActiveView(peer)
+			trigger addNodeActiveView(peer)
 
 upon Receive(Reject, peer) do
 	passiveView <− passiveView \ {peer}
-	Trigger attemptPassiveViewConnection
+	trigger attemptPassiveViewConnection
 	passiveView <− passiveView U {peer}
 
 upon Receive(Shuffle, ttl, passiveViewSample, activeViewSample, peer) do
@@ -69,18 +69,18 @@ upon Receive(Shuffle, ttl, passiveViewSample, activeViewSample, peer) do
 		n <- n ∈ activeView and n ≠ peer
 		Send(Shuffle, ttl - 1, n, myself)
 	else
-		sample <- getSampleFrom(passiveView, #passiveViewSample)
+		sample <- trigger getSampleFrom(passiveView, #passiveViewSample)
 		Send(ShuffleReply, sample, peer, myself)
 	samples <- passiveViewSample U activeViewSample
-	Trigger integrateElementsIntoPassiveView(samples)
+	trigger integrateElementsIntoPassiveView(samples)
 
 upon Receive(ShuffleReply, sample, peer) do
-	Trigger integrateElementsIntoPassiveView(sample)
+	trigger integrateElementsIntoPassiveView(sample)
 
 upon integrateElementsIntoPassiveView(sample) do
 	sample <- sample \ { activeView U passiveView U {myself} }
 	if #passiveView + #sample > passiveViewMaxSize then
-		removeRandomElements(passiveView, #sample)
+		trigger removeRandomElements(passiveView, #sample)
 	passiveView <- passiveView U sample
 
 upon attemptPassiveViewConnection do
@@ -91,7 +91,7 @@ upon attemptPassiveViewConnection do
 			isPriority = false
 		n <- n ∈ passiveView
 		passiveView <− passiveView \ {n}
-		addNodeActiveView(n)
+		trigger addNodeActiveView(n)
 		Send(Neighbor, isPriority, n, myself)
 
 upon JoinTimer do
@@ -100,8 +100,8 @@ upon JoinTimer do
 
 upon ShuffleTimer do
 	if #activeView > 0 then
-		activeViewSample <- getSampleFrom(activeView, KA)
-		passiveViewSample <- getSampleFrom(passiveView, KP)
+		activeViewSample <- trigger getSampleFrom(activeView, KA)
+		passiveViewSample <- trigger getSampleFrom(passiveView, KP)
 		n <- n ∈ activeView
 		Send(Shuffle, activeViewSample, passiveViewSample, n, myself)
 
