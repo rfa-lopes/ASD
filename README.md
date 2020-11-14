@@ -51,7 +51,7 @@ $ oarsub -l nodes=2 -I
 
 ### Run all tests (and wait...)
 ```bash
-$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh deploy/setup.sh deploy/runTest.sh deploy/runAll.sh
+$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh deploy/setup.sh deploy/runTest.sh deploy/runAll.sh deploy/checkLogs.sh
 $ ./deploy/runAll.sh
 ```
 
