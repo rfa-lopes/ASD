@@ -85,7 +85,7 @@ echo "${configs}" > config.properties
 
 sleep 1
 
-#./deploy/deploy.sh 100
+./deploy/deploy.sh 100
 
 echo "Passing logs to Logs-Cluster/ ..."
 
