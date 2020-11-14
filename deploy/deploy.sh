@@ -43,7 +43,7 @@ for i in $(seq 01 $(($nNodes - 1))); do
   sleep 0.5
 done
 
-sleep 460
+sleep 120
 
 for i in $(seq 00 $(($nNodes - 1))); do
   node=$(nextnode $i)

@@ -51,9 +51,9 @@ $ oarsub -l nodes=2 -I
 
 ### Deploy
 ```bash
-$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh deploy/setup.sh
-$ ./deploy/setup.sh 250
-$ ./deploy/deploy.sh 250
+$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh deploy/setup.sh deploy/runTest.sh
+$ ./deploy/setup.sh 100
+$ ./deploy/deploy.sh 100
 ```
 
 ### Download files

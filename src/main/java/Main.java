@@ -59,8 +59,8 @@ public class Main {
         logger.info("Hello, I am {}", myself);
 
         //Lets run the algorithms from props
-        String broadcastAlgorithm = props.getProperty("broadcast");
-        String membershipAlgorithm = props.getProperty("membership");
+        String broadcastAlgorithm = props.getProperty("broadcast", "");
+        String membershipAlgorithm = props.getProperty("membership", "");
 
         // Application
 
@@ -79,8 +79,11 @@ public class Main {
             case HYPARVIEW:
                 membership = new HyParView(props, myself);
                 break;
-            default:
+            case FULL:
                 membership = new SimpleFullMembership(props, myself);
+                break;
+            default:
+                membership = null;
                 break;
         }
 
@@ -94,21 +97,31 @@ public class Main {
                 broadcast = new PlumTree(props, myself);
                 broadcastApp = new BroadcastApp(myself, props, PlumTree.PROTOCOL_ID);
                 break;
-            default:
+            case FLOOD:
                 broadcast = new FloodBroadcast(props, myself);
                 broadcastApp = new BroadcastApp(myself, props, FloodBroadcast.PROTOCOL_ID);
+                break;
+            default:
+                broadcast = null;
+                broadcastApp = null;
                 break;
         }
 
         //Register the protocols in babel
-        babel.registerProtocol(broadcastApp);
-        babel.registerProtocol(broadcast);
-        babel.registerProtocol(membership);
+        if(broadcastApp != null)
+            babel.registerProtocol(broadcastApp);
+        if(broadcast != null)
+            babel.registerProtocol(broadcast);
+        if(membership != null)
+            babel.registerProtocol(membership);
 
         //Initialize the app and the algorithms
-        broadcastApp.init(props);
-        broadcast.init(props);
-        membership.init(props);
+        if(broadcastApp != null)
+            broadcastApp.init(props);
+        if(broadcast != null)
+            broadcast.init(props);
+        if(membership != null)
+            membership.init(props);
 
         //Start babel and protocol threads
         babel.start();
