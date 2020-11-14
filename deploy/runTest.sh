@@ -89,14 +89,12 @@ sleep 1
 
 echo "Passing logs to Logs-Cluster/ ..."
 
-rm -R Logs-Cluster/"${rootlogsfolder}"/"${payloadLogsFolder}"/"${broadcast_intervalLogsFolder}"
-
 rootlogsfolder="${broadcast}+${membership}"
 payloadLogsFolder="payload_size-${payload_size}"
 broadcast_intervalLogsFolder="broadcast_interval-${broadcast_interval}"
 
-mkdir Logs-Cluster/"${rootlogsfolder}"
-mkdir Logs-Cluster/"${rootlogsfolder}"/"${payloadLogsFolder}"
-mkdir Logs-Cluster/"${rootlogsfolder}"/"${payloadLogsFolder}"/"${broadcast_intervalLogsFolder}"
+mkdir -p Logs-Cluster/"${rootlogsfolder}"
+mkdir -p Logs-Cluster/"${rootlogsfolder}"/"${payloadLogsFolder}"
+mkdir -p Logs-Cluster/"${rootlogsfolder}"/"${payloadLogsFolder}"/"${broadcast_intervalLogsFolder}"
 
 cp -a ~/asdLogs/logs/ Logs-Cluster/"${rootlogsfolder}"/"${payloadLogsFolder}"/"${broadcast_intervalLogsFolder}"

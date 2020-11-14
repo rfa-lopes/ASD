@@ -5,6 +5,8 @@ Usage () {
 
 ./deploy/setup.sh 100
 
+mkdir -p Logs-Cluster
+
 #ALL COMBINATIONS
 echo "################## EAGER + HYPARVIEW..."
 ./deploy/runTest.sh --broadcast=eager --membership=hyparview --payload_size=10 --broadcast_interval=1000 

@@ -49,16 +49,15 @@ asd04@cluster.di.fct.unl.pt's password: d!7F6Xtqf8N=#DHx
 $ oarsub -l nodes=2 -I
 ```
 
-### Deploy
+### Run all tests (and wait...)
 ```bash
-$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh deploy/setup.sh deploy/runTest.sh
-$ ./deploy/setup.sh 100
-$ ./deploy/deploy.sh 100
+$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh deploy/setup.sh deploy/runTest.sh deploy/runAll.sh
+$ ./deploy/runAll.sh
 ```
 
 ### Download files
 ```bash
-$ scp -P 12034 -r asd04@cluster.di.fct.unl.pt:~/asdLogs .
+$ scp -P 12034 -r asd04@cluster.di.fct.unl.pt:~/ASD/Logs-Cluster/ .
 ```
 
 ---
