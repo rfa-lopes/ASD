@@ -1,0 +1,1254 @@
+[32mI[23:52:22,680] [main]Main:[m Hello, I am 172.10.10.2:10000
+[36mD[23:52:22,950] [main]HyParView:[m Send JoinMessage{} from 172.10.10.2:10000 to 172.10.10.1:10000
+[36mD[23:52:22,953] [main]HyParView:[m Setup Join Timer...
+[36mD[23:52:23,427] [9069-HyParView]HyParView:[m Connection to 172.10.10.1:10000 is up
+[36mD[23:52:23,428] [9069-HyParView]HyParView:[m Temporary Out Connection down with peer: 172.10.10.1:10000
+[36mD[23:52:23,859] [9069-HyParView]HyParView:[m Connection from 172.10.10.1:10000 is up
+[32mI[23:52:23,945] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.1:10000: msgOut=0 (0) msgIn=0 (0)
+Out channels:
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:23,955] [9069-HyParView]HyParView:[m Join Timer expired. Trying again...
+[36mD[23:52:23,955] [9069-HyParView]HyParView:[m Send JoinMessage{} from 172.10.10.2:10000 to 172.10.10.1:10000
+[32mI[23:52:23,956] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: []
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=5, messagesIn=0, messagesFailed=0, messagesSent=0, timers=2, notifications=0, requests=0, replies=0, customChannelEvents=3}
+
+[36mD[23:52:24,060] [9069-HyParView]HyParView:[m Received JoinReplyMessage{} from 172.10.10.1:10000
+[36mD[23:52:24,061] [9069-HyParView]HyParView:[m Join Timer with timerID=1 canceled.
+[36mD[23:52:24,326] [9069-HyParView]HyParView:[m Connection from 172.10.10.3:10000 is up
+[36mD[23:52:24,390] [9069-HyParView]HyParView:[m Connection to 172.10.10.1:10000 is up
+[36mD[23:52:24,535] [9069-HyParView]HyParView:[m Received JoinMessage{} from 172.10.10.3:10000
+[36mD[23:52:24,535] [9069-HyParView]HyParView:[m Send JoinReplyMessage{} from 172.10.10.2:10000 to 172.10.10.3:10000
+[36mD[23:52:24,541] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.3:10000 | TTL=6} from 172.10.10.2:10000 to 172.10.10.1:10000
+[36mD[23:52:24,545] [9069-HyParView]HyParView:[m Connection from 172.10.10.3:10000 is down, cause: null
+[36mD[23:52:24,593] [9069-HyParView]HyParView:[m Received JoinReplyMessage{} from 172.10.10.1:10000
+[36mD[23:52:24,593] [9069-HyParView]HyParView:[m Join Timer with timerID=1 canceled.
+[32mI[23:52:24,939] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=2 (32) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:24,955] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000]
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=13, messagesIn=3, messagesFailed=0, messagesSent=0, timers=3, notifications=0, requests=0, replies=0, customChannelEvents=7}
+
+[36mD[23:52:24,968] [9069-HyParView]HyParView:[m Connection to 172.10.10.3:10000 is up
+[36mD[23:52:25,292] [9069-HyParView]HyParView:[m Connection from 172.10.10.3:10000 is up
+[36mD[23:52:25,494] [9069-HyParView]HyParView:[m Received JoinMessage{} from 172.10.10.3:10000
+[36mD[23:52:25,494] [9069-HyParView]HyParView:[m Send JoinReplyMessage{} from 172.10.10.2:10000 to 172.10.10.3:10000
+[36mD[23:52:25,495] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.3:10000 | TTL=6} from 172.10.10.2:10000 to 172.10.10.1:10000
+[36mD[23:52:25,499] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.4:10000 | TTL=6} from 172.10.10.3:10000
+[36mD[23:52:25,499] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.4:10000 | TTL=5} from 172.10.10.2:10000 to 172.10.10.1:10000
+[32mI[23:52:25,939] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=2 (32)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=4 (74) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:25,954] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000]
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=19, messagesIn=5, messagesFailed=0, messagesSent=0, timers=4, notifications=0, requests=0, replies=0, customChannelEvents=10}
+
+[36mD[23:52:26,242] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.4:10000 | TTL=6} from 172.10.10.3:10000
+[36mD[23:52:26,243] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.4:10000 | TTL=5} from 172.10.10.2:10000 to 172.10.10.1:10000
+[36mD[23:52:26,539] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.5:10000 | TTL=5} from 172.10.10.3:10000
+[36mD[23:52:26,539] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.5:10000 | TTL=4} from 172.10.10.2:10000 to 172.10.10.1:10000
+[32mI[23:52:26,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=4 (74)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=6 (116) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:26,954] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000]
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=23, messagesIn=7, messagesFailed=0, messagesSent=0, timers=5, notifications=0, requests=0, replies=0, customChannelEvents=11}
+
+[36mD[23:52:27,491] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.5:10000 | TTL=5} from 172.10.10.3:10000
+[36mD[23:52:27,491] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.5:10000 | TTL=4} from 172.10.10.2:10000 to 172.10.10.1:10000
+[32mI[23:52:27,939] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=5 (95)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=7 (137) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:27,954] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000]
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=26, messagesIn=8, messagesFailed=0, messagesSent=0, timers=6, notifications=0, requests=0, replies=0, customChannelEvents=12}
+
+[36mD[23:52:28,095] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.6:10000 | TTL=4} from 172.10.10.3:10000
+[36mD[23:52:28,096] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.6:10000 | TTL=3} from 172.10.10.2:10000 to 172.10.10.1:10000
+[36mD[23:52:28,244] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.7:10000 | TTL=3} from 172.10.10.3:10000
+[36mD[23:52:28,245] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.7:10000 | TTL=2} from 172.10.10.2:10000 to 172.10.10.1:10000
+[32mI[23:52:28,939] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=7 (137)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=9 (179) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:28,954] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=30, messagesIn=10, messagesFailed=0, messagesSent=0, timers=7, notifications=0, requests=0, replies=0, customChannelEvents=13}
+
+[36mD[23:52:29,193] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.7:10000 | TTL=3} from 172.10.10.3:10000
+[36mD[23:52:29,194] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.7:10000 | TTL=2} from 172.10.10.2:10000 to 172.10.10.1:10000
+[36mD[23:52:29,194] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.8:10000 | TTL=2} from 172.10.10.3:10000
+[36mD[23:52:29,195] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.8:10000 | TTL=1} from 172.10.10.2:10000 to 172.10.10.1:10000
+[36mD[23:52:29,901] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.8:10000 | TTL=2} from 172.10.10.3:10000
+[36mD[23:52:29,901] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.8:10000 | TTL=1} from 172.10.10.2:10000 to 172.10.10.1:10000
+[32mI[23:52:29,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=10 (200)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=12 (242) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:29,955] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=35, messagesIn=13, messagesFailed=0, messagesSent=0, timers=8, notifications=0, requests=0, replies=0, customChannelEvents=14}
+
+[36mD[23:52:30,137] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.9:10000 | TTL=1} from 172.10.10.3:10000
+[36mD[23:52:30,137] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.9:10000 | TTL=0} from 172.10.10.2:10000 to 172.10.10.1:10000
+[32mI[23:52:30,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=11 (221)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=13 (263) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:30,955] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=38, messagesIn=14, messagesFailed=0, messagesSent=0, timers=9, notifications=0, requests=0, replies=0, customChannelEvents=15}
+
+[36mD[23:52:31,084] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.9:10000 | TTL=1} from 172.10.10.3:10000
+[36mD[23:52:31,085] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.9:10000 | TTL=0} from 172.10.10.2:10000 to 172.10.10.1:10000
+[36mD[23:52:31,085] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.10:10000 | TTL=0} from 172.10.10.3:10000
+[36mD[23:52:31,513] [9069-HyParView]HyParView:[m Connection to 172.10.10.10:10000 is up
+[36mD[23:52:31,835] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.10:10000 | TTL=0} from 172.10.10.3:10000
+[32mI[23:52:31,939] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:31,954] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=44, messagesIn=17, messagesFailed=0, messagesSent=0, timers=10, notifications=0, requests=0, replies=0, customChannelEvents=17}
+
+[32mI[23:52:32,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:32,954] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=46, messagesIn=17, messagesFailed=0, messagesSent=0, timers=11, notifications=0, requests=0, replies=0, customChannelEvents=18}
+
+[32mI[23:52:33,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:33,954] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=48, messagesIn=17, messagesFailed=0, messagesSent=0, timers=12, notifications=0, requests=0, replies=0, customChannelEvents=19}
+
+[32mI[23:52:34,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:34,954] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=50, messagesIn=17, messagesFailed=0, messagesSent=0, timers=13, notifications=0, requests=0, replies=0, customChannelEvents=20}
+
+[32mI[23:52:35,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:35,955] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=52, messagesIn=17, messagesFailed=0, messagesSent=0, timers=14, notifications=0, requests=0, replies=0, customChannelEvents=21}
+
+[32mI[23:52:36,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:36,955] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=54, messagesIn=17, messagesFailed=0, messagesSent=0, timers=15, notifications=0, requests=0, replies=0, customChannelEvents=22}
+
+[32mI[23:52:37,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[36mD[23:52:37,954] [9069-HyParView]HyParView:[m Timer Shuffle...
+[36mD[23:52:37,962] [9069-HyParView]HyParView:[m Send ShuffleMessage{activeViewSample=[172.10.10.10:10000, 172.10.10.3:10000, 172.10.10.1:10000] | passiveViewSample=[172.10.10.7:10000] | TTL=6} from 172.10.10.2:10000 to 172.10.10.3:10000
+[32mI[23:52:37,963] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=57, messagesIn=17, messagesFailed=0, messagesSent=0, timers=17, notifications=0, requests=0, replies=0, customChannelEvents=23}
+
+[32mI[23:52:38,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:38,955] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=59, messagesIn=17, messagesFailed=0, messagesSent=0, timers=18, notifications=0, requests=0, replies=0, customChannelEvents=24}
+
+[32mI[23:52:39,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:39,956] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=61, messagesIn=17, messagesFailed=0, messagesSent=0, timers=19, notifications=0, requests=0, replies=0, customChannelEvents=25}
+
+[32mI[23:52:40,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:40,956] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=63, messagesIn=17, messagesFailed=0, messagesSent=0, timers=20, notifications=0, requests=0, replies=0, customChannelEvents=26}
+
+[32mI[23:52:41,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:41,956] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=65, messagesIn=17, messagesFailed=0, messagesSent=0, timers=21, notifications=0, requests=0, replies=0, customChannelEvents=27}
+
+[32mI[23:52:42,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:42,956] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=67, messagesIn=17, messagesFailed=0, messagesSent=0, timers=22, notifications=0, requests=0, replies=0, customChannelEvents=28}
+
+[32mI[23:52:43,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:43,957] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=69, messagesIn=17, messagesFailed=0, messagesSent=0, timers=23, notifications=0, requests=0, replies=0, customChannelEvents=29}
+
+[32mI[23:52:44,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:44,957] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=71, messagesIn=17, messagesFailed=0, messagesSent=0, timers=24, notifications=0, requests=0, replies=0, customChannelEvents=30}
+
+[32mI[23:52:45,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:45,956] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=73, messagesIn=17, messagesFailed=0, messagesSent=0, timers=25, notifications=0, requests=0, replies=0, customChannelEvents=31}
+
+[32mI[23:52:46,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:46,956] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=75, messagesIn=17, messagesFailed=0, messagesSent=0, timers=26, notifications=0, requests=0, replies=0, customChannelEvents=32}
+
+[32mI[23:52:47,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:47,956] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=77, messagesIn=17, messagesFailed=0, messagesSent=0, timers=27, notifications=0, requests=0, replies=0, customChannelEvents=33}
+
+[32mI[23:52:48,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:48,957] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=79, messagesIn=17, messagesFailed=0, messagesSent=0, timers=28, notifications=0, requests=0, replies=0, customChannelEvents=34}
+
+[32mI[23:52:49,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:49,957] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=81, messagesIn=17, messagesFailed=0, messagesSent=0, timers=29, notifications=0, requests=0, replies=0, customChannelEvents=35}
+
+[32mI[23:52:50,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:50,957] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=83, messagesIn=17, messagesFailed=0, messagesSent=0, timers=30, notifications=0, requests=0, replies=0, customChannelEvents=36}
+
+[32mI[23:52:51,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:51,957] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=85, messagesIn=17, messagesFailed=0, messagesSent=0, timers=31, notifications=0, requests=0, replies=0, customChannelEvents=37}
+
+[32mI[23:52:52,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=14 (284) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[36mD[23:52:52,954] [9069-HyParView]HyParView:[m Timer Shuffle...
+[36mD[23:52:52,955] [9069-HyParView]HyParView:[m Send ShuffleMessage{activeViewSample=[172.10.10.10:10000, 172.10.10.3:10000, 172.10.10.1:10000] | passiveViewSample=[172.10.10.7:10000] | TTL=6} from 172.10.10.2:10000 to 172.10.10.1:10000
+[32mI[23:52:52,957] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=88, messagesIn=17, messagesFailed=0, messagesSent=0, timers=33, notifications=0, requests=0, replies=0, customChannelEvents=38}
+
+[32mI[23:52:53,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:53,958] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=90, messagesIn=17, messagesFailed=0, messagesSent=0, timers=34, notifications=0, requests=0, replies=0, customChannelEvents=39}
+
+[32mI[23:52:54,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:54,958] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=92, messagesIn=17, messagesFailed=0, messagesSent=0, timers=35, notifications=0, requests=0, replies=0, customChannelEvents=40}
+
+[32mI[23:52:55,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:55,958] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=94, messagesIn=17, messagesFailed=0, messagesSent=0, timers=36, notifications=0, requests=0, replies=0, customChannelEvents=41}
+
+[32mI[23:52:56,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:56,958] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=96, messagesIn=17, messagesFailed=0, messagesSent=0, timers=37, notifications=0, requests=0, replies=0, customChannelEvents=42}
+
+[32mI[23:52:57,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:57,958] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=98, messagesIn=17, messagesFailed=0, messagesSent=0, timers=38, notifications=0, requests=0, replies=0, customChannelEvents=43}
+
+[32mI[23:52:58,937] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:58,958] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=100, messagesIn=17, messagesFailed=0, messagesSent=0, timers=39, notifications=0, requests=0, replies=0, customChannelEvents=44}
+
+[32mI[23:52:59,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:52:59,959] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=102, messagesIn=17, messagesFailed=0, messagesSent=0, timers=40, notifications=0, requests=0, replies=0, customChannelEvents=45}
+
+[32mI[23:53:00,937] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:53:00,959] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=104, messagesIn=17, messagesFailed=0, messagesSent=0, timers=41, notifications=0, requests=0, replies=0, customChannelEvents=46}
+
+[32mI[23:53:01,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:53:01,959] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=106, messagesIn=17, messagesFailed=0, messagesSent=0, timers=42, notifications=0, requests=0, replies=0, customChannelEvents=47}
+
+[32mI[23:53:02,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:53:02,959] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=108, messagesIn=17, messagesFailed=0, messagesSent=0, timers=43, notifications=0, requests=0, replies=0, customChannelEvents=48}
+
+[32mI[23:53:03,937] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:53:03,960] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=110, messagesIn=17, messagesFailed=0, messagesSent=0, timers=44, notifications=0, requests=0, replies=0, customChannelEvents=49}
+
+[32mI[23:53:04,937] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:53:04,960] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=112, messagesIn=17, messagesFailed=0, messagesSent=0, timers=45, notifications=0, requests=0, replies=0, customChannelEvents=50}
+
+[36mD[23:53:05,715] [9069-HyParView]HyParView:[m Received ShuffleMessage{activeViewSample=[172.10.10.1:10000, 172.10.10.8:10000] | passiveViewSample=[172.10.10.5:10000, 172.10.10.8:10000] | TTL=5} from 172.10.10.1:10000
+[32mI[23:53:05,937] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=3 (69)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=1 (47) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:53:05,960] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=115, messagesIn=18, messagesFailed=0, messagesSent=0, timers=46, notifications=0, requests=0, replies=0, customChannelEvents=51}
+
+[32mI[23:53:06,938] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.3:10000: msgOut=0 (0) msgIn=14 (284)
+	172.10.10.1:10000: msgOut=0 (0) msgIn=3 (69)
+	172.10.10.3:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.10:10000: msgOut=1 (47) msgIn=0 (0)
+	172.10.10.3:10000: msgOut=3 (69) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=15 (331) msgIn=0 (0)
+	172.10.10.1:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[23:53:06,960] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.1:10000]
+ActiveView: [172.10.10.3:10000, 172.10.10.1:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=117, messagesIn=18, messagesFailed=0, messagesSent=0, timers=47, notifications=0, requests=0, replies=0, customChannelEvents=52}
+
+[36mD[23:53:07,126] [9069-HyParView]HyParView:[m Received ShuffleMessage{activeViewSample=[172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000] | passiveViewSample=[172.10.10.5:10000, 172.10.10.10:10000, 172.10.10.3:10000, 172.10.10.8:10000] | TTL=6} from 172.10.10.1:10000
+[33mW[23:53:07,127] [TCPChannel-1-1]SingleThreadEventExecutor:[m Unexpected exception from an event executor: 
+java.util.ConcurrentModificationException: null
+	at java.util.HashMap$HashIterator.nextNode(HashMap.java:1584) ~[?:?]
+	at java.util.HashMap$KeyIterator.next(HashMap.java:1607) ~[?:?]
+	at java.util.AbstractCollection.toString(AbstractCollection.java:456) ~[?:?]
+	at java.lang.StringConcatHelper.stringOf(StringConcatHelper.java:439) ~[?:?]
+	at protocols.membership.partial.messages.ShuffleMessage.toString(ShuffleMessage.java:45) ~[asdProj.jar:?]
+	at java.lang.String.valueOf(String.java:3388) ~[?:?]
+	at java.lang.StringBuilder.append(StringBuilder.java:167) ~[?:?]
+	at babel.internal.BabelMessage.toString(BabelMessage.java:13) ~[asdProj.jar:?]
+	at java.lang.String.valueOf(String.java:3388) ~[?:?]
+	at java.lang.StringBuilder.append(StringBuilder.java:167) ~[?:?]
+	at channel.tcp.TCPChannel.onSendMessage(TCPChannel.java:202) ~[asdProj.jar:?]
+	at channel.base.SingleThreadedChannel.lambda$sendMessage$0(SingleThreadedChannel.java:34) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.DefaultEventExecutor.run(DefaultEventExecutor.java:66) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [asdProj.jar:?]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [asdProj.jar:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [asdProj.jar:?]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+[36mD[23:53:07,954] [9069-HyParView]HyParView:[m Timer Shuffle...
+[33mW[23:53:20,713] [epollEventLoopGroup-3-2]AbstractChannelHandlerContext:[m An exception 'java.util.concurrent.RejectedExecutionException: event executor terminated' [enable DEBUG level for full stacktrace] was thrown by a user handler's exceptionCaught() method while handling the following exception:
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:926) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:828) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:818) ~[asdProj.jar:?]
+	at channel.base.SingleThreadedChannel.deliverMessage(SingleThreadedChannel.java:48) ~[asdProj.jar:?]
+	at network.pipeline.ConnectionHandler.channelRead(ConnectionHandler.java:44) ~[asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) [asdProj.jar:?]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:792) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:475) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378) [asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [asdProj.jar:?]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [asdProj.jar:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [asdProj.jar:?]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+[33mW[23:53:22,126] [epollEventLoopGroup-3-2]AbstractChannelHandlerContext:[m An exception 'java.util.concurrent.RejectedExecutionException: event executor terminated' [enable DEBUG level for full stacktrace] was thrown by a user handler's exceptionCaught() method while handling the following exception:
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:926) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:828) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:818) ~[asdProj.jar:?]
+	at channel.base.SingleThreadedChannel.deliverMessage(SingleThreadedChannel.java:48) ~[asdProj.jar:?]
+	at network.pipeline.ConnectionHandler.channelRead(ConnectionHandler.java:44) ~[asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) [asdProj.jar:?]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:792) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:475) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378) [asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [asdProj.jar:?]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [asdProj.jar:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [asdProj.jar:?]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+[33mW[23:53:35,713] [epollEventLoopGroup-3-2]AbstractChannelHandlerContext:[m An exception 'java.util.concurrent.RejectedExecutionException: event executor terminated' [enable DEBUG level for full stacktrace] was thrown by a user handler's exceptionCaught() method while handling the following exception:
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:926) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:828) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:818) ~[asdProj.jar:?]
+	at channel.base.SingleThreadedChannel.deliverMessage(SingleThreadedChannel.java:48) ~[asdProj.jar:?]
+	at network.pipeline.ConnectionHandler.channelRead(ConnectionHandler.java:44) ~[asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) [asdProj.jar:?]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:792) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:475) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378) [asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [asdProj.jar:?]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [asdProj.jar:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [asdProj.jar:?]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+[33mW[23:54:07,126] [epollEventLoopGroup-3-2]AbstractChannelHandlerContext:[m An exception 'java.util.concurrent.RejectedExecutionException: event executor terminated' [enable DEBUG level for full stacktrace] was thrown by a user handler's exceptionCaught() method while handling the following exception:
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:926) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:828) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:818) ~[asdProj.jar:?]
+	at channel.base.SingleThreadedChannel.deliverMessage(SingleThreadedChannel.java:48) ~[asdProj.jar:?]
+	at network.pipeline.ConnectionHandler.channelRead(ConnectionHandler.java:44) ~[asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) [asdProj.jar:?]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:792) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:475) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378) [asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [asdProj.jar:?]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [asdProj.jar:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [asdProj.jar:?]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+[33mW[23:54:09,061] [epollEventLoopGroup-3-6]AbstractChannelHandlerContext:[m An exception 'java.util.concurrent.RejectedExecutionException: event executor terminated' [enable DEBUG level for full stacktrace] was thrown by a user handler's exceptionCaught() method while handling the following exception:
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:926) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:828) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:818) ~[asdProj.jar:?]
+	at channel.base.SingleThreadedChannel.deliverMessage(SingleThreadedChannel.java:48) ~[asdProj.jar:?]
+	at network.pipeline.ConnectionHandler.channelRead(ConnectionHandler.java:44) ~[asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) [asdProj.jar:?]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:792) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:475) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378) [asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [asdProj.jar:?]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [asdProj.jar:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [asdProj.jar:?]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+[33mW[23:54:37,127] [epollEventLoopGroup-3-2]AbstractChannelHandlerContext:[m An exception 'java.util.concurrent.RejectedExecutionException: event executor terminated' [enable DEBUG level for full stacktrace] was thrown by a user handler's exceptionCaught() method while handling the following exception:
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:926) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:828) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:818) ~[asdProj.jar:?]
+	at channel.base.SingleThreadedChannel.deliverMessage(SingleThreadedChannel.java:48) ~[asdProj.jar:?]
+	at network.pipeline.ConnectionHandler.channelRead(ConnectionHandler.java:44) ~[asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) [asdProj.jar:?]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:792) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:475) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378) [asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [asdProj.jar:?]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [asdProj.jar:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [asdProj.jar:?]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+[33mW[23:55:24,061] [epollEventLoopGroup-3-6]AbstractChannelHandlerContext:[m An exception 'java.util.concurrent.RejectedExecutionException: event executor terminated' [enable DEBUG level for full stacktrace] was thrown by a user handler's exceptionCaught() method while handling the following exception:
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:926) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:828) ~[asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:818) ~[asdProj.jar:?]
+	at channel.base.SingleThreadedChannel.deliverMessage(SingleThreadedChannel.java:48) ~[asdProj.jar:?]
+	at network.pipeline.ConnectionHandler.channelRead(ConnectionHandler.java:44) ~[asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324) [asdProj.jar:?]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) [asdProj.jar:?]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) [asdProj.jar:?]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) [asdProj.jar:?]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:792) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:475) [asdProj.jar:?]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378) [asdProj.jar:?]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [asdProj.jar:?]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [asdProj.jar:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [asdProj.jar:?]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+[32mI[23:55:44,256] [Thread-1]Main:[m Goodbye
