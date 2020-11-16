@@ -1,0 +1,2169 @@
+[32mI[21:16:27,154] [main]Main:[m Hello, I am 172.10.10.1:10000
+[32mI[21:16:27,456] [main]BroadcastApp:[m Waiting...
+[36mD[21:16:27,459] [main]HyParView:[m Send JoinMessage{} from 172.10.10.1:10000 to 172.10.10.0:10000
+[36mD[21:16:27,462] [main]HyParView:[m Setup Join Timer...
+[36mD[21:16:27,956] [9069-HyParView]HyParView:[m Connection to 172.10.10.0:10000 is up
+[36mD[21:16:27,957] [9069-HyParView]HyParView:[m Temporary Out Connection down with peer: 172.10.10.0:10000
+[36mD[21:16:28,397] [9069-HyParView]HyParView:[m Connection from 172.10.10.0:10000 is up
+[32mI[21:16:28,440] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.0:10000: msgOut=0 (0) msgIn=0 (0)
+Out channels:
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:28,463] [9069-HyParView]HyParView:[m Join Timer expired. Trying again...
+[36mD[21:16:28,463] [9069-HyParView]HyParView:[m Send JoinMessage{} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:28,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: []
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=5, messagesIn=0, messagesFailed=0, messagesSent=0, timers=2, notifications=0, requests=0, replies=0, customChannelEvents=3}
+
+[36mD[21:16:28,602] [9069-HyParView]HyParView:[m Received JoinReplyMessage{} from 172.10.10.0:10000
+[36mD[21:16:28,603] [9069-HyParView]HyParView:[m Join Timer with timerID=2 canceled.
+[36mD[21:16:28,751] [9069-HyParView]HyParView:[m Connection from 172.10.10.2:10000 is up
+[36mD[21:16:28,896] [9069-HyParView]HyParView:[m Connection to 172.10.10.0:10000 is up
+[36mD[21:16:28,961] [9069-HyParView]HyParView:[m Received JoinMessage{} from 172.10.10.2:10000
+[36mD[21:16:28,961] [9069-HyParView]HyParView:[m Send JoinReplyMessage{} from 172.10.10.1:10000 to 172.10.10.2:10000
+[36mD[21:16:28,966] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.2:10000 | TTL=6} from 172.10.10.1:10000 to 172.10.10.0:10000
+[36mD[21:16:28,967] [9069-HyParView]HyParView:[m Connection from 172.10.10.2:10000 is down, cause: null
+[36mD[21:16:29,099] [9069-HyParView]HyParView:[m Received JoinReplyMessage{} from 172.10.10.0:10000
+[36mD[21:16:29,100] [9069-HyParView]HyParView:[m Join Timer with timerID=2 canceled.
+[36mD[21:16:29,388] [9069-HyParView]HyParView:[m Connection to 172.10.10.2:10000 is up
+[32mI[21:16:29,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.0:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.2:10000: msgOut=1 (11) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=2 (32) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:29,462] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=14, messagesIn=3, messagesFailed=0, messagesSent=0, timers=3, notifications=0, requests=0, replies=0, customChannelEvents=8}
+
+[36mD[21:16:29,730] [9069-HyParView]HyParView:[m Connection from 172.10.10.2:10000 is up
+[36mD[21:16:29,932] [9069-HyParView]HyParView:[m Received JoinMessage{} from 172.10.10.2:10000
+[36mD[21:16:29,932] [9069-HyParView]HyParView:[m Send JoinReplyMessage{} from 172.10.10.1:10000 to 172.10.10.2:10000
+[36mD[21:16:29,933] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.2:10000 | TTL=6} from 172.10.10.1:10000 to 172.10.10.0:10000
+[36mD[21:16:30,065] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.3:10000 | TTL=6} from 172.10.10.2:10000
+[36mD[21:16:30,065] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.3:10000 | TTL=5} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:30,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=2 (32)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=2 (22)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.2:10000: msgOut=2 (22) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=4 (74) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:30,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=19, messagesIn=5, messagesFailed=0, messagesSent=0, timers=4, notifications=0, requests=0, replies=0, customChannelEvents=10}
+
+[32mI[21:16:30,977] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=21eaa3c5-c917-4be1-a425-e25c7ef78888} from 172.10.10.0:10000
+[32mI[21:16:30,978] [300-BroadcastApp]BroadcastApp:[m Received 21eaa3c5-c917-4be1-a425-e25c7ef78888 - WDJCREWLFJ (10) from 172.10.10.0:10000
+[32mI[21:16:30,980] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=21eaa3c5-c917-4be1-a425-e25c7ef78888} to 172.10.10.2:10000
+[36mD[21:16:31,012] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.3:10000 | TTL=6} from 172.10.10.2:10000
+[36mD[21:16:31,012] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.3:10000 | TTL=5} from 172.10.10.1:10000 to 172.10.10.0:10000
+[36mD[21:16:31,014] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.4:10000 | TTL=5} from 172.10.10.2:10000
+[36mD[21:16:31,015] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.4:10000 | TTL=4} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:31,189] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=21eaa3c5-c917-4be1-a425-e25c7ef78888} from 172.10.10.2:10000
+[32mI[21:16:31,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=5 (127)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=3 (75)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.2:10000: msgOut=3 (75) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=6 (116) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:31,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=23, messagesIn=7, messagesFailed=0, messagesSent=0, timers=5, notifications=0, requests=0, replies=0, customChannelEvents=11}
+
+[36mD[21:16:31,758] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.4:10000 | TTL=5} from 172.10.10.2:10000
+[36mD[21:16:31,758] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.4:10000 | TTL=4} from 172.10.10.1:10000 to 172.10.10.0:10000
+[36mD[21:16:31,963] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.5:10000 | TTL=4} from 172.10.10.2:10000
+[36mD[21:16:31,963] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.5:10000 | TTL=3} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:31,969] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=6af63988-e85e-47cc-96f5-d1fdf99790d2} from 172.10.10.0:10000
+[32mI[21:16:31,969] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=6af63988-e85e-47cc-96f5-d1fdf99790d2} to 172.10.10.2:10000
+[32mI[21:16:31,969] [300-BroadcastApp]BroadcastApp:[m Received 6af63988-e85e-47cc-96f5-d1fdf99790d2 - VBTOYFFQMJ (10) from 172.10.10.0:10000
+[32mI[21:16:32,174] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=6af63988-e85e-47cc-96f5-d1fdf99790d2} from 172.10.10.2:10000
+[32mI[21:16:32,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=8 (222)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=4 (128)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.2:10000: msgOut=4 (128) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=8 (158) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:32,457] [300-BroadcastApp]BroadcastApp:[m Starting
+[32mI[21:16:32,461] [300-BroadcastApp]BroadcastApp:[m Sending: d02a2fd8-795c-43e4-8c74-8e7521d53d8e - JCEYJMTSLO (10)
+[32mI[21:16:32,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=d02a2fd8-795c-43e4-8c74-8e7521d53d8e} from 172.10.10.1:10000
+[32mI[21:16:32,463] [300-BroadcastApp]BroadcastApp:[m Received d02a2fd8-795c-43e4-8c74-8e7521d53d8e - JCEYJMTSLO (10) from 172.10.10.1:10000
+[32mI[21:16:32,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: []
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=27, messagesIn=9, messagesFailed=0, messagesSent=0, timers=6, notifications=0, requests=0, replies=0, customChannelEvents=12}
+
+[32mI[21:16:32,463] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=d02a2fd8-795c-43e4-8c74-8e7521d53d8e} to 172.10.10.2:10000
+[32mI[21:16:32,667] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=d02a2fd8-795c-43e4-8c74-8e7521d53d8e} from 172.10.10.2:10000
+[36mD[21:16:32,910] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.5:10000 | TTL=4} from 172.10.10.2:10000
+[36mD[21:16:32,910] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.5:10000 | TTL=3} from 172.10.10.1:10000 to 172.10.10.0:10000
+[36mD[21:16:32,910] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.6:10000 | TTL=3} from 172.10.10.2:10000
+[36mD[21:16:32,911] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.6:10000 | TTL=2} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:32,968] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=8f8b78cb-9201-4bae-ba72-b15f105fec7f} from 172.10.10.0:10000
+[32mI[21:16:32,968] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=8f8b78cb-9201-4bae-ba72-b15f105fec7f} to 172.10.10.0:10000
+[32mI[21:16:32,968] [300-BroadcastApp]BroadcastApp:[m Received 8f8b78cb-9201-4bae-ba72-b15f105fec7f - RMDMCMCCEA (10) from 172.10.10.0:10000
+[32mI[21:16:33,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=11 (317)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=5 (181)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.2:10000: msgOut=5 (181) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=11 (253) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:33,457] [300-BroadcastApp]BroadcastApp:[m Sending: 3e4e12d1-13f2-4c8d-b4d2-73a586094a00 - MQEJVHDYIQ (10)
+[32mI[21:16:33,457] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=3e4e12d1-13f2-4c8d-b4d2-73a586094a00} from 172.10.10.1:10000
+[32mI[21:16:33,458] [300-BroadcastApp]BroadcastApp:[m Received 3e4e12d1-13f2-4c8d-b4d2-73a586094a00 - MQEJVHDYIQ (10) from 172.10.10.1:10000
+[32mI[21:16:33,458] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3e4e12d1-13f2-4c8d-b4d2-73a586094a00} to 172.10.10.0:10000
+[32mI[21:16:33,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=31, messagesIn=11, messagesFailed=0, messagesSent=0, timers=7, notifications=0, requests=0, replies=0, customChannelEvents=13}
+
+[32mI[21:16:33,500] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=97c70ed4-1224-468f-9572-269edba44de2} from 172.10.10.2:10000
+[32mI[21:16:33,501] [300-BroadcastApp]BroadcastApp:[m Received 97c70ed4-1224-468f-9572-269edba44de2 - APZXENLYBX (10) from 172.10.10.2:10000
+[32mI[21:16:33,501] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=97c70ed4-1224-468f-9572-269edba44de2} to 172.10.10.0:10000
+[36mD[21:16:33,607] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.6:10000 | TTL=3} from 172.10.10.2:10000
+[36mD[21:16:33,607] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.6:10000 | TTL=2} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:33,663] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=3e4e12d1-13f2-4c8d-b4d2-73a586094a00} from 172.10.10.0:10000
+[32mI[21:16:33,705] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=97c70ed4-1224-468f-9572-269edba44de2} from 172.10.10.0:10000
+[36mD[21:16:33,865] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.7:10000 | TTL=2} from 172.10.10.2:10000
+[36mD[21:16:33,865] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.7:10000 | TTL=1} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:33,983] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ddc0d0e4-cad8-43d2-98e6-a7680f5b746f} from 172.10.10.0:10000
+[32mI[21:16:33,983] [300-BroadcastApp]BroadcastApp:[m Received ddc0d0e4-cad8-43d2-98e6-a7680f5b746f - LKKBFTAHIB (10) from 172.10.10.0:10000
+[32mI[21:16:33,983] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ddc0d0e4-cad8-43d2-98e6-a7680f5b746f} to 172.10.10.0:10000
+[32mI[21:16:34,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=14 (412)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=8 (340)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.2:10000: msgOut=5 (181) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=16 (454) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:34,457] [300-BroadcastApp]BroadcastApp:[m Sending: 66357bc6-ecfd-4505-9f5d-195eeb1bd34b - RPUGXCAKCA (10)
+[32mI[21:16:34,458] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=66357bc6-ecfd-4505-9f5d-195eeb1bd34b} from 172.10.10.1:10000
+[32mI[21:16:34,458] [300-BroadcastApp]BroadcastApp:[m Received 66357bc6-ecfd-4505-9f5d-195eeb1bd34b - RPUGXCAKCA (10) from 172.10.10.1:10000
+[32mI[21:16:34,458] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=66357bc6-ecfd-4505-9f5d-195eeb1bd34b} to 172.10.10.2:10000
+[32mI[21:16:34,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=35, messagesIn=13, messagesFailed=0, messagesSent=0, timers=8, notifications=0, requests=0, replies=0, customChannelEvents=14}
+
+[36mD[21:16:34,806] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.7:10000 | TTL=2} from 172.10.10.2:10000
+[36mD[21:16:34,807] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.7:10000 | TTL=1} from 172.10.10.1:10000 to 172.10.10.0:10000
+[36mD[21:16:34,807] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.8:10000 | TTL=1} from 172.10.10.2:10000
+[36mD[21:16:34,807] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.8:10000 | TTL=0} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:34,969] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=04f98fea-4acd-43f6-acb4-044a6f185fdd} from 172.10.10.0:10000
+[32mI[21:16:34,970] [300-BroadcastApp]BroadcastApp:[m Received 04f98fea-4acd-43f6-acb4-044a6f185fdd - GBPBPDUOYB (10) from 172.10.10.0:10000
+[32mI[21:16:34,970] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=04f98fea-4acd-43f6-acb4-044a6f185fdd} to 172.10.10.0:10000
+[32mI[21:16:35,330] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=65c7de99-862a-4575-841f-220ef8aa7f24} from 172.10.10.2:10000
+[32mI[21:16:35,330] [300-BroadcastApp]BroadcastApp:[m Received 65c7de99-862a-4575-841f-220ef8aa7f24 - RADEVAKNRG (10) from 172.10.10.4:10000
+[32mI[21:16:35,330] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=65c7de99-862a-4575-841f-220ef8aa7f24} to 172.10.10.0:10000
+[32mI[21:16:35,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=17 (507)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=9 (393)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.2:10000: msgOut=6 (234) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=20 (602) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:35,458] [300-BroadcastApp]BroadcastApp:[m Sending: 8aa82041-a90f-4ae4-8d97-faf4f108d050 - DEVARMBUXS (10)
+[32mI[21:16:35,458] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=8aa82041-a90f-4ae4-8d97-faf4f108d050} from 172.10.10.1:10000
+[32mI[21:16:35,458] [300-BroadcastApp]BroadcastApp:[m Received 8aa82041-a90f-4ae4-8d97-faf4f108d050 - DEVARMBUXS (10) from 172.10.10.1:10000
+[32mI[21:16:35,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=8aa82041-a90f-4ae4-8d97-faf4f108d050} to 172.10.10.2:10000
+[32mI[21:16:35,464] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=39, messagesIn=15, messagesFailed=0, messagesSent=0, timers=9, notifications=0, requests=0, replies=0, customChannelEvents=15}
+
+[32mI[21:16:35,495] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=4e49d2b7-cd4b-4eae-be07-6097b8f9c4d4} from 172.10.10.2:10000
+[32mI[21:16:35,496] [300-BroadcastApp]BroadcastApp:[m Received 4e49d2b7-cd4b-4eae-be07-6097b8f9c4d4 - OXPVSOYMZA (10) from 172.10.10.2:10000
+[32mI[21:16:35,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=4e49d2b7-cd4b-4eae-be07-6097b8f9c4d4} to 172.10.10.0:10000
+[36mD[21:16:35,507] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.8:10000 | TTL=1} from 172.10.10.2:10000
+[36mD[21:16:35,507] [9069-HyParView]HyParView:[m Send ForwardJoinMessage{newNode=172.10.10.8:10000 | TTL=0} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:35,576] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=5e8caa48-742b-41d3-9491-b88f4c8aa3fe} from 172.10.10.2:10000
+[32mI[21:16:35,577] [300-BroadcastApp]BroadcastApp:[m Received 5e8caa48-742b-41d3-9491-b88f4c8aa3fe - SDXYOITWTM (10) from 172.10.10.3:10000
+[32mI[21:16:35,577] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5e8caa48-742b-41d3-9491-b88f4c8aa3fe} to 172.10.10.0:10000
+[32mI[21:16:35,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=8aa82041-a90f-4ae4-8d97-faf4f108d050} from 172.10.10.2:10000
+[36mD[21:16:35,719] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.9:10000 | TTL=0} from 172.10.10.2:10000
+[36mD[21:16:36,166] [9069-HyParView]HyParView:[m Connection to 172.10.10.9:10000 is up
+[32mI[21:16:36,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=22 (708)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=9 (393)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=7 (287) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=23 (729) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:36,458] [300-BroadcastApp]BroadcastApp:[m Sending: 8a45850b-2453-4b15-b603-b8d022b9d5d6 - QJRHMOETMR (10)
+[32mI[21:16:36,459] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=8a45850b-2453-4b15-b603-b8d022b9d5d6} from 172.10.10.1:10000
+[32mI[21:16:36,459] [300-BroadcastApp]BroadcastApp:[m Received 8a45850b-2453-4b15-b603-b8d022b9d5d6 - QJRHMOETMR (10) from 172.10.10.1:10000
+[32mI[21:16:36,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=8a45850b-2453-4b15-b603-b8d022b9d5d6} to 172.10.10.9:10000
+[32mI[21:16:36,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=8a45850b-2453-4b15-b603-b8d022b9d5d6} to 172.10.10.0:10000
+[32mI[21:16:36,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=44, messagesIn=17, messagesFailed=0, messagesSent=0, timers=10, notifications=0, requests=0, replies=0, customChannelEvents=17}
+
+[32mI[21:16:36,496] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0a37e733-32ce-4b1b-82ec-ac25045d2665} from 172.10.10.2:10000
+[32mI[21:16:36,496] [300-BroadcastApp]BroadcastApp:[m Received 0a37e733-32ce-4b1b-82ec-ac25045d2665 - IRNZIFOECZ (10) from 172.10.10.2:10000
+[32mI[21:16:36,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0a37e733-32ce-4b1b-82ec-ac25045d2665} to 172.10.10.2:10000
+[32mI[21:16:36,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0a37e733-32ce-4b1b-82ec-ac25045d2665} to 172.10.10.0:10000
+[32mI[21:16:36,577] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=99ddffcd-9993-4994-885a-2a538da53680} from 172.10.10.2:10000
+[32mI[21:16:36,578] [300-BroadcastApp]BroadcastApp:[m Received 99ddffcd-9993-4994-885a-2a538da53680 - YRZBKVQDUQ (10) from 172.10.10.3:10000
+[32mI[21:16:36,578] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=99ddffcd-9993-4994-885a-2a538da53680} to 172.10.10.9:10000
+[32mI[21:16:36,578] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=99ddffcd-9993-4994-885a-2a538da53680} to 172.10.10.2:10000
+[32mI[21:16:36,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=8a45850b-2453-4b15-b603-b8d022b9d5d6} from 172.10.10.0:10000
+[36mD[21:16:36,669] [9069-HyParView]HyParView:[m Received ForwardJoinMessage{newNode=172.10.10.9:10000 | TTL=0} from 172.10.10.2:10000
+[32mI[21:16:37,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=25 (835)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=10 (446)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=2 (106) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=9 (393) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=25 (835) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:37,458] [300-BroadcastApp]BroadcastApp:[m Sending: e9ad70c9-977e-42c9-b5ef-0345668bcee1 - DALIQFTOOC (10)
+[32mI[21:16:37,459] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e9ad70c9-977e-42c9-b5ef-0345668bcee1} from 172.10.10.1:10000
+[32mI[21:16:37,459] [300-BroadcastApp]BroadcastApp:[m Received e9ad70c9-977e-42c9-b5ef-0345668bcee1 - DALIQFTOOC (10) from 172.10.10.1:10000
+[32mI[21:16:37,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e9ad70c9-977e-42c9-b5ef-0345668bcee1} to 172.10.10.9:10000
+[32mI[21:16:37,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e9ad70c9-977e-42c9-b5ef-0345668bcee1} to 172.10.10.0:10000
+[32mI[21:16:37,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=47, messagesIn=18, messagesFailed=0, messagesSent=0, timers=11, notifications=0, requests=0, replies=0, customChannelEvents=18}
+
+[32mI[21:16:37,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=1b7dbabf-07c9-477d-8254-69548604c367} from 172.10.10.2:10000
+[32mI[21:16:37,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=1b7dbabf-07c9-477d-8254-69548604c367} to 172.10.10.9:10000
+[32mI[21:16:37,497] [300-BroadcastApp]BroadcastApp:[m Received 1b7dbabf-07c9-477d-8254-69548604c367 - KLLYBRRLXR (10) from 172.10.10.2:10000
+[32mI[21:16:37,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=1b7dbabf-07c9-477d-8254-69548604c367} to 172.10.10.2:10000
+[32mI[21:16:37,578] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=c78bb361-22c0-43b2-8b0c-10711cd25e52} from 172.10.10.2:10000
+[32mI[21:16:37,579] [300-BroadcastApp]BroadcastApp:[m Received c78bb361-22c0-43b2-8b0c-10711cd25e52 - CPJTMIXYOD (10) from 172.10.10.3:10000
+[32mI[21:16:37,579] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c78bb361-22c0-43b2-8b0c-10711cd25e52} to 172.10.10.2:10000
+[32mI[21:16:37,579] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c78bb361-22c0-43b2-8b0c-10711cd25e52} to 172.10.10.0:10000
+[32mI[21:16:37,785] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=c78bb361-22c0-43b2-8b0c-10711cd25e52} from 172.10.10.0:10000
+[32mI[21:16:37,969] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=8bbd0a07-f648-415b-9ded-f67bd3d1513d} from 172.10.10.0:10000
+[32mI[21:16:37,970] [300-BroadcastApp]BroadcastApp:[m Received 8bbd0a07-f648-415b-9ded-f67bd3d1513d - LJXNXBMPZI (10) from 172.10.10.0:10000
+[32mI[21:16:37,970] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=8bbd0a07-f648-415b-9ded-f67bd3d1513d} to 172.10.10.9:10000
+[32mI[21:16:37,970] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=8bbd0a07-f648-415b-9ded-f67bd3d1513d} to 172.10.10.2:10000
+[32mI[21:16:38,327] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=7cce3bf7-2126-46bb-a0ac-abb0529d44a8} from 172.10.10.2:10000
+[32mI[21:16:38,328] [300-BroadcastApp]BroadcastApp:[m Received 7cce3bf7-2126-46bb-a0ac-abb0529d44a8 - UDANJQSCMF (10) from 172.10.10.4:10000
+[32mI[21:16:38,328] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=7cce3bf7-2126-46bb-a0ac-abb0529d44a8} to 172.10.10.2:10000
+[32mI[21:16:38,328] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=7cce3bf7-2126-46bb-a0ac-abb0529d44a8} to 172.10.10.0:10000
+[32mI[21:16:38,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=28 (994)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=12 (552)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=5 (265) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=13 (605) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=28 (994) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:38,458] [300-BroadcastApp]BroadcastApp:[m Sending: 307a2b47-fa96-41a5-8543-831a45237d1f - MVHNUJXGYD (10)
+[32mI[21:16:38,459] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=307a2b47-fa96-41a5-8543-831a45237d1f} from 172.10.10.1:10000
+[32mI[21:16:38,459] [300-BroadcastApp]BroadcastApp:[m Received 307a2b47-fa96-41a5-8543-831a45237d1f - MVHNUJXGYD (10) from 172.10.10.1:10000
+[32mI[21:16:38,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=307a2b47-fa96-41a5-8543-831a45237d1f} to 172.10.10.2:10000
+[32mI[21:16:38,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=307a2b47-fa96-41a5-8543-831a45237d1f} to 172.10.10.0:10000
+[32mI[21:16:38,463] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=49, messagesIn=18, messagesFailed=0, messagesSent=0, timers=12, notifications=0, requests=0, replies=0, customChannelEvents=19}
+
+[32mI[21:16:38,495] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=a8fc5de3-d754-492c-a7ce-97419d5ecba7} from 172.10.10.2:10000
+[32mI[21:16:38,495] [300-BroadcastApp]BroadcastApp:[m Received a8fc5de3-d754-492c-a7ce-97419d5ecba7 - INPYRSJAEL (10) from 172.10.10.2:10000
+[32mI[21:16:38,495] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a8fc5de3-d754-492c-a7ce-97419d5ecba7} to 172.10.10.2:10000
+[32mI[21:16:38,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a8fc5de3-d754-492c-a7ce-97419d5ecba7} to 172.10.10.0:10000
+[32mI[21:16:38,534] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=7cce3bf7-2126-46bb-a0ac-abb0529d44a8} from 172.10.10.0:10000
+[32mI[21:16:38,578] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=f6d20ea2-b529-463c-bd78-268e30047a22} from 172.10.10.2:10000
+[32mI[21:16:38,578] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=f6d20ea2-b529-463c-bd78-268e30047a22} to 172.10.10.9:10000
+[32mI[21:16:38,578] [300-BroadcastApp]BroadcastApp:[m Received f6d20ea2-b529-463c-bd78-268e30047a22 - QXHOIBIKEJ (10) from 172.10.10.3:10000
+[32mI[21:16:38,578] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=f6d20ea2-b529-463c-bd78-268e30047a22} to 172.10.10.2:10000
+[32mI[21:16:38,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=307a2b47-fa96-41a5-8543-831a45237d1f} from 172.10.10.0:10000
+[32mI[21:16:39,327] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=90c2af13-2bf8-4e62-ba0b-4f61297e04b4} from 172.10.10.2:10000
+[32mI[21:16:39,327] [300-BroadcastApp]BroadcastApp:[m Received 90c2af13-2bf8-4e62-ba0b-4f61297e04b4 - ICRBIVBWON (10) from 172.10.10.4:10000
+[32mI[21:16:39,327] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=90c2af13-2bf8-4e62-ba0b-4f61297e04b4} to 172.10.10.2:10000
+[32mI[21:16:39,327] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=90c2af13-2bf8-4e62-ba0b-4f61297e04b4} to 172.10.10.0:10000
+[32mI[21:16:39,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=31 (1153)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=14 (658)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=6 (318) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=17 (817) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=31 (1153) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:39,459] [300-BroadcastApp]BroadcastApp:[m Sending: 0c075721-93c1-4bd8-87c2-10faaab304a5 - JGEMSBLTKT (10)
+[32mI[21:16:39,459] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0c075721-93c1-4bd8-87c2-10faaab304a5} from 172.10.10.1:10000
+[32mI[21:16:39,460] [300-BroadcastApp]BroadcastApp:[m Received 0c075721-93c1-4bd8-87c2-10faaab304a5 - JGEMSBLTKT (10) from 172.10.10.1:10000
+[32mI[21:16:39,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0c075721-93c1-4bd8-87c2-10faaab304a5} to 172.10.10.9:10000
+[32mI[21:16:39,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0c075721-93c1-4bd8-87c2-10faaab304a5} to 172.10.10.2:10000
+[32mI[21:16:39,464] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=51, messagesIn=18, messagesFailed=0, messagesSent=0, timers=13, notifications=0, requests=0, replies=0, customChannelEvents=20}
+
+[32mI[21:16:39,496] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=27dabc88-aaef-491e-baa3-d5d78c292b43} from 172.10.10.2:10000
+[32mI[21:16:39,496] [300-BroadcastApp]BroadcastApp:[m Received 27dabc88-aaef-491e-baa3-d5d78c292b43 - WQOMSIRQLB (10) from 172.10.10.2:10000
+[32mI[21:16:39,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=27dabc88-aaef-491e-baa3-d5d78c292b43} to 172.10.10.2:10000
+[32mI[21:16:39,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=27dabc88-aaef-491e-baa3-d5d78c292b43} to 172.10.10.0:10000
+[32mI[21:16:39,579] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=42671369-238b-4bf5-86ae-ffc40e9b7937} from 172.10.10.2:10000
+[32mI[21:16:39,579] [300-BroadcastApp]BroadcastApp:[m Received 42671369-238b-4bf5-86ae-ffc40e9b7937 - PLYZKIVTNX (10) from 172.10.10.3:10000
+[32mI[21:16:39,579] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=42671369-238b-4bf5-86ae-ffc40e9b7937} to 172.10.10.9:10000
+[32mI[21:16:39,580] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=42671369-238b-4bf5-86ae-ffc40e9b7937} to 172.10.10.0:10000
+[32mI[21:16:39,666] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0c075721-93c1-4bd8-87c2-10faaab304a5} from 172.10.10.2:10000
+[32mI[21:16:39,785] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=42671369-238b-4bf5-86ae-ffc40e9b7937} from 172.10.10.0:10000
+[32mI[21:16:39,970] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e14c9769-ce35-4e19-850c-280827705bc3} from 172.10.10.0:10000
+[32mI[21:16:39,970] [300-BroadcastApp]BroadcastApp:[m Received e14c9769-ce35-4e19-850c-280827705bc3 - YRLWPXPACY (10) from 172.10.10.0:10000
+[32mI[21:16:39,971] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e14c9769-ce35-4e19-850c-280827705bc3} to 172.10.10.2:10000
+[32mI[21:16:39,971] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e14c9769-ce35-4e19-850c-280827705bc3} to 172.10.10.0:10000
+[32mI[21:16:40,176] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e14c9769-ce35-4e19-850c-280827705bc3} from 172.10.10.2:10000
+[32mI[21:16:40,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=35 (1365)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=16 (764)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=8 (424) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=20 (976) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=34 (1312) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:40,458] [300-BroadcastApp]BroadcastApp:[m Sending: 5c2eb978-ea02-4c9e-87cf-9d33f2b0de57 - JNXGHQLDKT (10)
+[32mI[21:16:40,458] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=5c2eb978-ea02-4c9e-87cf-9d33f2b0de57} from 172.10.10.1:10000
+[32mI[21:16:40,459] [300-BroadcastApp]BroadcastApp:[m Received 5c2eb978-ea02-4c9e-87cf-9d33f2b0de57 - JNXGHQLDKT (10) from 172.10.10.1:10000
+[32mI[21:16:40,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5c2eb978-ea02-4c9e-87cf-9d33f2b0de57} to 172.10.10.9:10000
+[32mI[21:16:40,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5c2eb978-ea02-4c9e-87cf-9d33f2b0de57} to 172.10.10.0:10000
+[32mI[21:16:40,464] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=53, messagesIn=18, messagesFailed=0, messagesSent=0, timers=14, notifications=0, requests=0, replies=0, customChannelEvents=21}
+
+[32mI[21:16:40,496] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=5d5301fd-30e7-4966-a90f-52bf89280b52} from 172.10.10.2:10000
+[32mI[21:16:40,496] [300-BroadcastApp]BroadcastApp:[m Received 5d5301fd-30e7-4966-a90f-52bf89280b52 - JNCPWICXWN (10) from 172.10.10.2:10000
+[32mI[21:16:40,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5d5301fd-30e7-4966-a90f-52bf89280b52} to 172.10.10.9:10000
+[32mI[21:16:40,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5d5301fd-30e7-4966-a90f-52bf89280b52} to 172.10.10.0:10000
+[32mI[21:16:40,702] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=5d5301fd-30e7-4966-a90f-52bf89280b52} from 172.10.10.0:10000
+[32mI[21:16:40,969] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0efa325a-49f5-44cd-9665-7a9194da74b9} from 172.10.10.0:10000
+[32mI[21:16:40,969] [300-BroadcastApp]BroadcastApp:[m Received 0efa325a-49f5-44cd-9665-7a9194da74b9 - TYPGTVRIMS (10) from 172.10.10.0:10000
+[32mI[21:16:40,969] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0efa325a-49f5-44cd-9665-7a9194da74b9} to 172.10.10.9:10000
+[32mI[21:16:40,970] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0efa325a-49f5-44cd-9665-7a9194da74b9} to 172.10.10.0:10000
+[36mD[21:16:40,999] [9069-HyParView]HyParView:[m Received ShuffleMessage{activeViewSample=[172.10.10.1:10000, 172.10.10.8:10000] | passiveViewSample=[172.10.10.5:10000] | TTL=6} from 172.10.10.0:10000
+[32mI[21:16:41,326] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=fdedb215-0b28-484c-b652-8871fc45c77b} from 172.10.10.2:10000
+[32mI[21:16:41,327] [300-BroadcastApp]BroadcastApp:[m Received fdedb215-0b28-484c-b652-8871fc45c77b - RFSOXDNNCE (10) from 172.10.10.4:10000
+[32mI[21:16:41,327] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=fdedb215-0b28-484c-b652-8871fc45c77b} to 172.10.10.9:10000
+[32mI[21:16:41,328] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=fdedb215-0b28-484c-b652-8871fc45c77b} to 172.10.10.0:10000
+[32mI[21:16:41,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=37 (1471)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=19 (911)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=12 (636) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=21 (1023) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=38 (1524) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:41,458] [300-BroadcastApp]BroadcastApp:[m Sending: 56f69c43-8daa-4ae5-a9e4-44acb248c78f - UQXVTEBWIT (10)
+[32mI[21:16:41,459] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=56f69c43-8daa-4ae5-a9e4-44acb248c78f} from 172.10.10.1:10000
+[32mI[21:16:41,459] [300-BroadcastApp]BroadcastApp:[m Received 56f69c43-8daa-4ae5-a9e4-44acb248c78f - UQXVTEBWIT (10) from 172.10.10.1:10000
+[32mI[21:16:41,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=56f69c43-8daa-4ae5-a9e4-44acb248c78f} to 172.10.10.9:10000
+[32mI[21:16:41,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=56f69c43-8daa-4ae5-a9e4-44acb248c78f} to 172.10.10.2:10000
+[32mI[21:16:41,464] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=56, messagesIn=19, messagesFailed=0, messagesSent=0, timers=15, notifications=0, requests=0, replies=0, customChannelEvents=22}
+
+[32mI[21:16:41,477] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e0d42fa4-e0ee-4b71-b334-a181ac006aec} from 172.10.10.2:10000
+[32mI[21:16:41,477] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e0d42fa4-e0ee-4b71-b334-a181ac006aec} to 172.10.10.9:10000
+[32mI[21:16:41,477] [300-BroadcastApp]BroadcastApp:[m Received e0d42fa4-e0ee-4b71-b334-a181ac006aec - YJCTXQQKNE (10) from 172.10.10.5:10000
+[32mI[21:16:41,478] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e0d42fa4-e0ee-4b71-b334-a181ac006aec} to 172.10.10.2:10000
+[32mI[21:16:41,578] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=68521433-35f3-4cac-b175-ee01490c34db} from 172.10.10.2:10000
+[32mI[21:16:41,578] [300-BroadcastApp]BroadcastApp:[m Received 68521433-35f3-4cac-b175-ee01490c34db - LEBYUYTZPE (10) from 172.10.10.3:10000
+[32mI[21:16:41,578] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=68521433-35f3-4cac-b175-ee01490c34db} to 172.10.10.2:10000
+[32mI[21:16:41,578] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=68521433-35f3-4cac-b175-ee01490c34db} to 172.10.10.0:10000
+[32mI[21:16:41,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=56f69c43-8daa-4ae5-a9e4-44acb248c78f} from 172.10.10.2:10000
+[32mI[21:16:41,783] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=68521433-35f3-4cac-b175-ee01490c34db} from 172.10.10.0:10000
+[32mI[21:16:42,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=40 (1630)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=14 (742) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=24 (1182) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=39 (1577) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:42,459] [300-BroadcastApp]BroadcastApp:[m Sending: 16c074db-c76b-4901-b72e-bcfb1d175d10 - BBSDGSSDPI (10)
+[32mI[21:16:42,459] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=16c074db-c76b-4901-b72e-bcfb1d175d10} from 172.10.10.1:10000
+[32mI[21:16:42,459] [300-BroadcastApp]BroadcastApp:[m Received 16c074db-c76b-4901-b72e-bcfb1d175d10 - BBSDGSSDPI (10) from 172.10.10.1:10000
+[32mI[21:16:42,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=16c074db-c76b-4901-b72e-bcfb1d175d10} to 172.10.10.2:10000
+[32mI[21:16:42,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=16c074db-c76b-4901-b72e-bcfb1d175d10} to 172.10.10.0:10000
+[36mD[21:16:42,463] [9069-HyParView]HyParView:[m Timer Shuffle...
+[36mD[21:16:42,463] [9069-HyParView]HyParView:[m Send ShuffleMessage{activeViewSample=[172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000] | passiveViewSample=[172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000] | TTL=6} from 172.10.10.1:10000 to 172.10.10.0:10000
+[32mI[21:16:42,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=59, messagesIn=19, messagesFailed=0, messagesSent=0, timers=17, notifications=0, requests=0, replies=0, customChannelEvents=23}
+
+[32mI[21:16:42,477] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=5fe86545-a487-423f-a505-00c993f3bd55} from 172.10.10.2:10000
+[32mI[21:16:42,477] [300-BroadcastApp]BroadcastApp:[m Received 5fe86545-a487-423f-a505-00c993f3bd55 - AXMAIYSZPH (10) from 172.10.10.5:10000
+[32mI[21:16:42,477] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5fe86545-a487-423f-a505-00c993f3bd55} to 172.10.10.9:10000
+[32mI[21:16:42,477] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5fe86545-a487-423f-a505-00c993f3bd55} to 172.10.10.0:10000
+[32mI[21:16:42,495] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=76691534-2170-417b-bd53-fef3ffe5bb2e} from 172.10.10.2:10000
+[32mI[21:16:42,495] [300-BroadcastApp]BroadcastApp:[m Received 76691534-2170-417b-bd53-fef3ffe5bb2e - KXZBXWPWOJ (10) from 172.10.10.2:10000
+[32mI[21:16:42,495] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=76691534-2170-417b-bd53-fef3ffe5bb2e} to 172.10.10.2:10000
+[32mI[21:16:42,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=76691534-2170-417b-bd53-fef3ffe5bb2e} to 172.10.10.0:10000
+[32mI[21:16:42,578] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=f83ffd1d-0b70-4742-8b40-fa53ad3bc930} from 172.10.10.2:10000
+[32mI[21:16:42,578] [300-BroadcastApp]BroadcastApp:[m Received f83ffd1d-0b70-4742-8b40-fa53ad3bc930 - QYTNJQHVKB (10) from 172.10.10.3:10000
+[32mI[21:16:42,578] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=f83ffd1d-0b70-4742-8b40-fa53ad3bc930} to 172.10.10.2:10000
+[32mI[21:16:42,578] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=f83ffd1d-0b70-4742-8b40-fa53ad3bc930} to 172.10.10.0:10000
+[32mI[21:16:42,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=16c074db-c76b-4901-b72e-bcfb1d175d10} from 172.10.10.2:10000
+[32mI[21:16:43,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=44 (1842)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=15 (795) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=27 (1341) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=44 (1848) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:43,459] [300-BroadcastApp]BroadcastApp:[m Sending: f5828e25-d8bb-404f-a2fe-a2fd31d17e9b - GCZYUJQSDU (10)
+[32mI[21:16:43,459] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=f5828e25-d8bb-404f-a2fe-a2fd31d17e9b} from 172.10.10.1:10000
+[32mI[21:16:43,459] [300-BroadcastApp]BroadcastApp:[m Received f5828e25-d8bb-404f-a2fe-a2fd31d17e9b - GCZYUJQSDU (10) from 172.10.10.1:10000
+[32mI[21:16:43,459] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=f5828e25-d8bb-404f-a2fe-a2fd31d17e9b} to 172.10.10.9:10000
+[32mI[21:16:43,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=f5828e25-d8bb-404f-a2fe-a2fd31d17e9b} to 172.10.10.2:10000
+[32mI[21:16:43,464] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=61, messagesIn=19, messagesFailed=0, messagesSent=0, timers=18, notifications=0, requests=0, replies=0, customChannelEvents=24}
+
+[36mD[21:16:43,498] [9069-HyParView]HyParView:[m Received ShuffleMessage{activeViewSample=[172.10.10.1:10000, 172.10.10.10:10000, 172.10.10.3:10000] | passiveViewSample=[172.10.10.5:10000, 172.10.10.7:10000, 172.10.10.8:10000] | TTL=6} from 172.10.10.2:10000
+[32mI[21:16:43,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=f5828e25-d8bb-404f-a2fe-a2fd31d17e9b} from 172.10.10.2:10000
+[32mI[21:16:44,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=46 (1954)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=16 (848) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=28 (1394) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=45 (1907) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:44,459] [300-BroadcastApp]BroadcastApp:[m Sending: 728d03ae-2e06-47ba-9b7b-d23c01711b1d - KARBXPBOZK (10)
+[32mI[21:16:44,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=728d03ae-2e06-47ba-9b7b-d23c01711b1d} from 172.10.10.1:10000
+[32mI[21:16:44,460] [300-BroadcastApp]BroadcastApp:[m Received 728d03ae-2e06-47ba-9b7b-d23c01711b1d - KARBXPBOZK (10) from 172.10.10.1:10000
+[32mI[21:16:44,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=728d03ae-2e06-47ba-9b7b-d23c01711b1d} to 172.10.10.9:10000
+[32mI[21:16:44,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=728d03ae-2e06-47ba-9b7b-d23c01711b1d} to 172.10.10.0:10000
+[32mI[21:16:44,464] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=64, messagesIn=20, messagesFailed=0, messagesSent=0, timers=19, notifications=0, requests=0, replies=0, customChannelEvents=25}
+
+[32mI[21:16:44,495] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=2a0cc38d-7f47-4e97-a549-fb1c47d8d6e9} from 172.10.10.2:10000
+[32mI[21:16:44,496] [300-BroadcastApp]BroadcastApp:[m Received 2a0cc38d-7f47-4e97-a549-fb1c47d8d6e9 - PLBMOPZLNF (10) from 172.10.10.2:10000
+[32mI[21:16:44,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=2a0cc38d-7f47-4e97-a549-fb1c47d8d6e9} to 172.10.10.2:10000
+[32mI[21:16:44,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=2a0cc38d-7f47-4e97-a549-fb1c47d8d6e9} to 172.10.10.0:10000
+[32mI[21:16:44,578] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ed7970ce-e5ae-4e85-a866-c867764b9999} from 172.10.10.2:10000
+[32mI[21:16:44,579] [300-BroadcastApp]BroadcastApp:[m Received ed7970ce-e5ae-4e85-a866-c867764b9999 - SLYBMESQWS (10) from 172.10.10.3:10000
+[32mI[21:16:44,579] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ed7970ce-e5ae-4e85-a866-c867764b9999} to 172.10.10.9:10000
+[32mI[21:16:44,580] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ed7970ce-e5ae-4e85-a866-c867764b9999} to 172.10.10.2:10000
+[32mI[21:16:45,323] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=94dac893-c9aa-4cfd-94c4-ce69fc4b07d6} from 172.10.10.2:10000
+[32mI[21:16:45,324] [300-BroadcastApp]BroadcastApp:[m Received 94dac893-c9aa-4cfd-94c4-ce69fc4b07d6 - GKJDKKOFGJ (10) from 172.10.10.4:10000
+[32mI[21:16:45,324] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=94dac893-c9aa-4cfd-94c4-ce69fc4b07d6} to 172.10.10.9:10000
+[32mI[21:16:45,324] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=94dac893-c9aa-4cfd-94c4-ce69fc4b07d6} to 172.10.10.2:10000
+[32mI[21:16:45,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=49 (2113)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=19 (1007) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=31 (1553) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=47 (2013) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:45,459] [300-BroadcastApp]BroadcastApp:[m Sending: 566a24fc-abe7-4af6-965f-66208d5b0b68 - DBBPJSLVBQ (10)
+[32mI[21:16:45,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=566a24fc-abe7-4af6-965f-66208d5b0b68} from 172.10.10.1:10000
+[32mI[21:16:45,460] [300-BroadcastApp]BroadcastApp:[m Received 566a24fc-abe7-4af6-965f-66208d5b0b68 - DBBPJSLVBQ (10) from 172.10.10.1:10000
+[32mI[21:16:45,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=566a24fc-abe7-4af6-965f-66208d5b0b68} to 172.10.10.2:10000
+[32mI[21:16:45,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=566a24fc-abe7-4af6-965f-66208d5b0b68} to 172.10.10.0:10000
+[32mI[21:16:45,464] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=66, messagesIn=20, messagesFailed=0, messagesSent=0, timers=20, notifications=0, requests=0, replies=0, customChannelEvents=26}
+
+[32mI[21:16:45,496] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=cb647288-70e4-401b-9db7-e92dbc734aa3} from 172.10.10.2:10000
+[32mI[21:16:45,496] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=cb647288-70e4-401b-9db7-e92dbc734aa3} to 172.10.10.9:10000
+[32mI[21:16:45,496] [300-BroadcastApp]BroadcastApp:[m Received cb647288-70e4-401b-9db7-e92dbc734aa3 - DMFSSEAFHG (10) from 172.10.10.2:10000
+[32mI[21:16:45,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=cb647288-70e4-401b-9db7-e92dbc734aa3} to 172.10.10.0:10000
+[32mI[21:16:46,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=50 (2166)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=20 (1060) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=32 (1606) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=49 (2119) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:46,460] [300-BroadcastApp]BroadcastApp:[m Sending: b2d15455-8939-48e9-9179-de1ca0711ab8 - CLHBSGPYRL (10)
+[32mI[21:16:46,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=b2d15455-8939-48e9-9179-de1ca0711ab8} from 172.10.10.1:10000
+[32mI[21:16:46,461] [300-BroadcastApp]BroadcastApp:[m Received b2d15455-8939-48e9-9179-de1ca0711ab8 - CLHBSGPYRL (10) from 172.10.10.1:10000
+[32mI[21:16:46,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b2d15455-8939-48e9-9179-de1ca0711ab8} to 172.10.10.9:10000
+[32mI[21:16:46,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b2d15455-8939-48e9-9179-de1ca0711ab8} to 172.10.10.0:10000
+[32mI[21:16:46,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=68, messagesIn=20, messagesFailed=0, messagesSent=0, timers=21, notifications=0, requests=0, replies=0, customChannelEvents=27}
+
+[32mI[21:16:46,496] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=31770e4c-2bdf-49ac-912f-47362d096c1a} from 172.10.10.2:10000
+[32mI[21:16:46,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=31770e4c-2bdf-49ac-912f-47362d096c1a} to 172.10.10.9:10000
+[32mI[21:16:46,497] [300-BroadcastApp]BroadcastApp:[m Received 31770e4c-2bdf-49ac-912f-47362d096c1a - PTWQPCZOOK (10) from 172.10.10.2:10000
+[32mI[21:16:46,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=31770e4c-2bdf-49ac-912f-47362d096c1a} to 172.10.10.0:10000
+[32mI[21:16:47,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=51 (2219)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=22 (1166) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=32 (1606) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=51 (2225) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:47,459] [300-BroadcastApp]BroadcastApp:[m Sending: 45fefae5-7731-4744-923d-11fde10e3e9d - CPBDSAHIRX (10)
+[32mI[21:16:47,459] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=45fefae5-7731-4744-923d-11fde10e3e9d} from 172.10.10.1:10000
+[32mI[21:16:47,460] [300-BroadcastApp]BroadcastApp:[m Received 45fefae5-7731-4744-923d-11fde10e3e9d - CPBDSAHIRX (10) from 172.10.10.1:10000
+[32mI[21:16:47,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=45fefae5-7731-4744-923d-11fde10e3e9d} to 172.10.10.9:10000
+[32mI[21:16:47,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=45fefae5-7731-4744-923d-11fde10e3e9d} to 172.10.10.2:10000
+[32mI[21:16:47,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=70, messagesIn=20, messagesFailed=0, messagesSent=0, timers=22, notifications=0, requests=0, replies=0, customChannelEvents=28}
+
+[32mI[21:16:47,663] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=45fefae5-7731-4744-923d-11fde10e3e9d} from 172.10.10.2:10000
+[32mI[21:16:48,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=52 (2272)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=23 (1219) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=33 (1659) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=51 (2225) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:48,459] [300-BroadcastApp]BroadcastApp:[m Sending: b2497287-85ad-4d18-9191-c68b84cc06ad - BONIBSTBOQ (10)
+[32mI[21:16:48,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=b2497287-85ad-4d18-9191-c68b84cc06ad} from 172.10.10.1:10000
+[32mI[21:16:48,460] [300-BroadcastApp]BroadcastApp:[m Received b2497287-85ad-4d18-9191-c68b84cc06ad - BONIBSTBOQ (10) from 172.10.10.1:10000
+[32mI[21:16:48,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b2497287-85ad-4d18-9191-c68b84cc06ad} to 172.10.10.2:10000
+[32mI[21:16:48,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b2497287-85ad-4d18-9191-c68b84cc06ad} to 172.10.10.0:10000
+[32mI[21:16:48,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=72, messagesIn=20, messagesFailed=0, messagesSent=0, timers=23, notifications=0, requests=0, replies=0, customChannelEvents=29}
+
+[32mI[21:16:48,496] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=a2f108ae-9d14-404e-bed5-15ab68bf38d7} from 172.10.10.2:10000
+[32mI[21:16:48,497] [300-BroadcastApp]BroadcastApp:[m Received a2f108ae-9d14-404e-bed5-15ab68bf38d7 - ZZRQBFGHSJ (10) from 172.10.10.2:10000
+[32mI[21:16:48,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a2f108ae-9d14-404e-bed5-15ab68bf38d7} to 172.10.10.9:10000
+[32mI[21:16:48,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a2f108ae-9d14-404e-bed5-15ab68bf38d7} to 172.10.10.2:10000
+[32mI[21:16:49,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=53 (2325)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=24 (1272) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=35 (1765) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=52 (2278) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:49,460] [300-BroadcastApp]BroadcastApp:[m Sending: 0a6ac6aa-1d4c-46a1-9f93-345253bba92a - FPCUFCNXUO (10)
+[32mI[21:16:49,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0a6ac6aa-1d4c-46a1-9f93-345253bba92a} from 172.10.10.1:10000
+[32mI[21:16:49,460] [300-BroadcastApp]BroadcastApp:[m Received 0a6ac6aa-1d4c-46a1-9f93-345253bba92a - FPCUFCNXUO (10) from 172.10.10.1:10000
+[32mI[21:16:49,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0a6ac6aa-1d4c-46a1-9f93-345253bba92a} to 172.10.10.2:10000
+[32mI[21:16:49,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0a6ac6aa-1d4c-46a1-9f93-345253bba92a} to 172.10.10.0:10000
+[32mI[21:16:49,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=74, messagesIn=20, messagesFailed=0, messagesSent=0, timers=24, notifications=0, requests=0, replies=0, customChannelEvents=30}
+
+[32mI[21:16:49,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0a6ac6aa-1d4c-46a1-9f93-345253bba92a} from 172.10.10.2:10000
+[32mI[21:16:50,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=54 (2378)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=24 (1272) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=36 (1818) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=53 (2331) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:50,460] [300-BroadcastApp]BroadcastApp:[m Sending: 16fc3638-e410-4a83-ad16-dcb9558d3c53 - VQBRQUCLLR (10)
+[32mI[21:16:50,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=16fc3638-e410-4a83-ad16-dcb9558d3c53} from 172.10.10.1:10000
+[32mI[21:16:50,460] [300-BroadcastApp]BroadcastApp:[m Received 16fc3638-e410-4a83-ad16-dcb9558d3c53 - VQBRQUCLLR (10) from 172.10.10.1:10000
+[32mI[21:16:50,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=16fc3638-e410-4a83-ad16-dcb9558d3c53} to 172.10.10.9:10000
+[32mI[21:16:50,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=16fc3638-e410-4a83-ad16-dcb9558d3c53} to 172.10.10.2:10000
+[32mI[21:16:50,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=76, messagesIn=20, messagesFailed=0, messagesSent=0, timers=25, notifications=0, requests=0, replies=0, customChannelEvents=31}
+
+[32mI[21:16:50,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=96812c01-d26a-41bb-9e27-d80e68bb60cc} from 172.10.10.2:10000
+[32mI[21:16:50,497] [300-BroadcastApp]BroadcastApp:[m Received 96812c01-d26a-41bb-9e27-d80e68bb60cc - RCZBHMNBAE (10) from 172.10.10.2:10000
+[32mI[21:16:50,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=96812c01-d26a-41bb-9e27-d80e68bb60cc} to 172.10.10.9:10000
+[32mI[21:16:50,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=96812c01-d26a-41bb-9e27-d80e68bb60cc} to 172.10.10.0:10000
+[32mI[21:16:50,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=16fc3638-e410-4a83-ad16-dcb9558d3c53} from 172.10.10.2:10000
+[32mI[21:16:51,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=56 (2484)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=26 (1378) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=37 (1871) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=54 (2384) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:51,459] [300-BroadcastApp]BroadcastApp:[m Sending: c7649d69-7aa5-4c45-b089-bec850a8deb5 - FNQZTRXULL (10)
+[32mI[21:16:51,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=c7649d69-7aa5-4c45-b089-bec850a8deb5} from 172.10.10.1:10000
+[32mI[21:16:51,460] [300-BroadcastApp]BroadcastApp:[m Received c7649d69-7aa5-4c45-b089-bec850a8deb5 - FNQZTRXULL (10) from 172.10.10.1:10000
+[32mI[21:16:51,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c7649d69-7aa5-4c45-b089-bec850a8deb5} to 172.10.10.2:10000
+[32mI[21:16:51,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c7649d69-7aa5-4c45-b089-bec850a8deb5} to 172.10.10.0:10000
+[32mI[21:16:51,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=78, messagesIn=20, messagesFailed=0, messagesSent=0, timers=26, notifications=0, requests=0, replies=0, customChannelEvents=32}
+
+[32mI[21:16:51,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ff9381ba-4a6a-4054-9abe-7c3841106a70} from 172.10.10.2:10000
+[32mI[21:16:51,497] [300-BroadcastApp]BroadcastApp:[m Received ff9381ba-4a6a-4054-9abe-7c3841106a70 - YODYQYDYXS (10) from 172.10.10.2:10000
+[32mI[21:16:51,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ff9381ba-4a6a-4054-9abe-7c3841106a70} to 172.10.10.9:10000
+[32mI[21:16:51,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ff9381ba-4a6a-4054-9abe-7c3841106a70} to 172.10.10.2:10000
+[32mI[21:16:51,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=c7649d69-7aa5-4c45-b089-bec850a8deb5} from 172.10.10.2:10000
+[32mI[21:16:52,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=58 (2590)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=27 (1431) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=39 (1977) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=55 (2437) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:52,460] [300-BroadcastApp]BroadcastApp:[m Sending: 7a641164-745f-44c3-98ac-99fad53d5d8d - GFDIVNGECH (10)
+[32mI[21:16:52,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=7a641164-745f-44c3-98ac-99fad53d5d8d} from 172.10.10.1:10000
+[32mI[21:16:52,460] [300-BroadcastApp]BroadcastApp:[m Received 7a641164-745f-44c3-98ac-99fad53d5d8d - GFDIVNGECH (10) from 172.10.10.1:10000
+[32mI[21:16:52,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=7a641164-745f-44c3-98ac-99fad53d5d8d} to 172.10.10.9:10000
+[32mI[21:16:52,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=7a641164-745f-44c3-98ac-99fad53d5d8d} to 172.10.10.0:10000
+[32mI[21:16:52,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=80, messagesIn=20, messagesFailed=0, messagesSent=0, timers=27, notifications=0, requests=0, replies=0, customChannelEvents=33}
+
+[32mI[21:16:52,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=373dd090-dad4-4d2a-9e81-2c0e4476b492} from 172.10.10.2:10000
+[32mI[21:16:52,498] [300-BroadcastApp]BroadcastApp:[m Received 373dd090-dad4-4d2a-9e81-2c0e4476b492 - OCIERBGUDI (10) from 172.10.10.2:10000
+[32mI[21:16:52,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=373dd090-dad4-4d2a-9e81-2c0e4476b492} to 172.10.10.9:10000
+[32mI[21:16:52,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=373dd090-dad4-4d2a-9e81-2c0e4476b492} to 172.10.10.0:10000
+[32mI[21:16:53,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=59 (2643)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=29 (1537) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=39 (1977) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=57 (2543) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:53,460] [300-BroadcastApp]BroadcastApp:[m Sending: b00ef027-c9d1-4c77-b65d-cc0c11f5d45f - FBGDFQZWSN (10)
+[32mI[21:16:53,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=b00ef027-c9d1-4c77-b65d-cc0c11f5d45f} from 172.10.10.1:10000
+[32mI[21:16:53,460] [300-BroadcastApp]BroadcastApp:[m Received b00ef027-c9d1-4c77-b65d-cc0c11f5d45f - FBGDFQZWSN (10) from 172.10.10.1:10000
+[32mI[21:16:53,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b00ef027-c9d1-4c77-b65d-cc0c11f5d45f} to 172.10.10.2:10000
+[32mI[21:16:53,460] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b00ef027-c9d1-4c77-b65d-cc0c11f5d45f} to 172.10.10.0:10000
+[32mI[21:16:53,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=82, messagesIn=20, messagesFailed=0, messagesSent=0, timers=28, notifications=0, requests=0, replies=0, customChannelEvents=34}
+
+[32mI[21:16:53,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0d9296bf-123d-4b16-a158-6ab8879128d4} from 172.10.10.2:10000
+[32mI[21:16:53,497] [300-BroadcastApp]BroadcastApp:[m Received 0d9296bf-123d-4b16-a158-6ab8879128d4 - STJKCWRKHD (10) from 172.10.10.2:10000
+[32mI[21:16:53,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0d9296bf-123d-4b16-a158-6ab8879128d4} to 172.10.10.9:10000
+[32mI[21:16:53,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0d9296bf-123d-4b16-a158-6ab8879128d4} to 172.10.10.2:10000
+[32mI[21:16:54,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=60 (2696)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=30 (1590) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=41 (2083) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=58 (2596) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:54,460] [300-BroadcastApp]BroadcastApp:[m Sending: 090993cc-2aab-42c0-8aa4-a6b840b9aae4 - SSXPHFYZOF (10)
+[32mI[21:16:54,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=090993cc-2aab-42c0-8aa4-a6b840b9aae4} from 172.10.10.1:10000
+[32mI[21:16:54,461] [300-BroadcastApp]BroadcastApp:[m Received 090993cc-2aab-42c0-8aa4-a6b840b9aae4 - SSXPHFYZOF (10) from 172.10.10.1:10000
+[32mI[21:16:54,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=090993cc-2aab-42c0-8aa4-a6b840b9aae4} to 172.10.10.9:10000
+[32mI[21:16:54,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=090993cc-2aab-42c0-8aa4-a6b840b9aae4} to 172.10.10.0:10000
+[32mI[21:16:54,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=84, messagesIn=20, messagesFailed=0, messagesSent=0, timers=29, notifications=0, requests=0, replies=0, customChannelEvents=35}
+
+[32mI[21:16:55,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=60 (2696)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=31 (1643) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=41 (2083) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=59 (2649) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:55,460] [300-BroadcastApp]BroadcastApp:[m Sending: 294eb776-bbb6-45ce-bb92-f57fdf90b2e2 - DICVELHTBV (10)
+[32mI[21:16:55,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=294eb776-bbb6-45ce-bb92-f57fdf90b2e2} from 172.10.10.1:10000
+[32mI[21:16:55,461] [300-BroadcastApp]BroadcastApp:[m Received 294eb776-bbb6-45ce-bb92-f57fdf90b2e2 - DICVELHTBV (10) from 172.10.10.1:10000
+[32mI[21:16:55,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=294eb776-bbb6-45ce-bb92-f57fdf90b2e2} to 172.10.10.2:10000
+[32mI[21:16:55,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=294eb776-bbb6-45ce-bb92-f57fdf90b2e2} to 172.10.10.0:10000
+[32mI[21:16:55,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=86, messagesIn=20, messagesFailed=0, messagesSent=0, timers=30, notifications=0, requests=0, replies=0, customChannelEvents=36}
+
+[32mI[21:16:55,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e114d9c8-5042-4884-819e-625553c51dcf} from 172.10.10.2:10000
+[32mI[21:16:55,498] [300-BroadcastApp]BroadcastApp:[m Received e114d9c8-5042-4884-819e-625553c51dcf - EMDIKGMVNV (10) from 172.10.10.2:10000
+[32mI[21:16:55,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e114d9c8-5042-4884-819e-625553c51dcf} to 172.10.10.2:10000
+[32mI[21:16:55,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e114d9c8-5042-4884-819e-625553c51dcf} to 172.10.10.0:10000
+[32mI[21:16:56,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=61 (2749)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=31 (1643) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=43 (2189) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=61 (2755) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:56,461] [300-BroadcastApp]BroadcastApp:[m Sending: 3ceb7efb-9c3b-4846-ae16-f7f4c92750f6 - ZFLAUXBCVV (10)
+[32mI[21:16:56,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=3ceb7efb-9c3b-4846-ae16-f7f4c92750f6} from 172.10.10.1:10000
+[32mI[21:16:56,461] [300-BroadcastApp]BroadcastApp:[m Received 3ceb7efb-9c3b-4846-ae16-f7f4c92750f6 - ZFLAUXBCVV (10) from 172.10.10.1:10000
+[32mI[21:16:56,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3ceb7efb-9c3b-4846-ae16-f7f4c92750f6} to 172.10.10.2:10000
+[32mI[21:16:56,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3ceb7efb-9c3b-4846-ae16-f7f4c92750f6} to 172.10.10.0:10000
+[32mI[21:16:56,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=88, messagesIn=20, messagesFailed=0, messagesSent=0, timers=31, notifications=0, requests=0, replies=0, customChannelEvents=37}
+
+[32mI[21:16:56,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=20c03083-031b-4654-b363-3705005eba6f} from 172.10.10.2:10000
+[32mI[21:16:56,497] [300-BroadcastApp]BroadcastApp:[m Received 20c03083-031b-4654-b363-3705005eba6f - TOEKFQSEZW (10) from 172.10.10.2:10000
+[32mI[21:16:56,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=20c03083-031b-4654-b363-3705005eba6f} to 172.10.10.9:10000
+[32mI[21:16:56,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=20c03083-031b-4654-b363-3705005eba6f} to 172.10.10.0:10000
+[32mI[21:16:56,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=3ceb7efb-9c3b-4846-ae16-f7f4c92750f6} from 172.10.10.2:10000
+[32mI[21:16:57,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=63 (2855)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=32 (1696) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=44 (2242) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=63 (2861) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:57,461] [300-BroadcastApp]BroadcastApp:[m Sending: 056262df-cdfa-4c37-aa1d-b52be74c7343 - IRZBDMHTNT (10)
+[32mI[21:16:57,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=056262df-cdfa-4c37-aa1d-b52be74c7343} from 172.10.10.1:10000
+[32mI[21:16:57,461] [300-BroadcastApp]BroadcastApp:[m Received 056262df-cdfa-4c37-aa1d-b52be74c7343 - IRZBDMHTNT (10) from 172.10.10.1:10000
+[32mI[21:16:57,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=056262df-cdfa-4c37-aa1d-b52be74c7343} to 172.10.10.9:10000
+[32mI[21:16:57,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=056262df-cdfa-4c37-aa1d-b52be74c7343} to 172.10.10.0:10000
+[36mD[21:16:57,463] [9069-HyParView]HyParView:[m Timer Shuffle...
+[36mD[21:16:57,463] [9069-HyParView]HyParView:[m Send ShuffleMessage{activeViewSample=[172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000] | passiveViewSample=[172.10.10.10:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000] | TTL=6} from 172.10.10.1:10000 to 172.10.10.9:10000
+[32mI[21:16:57,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=91, messagesIn=20, messagesFailed=0, messagesSent=0, timers=33, notifications=0, requests=0, replies=0, customChannelEvents=38}
+
+[32mI[21:16:58,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=63 (2855)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=34 (1814) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=44 (2242) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=64 (2914) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:58,460] [300-BroadcastApp]BroadcastApp:[m Sending: 224c18bc-6d1e-405e-af24-3700182117fd - PPMCFAVEPP (10)
+[32mI[21:16:58,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=224c18bc-6d1e-405e-af24-3700182117fd} from 172.10.10.1:10000
+[32mI[21:16:58,461] [300-BroadcastApp]BroadcastApp:[m Received 224c18bc-6d1e-405e-af24-3700182117fd - PPMCFAVEPP (10) from 172.10.10.1:10000
+[32mI[21:16:58,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=224c18bc-6d1e-405e-af24-3700182117fd} to 172.10.10.2:10000
+[32mI[21:16:58,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=224c18bc-6d1e-405e-af24-3700182117fd} to 172.10.10.0:10000
+[32mI[21:16:58,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=93, messagesIn=20, messagesFailed=0, messagesSent=0, timers=34, notifications=0, requests=0, replies=0, customChannelEvents=39}
+
+[32mI[21:16:58,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=2af2f5c8-5484-493a-ad68-2b2c66ac7ea1} from 172.10.10.2:10000
+[32mI[21:16:58,497] [300-BroadcastApp]BroadcastApp:[m Received 2af2f5c8-5484-493a-ad68-2b2c66ac7ea1 - KBCFLSNQTC (10) from 172.10.10.2:10000
+[32mI[21:16:58,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=2af2f5c8-5484-493a-ad68-2b2c66ac7ea1} to 172.10.10.9:10000
+[32mI[21:16:58,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=2af2f5c8-5484-493a-ad68-2b2c66ac7ea1} to 172.10.10.0:10000
+[32mI[21:16:59,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=64 (2908)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=35 (1867) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=45 (2295) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=66 (3020) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:16:59,460] [300-BroadcastApp]BroadcastApp:[m Sending: 606a5373-e87a-4558-8ce5-b5b0c4be7ee5 - JMELAITSAS (10)
+[32mI[21:16:59,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=606a5373-e87a-4558-8ce5-b5b0c4be7ee5} from 172.10.10.1:10000
+[32mI[21:16:59,461] [300-BroadcastApp]BroadcastApp:[m Received 606a5373-e87a-4558-8ce5-b5b0c4be7ee5 - JMELAITSAS (10) from 172.10.10.1:10000
+[32mI[21:16:59,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=606a5373-e87a-4558-8ce5-b5b0c4be7ee5} to 172.10.10.9:10000
+[32mI[21:16:59,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=606a5373-e87a-4558-8ce5-b5b0c4be7ee5} to 172.10.10.2:10000
+[32mI[21:16:59,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=95, messagesIn=20, messagesFailed=0, messagesSent=0, timers=35, notifications=0, requests=0, replies=0, customChannelEvents=40}
+
+[32mI[21:16:59,496] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e5c1cc95-ec4c-46c0-81e9-3519ef305783} from 172.10.10.2:10000
+[32mI[21:16:59,497] [300-BroadcastApp]BroadcastApp:[m Received e5c1cc95-ec4c-46c0-81e9-3519ef305783 - AIAZGODGGM (10) from 172.10.10.2:10000
+[32mI[21:16:59,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e5c1cc95-ec4c-46c0-81e9-3519ef305783} to 172.10.10.2:10000
+[32mI[21:16:59,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e5c1cc95-ec4c-46c0-81e9-3519ef305783} to 172.10.10.0:10000
+[32mI[21:16:59,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=606a5373-e87a-4558-8ce5-b5b0c4be7ee5} from 172.10.10.2:10000
+[32mI[21:17:00,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=66 (3014)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=36 (1920) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=47 (2401) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=67 (3073) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:00,461] [300-BroadcastApp]BroadcastApp:[m Sending: ee5ceeda-b8d1-4841-8bb6-f6ed3bc8470f - JWKARJUCID (10)
+[32mI[21:17:00,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ee5ceeda-b8d1-4841-8bb6-f6ed3bc8470f} from 172.10.10.1:10000
+[32mI[21:17:00,461] [300-BroadcastApp]BroadcastApp:[m Received ee5ceeda-b8d1-4841-8bb6-f6ed3bc8470f - JWKARJUCID (10) from 172.10.10.1:10000
+[32mI[21:17:00,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ee5ceeda-b8d1-4841-8bb6-f6ed3bc8470f} to 172.10.10.9:10000
+[32mI[21:17:00,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ee5ceeda-b8d1-4841-8bb6-f6ed3bc8470f} to 172.10.10.2:10000
+[32mI[21:17:00,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=97, messagesIn=20, messagesFailed=0, messagesSent=0, timers=36, notifications=0, requests=0, replies=0, customChannelEvents=41}
+
+[32mI[21:17:00,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=a7c2a579-0d27-4462-8fb5-624976a49bf4} from 172.10.10.2:10000
+[32mI[21:17:00,497] [300-BroadcastApp]BroadcastApp:[m Received a7c2a579-0d27-4462-8fb5-624976a49bf4 - YGATIVLAGK (10) from 172.10.10.2:10000
+[32mI[21:17:00,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a7c2a579-0d27-4462-8fb5-624976a49bf4} to 172.10.10.9:10000
+[32mI[21:17:00,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a7c2a579-0d27-4462-8fb5-624976a49bf4} to 172.10.10.2:10000
+[32mI[21:17:01,437] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=67 (3067)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=38 (2026) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=49 (2507) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=67 (3073) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:01,460] [300-BroadcastApp]BroadcastApp:[m Sending: 18668ab6-d60c-4ebf-91e9-f7dbc8b261ec - DEFWEIEHSM (10)
+[32mI[21:17:01,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=18668ab6-d60c-4ebf-91e9-f7dbc8b261ec} from 172.10.10.1:10000
+[32mI[21:17:01,461] [300-BroadcastApp]BroadcastApp:[m Received 18668ab6-d60c-4ebf-91e9-f7dbc8b261ec - DEFWEIEHSM (10) from 172.10.10.1:10000
+[32mI[21:17:01,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=18668ab6-d60c-4ebf-91e9-f7dbc8b261ec} to 172.10.10.9:10000
+[32mI[21:17:01,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=18668ab6-d60c-4ebf-91e9-f7dbc8b261ec} to 172.10.10.2:10000
+[32mI[21:17:01,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=99, messagesIn=20, messagesFailed=0, messagesSent=0, timers=37, notifications=0, requests=0, replies=0, customChannelEvents=42}
+
+[32mI[21:17:01,497] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=6c4328ee-06ed-44a6-ae59-62b26e2e51a7} from 172.10.10.2:10000
+[32mI[21:17:01,497] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=6c4328ee-06ed-44a6-ae59-62b26e2e51a7} to 172.10.10.9:10000
+[32mI[21:17:01,497] [300-BroadcastApp]BroadcastApp:[m Received 6c4328ee-06ed-44a6-ae59-62b26e2e51a7 - MGOJXFPYLY (10) from 172.10.10.2:10000
+[32mI[21:17:01,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=6c4328ee-06ed-44a6-ae59-62b26e2e51a7} to 172.10.10.0:10000
+[32mI[21:17:01,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=18668ab6-d60c-4ebf-91e9-f7dbc8b261ec} from 172.10.10.2:10000
+[32mI[21:17:02,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=69 (3173)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=40 (2132) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=50 (2560) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=68 (3126) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:02,461] [300-BroadcastApp]BroadcastApp:[m Sending: e86cd53e-e255-470b-97b7-68c0b595cb4b - PDKLFFWWJF (10)
+[32mI[21:17:02,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e86cd53e-e255-470b-97b7-68c0b595cb4b} from 172.10.10.1:10000
+[32mI[21:17:02,461] [300-BroadcastApp]BroadcastApp:[m Received e86cd53e-e255-470b-97b7-68c0b595cb4b - PDKLFFWWJF (10) from 172.10.10.1:10000
+[32mI[21:17:02,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e86cd53e-e255-470b-97b7-68c0b595cb4b} to 172.10.10.9:10000
+[32mI[21:17:02,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e86cd53e-e255-470b-97b7-68c0b595cb4b} to 172.10.10.2:10000
+[32mI[21:17:02,465] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=101, messagesIn=20, messagesFailed=0, messagesSent=0, timers=38, notifications=0, requests=0, replies=0, customChannelEvents=43}
+
+[32mI[21:17:02,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e86cd53e-e255-470b-97b7-68c0b595cb4b} from 172.10.10.2:10000
+[32mI[21:17:03,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=70 (3226)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=41 (2185) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=51 (2613) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=68 (3126) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:03,461] [300-BroadcastApp]BroadcastApp:[m Sending: 10eded05-3c8b-4b68-b60e-de90d2f6c54f - SCQJMGJAOD (10)
+[32mI[21:17:03,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=10eded05-3c8b-4b68-b60e-de90d2f6c54f} from 172.10.10.1:10000
+[32mI[21:17:03,461] [300-BroadcastApp]BroadcastApp:[m Received 10eded05-3c8b-4b68-b60e-de90d2f6c54f - SCQJMGJAOD (10) from 172.10.10.1:10000
+[32mI[21:17:03,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=10eded05-3c8b-4b68-b60e-de90d2f6c54f} to 172.10.10.9:10000
+[32mI[21:17:03,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=10eded05-3c8b-4b68-b60e-de90d2f6c54f} to 172.10.10.0:10000
+[32mI[21:17:03,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=103, messagesIn=20, messagesFailed=0, messagesSent=0, timers=39, notifications=0, requests=0, replies=0, customChannelEvents=44}
+
+[32mI[21:17:03,498] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ff87159e-cf23-433a-96dc-3084ab3615d7} from 172.10.10.2:10000
+[32mI[21:17:03,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ff87159e-cf23-433a-96dc-3084ab3615d7} to 172.10.10.2:10000
+[32mI[21:17:03,498] [300-BroadcastApp]BroadcastApp:[m Received ff87159e-cf23-433a-96dc-3084ab3615d7 - OTPSDRBGYX (10) from 172.10.10.2:10000
+[32mI[21:17:03,498] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ff87159e-cf23-433a-96dc-3084ab3615d7} to 172.10.10.0:10000
+[32mI[21:17:04,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=71 (3279)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=42 (2238) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=52 (2666) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=70 (3232) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:04,460] [300-BroadcastApp]BroadcastApp:[m Sending: 3193f4e8-254e-40b9-b719-ffcda4f32080 - MSDTAIECIF (10)
+[32mI[21:17:04,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=3193f4e8-254e-40b9-b719-ffcda4f32080} from 172.10.10.1:10000
+[32mI[21:17:04,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3193f4e8-254e-40b9-b719-ffcda4f32080} to 172.10.10.9:10000
+[32mI[21:17:04,461] [300-BroadcastApp]BroadcastApp:[m Received 3193f4e8-254e-40b9-b719-ffcda4f32080 - MSDTAIECIF (10) from 172.10.10.1:10000
+[32mI[21:17:04,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3193f4e8-254e-40b9-b719-ffcda4f32080} to 172.10.10.0:10000
+[32mI[21:17:04,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=105, messagesIn=20, messagesFailed=0, messagesSent=0, timers=40, notifications=0, requests=0, replies=0, customChannelEvents=45}
+
+[32mI[21:17:05,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=71 (3279)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=43 (2291) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=52 (2666) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=71 (3285) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:05,460] [300-BroadcastApp]BroadcastApp:[m Sending: 594ab209-127f-43c5-9a29-7d5628d0569c - RGJEXUEQAL (10)
+[32mI[21:17:05,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=594ab209-127f-43c5-9a29-7d5628d0569c} from 172.10.10.1:10000
+[32mI[21:17:05,461] [300-BroadcastApp]BroadcastApp:[m Received 594ab209-127f-43c5-9a29-7d5628d0569c - RGJEXUEQAL (10) from 172.10.10.1:10000
+[32mI[21:17:05,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=594ab209-127f-43c5-9a29-7d5628d0569c} to 172.10.10.2:10000
+[32mI[21:17:05,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=594ab209-127f-43c5-9a29-7d5628d0569c} to 172.10.10.0:10000
+[32mI[21:17:05,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=107, messagesIn=20, messagesFailed=0, messagesSent=0, timers=41, notifications=0, requests=0, replies=0, customChannelEvents=46}
+
+[32mI[21:17:05,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=594ab209-127f-43c5-9a29-7d5628d0569c} from 172.10.10.2:10000
+[32mI[21:17:06,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=72 (3332)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=43 (2291) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=53 (2719) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=72 (3338) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:06,461] [300-BroadcastApp]BroadcastApp:[m Sending: 58d72ce2-2c6f-495b-a8fd-3b998130d5bc - JBXQYIGQZE (10)
+[32mI[21:17:06,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=58d72ce2-2c6f-495b-a8fd-3b998130d5bc} from 172.10.10.1:10000
+[32mI[21:17:06,461] [300-BroadcastApp]BroadcastApp:[m Received 58d72ce2-2c6f-495b-a8fd-3b998130d5bc - JBXQYIGQZE (10) from 172.10.10.1:10000
+[32mI[21:17:06,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=58d72ce2-2c6f-495b-a8fd-3b998130d5bc} to 172.10.10.9:10000
+[32mI[21:17:06,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=58d72ce2-2c6f-495b-a8fd-3b998130d5bc} to 172.10.10.0:10000
+[32mI[21:17:06,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=109, messagesIn=20, messagesFailed=0, messagesSent=0, timers=42, notifications=0, requests=0, replies=0, customChannelEvents=47}
+
+[32mI[21:17:06,498] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=4939492a-5791-4038-8662-d1919b428b9f} from 172.10.10.2:10000
+[32mI[21:17:06,499] [300-BroadcastApp]BroadcastApp:[m Received 4939492a-5791-4038-8662-d1919b428b9f - GJFENIWHQX (10) from 172.10.10.2:10000
+[32mI[21:17:06,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=4939492a-5791-4038-8662-d1919b428b9f} to 172.10.10.9:10000
+[32mI[21:17:06,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=4939492a-5791-4038-8662-d1919b428b9f} to 172.10.10.2:10000
+[32mI[21:17:07,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=73 (3385)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=45 (2397) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=54 (2772) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=73 (3391) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:07,461] [300-BroadcastApp]BroadcastApp:[m Sending: 9e1926c8-1724-4aaa-a442-89e71a111d6f - IKNKWYYSCZ (10)
+[32mI[21:17:07,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=9e1926c8-1724-4aaa-a442-89e71a111d6f} from 172.10.10.1:10000
+[32mI[21:17:07,461] [300-BroadcastApp]BroadcastApp:[m Received 9e1926c8-1724-4aaa-a442-89e71a111d6f - IKNKWYYSCZ (10) from 172.10.10.1:10000
+[32mI[21:17:07,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=9e1926c8-1724-4aaa-a442-89e71a111d6f} to 172.10.10.2:10000
+[32mI[21:17:07,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=9e1926c8-1724-4aaa-a442-89e71a111d6f} to 172.10.10.0:10000
+[32mI[21:17:07,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=111, messagesIn=20, messagesFailed=0, messagesSent=0, timers=43, notifications=0, requests=0, replies=0, customChannelEvents=48}
+
+[32mI[21:17:07,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=edbfee60-8284-452c-b3ea-58b1e7bef0d8} from 172.10.10.2:10000
+[32mI[21:17:07,499] [300-BroadcastApp]BroadcastApp:[m Received edbfee60-8284-452c-b3ea-58b1e7bef0d8 - RRGCPFOXXY (10) from 172.10.10.2:10000
+[32mI[21:17:07,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=edbfee60-8284-452c-b3ea-58b1e7bef0d8} to 172.10.10.9:10000
+[32mI[21:17:07,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=edbfee60-8284-452c-b3ea-58b1e7bef0d8} to 172.10.10.0:10000
+[32mI[21:17:07,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=9e1926c8-1724-4aaa-a442-89e71a111d6f} from 172.10.10.2:10000
+[32mI[21:17:08,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=75 (3491)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=46 (2450) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=55 (2825) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=75 (3497) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:08,460] [300-BroadcastApp]BroadcastApp:[m Sending: b0039ae9-d801-4844-a94a-aff3a07285e8 - TTSQARJVAL (10)
+[32mI[21:17:08,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=b0039ae9-d801-4844-a94a-aff3a07285e8} from 172.10.10.1:10000
+[32mI[21:17:08,461] [300-BroadcastApp]BroadcastApp:[m Received b0039ae9-d801-4844-a94a-aff3a07285e8 - TTSQARJVAL (10) from 172.10.10.1:10000
+[32mI[21:17:08,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b0039ae9-d801-4844-a94a-aff3a07285e8} to 172.10.10.9:10000
+[32mI[21:17:08,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b0039ae9-d801-4844-a94a-aff3a07285e8} to 172.10.10.2:10000
+[32mI[21:17:08,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=113, messagesIn=20, messagesFailed=0, messagesSent=0, timers=44, notifications=0, requests=0, replies=0, customChannelEvents=49}
+
+[32mI[21:17:08,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=c63a8269-cb7b-44ad-b3a9-0da7e6dc92a9} from 172.10.10.2:10000
+[32mI[21:17:08,499] [300-BroadcastApp]BroadcastApp:[m Received c63a8269-cb7b-44ad-b3a9-0da7e6dc92a9 - WOLXGYHOHI (10) from 172.10.10.2:10000
+[32mI[21:17:08,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c63a8269-cb7b-44ad-b3a9-0da7e6dc92a9} to 172.10.10.2:10000
+[32mI[21:17:08,500] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c63a8269-cb7b-44ad-b3a9-0da7e6dc92a9} to 172.10.10.0:10000
+[32mI[21:17:08,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=b0039ae9-d801-4844-a94a-aff3a07285e8} from 172.10.10.2:10000
+[32mI[21:17:09,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=77 (3597)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=47 (2503) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=57 (2931) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=76 (3550) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:09,460] [300-BroadcastApp]BroadcastApp:[m Sending: 78ae8ebf-b855-4532-bc76-16184f6475f8 - MMTLKRWZYZ (10)
+[32mI[21:17:09,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=78ae8ebf-b855-4532-bc76-16184f6475f8} from 172.10.10.1:10000
+[32mI[21:17:09,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=78ae8ebf-b855-4532-bc76-16184f6475f8} to 172.10.10.2:10000
+[32mI[21:17:09,461] [300-BroadcastApp]BroadcastApp:[m Received 78ae8ebf-b855-4532-bc76-16184f6475f8 - MMTLKRWZYZ (10) from 172.10.10.1:10000
+[32mI[21:17:09,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=78ae8ebf-b855-4532-bc76-16184f6475f8} to 172.10.10.0:10000
+[32mI[21:17:09,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=115, messagesIn=20, messagesFailed=0, messagesSent=0, timers=45, notifications=0, requests=0, replies=0, customChannelEvents=50}
+
+[32mI[21:17:09,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=45e31a9c-f5e9-4b13-9921-96ccf28cbffd} from 172.10.10.2:10000
+[32mI[21:17:09,499] [300-BroadcastApp]BroadcastApp:[m Received 45e31a9c-f5e9-4b13-9921-96ccf28cbffd - USHYXJVXWJ (10) from 172.10.10.2:10000
+[32mI[21:17:09,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=45e31a9c-f5e9-4b13-9921-96ccf28cbffd} to 172.10.10.2:10000
+[32mI[21:17:09,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=45e31a9c-f5e9-4b13-9921-96ccf28cbffd} to 172.10.10.0:10000
+[32mI[21:17:09,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=78ae8ebf-b855-4532-bc76-16184f6475f8} from 172.10.10.2:10000
+[32mI[21:17:10,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=79 (3703)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=47 (2503) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=59 (3037) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=78 (3656) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:10,461] [300-BroadcastApp]BroadcastApp:[m Sending: 3f308376-1173-4017-af0c-c4e10d12a116 - HUBXUPAZUX (10)
+[32mI[21:17:10,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=3f308376-1173-4017-af0c-c4e10d12a116} from 172.10.10.1:10000
+[32mI[21:17:10,461] [300-BroadcastApp]BroadcastApp:[m Received 3f308376-1173-4017-af0c-c4e10d12a116 - HUBXUPAZUX (10) from 172.10.10.1:10000
+[32mI[21:17:10,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3f308376-1173-4017-af0c-c4e10d12a116} to 172.10.10.9:10000
+[32mI[21:17:10,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3f308376-1173-4017-af0c-c4e10d12a116} to 172.10.10.2:10000
+[32mI[21:17:10,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=117, messagesIn=20, messagesFailed=0, messagesSent=0, timers=46, notifications=0, requests=0, replies=0, customChannelEvents=51}
+
+[32mI[21:17:10,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=3f308376-1173-4017-af0c-c4e10d12a116} from 172.10.10.2:10000
+[32mI[21:17:11,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=80 (3756)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=48 (2556) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=60 (3090) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=78 (3656) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:11,461] [300-BroadcastApp]BroadcastApp:[m Sending: 0cad563d-7edf-4b0d-bc18-abcafab4aa07 - RDZFMJOBTQ (10)
+[32mI[21:17:11,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0cad563d-7edf-4b0d-bc18-abcafab4aa07} from 172.10.10.1:10000
+[32mI[21:17:11,462] [300-BroadcastApp]BroadcastApp:[m Received 0cad563d-7edf-4b0d-bc18-abcafab4aa07 - RDZFMJOBTQ (10) from 172.10.10.1:10000
+[32mI[21:17:11,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0cad563d-7edf-4b0d-bc18-abcafab4aa07} to 172.10.10.9:10000
+[32mI[21:17:11,463] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0cad563d-7edf-4b0d-bc18-abcafab4aa07} to 172.10.10.2:10000
+[32mI[21:17:11,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=119, messagesIn=20, messagesFailed=0, messagesSent=0, timers=47, notifications=0, requests=0, replies=0, customChannelEvents=52}
+
+[32mI[21:17:11,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=2263ccba-54de-4c8f-a303-213147029d32} from 172.10.10.2:10000
+[32mI[21:17:11,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=2263ccba-54de-4c8f-a303-213147029d32} to 172.10.10.9:10000
+[32mI[21:17:11,499] [300-BroadcastApp]BroadcastApp:[m Received 2263ccba-54de-4c8f-a303-213147029d32 - FRSGSEJKGV (10) from 172.10.10.2:10000
+[32mI[21:17:11,500] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=2263ccba-54de-4c8f-a303-213147029d32} to 172.10.10.0:10000
+[32mI[21:17:11,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0cad563d-7edf-4b0d-bc18-abcafab4aa07} from 172.10.10.2:10000
+[32mI[21:17:12,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=82 (3862)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=50 (2662) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=61 (3143) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=79 (3709) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:12,460] [300-BroadcastApp]BroadcastApp:[m Sending: fe9597c5-f01c-4157-a0e1-d9d6bbac7b6f - BKGQAJOROO (10)
+[32mI[21:17:12,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=fe9597c5-f01c-4157-a0e1-d9d6bbac7b6f} from 172.10.10.1:10000
+[32mI[21:17:12,461] [300-BroadcastApp]BroadcastApp:[m Received fe9597c5-f01c-4157-a0e1-d9d6bbac7b6f - BKGQAJOROO (10) from 172.10.10.1:10000
+[32mI[21:17:12,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=fe9597c5-f01c-4157-a0e1-d9d6bbac7b6f} to 172.10.10.2:10000
+[32mI[21:17:12,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=fe9597c5-f01c-4157-a0e1-d9d6bbac7b6f} to 172.10.10.0:10000
+[36mD[21:17:12,463] [9069-HyParView]HyParView:[m Timer Shuffle...
+[36mD[21:17:12,463] [9069-HyParView]HyParView:[m Send ShuffleMessage{activeViewSample=[172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000] | passiveViewSample=[172.10.10.10:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.3:10000] | TTL=6} from 172.10.10.1:10000 to 172.10.10.9:10000
+[32mI[21:17:12,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=122, messagesIn=20, messagesFailed=0, messagesSent=0, timers=49, notifications=0, requests=0, replies=0, customChannelEvents=53}
+
+[32mI[21:17:12,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=fe9597c5-f01c-4157-a0e1-d9d6bbac7b6f} from 172.10.10.2:10000
+[32mI[21:17:13,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=83 (3915)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=51 (2727) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=62 (3196) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=80 (3762) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:13,461] [300-BroadcastApp]BroadcastApp:[m Sending: 03dd1eb3-c85a-46f5-a5bd-347722048634 - FMIIZJXKGB (10)
+[32mI[21:17:13,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=03dd1eb3-c85a-46f5-a5bd-347722048634} from 172.10.10.1:10000
+[32mI[21:17:13,461] [300-BroadcastApp]BroadcastApp:[m Received 03dd1eb3-c85a-46f5-a5bd-347722048634 - FMIIZJXKGB (10) from 172.10.10.1:10000
+[32mI[21:17:13,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=03dd1eb3-c85a-46f5-a5bd-347722048634} to 172.10.10.2:10000
+[32mI[21:17:13,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=03dd1eb3-c85a-46f5-a5bd-347722048634} to 172.10.10.0:10000
+[32mI[21:17:13,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=124, messagesIn=20, messagesFailed=0, messagesSent=0, timers=50, notifications=0, requests=0, replies=0, customChannelEvents=54}
+
+[32mI[21:17:14,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=83 (3915)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=51 (2727) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=63 (3249) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=81 (3815) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:14,461] [300-BroadcastApp]BroadcastApp:[m Sending: a35875a8-4d47-47d0-95cc-6e15b1d268ff - XHJYSDXHZX (10)
+[32mI[21:17:14,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=a35875a8-4d47-47d0-95cc-6e15b1d268ff} from 172.10.10.1:10000
+[32mI[21:17:14,462] [300-BroadcastApp]BroadcastApp:[m Received a35875a8-4d47-47d0-95cc-6e15b1d268ff - XHJYSDXHZX (10) from 172.10.10.1:10000
+[32mI[21:17:14,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a35875a8-4d47-47d0-95cc-6e15b1d268ff} to 172.10.10.2:10000
+[32mI[21:17:14,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a35875a8-4d47-47d0-95cc-6e15b1d268ff} to 172.10.10.0:10000
+[32mI[21:17:14,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=126, messagesIn=20, messagesFailed=0, messagesSent=0, timers=51, notifications=0, requests=0, replies=0, customChannelEvents=55}
+
+[32mI[21:17:15,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=83 (3915)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=51 (2727) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=64 (3302) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=82 (3868) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:15,460] [300-BroadcastApp]BroadcastApp:[m Sending: bb0cec4a-1ee7-4fb3-bfbe-ab49fe6cff4c - NYIAIIKJJU (10)
+[32mI[21:17:15,460] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=bb0cec4a-1ee7-4fb3-bfbe-ab49fe6cff4c} from 172.10.10.1:10000
+[32mI[21:17:15,460] [300-BroadcastApp]BroadcastApp:[m Received bb0cec4a-1ee7-4fb3-bfbe-ab49fe6cff4c - NYIAIIKJJU (10) from 172.10.10.1:10000
+[32mI[21:17:15,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=bb0cec4a-1ee7-4fb3-bfbe-ab49fe6cff4c} to 172.10.10.9:10000
+[32mI[21:17:15,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=bb0cec4a-1ee7-4fb3-bfbe-ab49fe6cff4c} to 172.10.10.0:10000
+[32mI[21:17:15,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=128, messagesIn=20, messagesFailed=0, messagesSent=0, timers=52, notifications=0, requests=0, replies=0, customChannelEvents=56}
+
+[32mI[21:17:15,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ba6966b6-d76f-42f1-a3c6-fdbedd1026e7} from 172.10.10.2:10000
+[32mI[21:17:15,499] [300-BroadcastApp]BroadcastApp:[m Received ba6966b6-d76f-42f1-a3c6-fdbedd1026e7 - QTGNTRUBID (10) from 172.10.10.2:10000
+[32mI[21:17:15,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ba6966b6-d76f-42f1-a3c6-fdbedd1026e7} to 172.10.10.9:10000
+[32mI[21:17:15,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ba6966b6-d76f-42f1-a3c6-fdbedd1026e7} to 172.10.10.0:10000
+[32mI[21:17:16,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=84 (3968)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=53 (2833) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=64 (3302) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=84 (3974) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:16,461] [300-BroadcastApp]BroadcastApp:[m Sending: 134607e7-cd67-42b3-a498-d5cde6bb4e6d - DVTTANHWZM (10)
+[32mI[21:17:16,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=134607e7-cd67-42b3-a498-d5cde6bb4e6d} from 172.10.10.1:10000
+[32mI[21:17:16,461] [300-BroadcastApp]BroadcastApp:[m Received 134607e7-cd67-42b3-a498-d5cde6bb4e6d - DVTTANHWZM (10) from 172.10.10.1:10000
+[32mI[21:17:16,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=134607e7-cd67-42b3-a498-d5cde6bb4e6d} to 172.10.10.9:10000
+[32mI[21:17:16,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=134607e7-cd67-42b3-a498-d5cde6bb4e6d} to 172.10.10.0:10000
+[32mI[21:17:16,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=130, messagesIn=20, messagesFailed=0, messagesSent=0, timers=53, notifications=0, requests=0, replies=0, customChannelEvents=57}
+
+[32mI[21:17:16,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=542b6158-0ffb-414f-86b2-2bb8d12b3f52} from 172.10.10.2:10000
+[32mI[21:17:16,499] [300-BroadcastApp]BroadcastApp:[m Received 542b6158-0ffb-414f-86b2-2bb8d12b3f52 - IRNOXLJBPP (10) from 172.10.10.2:10000
+[32mI[21:17:16,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=542b6158-0ffb-414f-86b2-2bb8d12b3f52} to 172.10.10.9:10000
+[32mI[21:17:16,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=542b6158-0ffb-414f-86b2-2bb8d12b3f52} to 172.10.10.2:10000
+[32mI[21:17:17,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=85 (4021)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=55 (2939) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=65 (3355) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=85 (4027) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:17,461] [300-BroadcastApp]BroadcastApp:[m Sending: 2f9823d8-7422-4e0a-814e-398a87571a0d - MTXSDDGRGK (10)
+[32mI[21:17:17,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=2f9823d8-7422-4e0a-814e-398a87571a0d} from 172.10.10.1:10000
+[32mI[21:17:17,461] [300-BroadcastApp]BroadcastApp:[m Received 2f9823d8-7422-4e0a-814e-398a87571a0d - MTXSDDGRGK (10) from 172.10.10.1:10000
+[32mI[21:17:17,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=2f9823d8-7422-4e0a-814e-398a87571a0d} to 172.10.10.9:10000
+[32mI[21:17:17,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=2f9823d8-7422-4e0a-814e-398a87571a0d} to 172.10.10.2:10000
+[32mI[21:17:17,466] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=132, messagesIn=20, messagesFailed=0, messagesSent=0, timers=54, notifications=0, requests=0, replies=0, customChannelEvents=58}
+
+[32mI[21:17:17,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=c98aee0f-81a9-408d-abf8-9e7310cf106b} from 172.10.10.2:10000
+[32mI[21:17:17,499] [300-BroadcastApp]BroadcastApp:[m Received c98aee0f-81a9-408d-abf8-9e7310cf106b - TBEIEMFXTI (10) from 172.10.10.2:10000
+[32mI[21:17:17,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c98aee0f-81a9-408d-abf8-9e7310cf106b} to 172.10.10.9:10000
+[32mI[21:17:17,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c98aee0f-81a9-408d-abf8-9e7310cf106b} to 172.10.10.2:10000
+[32mI[21:17:17,664] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=2f9823d8-7422-4e0a-814e-398a87571a0d} from 172.10.10.2:10000
+[32mI[21:17:18,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=87 (4127)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=57 (3045) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=67 (3461) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=85 (4027) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:18,461] [300-BroadcastApp]BroadcastApp:[m Sending: b6f56bfe-4c1c-4f43-a616-885ee30d8dde - SBYRYDWGKR (10)
+[32mI[21:17:18,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=b6f56bfe-4c1c-4f43-a616-885ee30d8dde} from 172.10.10.1:10000
+[32mI[21:17:18,461] [300-BroadcastApp]BroadcastApp:[m Received b6f56bfe-4c1c-4f43-a616-885ee30d8dde - SBYRYDWGKR (10) from 172.10.10.1:10000
+[32mI[21:17:18,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b6f56bfe-4c1c-4f43-a616-885ee30d8dde} to 172.10.10.9:10000
+[32mI[21:17:18,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b6f56bfe-4c1c-4f43-a616-885ee30d8dde} to 172.10.10.0:10000
+[32mI[21:17:18,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=134, messagesIn=20, messagesFailed=0, messagesSent=0, timers=55, notifications=0, requests=0, replies=0, customChannelEvents=59}
+
+[32mI[21:17:18,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=af299780-b8eb-4010-90d4-d2c55bd307ec} from 172.10.10.2:10000
+[32mI[21:17:18,500] [300-BroadcastApp]BroadcastApp:[m Received af299780-b8eb-4010-90d4-d2c55bd307ec - KAYVWJXPIU (10) from 172.10.10.2:10000
+[32mI[21:17:18,500] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=af299780-b8eb-4010-90d4-d2c55bd307ec} to 172.10.10.9:10000
+[32mI[21:17:18,500] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=af299780-b8eb-4010-90d4-d2c55bd307ec} to 172.10.10.0:10000
+[32mI[21:17:19,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=88 (4180)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=59 (3151) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=67 (3461) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=87 (4133) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:19,460] [300-BroadcastApp]BroadcastApp:[m Sending: ada7ac27-23c0-4426-89ed-b03a9b3456a5 - GXYTVPNPQG (10)
+[32mI[21:17:19,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ada7ac27-23c0-4426-89ed-b03a9b3456a5} from 172.10.10.1:10000
+[32mI[21:17:19,461] [300-BroadcastApp]BroadcastApp:[m Received ada7ac27-23c0-4426-89ed-b03a9b3456a5 - GXYTVPNPQG (10) from 172.10.10.1:10000
+[32mI[21:17:19,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ada7ac27-23c0-4426-89ed-b03a9b3456a5} to 172.10.10.9:10000
+[32mI[21:17:19,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ada7ac27-23c0-4426-89ed-b03a9b3456a5} to 172.10.10.0:10000
+[32mI[21:17:19,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=136, messagesIn=20, messagesFailed=0, messagesSent=0, timers=56, notifications=0, requests=0, replies=0, customChannelEvents=60}
+
+[32mI[21:17:19,498] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=cfb55484-c7e0-4ede-aab8-a83182900cd1} from 172.10.10.2:10000
+[32mI[21:17:19,499] [300-BroadcastApp]BroadcastApp:[m Received cfb55484-c7e0-4ede-aab8-a83182900cd1 - MEMQFXIRRO (10) from 172.10.10.2:10000
+[32mI[21:17:19,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=cfb55484-c7e0-4ede-aab8-a83182900cd1} to 172.10.10.2:10000
+[32mI[21:17:19,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=cfb55484-c7e0-4ede-aab8-a83182900cd1} to 172.10.10.0:10000
+[32mI[21:17:20,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=89 (4233)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=60 (3204) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=68 (3514) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=89 (4239) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:20,460] [300-BroadcastApp]BroadcastApp:[m Sending: 5cb26f28-7903-4e1e-8460-2f2e1a53fbcb - JPNMAGKMOV (10)
+[32mI[21:17:20,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=5cb26f28-7903-4e1e-8460-2f2e1a53fbcb} from 172.10.10.1:10000
+[32mI[21:17:20,461] [300-BroadcastApp]BroadcastApp:[m Received 5cb26f28-7903-4e1e-8460-2f2e1a53fbcb - JPNMAGKMOV (10) from 172.10.10.1:10000
+[32mI[21:17:20,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5cb26f28-7903-4e1e-8460-2f2e1a53fbcb} to 172.10.10.2:10000
+[32mI[21:17:20,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=5cb26f28-7903-4e1e-8460-2f2e1a53fbcb} to 172.10.10.0:10000
+[32mI[21:17:20,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=138, messagesIn=20, messagesFailed=0, messagesSent=0, timers=57, notifications=0, requests=0, replies=0, customChannelEvents=61}
+
+[32mI[21:17:21,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=89 (4233)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=60 (3204) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=69 (3567) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=90 (4292) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:21,461] [300-BroadcastApp]BroadcastApp:[m Sending: 0eb93c04-f90c-4d34-9ad3-9255e0173df3 - IVBYAVQZZE (10)
+[32mI[21:17:21,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0eb93c04-f90c-4d34-9ad3-9255e0173df3} from 172.10.10.1:10000
+[32mI[21:17:21,461] [300-BroadcastApp]BroadcastApp:[m Received 0eb93c04-f90c-4d34-9ad3-9255e0173df3 - IVBYAVQZZE (10) from 172.10.10.1:10000
+[32mI[21:17:21,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0eb93c04-f90c-4d34-9ad3-9255e0173df3} to 172.10.10.2:10000
+[32mI[21:17:21,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=0eb93c04-f90c-4d34-9ad3-9255e0173df3} to 172.10.10.0:10000
+[32mI[21:17:21,468] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=140, messagesIn=20, messagesFailed=0, messagesSent=0, timers=58, notifications=0, requests=0, replies=0, customChannelEvents=62}
+
+[32mI[21:17:21,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=a1c6059c-c75b-481c-a7bc-a19bc7170735} from 172.10.10.2:10000
+[32mI[21:17:21,499] [300-BroadcastApp]BroadcastApp:[m Received a1c6059c-c75b-481c-a7bc-a19bc7170735 - YFRELDPFJF (10) from 172.10.10.2:10000
+[32mI[21:17:21,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a1c6059c-c75b-481c-a7bc-a19bc7170735} to 172.10.10.9:10000
+[32mI[21:17:21,500] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a1c6059c-c75b-481c-a7bc-a19bc7170735} to 172.10.10.0:10000
+[32mI[21:17:21,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=0eb93c04-f90c-4d34-9ad3-9255e0173df3} from 172.10.10.2:10000
+[32mI[21:17:22,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=91 (4339)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=61 (3257) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=70 (3620) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=92 (4398) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:22,461] [300-BroadcastApp]BroadcastApp:[m Sending: a0da7497-f0fb-41a2-88a6-fa1396990672 - GWNSIAGVOZ (10)
+[32mI[21:17:22,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=a0da7497-f0fb-41a2-88a6-fa1396990672} from 172.10.10.1:10000
+[32mI[21:17:22,462] [300-BroadcastApp]BroadcastApp:[m Received a0da7497-f0fb-41a2-88a6-fa1396990672 - GWNSIAGVOZ (10) from 172.10.10.1:10000
+[32mI[21:17:22,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a0da7497-f0fb-41a2-88a6-fa1396990672} to 172.10.10.9:10000
+[32mI[21:17:22,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=a0da7497-f0fb-41a2-88a6-fa1396990672} to 172.10.10.2:10000
+[32mI[21:17:22,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=142, messagesIn=20, messagesFailed=0, messagesSent=0, timers=59, notifications=0, requests=0, replies=0, customChannelEvents=63}
+
+[32mI[21:17:23,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=91 (4339)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=62 (3310) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=71 (3673) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=92 (4398) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:23,461] [300-BroadcastApp]BroadcastApp:[m Sending: 18310108-823f-4bb3-9fad-cf7bf9c76c5a - MUKIHEFEYA (10)
+[32mI[21:17:23,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=18310108-823f-4bb3-9fad-cf7bf9c76c5a} from 172.10.10.1:10000
+[32mI[21:17:23,462] [300-BroadcastApp]BroadcastApp:[m Received 18310108-823f-4bb3-9fad-cf7bf9c76c5a - MUKIHEFEYA (10) from 172.10.10.1:10000
+[32mI[21:17:23,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=18310108-823f-4bb3-9fad-cf7bf9c76c5a} to 172.10.10.2:10000
+[32mI[21:17:23,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=18310108-823f-4bb3-9fad-cf7bf9c76c5a} to 172.10.10.0:10000
+[32mI[21:17:23,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=144, messagesIn=20, messagesFailed=0, messagesSent=0, timers=60, notifications=0, requests=0, replies=0, customChannelEvents=64}
+
+[32mI[21:17:23,498] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=c5b564a2-91b5-496a-a1bc-4b2e66a3de41} from 172.10.10.2:10000
+[32mI[21:17:23,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c5b564a2-91b5-496a-a1bc-4b2e66a3de41} to 172.10.10.9:10000
+[32mI[21:17:23,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=c5b564a2-91b5-496a-a1bc-4b2e66a3de41} to 172.10.10.0:10000
+[32mI[21:17:23,499] [300-BroadcastApp]BroadcastApp:[m Received c5b564a2-91b5-496a-a1bc-4b2e66a3de41 - KQSEGAGKGC (10) from 172.10.10.2:10000
+[32mI[21:17:24,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=92 (4392)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=63 (3363) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=72 (3726) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=94 (4504) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:24,461] [300-BroadcastApp]BroadcastApp:[m Sending: ffabfd1d-247e-49b7-9379-953aeddfb667 - FRLAVWAACJ (10)
+[32mI[21:17:24,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ffabfd1d-247e-49b7-9379-953aeddfb667} from 172.10.10.1:10000
+[32mI[21:17:24,462] [300-BroadcastApp]BroadcastApp:[m Received ffabfd1d-247e-49b7-9379-953aeddfb667 - FRLAVWAACJ (10) from 172.10.10.1:10000
+[32mI[21:17:24,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ffabfd1d-247e-49b7-9379-953aeddfb667} to 172.10.10.9:10000
+[32mI[21:17:24,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=ffabfd1d-247e-49b7-9379-953aeddfb667} to 172.10.10.2:10000
+[32mI[21:17:24,467] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=146, messagesIn=20, messagesFailed=0, messagesSent=0, timers=61, notifications=0, requests=0, replies=0, customChannelEvents=65}
+
+[32mI[21:17:24,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=22c0f411-4acb-423e-af5b-dbf3ae8142ed} from 172.10.10.2:10000
+[32mI[21:17:24,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=22c0f411-4acb-423e-af5b-dbf3ae8142ed} to 172.10.10.9:10000
+[32mI[21:17:24,499] [300-BroadcastApp]BroadcastApp:[m Received 22c0f411-4acb-423e-af5b-dbf3ae8142ed - UMPZNRVPIO (10) from 172.10.10.2:10000
+[32mI[21:17:24,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=22c0f411-4acb-423e-af5b-dbf3ae8142ed} to 172.10.10.2:10000
+[32mI[21:17:24,666] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=ffabfd1d-247e-49b7-9379-953aeddfb667} from 172.10.10.2:10000
+[32mI[21:17:25,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=94 (4498)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=65 (3469) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=74 (3832) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=94 (4504) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:25,462] [300-BroadcastApp]BroadcastApp:[m Sending: 07bc4f45-5591-4aa5-b4e8-4a624a1c5864 - GRACTGGJVC (10)
+[32mI[21:17:25,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=07bc4f45-5591-4aa5-b4e8-4a624a1c5864} from 172.10.10.1:10000
+[32mI[21:17:25,462] [300-BroadcastApp]BroadcastApp:[m Received 07bc4f45-5591-4aa5-b4e8-4a624a1c5864 - GRACTGGJVC (10) from 172.10.10.1:10000
+[32mI[21:17:25,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=07bc4f45-5591-4aa5-b4e8-4a624a1c5864} to 172.10.10.9:10000
+[32mI[21:17:25,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=07bc4f45-5591-4aa5-b4e8-4a624a1c5864} to 172.10.10.2:10000
+[32mI[21:17:25,468] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=148, messagesIn=20, messagesFailed=0, messagesSent=0, timers=62, notifications=0, requests=0, replies=0, customChannelEvents=66}
+
+[32mI[21:17:25,499] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=1aa3a535-34ad-4f77-ba31-be5f0f37c539} from 172.10.10.2:10000
+[32mI[21:17:25,499] [300-BroadcastApp]BroadcastApp:[m Received 1aa3a535-34ad-4f77-ba31-be5f0f37c539 - DZJUHKWCYL (10) from 172.10.10.2:10000
+[32mI[21:17:25,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=1aa3a535-34ad-4f77-ba31-be5f0f37c539} to 172.10.10.2:10000
+[32mI[21:17:25,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=1aa3a535-34ad-4f77-ba31-be5f0f37c539} to 172.10.10.0:10000
+[32mI[21:17:25,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=07bc4f45-5591-4aa5-b4e8-4a624a1c5864} from 172.10.10.2:10000
+[32mI[21:17:26,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=96 (4604)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=66 (3522) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=76 (3938) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=95 (4557) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:26,461] [300-BroadcastApp]BroadcastApp:[m Sending: b3df3784-9f34-4f4f-9ce2-df4badd95064 - AMXUUOPMUW (10)
+[32mI[21:17:26,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=b3df3784-9f34-4f4f-9ce2-df4badd95064} from 172.10.10.1:10000
+[32mI[21:17:26,461] [300-BroadcastApp]BroadcastApp:[m Received b3df3784-9f34-4f4f-9ce2-df4badd95064 - AMXUUOPMUW (10) from 172.10.10.1:10000
+[32mI[21:17:26,461] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b3df3784-9f34-4f4f-9ce2-df4badd95064} to 172.10.10.2:10000
+[32mI[21:17:26,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=b3df3784-9f34-4f4f-9ce2-df4badd95064} to 172.10.10.0:10000
+[32mI[21:17:26,468] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=150, messagesIn=20, messagesFailed=0, messagesSent=0, timers=63, notifications=0, requests=0, replies=0, customChannelEvents=67}
+
+[32mI[21:17:26,498] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=3671a756-32ca-4231-85d1-c621654b734a} from 172.10.10.2:10000
+[32mI[21:17:26,498] [300-BroadcastApp]BroadcastApp:[m Received 3671a756-32ca-4231-85d1-c621654b734a - LQYXNDDWIW (10) from 172.10.10.2:10000
+[32mI[21:17:26,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3671a756-32ca-4231-85d1-c621654b734a} to 172.10.10.9:10000
+[32mI[21:17:26,499] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=3671a756-32ca-4231-85d1-c621654b734a} to 172.10.10.0:10000
+[32mI[21:17:26,665] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=b3df3784-9f34-4f4f-9ce2-df4badd95064} from 172.10.10.2:10000
+[32mI[21:17:27,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=67 (3575) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=77 (3991) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=97 (4663) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:27,461] [300-BroadcastApp]BroadcastApp:[m Sending: bf0bf77e-a198-457a-9858-47be7309bea2 - LEVWWLGMNP (10)
+[32mI[21:17:27,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=bf0bf77e-a198-457a-9858-47be7309bea2} from 172.10.10.1:10000
+[32mI[21:17:27,462] [300-BroadcastApp]BroadcastApp:[m Received bf0bf77e-a198-457a-9858-47be7309bea2 - LEVWWLGMNP (10) from 172.10.10.1:10000
+[32mI[21:17:27,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=bf0bf77e-a198-457a-9858-47be7309bea2} to 172.10.10.9:10000
+[32mI[21:17:27,463] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=bf0bf77e-a198-457a-9858-47be7309bea2} to 172.10.10.0:10000
+[36mD[21:17:27,463] [9069-HyParView]HyParView:[m Timer Shuffle...
+[36mD[21:17:27,463] [9069-HyParView]HyParView:[m Send ShuffleMessage{activeViewSample=[172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000] | passiveViewSample=[172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.3:10000] | TTL=6} from 172.10.10.1:10000 to 172.10.10.2:10000
+[32mI[21:17:27,468] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=153, messagesIn=20, messagesFailed=0, messagesSent=0, timers=65, notifications=0, requests=0, replies=0, customChannelEvents=68}
+
+[32mI[21:17:28,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=68 (3628) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=78 (4056) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=98 (4716) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:28,462] [300-BroadcastApp]BroadcastApp:[m Sending: 13b0d09d-39cc-42e3-9e83-52851f888789 - HVKUCKMNUN (10)
+[32mI[21:17:28,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=13b0d09d-39cc-42e3-9e83-52851f888789} from 172.10.10.1:10000
+[32mI[21:17:28,462] [300-BroadcastApp]BroadcastApp:[m Received 13b0d09d-39cc-42e3-9e83-52851f888789 - HVKUCKMNUN (10) from 172.10.10.1:10000
+[32mI[21:17:28,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=13b0d09d-39cc-42e3-9e83-52851f888789} to 172.10.10.9:10000
+[32mI[21:17:28,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=13b0d09d-39cc-42e3-9e83-52851f888789} to 172.10.10.2:10000
+[32mI[21:17:28,469] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=155, messagesIn=20, messagesFailed=0, messagesSent=0, timers=66, notifications=0, requests=0, replies=0, customChannelEvents=69}
+
+[32mI[21:17:29,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=69 (3681) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=79 (4109) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=98 (4716) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:29,462] [300-BroadcastApp]BroadcastApp:[m Sending: d2e0c1b9-f7fb-46d6-9d7c-381f195897f6 - IPKKWJUVNF (10)
+[32mI[21:17:29,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=d2e0c1b9-f7fb-46d6-9d7c-381f195897f6} from 172.10.10.1:10000
+[32mI[21:17:29,462] [300-BroadcastApp]BroadcastApp:[m Received d2e0c1b9-f7fb-46d6-9d7c-381f195897f6 - IPKKWJUVNF (10) from 172.10.10.1:10000
+[32mI[21:17:29,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=d2e0c1b9-f7fb-46d6-9d7c-381f195897f6} to 172.10.10.9:10000
+[32mI[21:17:29,463] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=d2e0c1b9-f7fb-46d6-9d7c-381f195897f6} to 172.10.10.0:10000
+[32mI[21:17:29,468] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=157, messagesIn=20, messagesFailed=0, messagesSent=0, timers=67, notifications=0, requests=0, replies=0, customChannelEvents=70}
+
+[32mI[21:17:30,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=70 (3734) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=79 (4109) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=99 (4769) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:30,461] [300-BroadcastApp]BroadcastApp:[m Sending: e010df10-a2f9-45e8-9fff-0b3f1e10b67f - GDVHSENVAC (10)
+[32mI[21:17:30,461] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=e010df10-a2f9-45e8-9fff-0b3f1e10b67f} from 172.10.10.1:10000
+[32mI[21:17:30,462] [300-BroadcastApp]BroadcastApp:[m Received e010df10-a2f9-45e8-9fff-0b3f1e10b67f - GDVHSENVAC (10) from 172.10.10.1:10000
+[32mI[21:17:30,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e010df10-a2f9-45e8-9fff-0b3f1e10b67f} to 172.10.10.9:10000
+[32mI[21:17:30,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=e010df10-a2f9-45e8-9fff-0b3f1e10b67f} to 172.10.10.0:10000
+[32mI[21:17:30,468] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=159, messagesIn=20, messagesFailed=0, messagesSent=0, timers=68, notifications=0, requests=0, replies=0, customChannelEvents=71}
+
+[32mI[21:17:31,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=71 (3787) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=79 (4109) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=100 (4822) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:31,462] [300-BroadcastApp]BroadcastApp:[m Sending: 8b1b83ea-6762-4f76-bf26-b7fb05f59e52 - YWZVYPOBAB (10)
+[32mI[21:17:31,462] [200-EagerPush]EagerPushBroadcast:[m Received GossipMessage{mid=8b1b83ea-6762-4f76-bf26-b7fb05f59e52} from 172.10.10.1:10000
+[32mI[21:17:31,462] [300-BroadcastApp]BroadcastApp:[m Received 8b1b83ea-6762-4f76-bf26-b7fb05f59e52 - YWZVYPOBAB (10) from 172.10.10.1:10000
+[32mI[21:17:31,462] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=8b1b83ea-6762-4f76-bf26-b7fb05f59e52} to 172.10.10.2:10000
+[32mI[21:17:31,463] [200-EagerPush]EagerPushBroadcast:[m Sent GossipMessage{mid=8b1b83ea-6762-4f76-bf26-b7fb05f59e52} to 172.10.10.0:10000
+[32mI[21:17:31,468] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=161, messagesIn=20, messagesFailed=0, messagesSent=0, timers=69, notifications=0, requests=0, replies=0, customChannelEvents=72}
+
+[32mI[21:17:32,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=71 (3787) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=80 (4162) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=101 (4875) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:32,458] [300-BroadcastApp]BroadcastApp:[m Stopping broadcasts
+[32mI[21:17:32,468] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=163, messagesIn=20, messagesFailed=0, messagesSent=0, timers=70, notifications=0, requests=0, replies=0, customChannelEvents=73}
+
+[32mI[21:17:33,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=71 (3787) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=80 (4162) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=101 (4875) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:33,469] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=165, messagesIn=20, messagesFailed=0, messagesSent=0, timers=71, notifications=0, requests=0, replies=0, customChannelEvents=74}
+
+[32mI[21:17:34,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=71 (3787) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=80 (4162) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=101 (4875) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:34,469] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=167, messagesIn=20, messagesFailed=0, messagesSent=0, timers=72, notifications=0, requests=0, replies=0, customChannelEvents=75}
+
+[32mI[21:17:35,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=71 (3787) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=80 (4162) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=101 (4875) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+
+
+[32mI[21:17:35,469] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.0:10000]
+PassiveView: [172.10.10.10:10000, 172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=169, messagesIn=20, messagesFailed=0, messagesSent=0, timers=73, notifications=0, requests=0, replies=0, customChannelEvents=76}
+
+[36mD[21:17:36,298] [9069-HyParView]HyParView:[m Connection from 172.10.10.0:10000 is down, cause: null
+[36mD[21:17:36,298] [9069-HyParView]HyParView:[m Connection to 172.10.10.0:10000 is down cause null
+[36mD[21:17:36,299] [9069-HyParView]HyParView:[m Remove 172.10.10.0:10000 from Active View
+[36mD[21:17:36,299] [9069-HyParView]HyParView:[m Attempt passive view connection with: 172.10.10.10:10000
+[32mI[21:17:36,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=71 (3787) msgIn=0 (0)
+	172.10.10.10:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=80 (4162) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+	172.10.10.0:10000: msgOut=101 (4875) msgIn=0 (0) (old)
+
+
+[32mI[21:17:36,469] [9069-HyParView]HyParView:[m Membership Metrics:
+
+
+Contacts: [172.10.10.0:10000]
+ActiveView: [172.10.10.9:10000, 172.10.10.2:10000, 172.10.10.10:10000]
+PassiveView: [172.10.10.7:10000, 172.10.10.8:10000, 172.10.10.5:10000, 172.10.10.6:10000, 172.10.10.3:10000, 172.10.10.0:10000]
+activeViewMaxSize: 5
+passiveViewMaxSize: 30
+ProtocolMetrics{totalEvents=173, messagesIn=20, messagesFailed=0, messagesSent=0, timers=74, notifications=0, requests=0, replies=0, customChannelEvents=79}
+
+[36mD[21:17:36,730] [9069-HyParView]HyParView:[m Connection to 172.10.10.10:10000 is up
+[36mD[21:17:36,730] [9069-HyParView]HyParView:[m Connection to 172.10.10.10:10000 is down cause java.nio.channels.ClosedChannelException
+[36mD[21:17:36,730] [9069-HyParView]HyParView:[m Remove 172.10.10.10:10000 from Active View
+[36mD[21:17:36,730] [9069-HyParView]HyParView:[m Attempt passive view connection with: 172.10.10.3:10000
+[1;31mE[21:17:36,732] [9069-HyParView]HyParView:[m Message NeighborMessage{isPriority=false} to 172.10.10.10:10000 failed, reason: java.nio.channels.ClosedChannelException
+[36mD[21:17:37,161] [9069-HyParView]HyParView:[m Connection to 172.10.10.3:10000 is up
+[36mD[21:17:37,161] [9069-HyParView]HyParView:[m Connection to 172.10.10.3:10000 is down cause java.nio.channels.ClosedChannelException
+[36mD[21:17:37,161] [9069-HyParView]HyParView:[m Remove 172.10.10.3:10000 from Active View
+[36mD[21:17:37,161] [9069-HyParView]HyParView:[m Attempt passive view connection with: 172.10.10.5:10000
+[1;31mE[21:17:37,162] [9069-HyParView]HyParView:[m Message NeighborMessage{isPriority=false} to 172.10.10.3:10000 failed, reason: java.nio.channels.ClosedChannelException
+[32mI[21:17:37,436] [9069-HyParView]HyParView:[m Channel Metrics:
+In channels:
+	172.10.10.2:10000: msgOut=0 (0) msgIn=98 (4710)
+	172.10.10.2:10000: msgOut=0 (0) msgIn=1 (11) (old)
+	172.10.10.0:10000: msgOut=0 (0) msgIn=20 (964) (old)
+Out channels:
+	172.10.10.9:10000: msgOut=71 (3787) msgIn=0 (0)
+	172.10.10.5:10000: msgOut=0 (0) msgIn=0 (0)
+	172.10.10.2:10000: msgOut=80 (4162) msgIn=0 (0)
+	172.10.10.0:10000: msgOut=1 (11) msgIn=0 (0) (old)
+	172.10.10.0:10000: msgOut=101 (4875) msgIn=0 (0) (old)
+	172.10.10.10:10000: msgOut=1 (12) msgIn=0 (0) (old)
+	172.10.10.3:10000: msgOut=1 (12) msgIn=0 (0) (old)
+
+
+[32mI[21:17:37,458] [300-BroadcastApp]BroadcastApp:[m Exiting...
+[32mI[21:17:37,460] [Thread-1]Main:[m Goodbye
