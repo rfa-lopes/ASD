@@ -1,0 +1,904 @@
+[32mI[22:32:44,102] [main]Main:[m Hello, I am 172.10.10.91:10000
+[32mI[22:32:44,411] [main]BroadcastApp:[m Waiting...
+[32mI[22:32:45,404] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+Out channels:
+[32mI[22:32:45,416] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.90:10000]
+ProtocolMetrics{totalEvents=2, messagesIn=0, messagesFailed=0, messagesSent=0, timers=1, notifications=0, requests=0, replies=0, customChannelEvents=1}
+[32mI[22:32:46,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+Out channels:
+[32mI[22:32:46,416] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.90:10000]
+ProtocolMetrics{totalEvents=4, messagesIn=0, messagesFailed=0, messagesSent=0, timers=2, notifications=0, requests=0, replies=0, customChannelEvents=2}
+[32mI[22:32:47,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+Out channels:
+[36mD[22:32:47,415] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.90:10000]
+[36mD[22:32:47,424] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.90:10000
+[32mI[22:32:47,425] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.90:10000]
+ProtocolMetrics{totalEvents=7, messagesIn=0, messagesFailed=0, messagesSent=0, timers=4, notifications=0, requests=0, replies=0, customChannelEvents=3}
+[32mI[22:32:48,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+Out channels:
+	172.10.10.90:10000: msgOut=1 (29) msgIn=0 (0)
+[32mI[22:32:48,416] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.90:10000]
+ProtocolMetrics{totalEvents=10, messagesIn=0, messagesFailed=0, messagesSent=0, timers=5, notifications=0, requests=0, replies=0, customChannelEvents=5}
+[36mD[22:32:48,696] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:32:48,697] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:32:48,698] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.92:10000, 172.10.10.90:10000]
+[32mI[22:32:49,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=1 (29)
+Out channels:
+	172.10.10.90:10000: msgOut=1 (29) msgIn=0 (0)
+[32mI[22:32:49,413] [300-BroadcastApp]BroadcastApp:[m Starting
+[32mI[22:32:49,416] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.92:10000, 172.10.10.90:10000]
+ProtocolMetrics{totalEvents=15, messagesIn=1, messagesFailed=1, messagesSent=0, timers=6, notifications=0, requests=0, replies=0, customChannelEvents=7}
+[32mI[22:32:49,418] [300-BroadcastApp]BroadcastApp:[m Sending: 5770af5b-14ef-4bd0-bc59-72a7d28f7ae4 - VECQMXMIRG (10)
+[32mI[22:32:49,419] [300-BroadcastApp]BroadcastApp:[m Received 5770af5b-14ef-4bd0-bc59-72a7d28f7ae4 - VECQMXMIRG (10) from 172.10.10.91:10000
+[32mI[22:32:50,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=1 (29)
+Out channels:
+	172.10.10.90:10000: msgOut=1 (29) msgIn=0 (0)
+[32mI[22:32:50,415] [300-BroadcastApp]BroadcastApp:[m Sending: 4afb6235-8592-4618-80d2-5305473b3d2a - TMDTLEEQRM (10)
+[36mD[22:32:50,416] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.92:10000, 172.10.10.90:10000]
+[32mI[22:32:50,415] [300-BroadcastApp]BroadcastApp:[m Received 4afb6235-8592-4618-80d2-5305473b3d2a - TMDTLEEQRM (10) from 172.10.10.91:10000
+[36mD[22:32:50,416] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.90:10000
+[32mI[22:32:50,417] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.92:10000, 172.10.10.90:10000]
+ProtocolMetrics{totalEvents=18, messagesIn=1, messagesFailed=1, messagesSent=0, timers=8, notifications=0, requests=0, replies=0, customChannelEvents=8}
+[36mD[22:32:51,212] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:32:51,213] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:32:51,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.92:10000, 172.10.10.90:10000]
+[32mI[22:32:51,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=2 (68)
+Out channels:
+	172.10.10.90:10000: msgOut=2 (68) msgIn=0 (0)
+[32mI[22:32:51,415] [300-BroadcastApp]BroadcastApp:[m Sending: e5238a43-7eb4-462b-8a03-a6c3397c22ae - PWLNWKUMFS (10)
+[32mI[22:32:51,416] [300-BroadcastApp]BroadcastApp:[m Received e5238a43-7eb4-462b-8a03-a6c3397c22ae - PWLNWKUMFS (10) from 172.10.10.91:10000
+[32mI[22:32:51,416] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.92:10000, 172.10.10.90:10000]
+ProtocolMetrics{totalEvents=22, messagesIn=2, messagesFailed=2, messagesSent=0, timers=9, notifications=0, requests=0, replies=0, customChannelEvents=9}
+[32mI[22:32:52,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=2 (68)
+Out channels:
+	172.10.10.90:10000: msgOut=2 (68) msgIn=0 (0)
+[32mI[22:32:52,416] [300-BroadcastApp]BroadcastApp:[m Sending: c9f13e48-c23d-498d-b711-ea37d6b2958a - RXCINMVMEF (10)
+[32mI[22:32:52,416] [300-BroadcastApp]BroadcastApp:[m Received c9f13e48-c23d-498d-b711-ea37d6b2958a - RXCINMVMEF (10) from 172.10.10.91:10000
+[32mI[22:32:52,416] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.92:10000, 172.10.10.90:10000]
+ProtocolMetrics{totalEvents=24, messagesIn=2, messagesFailed=2, messagesSent=0, timers=10, notifications=0, requests=0, replies=0, customChannelEvents=10}
+[32mI[22:32:53,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=2 (68)
+Out channels:
+	172.10.10.90:10000: msgOut=2 (68) msgIn=0 (0)
+[36mD[22:32:53,416] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.92:10000, 172.10.10.90:10000]
+[32mI[22:32:53,416] [300-BroadcastApp]BroadcastApp:[m Sending: 3931471c-c2f0-4cce-933d-199829d03994 - GSLRSDNZPF (10)
+[36mD[22:32:53,416] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.90:10000
+[32mI[22:32:53,417] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.92:10000, 172.10.10.90:10000]
+ProtocolMetrics{totalEvents=27, messagesIn=2, messagesFailed=2, messagesSent=0, timers=12, notifications=0, requests=0, replies=0, customChannelEvents=11}
+[32mI[22:32:53,417] [300-BroadcastApp]BroadcastApp:[m Received 3931471c-c2f0-4cce-933d-199829d03994 - GSLRSDNZPF (10) from 172.10.10.91:10000
+[36mD[22:32:54,211] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:32:54,212] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:32:54,212] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:32:54,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=3 (117)
+Out channels:
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:32:54,415] [300-BroadcastApp]BroadcastApp:[m Sending: 4e5599ac-c94d-47cc-a8ed-a4dfe7f500d5 - MOWTSZBKFR (10)
+[32mI[22:32:54,416] [300-BroadcastApp]BroadcastApp:[m Received 4e5599ac-c94d-47cc-a8ed-a4dfe7f500d5 - MOWTSZBKFR (10) from 172.10.10.91:10000
+[32mI[22:32:54,417] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=31, messagesIn=3, messagesFailed=3, messagesSent=0, timers=13, notifications=0, requests=0, replies=0, customChannelEvents=12}
+[32mI[22:32:55,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=3 (117)
+Out channels:
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:32:55,416] [300-BroadcastApp]BroadcastApp:[m Sending: 8796f7ab-3473-4ccc-b385-87f9169d2cd7 - LULIQQVCLE (10)
+[32mI[22:32:55,416] [300-BroadcastApp]BroadcastApp:[m Received 8796f7ab-3473-4ccc-b385-87f9169d2cd7 - LULIQQVCLE (10) from 172.10.10.91:10000
+[32mI[22:32:55,417] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=33, messagesIn=3, messagesFailed=3, messagesSent=0, timers=14, notifications=0, requests=0, replies=0, customChannelEvents=13}
+[32mI[22:32:56,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=3 (117)
+Out channels:
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:32:56,416] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:32:56,416] [300-BroadcastApp]BroadcastApp:[m Sending: 483f4a72-d454-438d-a0e1-1db95073fd56 - XCCFDDKVAL (10)
+[36mD[22:32:56,416] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.93:10000
+[32mI[22:32:56,417] [300-BroadcastApp]BroadcastApp:[m Received 483f4a72-d454-438d-a0e1-1db95073fd56 - XCCFDDKVAL (10) from 172.10.10.91:10000
+[32mI[22:32:56,418] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=36, messagesIn=3, messagesFailed=3, messagesSent=0, timers=16, notifications=0, requests=0, replies=0, customChannelEvents=14}
+[36mD[22:32:57,212] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:32:57,212] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:32:57,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.94:10000, 172.10.10.92:10000, 172.10.10.95:10000]
+[32mI[22:32:57,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=4 (166)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:32:57,415] [300-BroadcastApp]BroadcastApp:[m Sending: 6f3e49ee-0a83-4c42-be57-8ad63662bc34 - UUELAQFEGC (10)
+[32mI[22:32:57,416] [300-BroadcastApp]BroadcastApp:[m Received 6f3e49ee-0a83-4c42-be57-8ad63662bc34 - UUELAQFEGC (10) from 172.10.10.91:10000
+[32mI[22:32:57,418] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.94:10000, 172.10.10.92:10000, 172.10.10.95:10000]
+ProtocolMetrics{totalEvents=41, messagesIn=4, messagesFailed=4, messagesSent=0, timers=17, notifications=0, requests=0, replies=0, customChannelEvents=16}
+[32mI[22:32:58,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=4 (166)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:32:58,416] [300-BroadcastApp]BroadcastApp:[m Sending: 0d3c92a8-c6fa-45af-8540-ef034d404326 - FCAMTMWYKG (10)
+[32mI[22:32:58,416] [300-BroadcastApp]BroadcastApp:[m Received 0d3c92a8-c6fa-45af-8540-ef034d404326 - FCAMTMWYKG (10) from 172.10.10.91:10000
+[32mI[22:32:58,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.94:10000, 172.10.10.92:10000, 172.10.10.95:10000]
+ProtocolMetrics{totalEvents=43, messagesIn=4, messagesFailed=4, messagesSent=0, timers=18, notifications=0, requests=0, replies=0, customChannelEvents=17}
+[32mI[22:32:59,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=4 (166)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:32:59,416] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.94:10000, 172.10.10.92:10000, 172.10.10.95:10000]
+[32mI[22:32:59,416] [300-BroadcastApp]BroadcastApp:[m Sending: c6cefd47-63f6-4219-96b1-ce44586d2af2 - XTJJMTAGRM (10)
+[36mD[22:32:59,416] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:32:59,417] [300-BroadcastApp]BroadcastApp:[m Received c6cefd47-63f6-4219-96b1-ce44586d2af2 - XTJJMTAGRM (10) from 172.10.10.91:10000
+[32mI[22:32:59,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.94:10000, 172.10.10.92:10000, 172.10.10.95:10000]
+ProtocolMetrics{totalEvents=46, messagesIn=4, messagesFailed=4, messagesSent=0, timers=20, notifications=0, requests=0, replies=0, customChannelEvents=18}
+[36mD[22:33:00,212] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:00,212] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:00,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:00,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=5 (215)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:00,415] [300-BroadcastApp]BroadcastApp:[m Sending: 25cad7ac-bd1d-464d-acbe-4aafbe9caeed - YKRQSYBBLT (10)
+[32mI[22:33:00,416] [300-BroadcastApp]BroadcastApp:[m Received 25cad7ac-bd1d-464d-acbe-4aafbe9caeed - YKRQSYBBLT (10) from 172.10.10.91:10000
+[32mI[22:33:00,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=51, messagesIn=5, messagesFailed=5, messagesSent=0, timers=21, notifications=0, requests=0, replies=0, customChannelEvents=20}
+[32mI[22:33:01,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=5 (215)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:01,416] [300-BroadcastApp]BroadcastApp:[m Sending: 7e5ffd12-9d1a-4e99-a454-b13ba8563dc5 - JPFMMIGKGP (10)
+[32mI[22:33:01,416] [300-BroadcastApp]BroadcastApp:[m Received 7e5ffd12-9d1a-4e99-a454-b13ba8563dc5 - JPFMMIGKGP (10) from 172.10.10.91:10000
+[32mI[22:33:01,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=53, messagesIn=5, messagesFailed=5, messagesSent=0, timers=22, notifications=0, requests=0, replies=0, customChannelEvents=21}
+[32mI[22:33:02,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=5 (215)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:02,416] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:02,416] [300-BroadcastApp]BroadcastApp:[m Sending: 991f0763-5d3d-4353-9fd5-94196d9eac3a - UFLBZRHDBA (10)
+[36mD[22:33:02,416] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:02,416] [300-BroadcastApp]BroadcastApp:[m Received 991f0763-5d3d-4353-9fd5-94196d9eac3a - UFLBZRHDBA (10) from 172.10.10.91:10000
+[32mI[22:33:02,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=56, messagesIn=5, messagesFailed=5, messagesSent=0, timers=24, notifications=0, requests=0, replies=0, customChannelEvents=22}
+[36mD[22:33:03,212] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:03,212] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:03,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:03,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=6 (264)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=2 (98) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:03,415] [300-BroadcastApp]BroadcastApp:[m Sending: 09805317-95d9-4212-889e-58ec0d099893 - CCYPEYXBFL (10)
+[32mI[22:33:03,416] [300-BroadcastApp]BroadcastApp:[m Received 09805317-95d9-4212-889e-58ec0d099893 - CCYPEYXBFL (10) from 172.10.10.91:10000
+[32mI[22:33:03,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=60, messagesIn=6, messagesFailed=6, messagesSent=0, timers=25, notifications=0, requests=0, replies=0, customChannelEvents=23}
+[32mI[22:33:04,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=6 (264)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=2 (98) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:04,416] [300-BroadcastApp]BroadcastApp:[m Sending: b1519956-368c-4ccc-88bf-ab86ab848760 - TNHONNVTEP (10)
+[32mI[22:33:04,416] [300-BroadcastApp]BroadcastApp:[m Received b1519956-368c-4ccc-88bf-ab86ab848760 - TNHONNVTEP (10) from 172.10.10.91:10000
+[32mI[22:33:04,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=62, messagesIn=6, messagesFailed=6, messagesSent=0, timers=26, notifications=0, requests=0, replies=0, customChannelEvents=24}
+[32mI[22:33:05,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=6 (264)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=2 (98) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:05,416] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:05,416] [300-BroadcastApp]BroadcastApp:[m Sending: f180bcec-6cb1-4795-8cb2-be53f00d80df - YSOMYMSRFO (10)
+[36mD[22:33:05,416] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:05,417] [300-BroadcastApp]BroadcastApp:[m Received f180bcec-6cb1-4795-8cb2-be53f00d80df - YSOMYMSRFO (10) from 172.10.10.91:10000
+[32mI[22:33:05,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=65, messagesIn=6, messagesFailed=6, messagesSent=0, timers=28, notifications=0, requests=0, replies=0, customChannelEvents=25}
+[36mD[22:33:06,211] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:06,212] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:06,212] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:06,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=7 (313)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=3 (147) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:06,416] [300-BroadcastApp]BroadcastApp:[m Sending: 2bcca9bc-899e-4e30-b8fb-e5c6816238ae - UXOFRPMEFU (10)
+[32mI[22:33:06,416] [300-BroadcastApp]BroadcastApp:[m Received 2bcca9bc-899e-4e30-b8fb-e5c6816238ae - UXOFRPMEFU (10) from 172.10.10.91:10000
+[32mI[22:33:06,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=69, messagesIn=7, messagesFailed=7, messagesSent=0, timers=29, notifications=0, requests=0, replies=0, customChannelEvents=26}
+[32mI[22:33:07,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=7 (313)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=3 (147) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:07,416] [300-BroadcastApp]BroadcastApp:[m Sending: 8b9d5110-126d-4f21-98d5-ddd5e8946ef1 - VWZLUMNLSP (10)
+[32mI[22:33:07,417] [300-BroadcastApp]BroadcastApp:[m Received 8b9d5110-126d-4f21-98d5-ddd5e8946ef1 - VWZLUMNLSP (10) from 172.10.10.91:10000
+[32mI[22:33:07,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=71, messagesIn=7, messagesFailed=7, messagesSent=0, timers=30, notifications=0, requests=0, replies=0, customChannelEvents=27}
+[32mI[22:33:08,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=7 (313)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=3 (147) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:08,416] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:08,417] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:08,416] [300-BroadcastApp]BroadcastApp:[m Sending: 4f4767b5-1f44-4915-8bfd-3718ebeb1f75 - JXVQOHQEEP (10)
+[32mI[22:33:08,417] [300-BroadcastApp]BroadcastApp:[m Received 4f4767b5-1f44-4915-8bfd-3718ebeb1f75 - JXVQOHQEEP (10) from 172.10.10.91:10000
+[32mI[22:33:08,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=74, messagesIn=7, messagesFailed=7, messagesSent=0, timers=32, notifications=0, requests=0, replies=0, customChannelEvents=28}
+[36mD[22:33:09,211] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:09,211] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:09,211] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:09,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=8 (362)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=4 (196) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:09,415] [300-BroadcastApp]BroadcastApp:[m Sending: 31bf93d7-b194-4dbf-81cb-1dc8fe223e56 - BVSDPCPSZW (10)
+[32mI[22:33:09,416] [300-BroadcastApp]BroadcastApp:[m Received 31bf93d7-b194-4dbf-81cb-1dc8fe223e56 - BVSDPCPSZW (10) from 172.10.10.91:10000
+[32mI[22:33:09,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=78, messagesIn=8, messagesFailed=8, messagesSent=0, timers=33, notifications=0, requests=0, replies=0, customChannelEvents=29}
+[32mI[22:33:10,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=8 (362)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=4 (196) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:10,416] [300-BroadcastApp]BroadcastApp:[m Sending: bb631063-7a19-432a-a856-7d2c28911104 - DNUGFDGFES (10)
+[32mI[22:33:10,417] [300-BroadcastApp]BroadcastApp:[m Received bb631063-7a19-432a-a856-7d2c28911104 - DNUGFDGFES (10) from 172.10.10.91:10000
+[32mI[22:33:10,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=80, messagesIn=8, messagesFailed=8, messagesSent=0, timers=34, notifications=0, requests=0, replies=0, customChannelEvents=30}
+[32mI[22:33:11,398] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=8 (362)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=4 (196) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:11,416] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:11,416] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:11,416] [300-BroadcastApp]BroadcastApp:[m Sending: e2470ccb-4bd8-41cd-8706-b5ade22fec98 - UJBSTOTXPV (10)
+[32mI[22:33:11,417] [300-BroadcastApp]BroadcastApp:[m Received e2470ccb-4bd8-41cd-8706-b5ade22fec98 - UJBSTOTXPV (10) from 172.10.10.91:10000
+[32mI[22:33:11,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=83, messagesIn=8, messagesFailed=8, messagesSent=0, timers=36, notifications=0, requests=0, replies=0, customChannelEvents=31}
+[36mD[22:33:12,212] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:12,212] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:12,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:12,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=9 (411)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=5 (245) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:12,417] [300-BroadcastApp]BroadcastApp:[m Sending: f86ee1a0-116a-4b09-85a1-a127216776da - RVZRVQANCK (10)
+[32mI[22:33:12,418] [300-BroadcastApp]BroadcastApp:[m Received f86ee1a0-116a-4b09-85a1-a127216776da - RVZRVQANCK (10) from 172.10.10.91:10000
+[32mI[22:33:12,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=87, messagesIn=9, messagesFailed=9, messagesSent=0, timers=37, notifications=0, requests=0, replies=0, customChannelEvents=32}
+[32mI[22:33:13,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=9 (411)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=5 (245) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:13,417] [300-BroadcastApp]BroadcastApp:[m Sending: 4ece22a3-de57-4771-8a03-2451dfbf9d0d - MTYAFXUBCF (10)
+[32mI[22:33:13,418] [300-BroadcastApp]BroadcastApp:[m Received 4ece22a3-de57-4771-8a03-2451dfbf9d0d - MTYAFXUBCF (10) from 172.10.10.91:10000
+[32mI[22:33:13,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=89, messagesIn=9, messagesFailed=9, messagesSent=0, timers=38, notifications=0, requests=0, replies=0, customChannelEvents=33}
+[32mI[22:33:14,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=9 (411)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=5 (245) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:14,417] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:14,417] [300-BroadcastApp]BroadcastApp:[m Sending: e0d2bc62-96d4-4fe8-8a24-b68d80c2526c - TPZOKKCQSI (10)
+[36mD[22:33:14,418] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:14,418] [300-BroadcastApp]BroadcastApp:[m Received e0d2bc62-96d4-4fe8-8a24-b68d80c2526c - TPZOKKCQSI (10) from 172.10.10.91:10000
+[32mI[22:33:14,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=92, messagesIn=9, messagesFailed=9, messagesSent=0, timers=40, notifications=0, requests=0, replies=0, customChannelEvents=34}
+[36mD[22:33:15,212] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:15,213] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:15,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:15,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=10 (460)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=6 (294) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:15,418] [300-BroadcastApp]BroadcastApp:[m Sending: bd43369b-3977-4c18-b834-c094e2bf40fa - TUWRLQDMMC (10)
+[32mI[22:33:15,418] [300-BroadcastApp]BroadcastApp:[m Received bd43369b-3977-4c18-b834-c094e2bf40fa - TUWRLQDMMC (10) from 172.10.10.91:10000
+[32mI[22:33:15,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=96, messagesIn=10, messagesFailed=10, messagesSent=0, timers=41, notifications=0, requests=0, replies=0, customChannelEvents=35}
+[32mI[22:33:16,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=10 (460)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=6 (294) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:16,418] [300-BroadcastApp]BroadcastApp:[m Sending: 9851f923-d5c4-426c-a9b1-5acb7547ae08 - SNXWFLZRXW (10)
+[32mI[22:33:16,418] [300-BroadcastApp]BroadcastApp:[m Received 9851f923-d5c4-426c-a9b1-5acb7547ae08 - SNXWFLZRXW (10) from 172.10.10.91:10000
+[32mI[22:33:16,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=98, messagesIn=10, messagesFailed=10, messagesSent=0, timers=42, notifications=0, requests=0, replies=0, customChannelEvents=36}
+[32mI[22:33:17,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=10 (460)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=6 (294) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:17,418] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:17,418] [300-BroadcastApp]BroadcastApp:[m Sending: f24fb407-efc1-4790-8980-826aabac9a35 - VPKAIIPBSJ (10)
+[36mD[22:33:17,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:17,419] [300-BroadcastApp]BroadcastApp:[m Received f24fb407-efc1-4790-8980-826aabac9a35 - VPKAIIPBSJ (10) from 172.10.10.91:10000
+[32mI[22:33:17,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=101, messagesIn=10, messagesFailed=10, messagesSent=0, timers=44, notifications=0, requests=0, replies=0, customChannelEvents=37}
+[36mD[22:33:18,212] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:18,212] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:18,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:18,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=11 (509)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=7 (343) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:18,418] [300-BroadcastApp]BroadcastApp:[m Sending: 93b06611-06ae-4ce3-9f72-3b081efdbf0d - FHNIOAJZXQ (10)
+[32mI[22:33:18,419] [300-BroadcastApp]BroadcastApp:[m Received 93b06611-06ae-4ce3-9f72-3b081efdbf0d - FHNIOAJZXQ (10) from 172.10.10.91:10000
+[32mI[22:33:18,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=105, messagesIn=11, messagesFailed=11, messagesSent=0, timers=45, notifications=0, requests=0, replies=0, customChannelEvents=38}
+[32mI[22:33:19,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=11 (509)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=7 (343) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:19,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=107, messagesIn=11, messagesFailed=11, messagesSent=0, timers=46, notifications=0, requests=0, replies=0, customChannelEvents=39}
+[32mI[22:33:19,419] [300-BroadcastApp]BroadcastApp:[m Sending: 544d4a0f-3d9e-4161-b745-3599bba7cf99 - IGRDKOLUSC (10)
+[32mI[22:33:19,420] [300-BroadcastApp]BroadcastApp:[m Received 544d4a0f-3d9e-4161-b745-3599bba7cf99 - IGRDKOLUSC (10) from 172.10.10.91:10000
+[32mI[22:33:20,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=11 (509)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=7 (343) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:20,418] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:20,418] [300-BroadcastApp]BroadcastApp:[m Sending: f4df43ab-1ee4-4ca3-a99c-22b2de748892 - XAJFTDZWYA (10)
+[36mD[22:33:20,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:20,419] [300-BroadcastApp]BroadcastApp:[m Received f4df43ab-1ee4-4ca3-a99c-22b2de748892 - XAJFTDZWYA (10) from 172.10.10.91:10000
+[32mI[22:33:20,419] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=110, messagesIn=11, messagesFailed=11, messagesSent=0, timers=48, notifications=0, requests=0, replies=0, customChannelEvents=40}
+[36mD[22:33:21,212] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:21,213] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:21,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:21,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=12 (558)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=8 (392) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:21,419] [300-BroadcastApp]BroadcastApp:[m Sending: d0e04e80-de22-4909-bcd8-718c158fa8b1 - SIUGVSLSII (10)
+[32mI[22:33:21,419] [300-BroadcastApp]BroadcastApp:[m Received d0e04e80-de22-4909-bcd8-718c158fa8b1 - SIUGVSLSII (10) from 172.10.10.91:10000
+[32mI[22:33:21,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=114, messagesIn=12, messagesFailed=12, messagesSent=0, timers=49, notifications=0, requests=0, replies=0, customChannelEvents=41}
+[32mI[22:33:22,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=12 (558)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=8 (392) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:22,419] [300-BroadcastApp]BroadcastApp:[m Sending: 4df61616-3198-4dc6-ad3d-4ffde6a1cd6f - YFVRLSTSUN (10)
+[32mI[22:33:22,419] [300-BroadcastApp]BroadcastApp:[m Received 4df61616-3198-4dc6-ad3d-4ffde6a1cd6f - YFVRLSTSUN (10) from 172.10.10.91:10000
+[32mI[22:33:22,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=116, messagesIn=12, messagesFailed=12, messagesSent=0, timers=50, notifications=0, requests=0, replies=0, customChannelEvents=42}
+[32mI[22:33:23,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=12 (558)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=8 (392) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:23,418] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:23,418] [300-BroadcastApp]BroadcastApp:[m Sending: d63c5170-971e-4b34-a28b-ee23ff758f10 - MUZGXJHOQV (10)
+[36mD[22:33:23,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:23,419] [300-BroadcastApp]BroadcastApp:[m Received d63c5170-971e-4b34-a28b-ee23ff758f10 - MUZGXJHOQV (10) from 172.10.10.91:10000
+[32mI[22:33:23,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=119, messagesIn=12, messagesFailed=12, messagesSent=0, timers=52, notifications=0, requests=0, replies=0, customChannelEvents=43}
+[36mD[22:33:24,213] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:24,213] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:24,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:24,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=13 (607)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=9 (441) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:24,419] [300-BroadcastApp]BroadcastApp:[m Sending: 9092e333-fb8f-4e6b-b41b-85c5b3556473 - OZDQOOUVEJ (10)
+[32mI[22:33:24,419] [300-BroadcastApp]BroadcastApp:[m Received 9092e333-fb8f-4e6b-b41b-85c5b3556473 - OZDQOOUVEJ (10) from 172.10.10.91:10000
+[32mI[22:33:24,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=123, messagesIn=13, messagesFailed=13, messagesSent=0, timers=53, notifications=0, requests=0, replies=0, customChannelEvents=44}
+[32mI[22:33:25,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=13 (607)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=9 (441) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:25,419] [300-BroadcastApp]BroadcastApp:[m Sending: 6f374a1b-ed67-4b65-83da-7d2fd00afb8a - WZJIRHZITO (10)
+[32mI[22:33:25,419] [300-BroadcastApp]BroadcastApp:[m Received 6f374a1b-ed67-4b65-83da-7d2fd00afb8a - WZJIRHZITO (10) from 172.10.10.91:10000
+[32mI[22:33:25,421] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=125, messagesIn=13, messagesFailed=13, messagesSent=0, timers=54, notifications=0, requests=0, replies=0, customChannelEvents=45}
+[32mI[22:33:26,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=13 (607)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=9 (441) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:26,418] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:26,418] [300-BroadcastApp]BroadcastApp:[m Sending: 7aeb67a7-64e0-4c9e-8731-22dded98bf6f - RAGFITPBMJ (10)
+[36mD[22:33:26,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:26,419] [300-BroadcastApp]BroadcastApp:[m Received 7aeb67a7-64e0-4c9e-8731-22dded98bf6f - RAGFITPBMJ (10) from 172.10.10.91:10000
+[32mI[22:33:26,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=128, messagesIn=13, messagesFailed=13, messagesSent=0, timers=56, notifications=0, requests=0, replies=0, customChannelEvents=46}
+[36mD[22:33:27,213] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:27,213] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:27,213] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:27,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=14 (656)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=10 (490) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:27,418] [300-BroadcastApp]BroadcastApp:[m Sending: 5031f1b8-90f6-4d31-ab19-8bc9791f4193 - HNLZPUIZDR (10)
+[32mI[22:33:27,419] [300-BroadcastApp]BroadcastApp:[m Received 5031f1b8-90f6-4d31-ab19-8bc9791f4193 - HNLZPUIZDR (10) from 172.10.10.91:10000
+[32mI[22:33:27,421] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=132, messagesIn=14, messagesFailed=14, messagesSent=0, timers=57, notifications=0, requests=0, replies=0, customChannelEvents=47}
+[32mI[22:33:28,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=14 (656)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=10 (490) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:28,419] [300-BroadcastApp]BroadcastApp:[m Sending: a7ff7dd6-7ede-42dd-b1cf-6aee21a3afa6 - JILHDXUPIX (10)
+[32mI[22:33:28,420] [300-BroadcastApp]BroadcastApp:[m Received a7ff7dd6-7ede-42dd-b1cf-6aee21a3afa6 - JILHDXUPIX (10) from 172.10.10.91:10000
+[32mI[22:33:28,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=134, messagesIn=14, messagesFailed=14, messagesSent=0, timers=58, notifications=0, requests=0, replies=0, customChannelEvents=48}
+[32mI[22:33:29,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=14 (656)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=10 (490) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:29,418] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:29,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:29,419] [300-BroadcastApp]BroadcastApp:[m Sending: 94ba7f9b-8044-4826-af1f-5d9e7f600ee3 - LVLAQVNIGK (10)
+[32mI[22:33:29,420] [300-BroadcastApp]BroadcastApp:[m Received 94ba7f9b-8044-4826-af1f-5d9e7f600ee3 - LVLAQVNIGK (10) from 172.10.10.91:10000
+[32mI[22:33:29,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=137, messagesIn=14, messagesFailed=14, messagesSent=0, timers=60, notifications=0, requests=0, replies=0, customChannelEvents=49}
+[36mD[22:33:30,213] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:30,214] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:30,214] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:30,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=15 (705)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=11 (539) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:30,420] [300-BroadcastApp]BroadcastApp:[m Sending: 2a8eb05f-6a36-4412-b85a-3bcf307c99ee - QVZHJJOONQ (10)
+[32mI[22:33:30,421] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=141, messagesIn=15, messagesFailed=15, messagesSent=0, timers=61, notifications=0, requests=0, replies=0, customChannelEvents=50}
+[32mI[22:33:30,421] [300-BroadcastApp]BroadcastApp:[m Received 2a8eb05f-6a36-4412-b85a-3bcf307c99ee - QVZHJJOONQ (10) from 172.10.10.91:10000
+[32mI[22:33:31,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=15 (705)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=11 (539) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:31,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=143, messagesIn=15, messagesFailed=15, messagesSent=0, timers=62, notifications=0, requests=0, replies=0, customChannelEvents=51}
+[32mI[22:33:31,420] [300-BroadcastApp]BroadcastApp:[m Sending: 221c9979-4f28-4d1f-92b4-aea326c63811 - WDJTNYUXGJ (10)
+[32mI[22:33:31,421] [300-BroadcastApp]BroadcastApp:[m Received 221c9979-4f28-4d1f-92b4-aea326c63811 - WDJTNYUXGJ (10) from 172.10.10.91:10000
+[32mI[22:33:32,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=15 (705)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=11 (539) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:32,418] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:32,418] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:32,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=146, messagesIn=15, messagesFailed=15, messagesSent=0, timers=64, notifications=0, requests=0, replies=0, customChannelEvents=52}
+[32mI[22:33:32,420] [300-BroadcastApp]BroadcastApp:[m Sending: 6ad35d5a-50e8-4e7e-9e86-58ce79ce2c7d - URFYARGFQA (10)
+[32mI[22:33:32,421] [300-BroadcastApp]BroadcastApp:[m Received 6ad35d5a-50e8-4e7e-9e86-58ce79ce2c7d - URFYARGFQA (10) from 172.10.10.91:10000
+[36mD[22:33:33,215] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:33,215] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:33,215] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:33,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=16 (754)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=12 (588) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:33,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=150, messagesIn=16, messagesFailed=16, messagesSent=0, timers=65, notifications=0, requests=0, replies=0, customChannelEvents=53}
+[32mI[22:33:33,421] [300-BroadcastApp]BroadcastApp:[m Sending: 197aa4e5-6b42-42d5-8e1e-96dfbec78838 - YNMFSKLNVF (10)
+[32mI[22:33:33,421] [300-BroadcastApp]BroadcastApp:[m Received 197aa4e5-6b42-42d5-8e1e-96dfbec78838 - YNMFSKLNVF (10) from 172.10.10.91:10000
+[32mI[22:33:34,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=16 (754)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=12 (588) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:34,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=152, messagesIn=16, messagesFailed=16, messagesSent=0, timers=66, notifications=0, requests=0, replies=0, customChannelEvents=54}
+[32mI[22:33:34,421] [300-BroadcastApp]BroadcastApp:[m Sending: 22a28063-429c-41ec-a145-82909fe5a6e6 - AOARORGCRQ (10)
+[32mI[22:33:34,421] [300-BroadcastApp]BroadcastApp:[m Received 22a28063-429c-41ec-a145-82909fe5a6e6 - AOARORGCRQ (10) from 172.10.10.91:10000
+[32mI[22:33:35,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=16 (754)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=12 (588) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:35,419] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:35,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:35,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=155, messagesIn=16, messagesFailed=16, messagesSent=0, timers=68, notifications=0, requests=0, replies=0, customChannelEvents=55}
+[32mI[22:33:35,420] [300-BroadcastApp]BroadcastApp:[m Sending: cb6efdd8-30a8-4eb8-972c-d1f346611fb3 - NDZDZWRPIY (10)
+[32mI[22:33:35,421] [300-BroadcastApp]BroadcastApp:[m Received cb6efdd8-30a8-4eb8-972c-d1f346611fb3 - NDZDZWRPIY (10) from 172.10.10.91:10000
+[36mD[22:33:36,215] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:36,215] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:36,216] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:36,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=17 (803)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=13 (637) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:36,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=159, messagesIn=17, messagesFailed=17, messagesSent=0, timers=69, notifications=0, requests=0, replies=0, customChannelEvents=56}
+[32mI[22:33:36,420] [300-BroadcastApp]BroadcastApp:[m Sending: a5d094cb-b33a-4e95-8734-7e886ce43921 - RMZSIVCZNX (10)
+[32mI[22:33:36,421] [300-BroadcastApp]BroadcastApp:[m Received a5d094cb-b33a-4e95-8734-7e886ce43921 - RMZSIVCZNX (10) from 172.10.10.91:10000
+[32mI[22:33:37,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=17 (803)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=13 (637) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:37,420] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=161, messagesIn=17, messagesFailed=17, messagesSent=0, timers=70, notifications=0, requests=0, replies=0, customChannelEvents=57}
+[32mI[22:33:37,420] [300-BroadcastApp]BroadcastApp:[m Sending: 8a55fcb0-4b93-4d2a-aa2a-feeb7c7aa3af - IMNXEIEFDA (10)
+[32mI[22:33:37,421] [300-BroadcastApp]BroadcastApp:[m Received 8a55fcb0-4b93-4d2a-aa2a-feeb7c7aa3af - IMNXEIEFDA (10) from 172.10.10.91:10000
+[32mI[22:33:38,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=17 (803)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=13 (637) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:38,419] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:38,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:38,421] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=164, messagesIn=17, messagesFailed=17, messagesSent=0, timers=72, notifications=0, requests=0, replies=0, customChannelEvents=58}
+[32mI[22:33:38,421] [300-BroadcastApp]BroadcastApp:[m Sending: 7ab6d146-b118-452e-884f-1ae4ac82b3f2 - VGCCPRFSWU (10)
+[32mI[22:33:38,421] [300-BroadcastApp]BroadcastApp:[m Received 7ab6d146-b118-452e-884f-1ae4ac82b3f2 - VGCCPRFSWU (10) from 172.10.10.91:10000
+[36mD[22:33:39,216] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:39,216] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:39,217] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:39,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=18 (852)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=14 (686) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:39,421] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=168, messagesIn=18, messagesFailed=18, messagesSent=0, timers=73, notifications=0, requests=0, replies=0, customChannelEvents=59}
+[32mI[22:33:39,421] [300-BroadcastApp]BroadcastApp:[m Sending: a052f60c-41f7-4f75-ba4d-42853f38e1f2 - SFOSUESCTP (10)
+[32mI[22:33:39,422] [300-BroadcastApp]BroadcastApp:[m Received a052f60c-41f7-4f75-ba4d-42853f38e1f2 - SFOSUESCTP (10) from 172.10.10.91:10000
+[32mI[22:33:40,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=18 (852)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=14 (686) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:40,421] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=170, messagesIn=18, messagesFailed=18, messagesSent=0, timers=74, notifications=0, requests=0, replies=0, customChannelEvents=60}
+[32mI[22:33:40,421] [300-BroadcastApp]BroadcastApp:[m Sending: 63539104-a6f4-4da1-a00f-aab6354fd63d - NRNKWPPMQO (10)
+[32mI[22:33:40,422] [300-BroadcastApp]BroadcastApp:[m Received 63539104-a6f4-4da1-a00f-aab6354fd63d - NRNKWPPMQO (10) from 172.10.10.91:10000
+[32mI[22:33:41,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=18 (852)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=14 (686) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:41,418] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:41,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:41,421] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=173, messagesIn=18, messagesFailed=18, messagesSent=0, timers=76, notifications=0, requests=0, replies=0, customChannelEvents=61}
+[32mI[22:33:41,422] [300-BroadcastApp]BroadcastApp:[m Sending: deecea86-a179-4423-af55-05c2b628daaa - VFXNAIVSMZ (10)
+[32mI[22:33:41,422] [300-BroadcastApp]BroadcastApp:[m Received deecea86-a179-4423-af55-05c2b628daaa - VFXNAIVSMZ (10) from 172.10.10.91:10000
+[36mD[22:33:42,215] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:42,216] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:42,216] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:42,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=19 (901)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=15 (735) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:42,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=177, messagesIn=19, messagesFailed=19, messagesSent=0, timers=77, notifications=0, requests=0, replies=0, customChannelEvents=62}
+[32mI[22:33:42,422] [300-BroadcastApp]BroadcastApp:[m Sending: 9511fd0f-28fd-460f-bdc5-9e0494aad59f - SBGQTYTTHR (10)
+[32mI[22:33:42,422] [300-BroadcastApp]BroadcastApp:[m Received 9511fd0f-28fd-460f-bdc5-9e0494aad59f - SBGQTYTTHR (10) from 172.10.10.91:10000
+[32mI[22:33:43,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=19 (901)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=15 (735) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:43,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=179, messagesIn=19, messagesFailed=19, messagesSent=0, timers=78, notifications=0, requests=0, replies=0, customChannelEvents=63}
+[32mI[22:33:43,422] [300-BroadcastApp]BroadcastApp:[m Sending: 34e7eda7-4f7e-4de4-b1ba-bd8d7c880a77 - VNWSHXQNHE (10)
+[32mI[22:33:43,422] [300-BroadcastApp]BroadcastApp:[m Received 34e7eda7-4f7e-4de4-b1ba-bd8d7c880a77 - VNWSHXQNHE (10) from 172.10.10.91:10000
+[32mI[22:33:44,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=19 (901)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=15 (735) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:44,418] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:44,418] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:44,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=182, messagesIn=19, messagesFailed=19, messagesSent=0, timers=80, notifications=0, requests=0, replies=0, customChannelEvents=64}
+[32mI[22:33:44,422] [300-BroadcastApp]BroadcastApp:[m Sending: c557a2c9-5cd2-4df7-9f64-d35293b4f9a6 - RXGVKUJQME (10)
+[32mI[22:33:44,423] [300-BroadcastApp]BroadcastApp:[m Received c557a2c9-5cd2-4df7-9f64-d35293b4f9a6 - RXGVKUJQME (10) from 172.10.10.91:10000
+[36mD[22:33:45,216] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:45,216] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:45,217] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:45,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=20 (950)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=16 (784) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:45,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=186, messagesIn=20, messagesFailed=20, messagesSent=0, timers=81, notifications=0, requests=0, replies=0, customChannelEvents=65}
+[32mI[22:33:45,423] [300-BroadcastApp]BroadcastApp:[m Sending: 88366836-6b98-4b6d-833e-c2792db01d6d - WOZRUKRQSC (10)
+[32mI[22:33:45,423] [300-BroadcastApp]BroadcastApp:[m Received 88366836-6b98-4b6d-833e-c2792db01d6d - WOZRUKRQSC (10) from 172.10.10.91:10000
+[32mI[22:33:46,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=20 (950)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=16 (784) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:46,423] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=188, messagesIn=20, messagesFailed=20, messagesSent=0, timers=82, notifications=0, requests=0, replies=0, customChannelEvents=66}
+[32mI[22:33:46,423] [300-BroadcastApp]BroadcastApp:[m Sending: 9d83217f-afcd-4205-b2a1-994448d63908 - OPBTHISNGM (10)
+[32mI[22:33:46,423] [300-BroadcastApp]BroadcastApp:[m Received 9d83217f-afcd-4205-b2a1-994448d63908 - OPBTHISNGM (10) from 172.10.10.91:10000
+[32mI[22:33:47,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=20 (950)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=16 (784) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:47,419] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:47,419] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:47,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=191, messagesIn=20, messagesFailed=20, messagesSent=0, timers=84, notifications=0, requests=0, replies=0, customChannelEvents=67}
+[32mI[22:33:47,422] [300-BroadcastApp]BroadcastApp:[m Sending: eda40290-8e6a-4502-aafe-3e776890a404 - SNECWOWDSS (10)
+[32mI[22:33:47,423] [300-BroadcastApp]BroadcastApp:[m Received eda40290-8e6a-4502-aafe-3e776890a404 - SNECWOWDSS (10) from 172.10.10.91:10000
+[36mD[22:33:48,215] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:48,216] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:48,216] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:48,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=21 (999)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=17 (833) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:48,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=195, messagesIn=21, messagesFailed=21, messagesSent=0, timers=85, notifications=0, requests=0, replies=0, customChannelEvents=68}
+[32mI[22:33:48,422] [300-BroadcastApp]BroadcastApp:[m Sending: 4a12625d-184d-4055-b43e-de9c6a9c1f6d - KKCVSYFOQK (10)
+[32mI[22:33:48,423] [300-BroadcastApp]BroadcastApp:[m Received 4a12625d-184d-4055-b43e-de9c6a9c1f6d - KKCVSYFOQK (10) from 172.10.10.91:10000
+[32mI[22:33:49,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=21 (999)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=17 (833) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:49,414] [300-BroadcastApp]BroadcastApp:[m Stopping broadcasts
+[32mI[22:33:49,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=197, messagesIn=21, messagesFailed=21, messagesSent=0, timers=86, notifications=0, requests=0, replies=0, customChannelEvents=69}
+[32mI[22:33:50,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=21 (999)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=17 (833) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:50,419] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:50,420] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:50,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=200, messagesIn=21, messagesFailed=21, messagesSent=0, timers=88, notifications=0, requests=0, replies=0, customChannelEvents=70}
+[36mD[22:33:51,215] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:51,216] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:51,216] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:51,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=22 (1048)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=18 (882) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:51,423] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=204, messagesIn=22, messagesFailed=22, messagesSent=0, timers=89, notifications=0, requests=0, replies=0, customChannelEvents=71}
+[32mI[22:33:52,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=22 (1048)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=18 (882) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[32mI[22:33:52,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=206, messagesIn=22, messagesFailed=22, messagesSent=0, timers=90, notifications=0, requests=0, replies=0, customChannelEvents=72}
+[32mI[22:33:53,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=22 (1048)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=18 (882) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0)
+[36mD[22:33:53,419] [100-CyclonMembership]CyclonMembership:[m Shuffle: membership[172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[36mD[22:33:53,420] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleRequest 172.10.10.94:10000
+[32mI[22:33:53,422] [100-CyclonMembership]CyclonMembership:[m Membership Metrics:
+Membership: [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+ProtocolMetrics{totalEvents=209, messagesIn=22, messagesFailed=22, messagesSent=0, timers=92, notifications=0, requests=0, replies=0, customChannelEvents=73}
+[36mD[22:33:54,215] [100-CyclonMembership]CyclonMembership:[m Received ShuffleRequest 172.10.10.92:10000
+[36mD[22:33:54,216] [100-CyclonMembership]CyclonMembership:[m Sent ShuffleReply 172.10.10.92:10000
+[36mD[22:33:54,216] [100-CyclonMembership]CyclonMembership:[m Finished Merge resulting in [172.10.10.93:10000, 172.10.10.94:10000, 172.10.10.92:10000]
+[32mI[22:33:54,397] [100-CyclonMembership]CyclonMembership:[m Channel Metrics:
+In channels:
+	172.10.10.92:10000: msgOut=0 (0) msgIn=23 (1097)
+Out channels:
+	172.10.10.93:10000: msgOut=1 (49) msgIn=0 (0)
+	172.10.10.94:10000: msgOut=19 (931) msgIn=0 (0)
+	172.10.10.90:10000: msgOut=3 (117) msgIn=0 (0) (old)
+[32mI[22:33:54,415] [300-BroadcastApp]BroadcastApp:[m Exiting...
+[32mI[22:33:54,417] [Thread-1]Main:[m Goodbye
