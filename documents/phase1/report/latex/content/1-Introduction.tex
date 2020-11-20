@@ -1,0 +1,15 @@
+\section{Introduction}
+%TODO
+%(4 ou 5 paragrafos)
+%Contexto - Porque é que isto é interessante?
+%Contexto muito geral (paragrafo)
+%Contexto menos geral (paragrafo)
+%Contexto especifico (paragrafo)
+%
+%(paragrafo)
+%Estrutura do documento
+No contexto de propagação e disseminação de mensagens,iremos analisar dois tipos de protocolos, os protocolos \textit{gossip} e protocolos baseado em estruturas fixas,neste caso uma broadcast tree.
+
+Os algoritmos de \textit{gossip} são bastante utilizados devido à sua elevada resiliência e distribuem de forma eficaz a carga entre todos os nó se funcionam seleccionando da sua vizinhança um determinado número de nós deforma aleatória para o qual vão enviar uma mensagem. Devido aos problemas de memória associados à escalabilidade destes algoritmos foram criados algoritmos de \textit{partial view}, em que cada nó tem apenas uma visão parcial de todos os nós pertencentes à \textit{membership} e passam a poder apenas escolher dessa \textit{pool}, isto resolve os problemas de escalabilidade mas introduz novas falhas relativamente à tolerância de falhas dos sistemas.Neste artigo vamos apresentar diversos protocolos de \textit{broadcast} e \textit{membership} de variados tipos,iremos falar sobre as suas implementações,alguns estudos sobre eles. Vamos dar a conhecer também algumas métricas de desempenho resultantes de testes com as quais vamos comparar a performance relativa de cada protocolo. Os testes foram desenvolvidos para cada par de algoritmos (Broadcast + Membership) fazendo variar parâmetros tais como o tamanho do \textit{payload} e a taxa de transmissão.
+
+O restante artigo está dividido em quatro partes e da seguinte forma. Na secção 2 são apresentados os protocolos de disseminação e \textit{Partial Membership} escolhidos para estudo e implementação neste artigo, incluindo breves descrições deles e das suas vantagens e desafios bem como breves menções de trabalhos relacionados com os mesmos. Na secção 3 iremos falar de forma um pouco mais aprofundada acerca da implementação de cada um dos protocolos analisados. A secção 4, estará subdividida em três partes, sendo na primeira apresentadas as metodologias de teste utilizadas para avaliar cada protocolo, na segunda os resultados que vieram dos testes realizados e na última teremos uma breve discussão acercas dos resultados obtidos e como os protocolos se comparam entre si. Por último na secção 5 apresentamos as nossas conclusões acerca dos protocolos escolhidos e da sua performance.

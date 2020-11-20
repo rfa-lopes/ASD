@@ -1,0 +1,20 @@
+\section{Conclusions}
+%TODO
+
+%sumário do que apresentamos
+
+%future work
+
+%limitações que o nosso trabalho tem
+
+Concluindo este relatório, através do desenvolvimento deste projecto foi possível aplicar os conhecimentos teóricos adquiridos nas aulas, pôr os mesmos em prática e testa-los numa situação real como no \textit{cluster} do Departamento de Informática.
+
+Os protocolos à base de gossip tem um papel fundamental, no sentido em que deixa de ser necessário fazer \textit{flood} na rede para assegurar que todos os processos nesta, receberam efectivamente a mensagem. Sendo assim este tipo de protocolos, baseia-se na evidência de que é apenas necessário enviar um reduzido numero de mensagens para assegurar a disseminação efectiva de uma mensagem na rede, aumentando assim a disponibilidade e fazendo menos pressão no envio de mensagens num processo.
+
+Relativamente aos protocolos de \textit{Membership}, estes desempenham um papel fundamental, pois tem como papel principal a manutenção e organização da \textit{network overlay} que liga todos os processos, com o objectivo de facultar ao algoritmo de \textit{broadcast} uma vista parcial da rede para ser possível a disseminação de mensagens.
+
+Foi ainda possível concluir, pelos dados estatísticos, que existem certas combinações de protocolos que funcionam melhor do que outras, e que, por exemplo quando o \textit{payload} era aumentado havia uma condensação/pressão maior na rede, levando assim a uma disponibilidade menor, o que é suportado pelos dados estatísticos. 
+
+O \textit{bitrate} é ainda outro factor que é determinante na performance dos testes, a escolha dos diferentes \textit{bitrates} utilizados no teste, não foi a mais adequada visto que a diferença entre eles era ínfima.
+
+Ainda assim, houve algumas limitações na implementação dos algoritmos, levando assim a alguma dificuldade na extracção dos dados estatísticos, mas futuramente seria algo que poderia ser melhorado, como por exemplo no algoritmo EagerPush, relativamente ao tempo em que este devia guardar as mensagens, por razões de complexidade espacial e finalmente aumentar o número de testes utilizando outras combinações de parâmetros com o fim de aumentar a diversidade das métricas avaliadas.

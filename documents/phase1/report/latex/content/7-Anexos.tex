@@ -1,0 +1,94 @@
+\newpage
+
+\begin{appendices}
+
+\lstset{language=Python}
+
+\subsection{Configuration file}
+    \begin{lstlisting}
+        port=10000
+        interface=eth0
+        address=127.0.0.1
+        sample_size=3
+        sample_time=3000
+        protocol_metrics_interval=1000
+        channel_metrics_interval=1000
+        payload_size={PAYLOAD_SIZE}
+        prepare_time=5
+        run_time=60
+        cooldown_time=5
+        broadcast_interval={INTERVAL_RATE}
+        broadcast={BROADCAST_ALG}
+        membership={MEMBERSHIP_ALG}
+        activeMembershipSize=5
+        passiveMembershipSize=30
+        shuffleTime=15000
+        joinTime=1000
+        k=6
+        c=1
+        arwl=6
+        prwl=3
+        ka=3
+        kp=4
+        n=100
+    \end{lstlisting}
+    
+\subsection{Docker info}
+    \begin{lstlisting}
+        Client:
+         Debug Mode: false
+        Server:
+         Containers: 0
+          Running: 0
+          Paused: 0
+          Stopped: 0
+         Images: 380
+         Server Version: 19.03.6
+         Storage Driver: overlay2
+          Backing Filesystem: extfs
+          Supports d_type: true
+          Native Overlay Diff: true
+         Logging Driver: json-file
+         Cgroup Driver: cgroupfs
+         Plugins:
+          Volume: local
+          Network: bridge host ipvlan macvlan null overlay
+          Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+         Swarm: active
+          NodeID: wpj20zepewpo13plsneygvk03
+          Error: rpc error: code = Unknown desc = The swarm does not have a leader. It's possible that too few managers are online. Make sure more than half of the managers are online.
+          Is Manager: true
+          Node Address: 172.30.10.108
+          Manager Addresses:
+           172.30.10.107:2377
+           172.30.10.108:2377
+         Runtimes: runc
+         Default Runtime: runc
+         Init Binary: docker-init
+         containerd version:
+         runc version:
+         init version:
+         Security Options:
+          apparmor
+          seccomp
+           Profile: default
+         Kernel Version: 5.3.0-64-generic
+         Operating System: Ubuntu 19.10
+         OSType: linux
+         Architecture: x86_64
+         CPUs: 24
+         Total Memory: 62.87GiB
+         Name: node8
+         ID:
+          XFNZ:7CU6:2VDG:M4K7:XRMR:WE6A:63WW:FORC:VE2V:MMRA:LDBI:KNVE
+         Docker Root Dir: /var/lib/docker
+         Debug Mode: false
+         Registry: https://index.docker.io/v1/
+         Labels:
+         Experimental: false
+         Insecure Registries:
+          127.0.0.0/8
+         Live Restore Enabled: false
+     \end{lstlisting}
+     
+\end{appendices}

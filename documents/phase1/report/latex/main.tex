@@ -41,7 +41,7 @@
 %\acmDOI{10.1145/1122445.1122456}
 
 %% These commands are for a PROCEEDINGS abstract or paper.
-\acmConference[ASD20/21]{The first project delivery of ASD2021}{2020}{Faculdade de Ciências e Tecnologia, NOVA University of Lisbon, Portugal}
+\acmConference[ASD20/21]{The first project delivery of ASD2021}{2020}{FCT, NOVA University of Lisbon, Portugal}
 \acmBooktitle{The Projects of ASD - first delivery, 2020, Faculdade de Ciências e Tecnologia, NOVA University of Lisbon, Portugal}
 %\acmPrice{15.00}
 %\acmISBN{978-1-4503-XXXX-X/18/06}
@@ -66,6 +66,40 @@
 %% the next command will enable that style.
 %%\citestyle{acmauthoryear}
 
+%%..........................MEUS PACOTES................................
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[toc,page]{appendix}
+\usepackage{listings}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=1
+}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=20mm,
+ right=20mm,
+ top=20mm,
+ bottom=20mm,
+ }
+%%..........................MEUS PACOTES................................
+
 %%
 %% end of the preamble, start of the body of the document source.
 \begin{document}
@@ -82,21 +116,21 @@
 %% "authornote" and "authornotemark" commands
 %% used to denote shared contribution to the research.
 \author{Rodrigo Faria Lopes}
-\authornote{Student number 50435. Rodrigo was responsible for implementing HyParView.}
+\authornote{Student number 50435. Rodrigo foi responsável pela implementação do HyParView e escrita dos scripts para a facilitação de testes automáticos no Cluster.}
 \email{rfa.lopes@campus.fct.unl.pt}
 \affiliation{%
   \institution{MIEI, DI, FCT, UNL}
 }
 
 \author{Miguel Candeias}
-\authornote{Student number 50647. Miguel was responsible for implementing Cyclon.}
+\authornote{Student number 50647. Miguel foi o responsável pela implementação do Cyclon e do Eager Push, assim como do script em python para analizar os logs para gerar as estatísticas experimentais.}
 \email{mb.candeias@campus.fct.unl.pt}
 \affiliation{%
   \institution{MIEI, DI, FCT, UNL}
 }
 
 \author{Salvador Rosa Mendes}
-\authornote{Student number 50503. Salvador was responsible for implementing Plumtree.}
+\authornote{Student number 50503. Salvador desenvolveu a implementação do PlumTree.}
 \email{sr.mendes@campus.fct.unl.pt}
 \affiliation{%
   \institution{MIEI, DI, FCT, UNL}
@@ -114,11 +148,12 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  TODO
+  %TODO: RODRIGO
+  %Primeiro paragrafo - Contexto e objectivos
+  %Segundo paragrafo - O que fizemos em concreto e resultados obtidos
+  Este artigo tem como objetivo a implementação e comparação de alguns algoritmos de Bradcast e Membership que servirão como base de uma aplicação previamente fornecida. O foco deste artigo é testar como funcionam todas as combinações dos algoritmos propostos e avaliar os seus resultados. Os algoritmos que iremos abordar são: HyParView \cite{hyparview} e Cyclon \cite{cyclon} como algoritmos de \textit{Partial Mermbership}, e os algoritmos Plumtree \cite{plumtree} e Eager \cite{hyparview} como algoritmos de \textit{Broadcast}.
   
-  Primeiro paragrafo - Contexto e objectivos
-  
-  Segundo paragrafo - O que fizemos em concreto e resultados obtidos
+  O trabalho desenvolvido começou pelo estudo e implementação dos algoritmos de forma individual utilizando a biblioteca Babel \cite{babel}. Posteriormente foram desenvolvidos testes para cada par de algoritmos (Broadcast + Membership) variando várias parâmetros, tais como o tamanho do payload e a taxa de transmissão. Por fim, os resultados obtidos serão discutidos e avaliados de acordo com os nossos resultados.
 \end{abstract}
 
 
@@ -138,6 +173,8 @@
 \input{content/5-Conclusions}
 
 \input{content/6-References}
+
+\input{content/7-Anexos}
 
 \end{document}
 \endinput

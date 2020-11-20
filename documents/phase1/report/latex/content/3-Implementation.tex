@@ -1,0 +1,411 @@
+\section{Implementation}
+%TODO - Explicar a implementação e possíveis modificações
+%pseudocodigo, etc
+
+%---------------------------------------------
+
+%TODO: Indice sobre os topicos que vao ser abordados
+Nesta secção vamos falar sobre a implementação dos algoritmos. Decidimos dividir esta secção em duas partes de forma semelhante à secção 2, de modo a separar as componentes do projeto.
+
+Na secção 3.1 iremos abordar a implementação dos algoritmos de disseminação (Eager Push e Plumtree), e na secção seguinte, 3.2, serão abordados os algoritmos de \textit{Partial Membership} (HyParView e Cyclon).
+
+\subsection{Epidemic Dissemination Protocols (Broadcast)}
+%TODO: Breve introdução dos protocolos
+
+\subsubsection{Eager Push Gossip}
+%TODO: Descrição geral
+%TODO: Explicação do protocolo e explicação de possíveis modificações
+Através do material leccionado nas aulas, e da dissertação \cite{leitao}, foi possível estudar e implementar o algoritmo.
+
+Este algoritmo é do tipo \textit{gossip}, o que permite não sub carregar o emissor e ao mesmo também condensa menos a \textit{overlay network }quando é necessário enviar mensagens. Através do calculo do parâmetro de \textit{fanout}, cujo o seu valor é o logaritmo do numero actual de vizinhos, é possível assim enviar uma mensagem cujo a probabilidade de chegar a todos os nós no \textit{overlay} é bastante alta. 
+
+A função Init deste protocolo inicializa o estado do processo, e então aguarda pela notificação do protocolo de \textit{membership} para que se possa utilizar o canal. Na função \textit{EagerMessage} é possível então verificar a aplicação prática do envio apenas para um numero reduzido de nós a mensagem que se pretende disseminar na rede.
+
+De modo a ilustrar melhor o comportamento do algoritmo, de seguida apresenta-se o pseudocódigo do mesmo (Algoritmo 1).
+
+\begin{algorithm}
+   \caption{Eager Push Broadcast}
+    \begin{algorithmic}[1]
+      \Function{Init}{myIp}
+        \State myself $\leftarrow$ myIp
+        \State t $\leftarrow$ $\bot$
+        \State neigh $\leftarrow$ \{ \}
+        \State delivered $\leftarrow$ \{ \}
+        \State channelReady $\leftarrow$ False
+	  \EndFunction
+    \paragraph{}
+    
+\Function{EagerMessage}{GossipMessage}
+     \If{GossipMessage $\notin$ delivered}
+         \If{GossipMessage.ttl > -1}
+         \State \textbf{Trigger }DeliverNotifications()
+          \State neigh $\leftarrow$ getNeigh()
+          \State t $\leftarrow$ $\ln$(\#neigh)
+           \If{\#neighbors > 0}
+                gossipTargets $\leftarrow$ RandomSelection(t)
+                
+                 \For{p $\in$ gossipTargets}
+                    \State \textbf{Trigger} Send(GossipMessage, p);
+                    \EndFor
+            \EndIf
+        \EndIf
+        \EndIf
+\EndFunction
+
+\paragraph{}
+
+\Function{BroadcastRequest}{BroadcastRequest}
+    \If{channelReady}
+        \State gossipMessage $\leftarrow$ GossipMessage(request.MsgId, request.Sender, sourceProtocol. request.Payload, ttl)
+        \State \textbf{Trigger} EagerMessage(gossipMessage)
+        \EndIf
+\EndFunction
+	  
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Plumtree}
+%TODO: Descrição geral
+%TODO: Explicação do protocolo e explicação de possíveis modificações
+
+O Plumtree é uma implementação do tipo \textit{gossip} e é uma junção parcial dos algoritmos de \textit{gossip Eager Push} e \textit{Lazy Push}, sendo assim mais equilibrado em termos de recursos e performance.
+No algoritmo é feita uma divisão dos seus \textit{peers}, os \textit{Eager Push Peers} e os \textit{Lazy Push Peers}. 
+Os \textit{Eager Push Peers} são todos os nós que ainda não enviaram uma mensagem repetida e que portanto são beneficiados se for mantida uma comunicação bi-direcional entre eles, os nós pertencentes a este grupo comunicaram posteriormente através de uma forma do algoritmo Eager Push, que consiste em enviar a mensagem recebida para todos os \textit{peers} que pertençam a este grupo.
+Os \textit{Lazy Peers} são nós que devido a terem enviado uma mensagem repetida foram removidos dos \textit{Eager Push Peers} e enviados por parte do receptor da mensagem repetida uma mensagem \textit{Prune} que lhe indica que a mensagem era repetida e que portanto podem remover o nó receptor dos \textit{Eager Push Peers} mantendo-se assim sincronizados. Os nós pertencentes a este grupo serão enviados mais tarde através de uma forma do algoritmo \textit{Lazy Push} uma mensagem, mensagem \textit{Prune},  que apenas contém o ID da mensagem que o emissor possui, estas mensagens não têm obrigatoriamente de sair imediatamente após o nó ser movido para os \textit{Lazy Peers} e por isso de forma a optimizar o processo são enviadas em batches através de um \textit{dispatch protocol}.
+
+O algoritmo implementado e usado nos testes das secções seguintes, foi passado para pseudocódigo (Algoritmo 2) de modo a permitir uma melhor percepção de como este funciona.
+
+\begin{algorithm}
+   \caption{PlumTree}
+    \begin{algorithmic}[1]
+      \Function{Init}{}
+        \State eagerPushPeers $\leftarrow$ \{ \}
+        \State lazyPushPeers $\leftarrow$ \{ \}
+        \State lazyQueue $\leftarrow$ \{ \}
+        \State received $\leftarrow$ \{ \}
+        \State channelReady $\leftarrow$ False
+	  \EndFunction
+    \paragraph{}
+    
+\Function{BroadcastRequest}{Request, sourceProtocol}
+     \If{channelReady}
+        \State gossipMessage $\leftarrow$ GossipMessage(request.MsgId, request.Sender, sourceProtocol. request.Payload, ttl)
+        \State \textbf{Call} eagerPush(gossipMessage, myself, currentProtocolId, channelId)
+         \State lazyPush(gossipMessage, currentProtocolId)
+         \State \textbf{trigger} DeliverNotification
+         \State received $\leftarrow$ $\cup$ request.MsgId
+        \EndIf
+\EndFunction
+
+    \paragraph{}
+
+
+\paragraph{}
+
+\Function{receive}{ProtoMessage, HostFrom, sourceProto, channelId}
+    \If{type(ProtoMessage) = "LazyMessage"}
+        \State \textbf{Call} receive(ProtoMessage, HostFrom, sourceProto, channelId) //Prune Msg
+    \Else
+        \State \textbf{Call} receive(ProtoMessage, HostFrom, sourceProto, channelId)
+    \EndIf
+\EndFunction
+
+    \paragraph{}
+
+\Function{dispatch}{}
+   \For{lazyMessage $\in$ LazyQueue}
+    \State \textbf{trigger} Send(lazyMessage, lazyMessage.Destination)
+    \State LazyQueue $\leftarrow$ LazyQueue  $\setminus$ lazyMessage 
+    \EndFor
+\EndFunction
+
+    \paragraph{}
+
+
+\Function{eagerPush}{GossipMessage, Host, sourceProtocol, channelId}
+     \For{h $\in$ LazyQueue eagerPushPeers $\land$ h $\ne$ myself}
+     \State Send(GossipMessage, h) $\cup$ LazyMessage(h, message.MsgId, HostMyself,sourceProtocol)
+     \State \textbf{call} dispatch()
+     \EndFor
+   
+\EndFunction
+
+    \paragraph{}
+
+
+\Function{lazyPush}{GossipMessage, sourceProtocol)}
+    \For{h $\in$ LazyQueue eagerPushPeers $\land$ h $\ne$ myself}
+    \State lazyQueue $\leftarrow$ lazyQueue
+    \EndFor
+\EndFunction
+	  
+\end{algorithmic}
+\end{algorithm}
+
+
+%---------------------------------------------
+
+\subsection{Partial Membership Protocols (Unstructed Overlay)}
+%TODO: Breve introdução dos protocolos
+
+\subsubsection{HyParView}
+%TODO: RODRIGO
+%TODO: Descrição geral
+%TODO: Explicação do protocolo e explicação de possíveis modificações
+A implementação deste algoritmo foi totalmente inspirada em \cite{hyparview}, tendo este sido implementado de acordo com as instruções do artigo referido.
+
+Inicialmente o protocolo inicia com uma mensagem de \textit{Join} a um elemento aleatório da lista de contactos do novo nó que se quer juntar à rede. O envio desta mensagem tem origem na função \textit{Init} onde também é lá que se inicializam os temporizadores (JoinTimer e ShuffleTimer). Após o envio da mensagem de \textit{Join} o processo espera, durante um período de tempo, por uma mensagem de \textit{JoinReply}, caso a mensagem chegue dentro do tempo definido no \textit{JoinTimer}, este já faz parte da rede e continua o algoritmo normalmente como definido em \cite{hyparview}, desligando o \textit{JoinTimer}. Caso contrário, isto é, o tempo definido para o \textit{JoinTimer} passou, é lançado um processo de selecção de um novo contacto de forma aleatória. Com este mecanismo, caso o novo nó apenas tenha um contacto, este ficará num ciclo infinito à espera que este aceite o sei pedido de \textit{Join}, ao contrário do algoritmo definido em \cite{hyparview} onde caso o contacto não existisse ou estivesse em baixo, este processo terminava. Todo este novo mecanismo de \textit{Join} de um novo nó está presente no Algoritmo 1 HyParView - Parte 1.
+
+Algumas verificações adicionais poderiam ser implementadas para mitigar alguns dos problemas desta solução, algumas delas irão ser referidas na secção 5 como \textit{future work}.
+
+Após o protocolo de \textit{Join} o algoritmo continua o seu processo de adesão do novo nó, espalhando mensagens à vizinhança do contacto de modo a estes saibam da existência de um novo nó na rede.
+
+Todo o algoritmo implementado e usado nos testes das secções seguintes, foi passado para pseudocódigo (Algoritmos 3 a 6) de modo a permitir uma melhor percepção de como este funciona.
+
+\begin{algorithm}
+   \caption{HyparView- Parte 1}
+    \begin{algorithmic}[1]
+      \Function{Init}{}
+        \State n $\leftarrow$ n $\in$ contactsNodes
+        \State Setup Periodic Timer ( JoinTimer, t1 )
+	    \State Setup Periodic Timer ( ShuffleTimer, t2 )
+	    \State Send( Join, n, myself )
+	  \EndFunction
+	    \State
+	  \Function{Receive}{Join, newNode}
+        \If {isfull( activeView )}
+            \State \textbf{trigger} dropRandomElementFromActiveView
+        \EndIf
+        \State \textbf{trigger} addNodeActiveView(newNode)
+        \State Send(JoinReply, newNode, myself)
+        \For{n $\in$ activeView and n $\ne$ newNode}
+            \State Send(ForwardJoin, n, newNode, ARWL, myself)
+        \EndFor
+     \EndFunction
+     \State
+     \Function{Receive}{JoinReply, contactNode}
+        \State \textbf{trigger} addNodeActiveView(newNode)
+        \State Cancel Periodic Timer(JoinTimer, t)
+     \EndFunction
+     \State
+     \Function{Receive}{ForwardJoin, newNode, ttl, sender}
+        \If {ttl==0 || \#activeView==0}
+            \State \textbf{trigger} addNodeActiveView(newNode)
+        \Else
+            \If {ttl==PRWL}
+                \State \textbf{trigger} addNodePassiveView(newNode)
+            \EndIf
+            \State n $\leftarrow$ n $\in$ activeView and n $\ne$ sender
+            \State Send(ForwardJoin, n, newNode, ttl-1, myself)
+        \EndIf
+     \EndFunction
+     \State
+     \Function{dropRandomElementFromActiveView}{}
+        \State n $\leftarrow$ n $\in$ activeView
+        \State Send(Disconnect, n, myself)
+        \State activeView $\leftarrow$ activeView $\setminus$ $\{$n$\}$
+        \State passiveView $\leftarrow$ passiveView $\cup$ $\{$n$\}$
+     \EndFunction
+     \State
+     \Function{addNodeActiveView}{node}
+        \If {node $\ne$ myself and node $\notin$ activeView}
+            \If {isfull( activeView )}
+                \State \textbf{trigger} dropRandomElementFromActiveView
+            \EndIf
+            \State activeView $\leftarrow$ activeView $\cup$ $\{$n$\}$
+        \EndIf
+     \EndFunction
+     \State
+     \Function{addNodePassiveView}{node}
+        \If {node $\ne$ myself and node $\notin$ activeView and node $\notin$ passiveView}
+            \If {isfull( passiveView )}
+                \State n $\leftarrow$ n $\in$ passiveView
+                \State passiveView $\leftarrow$ passiveView $\setminus$ $\{$n$\}$
+            \EndIf
+            \State passiveView $\leftarrow$ passiveView $\cup$ $\{$node$\}$
+        \EndIf
+     \EndFunction
+    
+\end{algorithmic}
+\end{algorithm}
+%--------------------------Continuação (nao cabia na página)
+\begin{algorithm}
+   \caption{HyParView - Parte 2}
+    \begin{algorithmic}[1]
+     \Function{Receive}{Disconnect, peer}
+        \If {peer $\in$ activeView}
+            \State activeView $\leftarrow$ activeView $\setminus$ $\{$peer$\}$
+            \State \textbf{trigger} addNodePassiveView(peer)
+        \EndIf
+     \EndFunction
+     \State
+    \Function{Receive}{Neighbor, peer, isPriority}
+        \If {isPriority}
+            \State \textbf{trigger} addNodeActiveView(peer)
+        \Else
+            \If {isfull(activeView)}
+                \State Send(Reject, peer, myself)
+            \Else
+                \State passiveView $\leftarrow$ passiveView $\setminus$ $\{$peer$\}$
+			    \State \textbf{trigger} addNodeActiveView(peer)
+            \EndIf
+        \EndIf
+     \EndFunction
+     \State
+     \Function{Receive}{Reject, peer}
+        \State passiveView $\leftarrow$ passiveView $\setminus$ $\{$peer$\}$
+        \State \textbf{trigger} attemptPassiveViewConnection
+        \State passiveView $\leftarrow$ passiveView $\cup$ $\{$peer$\}$
+     \EndFunction
+     \State
+     \Function{Receive}{Shuffle, ttl, passiveViewSample, activeViewSample, peer}
+        \If {ttl - 1 == 0 and \#activeView > 1}
+            \State n $\leftarrow$ n $\in$ activeView and n $\ne$ peer
+            \State Send(Shuffle, ttl - 1, n, myself)
+        \Else
+            \State sample $\leftarrow$ \textbf{trigger} getSample(passiveView, \#passiveViewSample)
+            \State Send(ShuffleReply, sample, peer, myself)
+        \EndIf
+        \State sample $\leftarrow$ passiveViewSample $\cup$ activeViewSample
+	    \State \textbf{trigger} integrateElementsIntoPassiveView(samples)
+     \EndFunction
+     \State
+     \Function{Receive}{ShuffleReply, sample, peer}
+        \State \textbf{trigger} integrateElementsIntoPassiveView(samples)
+     \EndFunction
+     
+     \Function{integrateElementsIntoPassiveView}{sample}
+        \State sample $\leftarrow$ sample $\setminus$ $\{$activeView $\cup$ passiveView $\cup$ $\{$myself$\}$ $\}$
+        \If {\#passiveView + \#sample > passiveViewMaxSize}
+            \State \textbf{trigger} removeRandomElements(passiveView, \#sample)
+        \EndIf
+        \State passiveView $\leftarrow$ passiveView $\cup$ sample
+     \EndFunction
+     \State
+     \Function{JoinTimer}{}
+        \State n $\leftarrow$ n $\in$ contactsNodes
+        \State Send(Join, n, myself)
+     \EndFunction
+     
+\end{algorithmic}
+\end{algorithm}
+
+%--------------------------Continuação (nao cabia na página)
+\begin{algorithm}
+   \caption{HyParView - Parte 3}
+    \begin{algorithmic}[1]
+    
+    \Function{attemptPassiveViewConnection}{}
+        \If {\#passiveView > 0}
+            \If {\#activeView == 0}
+                \State isPriority = true
+            \Else
+                \State isPriority = false
+            \EndIf
+            \State n $\leftarrow$ n $\in$ passiveView
+            \State passiveView $\leftarrow$ passiveView $\setminus$ $\{$n$\}$
+            \State \textbf{trigger} addNodeActiveView(newNode)
+            \State Send(Neighbor, isPriority, n, myself)
+        \EndIf
+     \EndFunction
+     \State
+    \Function{ShuffleTimer}{}
+        \If{\#activeView > 0}
+            \State aSample $\leftarrow$ \textbf{trigger} getSample(activeView, KA)
+            \State pSample $\leftarrow$ \textbf{trigger} getSample(passiveView, KP)
+            \State n $\leftarrow$ n $\in$ activeView
+            \State Send(Shuffle, aSample, pSample, n, myself)
+        \EndIf
+     \EndFunction
+     \State
+     \Function{getSample}{set, size}
+        \State retult $\leftarrow$ $\{$ $\}$
+        \For{i=0 \textbf{to} size-1}
+            \State n $\leftarrow$ $\{$n$\}$ $\in$ set
+            \State result $\leftarrow$ $\{$result$\}$ $\cup$ n
+        \EndFor
+     \EndFunction
+    
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsubsection{Cyclon}
+%TODO: Descrição geral
+%TODO: Explicação do protocolo e explicação de possíveis modificações
+
+A implementação deste algoritmo, foi baseada no material de apoio do Cyclon que foi leccionado na cadeira, e também respeitando algumas propriedades encontradas na dissertação \cite{leitao} e finalmente o artigo \cite{cyclon}
+
+O primeiro passo de execução do algoritmo, consiste em, verificar se quando o processo que se pretende juntar ao \textit{overlay} tem algum nó conhecido dentro deste, então este será a o primeiro vizinho do mais recente processo. Este processo ocorre na função init. Como explicado na secção anterior, nesta implementação do protocolo decidimos não validar se o contacto conhecido dentro do \textit{overlay} ainda existia ou não, isto deve-se ao facto de como o protocolo recorre a um procedimento periódico, que é este o responsável pela manutenção do \textit{overlay} em termos de frescura de de processos validos, como irá ser explicado mais adiante, garantindo assim que o contacto invalido será esquecido.
+
+Como dito anteriormente, a função de \textit{shuffle }que ocorre periodicamente é a responsável pela manutenção do \textit{overlay}, inicialmente esta função incrementa a idade de todos os processos que se encontram na vizinhança de um nó, após este incremento, é então eleito o nó mais antigo dentro da vizinhança de um processo, e temporariamente  retira-se o mesmo e procede-se à tentativa de comunicação com este.
+
+A função apresentada na linha 29 no pseudo codigo do algoritmo, é chamada quando um nó vizinho do processo, pede uma amostra da vizinhança actual para poder actualizar a sua. Esta função assim como a que está representada na linha 26, terminam sempre numa chamada a um procedimento chamado \textit{"Merge Views"}. Este procedimento fundamental do algoritmo, sendo este o responsável pela actualização da nova vizinhança do processo onde este procedimento foi despoletado, este consiste em analisar para cada nó na vizinhança que foi enviada por um vizinho, se o nó já existe na vizinhança, caso exista e este tiver uma \textit{timestamp} mais recente, actualiza-se a vizinhança. Se o nó não existir e houver espaço na vizinhança, apenas se insere o nó nesta, caso contrario tenta-se escolher um nó que esteja contido na vizinhança recebida e na vizinhança do nó onde está a correr o procedimento, caso não seja possível, então finalmente escolhe-se um nó da vizinhança onde está a correr o procedimento, retira-se o mesmo, e insere-se o nó da vizinhança recebida.
+
+De seguida apresenta-se o pseudocódigo do algoritmo, de maneira a ilustrar o funcionamento do mesmo (algoritmo 4).
+
+
+\begin{algorithm}
+   \caption{Cyclon}
+    \begin{algorithmic}[1]
+      \Function{Init}{contactNode, timer}
+        \State \textbf{trigger} CreateNotification(channelId)
+        \If{contactNode $\ne$ $\bot$}
+            \State neigh $\leftarrow$ neingh $\cup$ \{ \}
+        \EndIf
+        
+        \State Setup Periodic Timer Shuffle(timer)
+	  \EndFunction
+	          \paragraph{}
+
+	  \Function{Shuffle}{}
+	   \If{\#neigh > 0}
+	    \For{(p, age) $\in$ neigh}
+            \State neigh $\leftarrow$ neingh $\setminus$ (p,age) $\cup$ (p,age +1)
+
+        \EndFor
+            \State  oldest $\leftarrow$ GetOldest(neigh)
+            \State  neigh $\leftarrow$ neigh $\setminus$ oldest
+            \State sample $\leftarrow$ randomSubset(neigh)
+            \State \textbf{Trigger} Send (ShuffleRequest,p,sample $\cup$ \{(myself,0) \})
+        \EndIf
+        \EndFunction
+        \paragraph{}
+        \Function{Receive}{ShuffleReply, s, PeerSample}
+            \State Call mergeViews(peerSample, sample)
+        \EndFunction
+                \paragraph{}
+
+         \Function{Receive}{ShuffleRequest, s, PeerSample}
+            \State temporarySample $\leftarrow$ temporarySample $\cup$ neigh
+            \State \textbf{Trigger }Send(ShuffleReply, s, temporarySample)
+            \State Call mergeViews(peerSample,temporarySample)
+        \EndFunction
+                \paragraph{}
+
+        \Function{Merge Views}{peerSample, mySample}
+           \For{(p, age) $\in$ peerSample}
+            \If{(p', age') $\in$ neigh $\land$ p = p'}
+                \If{age'> age}
+                    \State neigh $\leftarrow$ (neigh $\setminus$(p', age')) $\cup$ \{(p, age) \})  \EndIf
+                \Else
+                    \If{\#neigh< sampleSize}
+                        \State neigh $\leftarrow$ neigh $\cup$ \{(p, age)\})  
+                    
+                     \Else
+                        \State (x,age’):(x,age') $\cup$ neigh $\land$ (x, age'') $\cup$ mySample
+                        \If{\#neigh< sampleSize}
+                            \State (x, age') $\leftarrow$ (x,age’):(x, age’) $\cup$ neigh
+                            \EndIf
+                        \State neigh $\leftarrow$ (neigh $\setminus$ (x, age')) $\cup$ \{(p, age)\})
+                    \EndIf
+                \EndIf
+                    
+                   
+                        
+                   
+            \EndFor
+        \EndFunction
+	  
+\end{algorithmic}
+\end{algorithm}

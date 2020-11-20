@@ -1,0 +1,72 @@
+\section{Related Work}
+%TODO - Explicar os algoritmos
+%2 Subseccoes
+%    1-Overlay protocols
+%    2-Broadcast gossip
+%    3(opcional) - Discutir outros estudos praticos destas soluções (poque é que o nosso é melhor?)
+
+%---------------------------------------------
+
+%TODO: Indice sobre os topicos que vao ser abordados
+%RODRIGO
+Nesta secção começamos por explicar os algoritmos de disseminação escolhidos para este artigo, tais como o Eager Push e o Plumtree, falando um pouco sobre cada um deles.
+Depois é feita outra descrição semelhante, mas desta vez para os algoritmos de \textit{Partial Membership}, como o HyParView e o Cyclon.
+
+\subsection{Epidemic Dissemination Protocols}
+%TODO: Breve introdução dos protocolos
+
+\subsubsection{Eager Push Gossip}
+%TODO: Descrição geral
+%TODO: Explicação do protocolo e explicação de possíveis modificações
+O estudo deste algoritmo, teve como bases a seguinte dissertação \cite{leitao}, para alem do material leccionado nas aulas.
+
+O Eager Push é uma estratégia de \textit{gossip}, cujo um dos seus objectivos é assegurar que uma mensagem seja disseminada por toda a rede, fazendo assim chegar a mensagem a todos os processos nesta, mas apenas enviando um reduzido numero de mensagens, que a pouco e pouco vão começando a chegar a todos os processos. Por consequência disto, a condensação do \textit{overlay} torna-se menos pesado, tornado assim a eficiência de entrega de mensagens maior, mas até um certo ponto, sendo este um dos problemas que irá ser discutidos mais adiante no relatório.
+
+Uma das preocupações que tivemos com o protocolo, mas não foi implementado com sucesso, foi um mecanismo para tentar poupar recursos de memória, mais concretamente a nível das mensagens que o algoritmo guarda para não estar constantemente a enviar uma mensagem que já tenham chegado a todos os processos. O mecanismo passaria por tentar limpar o armazenamento das mensagens após x tempo, mas na implementação houve o problema do algoritmo estar a enviar duplicados, fazendo assim diminuir a performance deste.
+
+Os detalhes da implementação deste protocolo serão explicados mais à frente na secção 3.1.1.
+
+
+\subsubsection{Plumtree}
+%TODO: Descrição geral
+%TODO: Explicação do protocolo e explicação de possíveis modificações
+
+Toda a informação respetivamente ao Plumtree e a sua implementação foi baseado no artigo \cite{plumtree}.
+O Plumtree foi desenvolvido com o intuito de criar um meio termo entre as vantagens e desvantagens de \textit{gossip Protocols} e \textit{Broadcast Trees} de modo a conseguir uma implementação com baixa complexidade e \textit{overhead} em termos mensagens e uma alta confiabilidade. Apesar de em testes e simulações o Plumtree ter apresentado uma boa capacidade de escalabilidade e rápida recuperação de falhas, este apresenta também uma performance reduzida quando existe mais do que um nó propagador de mensagens na rede.
+No Plumtree o envio de mensagens é feito maioritariamente através de \textit{push gossip}, sendo efetuado Eager Push nos ramos da árvore e \textit{lazy push} nas restantes ligações de modo a garantir a confiabilidade do sistema.
+%---------------------------------------------
+
+\subsection{Partial Membership Protocols}
+%TODO: Breve introdução dos protocolos
+
+\subsubsection{HyParView}
+%RODRIGO
+%Descrição geral
+%Explicação do protocolo e explicação de possíveis modificações
+Todo o estudo deste algoritmo foi baseado no artigo \cite{hyparview}, tendo sido aplicadas melhorias ao atual algoritmo. 
+
+A melhoria proposta tem como objetivo desenvolver um pouco mais o protocolo de \textit{Join} do algoritmo proposto em \cite{hyparview}. Este inicialmente apenas requer que o membro que se queira juntar à rede, tenha conhecimento de um único nó já existente na mesma, fazendo um \textit{Join Request} a este e assumindo que corre tudo como planeado, o novo nó entra na visão ativa do nó de contacto, fazendo com que o novo nó entre na rede como um novo membro da mesma.
+
+Esta solução, bastante básica, requer um pensamento mais critico para criar uma solução mais robusta e fiável. Se levantarmos questões tais como: "Se o meu contacto na altura estiver em baixo?" rapidamente percebemos que a solução inicialmente proposta não será a ideal. Foi então que decidimos implementar um protocolo mais robusto que visa ir ao encontro destes problemas.
+
+Agora, para um novo nó se juntar à rede de membros, poderá não só inserir um contacto, mas sim um conjunto de contactos, que, de forma aleatória, serão escolhidos um por um para serem o contacto directo do novo nó. Isto irá mitigar o problema de o nosso contacto na altura do \textit{Join Request} estar em baixo, porque caso isso acontece, iremos de forma aleatória escolher outro contacto do nosso conjunto, havendo por isso uma maior probabilidade de sucesso na entrada do novo membro na rede.
+
+Os detalhes da implementação deste protocolo serão explicados mais à frente na secção 3.2.1.
+
+\subsubsection{Cyclon}
+%TODO: Descrição geral
+%TODO: Explicação do protocolo e explicação de possíveis modificações
+Este algoritmo foi estudado com base na seguinte dissertação \cite{leitao} e no seguinte artigo \cite{cyclon}.
+
+O funcionamento deste, é baseado na estratégia de guardar apenas uma vista parcial da vizinhança de um processo, invés deste conhecer todos os nós participantes na \textit{overlay network}. Adicionalmente, quando um qualquer nó pretende juntar-se ao \textit{overlay}, este tem também a possibilidade de adicionar um contacto a priori existente na rede, ou não.
+
+Apesar de não ter sido implementado, uma das possíveis maneiras de melhorar a escalabilidade do protocolo teria passado por, durante a inicialização deste, sempre que um processo pretenda tentar comunicar com um nó cujo a sua vizinhança esteja cheia, o protocolo poderia ter também a opção de tentar comunicar com outros nós existentes na rede até conseguir obter um nó com capacidade de adicionar um vizinho.
+
+Para a \textit{overlay network} ser prestável, poder suportar uma rápida disseminação de mensagens e ser altamente tolerante a falhas, o Cyclon oferece ainda fortes garantias das seguintes enumeradas relativamente à \textit{overlay network}:
+    \begin{itemize}
+        \item Conectividade 
+        \item Grau de distribuição 
+        \item Precisão
+    \end{itemize}
+
+Os detalhes de como funciona a estratégia de manutenção da vizinhança do protocolo, e a implementação deste serão explicados mais à frente na secção 3.2.2.
