@@ -20,19 +20,19 @@ import java.io.IOException;
 import java.util.*;
 
 /*Made by Rodrigo*/
-public class MultiPaxos extends GenericProtocol {
+public class Paxos extends GenericProtocol {
 
     private static final Logger logger = LogManager.getLogger(MultiPaxos.class);
 
     //Protocol information, to register in babel
-    public final static short PROTOCOL_ID = 9021;
-    public final static String PROTOCOL_NAME = "Multi-Paxos";
+    public final static short PROTOCOL_ID = 9020;
+    public final static String PROTOCOL_NAME = "Paxos";
 
     private Host myself;
     private int joinedInstance;
     private List<Host> membership;
 
-    public MultiPaxos(Properties properties) throws IOException, HandlerRegistrationException {
+    public Paxos(Properties properties) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
 
         joinedInstance = -1; //-1 means we have not yet joined the system

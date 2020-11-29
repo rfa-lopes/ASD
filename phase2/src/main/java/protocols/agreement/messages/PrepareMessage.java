@@ -8,7 +8,7 @@ import java.io.IOException;
 /*Made by Rodrigo*/
 public class PrepareMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 9021;
+    public final static short MSG_CODE = 9022;
 
     private final int sequenceNumber;
 
