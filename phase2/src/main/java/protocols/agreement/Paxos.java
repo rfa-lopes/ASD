@@ -13,7 +13,6 @@ import pt.unl.fct.di.novasys.network.data.Host;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocols.statemachine.notifications.ChannelReadyNotification;
-import protocols.agreement.notifications.DecidedNotification;
 import protocols.agreement.requests.ProposeRequest;
 
 import java.io.IOException;
@@ -31,21 +30,23 @@ public class Paxos extends GenericProtocol {
     private Host myself;
     private int joinedInstance;
     private List<Host> membership;
+    private UUID maxUUID;
 
     public Paxos(Properties properties) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
 
         joinedInstance = -1; //-1 means we have not yet joined the system
         membership = null;
+        maxUUID = new UUID(0,1); //TODO: How this works (UUID)?
 
-        /*--------------------- Register Timer Handlers ----------------------------- */
+        /* Register Timer Handlers ----------------------------- */
 
-        /*--------------------- Register Request Handlers --------------------------- */
+        /* Register Request Handlers --------------------------- */
         registerRequestHandler(ProposeRequest.REQUEST_ID, this::uponProposeRequest);
         registerRequestHandler(AddReplicaRequest.REQUEST_ID, this::uponAddReplica);
         registerRequestHandler(RemoveReplicaRequest.REQUEST_ID, this::uponRemoveReplica);
 
-        /*--------------------- Register Notification Handlers ---------------------- */
+        /* Register Notification Handlers ---------------------- */
         subscribeNotification(ChannelReadyNotification.NOTIFICATION_ID, this::uponChannelCreated);
         subscribeNotification(JoinedNotification.NOTIFICATION_ID, this::uponJoinedNotification);
     }
@@ -54,6 +55,8 @@ public class Paxos extends GenericProtocol {
     public void init(Properties props) {
         //Nothing to do here, we just wait for events from the application or agreement
     }
+
+    /*----------------------------------------NOTIFICATIONS------------------------------------------------*/
 
     //Upon receiving the channelId from the membership, register our own callbacks and serializers
     private void uponChannelCreated(ChannelReadyNotification notification, short sourceProto) {
@@ -65,29 +68,19 @@ public class Paxos extends GenericProtocol {
         // Allows this protocol to receive events from this channel.
         registerSharedChannel(cId);
 
-        /*---------------------- Register Message Serializers ---------------------- */
+        /* Register Message Serializers ---------------------- */
         registerMessageSerializer(cId, BroadcastMessage.MSG_ID, BroadcastMessage.serializer);
         registerMessageSerializer(cId, PrepareMessage.MSG_CODE, PrepareMessage.serializer);
         registerMessageSerializer(cId, PrepareOkMessage.MSG_CODE, PrepareOkMessage.serializer);
-        //TODO
+        //TODO: registerMessageSerializer
 
-        /*---------------------- Register Message Handlers -------------------------- */
-        //TODO
-
+        /* Register Message Handlers -------------------------- */
         try {
-            registerMessageHandler(cId, BroadcastMessage.MSG_ID, this::uponBroadcastMessage, this::uponMsgFail);
+            registerMessageHandler(cId, PrepareMessage.MSG_CODE, this::uponPrepareMessage, this::uponMsgFail);
+            registerMessageHandler(cId, PrepareOkMessage.MSG_CODE, this::uponPrepareOkMessage, this::uponMsgFail);
+            //TODO: registerMessageHandler
         } catch (HandlerRegistrationException e) {
             throw new AssertionError("Error registering message handler.", e);
-        }
-    }
-
-    private void uponBroadcastMessage(BroadcastMessage msg, Host host, short sourceProto, int channelId) {
-        if(joinedInstance >= 0 ){
-            //Obviously your agreement protocols will not decide things as soon as you receive the first message
-            triggerNotification(new DecidedNotification(msg.getInstance(), msg.getOpId(), msg.getOp()));
-        } else {
-            //We have not yet received a JoinedNotification, but we are already receiving messages from the other
-            //agreement instances, maybe we should do something with them...?
         }
     }
 
@@ -98,11 +91,39 @@ public class Paxos extends GenericProtocol {
         logger.info("Agreement starting at instance {},  membership: {}", joinedInstance, membership);
     }
 
+    /*----------------------------------------MESSAGES HANDLERS------------------------------------------------*/
+
+    private void uponPrepareOkMessage(PrepareOkMessage msg, Host host, short sourceProto, int channelId) {
+        //TODO: uponPrepareOkMessage
+    }
+
+    private void uponPrepareMessage(PrepareMessage msg, Host host, short sourceProto, int channelId) {
+        //Each acceptor that receives the PREPARE message looks at the ID in the message and decides
+        UUID msgUUID = msg.getOpId();
+
+        //Is this ID bigger than any round I have previously received?
+        if(msgUUID.compareTo(maxUUID) > 0){
+            //store the ID number, max_id = ID
+            //respond with a PrepareOk message
+            maxUUID = msgUUID;
+            PrepareOkMessage prepareMessage = new PrepareOkMessage(msgUUID);
+            sendMessage(prepareMessage, host);
+        }else{
+            /*do not respond (or respond with a "fail" message)*/
+        }
+    }
+
+    /*----------------------------------------REQUESTS------------------------------------------------*/
+
     private void uponProposeRequest(ProposeRequest request, short sourceProto) {
+        /* A proposer receives a consensus request for a VALUE from a client.
+        It creates a unique proposal number, ID, and sends a PREPARE(ID)
+        message to at least a majority of acceptors.*/
+
         logger.debug("Received " + request);
-        BroadcastMessage msg = new BroadcastMessage(request.getInstance(), request.getOpId(), request.getOperation());
+        PrepareMessage prepareMessage = new PrepareMessage(request.getOpId());
         logger.debug("Sending to: " + membership);
-        membership.forEach(h -> sendMessage(msg, h));
+        membership.forEach(h -> sendMessage(prepareMessage, h));
     }
 
     private void uponAddReplica(AddReplicaRequest request, short sourceProto) {
@@ -118,6 +139,8 @@ public class Paxos extends GenericProtocol {
         //You should probably take it into account while doing whatever you do here.
         membership.remove(request.getReplica());
     }
+
+    /*----------------------------------------FAILS------------------------------------------------*/
 
     private void uponMsgFail(ProtoMessage msg, Host host, short destProto, Throwable throwable, int channelId) {
         //If a message fails to be sent, for whatever reason, log the message and the reason

@@ -69,13 +69,12 @@ public class MultiPaxos extends GenericProtocol {
         registerMessageSerializer(cId, BroadcastMessage.MSG_ID, BroadcastMessage.serializer);
         registerMessageSerializer(cId, PrepareMessage.MSG_CODE, PrepareMessage.serializer);
         registerMessageSerializer(cId, PrepareOkMessage.MSG_CODE, PrepareOkMessage.serializer);
-        //TODO
+        //TODO: registerMessageSerializer
 
         /*---------------------- Register Message Handlers -------------------------- */
-        //TODO
-
         try {
             registerMessageHandler(cId, BroadcastMessage.MSG_ID, this::uponBroadcastMessage, this::uponMsgFail);
+            //TODO: registerMessageHandler
         } catch (HandlerRegistrationException e) {
             throw new AssertionError("Error registering message handler.", e);
         }

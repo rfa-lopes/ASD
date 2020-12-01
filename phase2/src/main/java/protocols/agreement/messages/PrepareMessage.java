@@ -4,40 +4,43 @@ import io.netty.buffer.ByteBuf;
 import pt.unl.fct.di.novasys.babel.generic.ProtoMessage;
 import pt.unl.fct.di.novasys.network.ISerializer;
 import java.io.IOException;
+import java.util.UUID;
 
 /*Made by Rodrigo*/
 public class PrepareMessage extends ProtoMessage {
 
     public final static short MSG_CODE = 9022;
 
-    private final int sequenceNumber;
+    private final UUID opId;
 
-    public PrepareMessage(int sequenceNumber) {
+    public PrepareMessage(UUID opId) {
         super(MSG_CODE);
-        this.sequenceNumber = sequenceNumber;
+        this.opId = opId;
     }
 
-    public int getSequenceNumber() {
-        return sequenceNumber;
+    public UUID getOpId() {
+        return opId;
     }
 
     @Override
     public String toString() {
         return "PrepareMessage{" +
-                "sequenceNumber: " + sequenceNumber +
+                "opId: " + opId +
                 "}";
     }
 
     public static final ISerializer<PrepareMessage> serializer = new ISerializer<PrepareMessage>()  {
         @Override
         public void serialize(PrepareMessage prepareMessage, ByteBuf out) throws IOException {
-            out.writeInt(prepareMessage.getSequenceNumber());
+            out.writeLong(prepareMessage.getOpId().getMostSignificantBits());
+            out.writeLong(prepareMessage.getOpId().getLeastSignificantBits());
         }
 
         @Override
         public PrepareMessage deserialize(ByteBuf in) throws IOException {
-            int sequenceNumber = in.readInt();
-            return new PrepareMessage(sequenceNumber);
+            long high = in.readLong();
+            long low = in.readLong();
+            return new PrepareMessage(new UUID(high, low));
         }
     };
 }
