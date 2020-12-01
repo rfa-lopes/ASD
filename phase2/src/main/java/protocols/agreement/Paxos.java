@@ -1,8 +1,7 @@
 package protocols.agreement;
 
-import protocols.agreement.messages.BroadcastMessage;
-import protocols.agreement.messages.PrepareMessage;
-import protocols.agreement.messages.PrepareOkMessage;
+import protocols.agreement.messages.*;
+import protocols.agreement.notifications.DecidedNotification;
 import protocols.agreement.notifications.JoinedNotification;
 import protocols.agreement.requests.AddReplicaRequest;
 import protocols.agreement.requests.RemoveReplicaRequest;
@@ -54,6 +53,8 @@ public class Paxos extends GenericProtocol {
     @Override
     public void init(Properties props) {
         //Nothing to do here, we just wait for events from the application or agreement
+        //TODO: How send notification to State Machine ->
+        //triggerNotification(new DecidedNotification(joinedInstance, maxUUID, null));
     }
 
     /*----------------------------------------NOTIFICATIONS------------------------------------------------*/
@@ -69,15 +70,18 @@ public class Paxos extends GenericProtocol {
         registerSharedChannel(cId);
 
         /* Register Message Serializers ---------------------- */
-        registerMessageSerializer(cId, BroadcastMessage.MSG_ID, BroadcastMessage.serializer);
         registerMessageSerializer(cId, PrepareMessage.MSG_CODE, PrepareMessage.serializer);
         registerMessageSerializer(cId, PrepareOkMessage.MSG_CODE, PrepareOkMessage.serializer);
+        registerMessageSerializer(cId, AcceptMessage.MSG_CODE, AcceptMessage.serializer);
+        registerMessageSerializer(cId, AcceptOkMessage.MSG_CODE, AcceptOkMessage.serializer);
         //TODO: registerMessageSerializer
 
         /* Register Message Handlers -------------------------- */
         try {
             registerMessageHandler(cId, PrepareMessage.MSG_CODE, this::uponPrepareMessage, this::uponMsgFail);
             registerMessageHandler(cId, PrepareOkMessage.MSG_CODE, this::uponPrepareOkMessage, this::uponMsgFail);
+            registerMessageHandler(cId, AcceptMessage.MSG_CODE, this::uponAcceptMessage, this::uponMsgFail);
+            registerMessageHandler(cId, AcceptOkMessage.MSG_CODE, this::uponAcceptOkMessage, this::uponMsgFail);
             //TODO: registerMessageHandler
         } catch (HandlerRegistrationException e) {
             throw new AssertionError("Error registering message handler.", e);
@@ -93,16 +97,13 @@ public class Paxos extends GenericProtocol {
 
     /*----------------------------------------MESSAGES HANDLERS------------------------------------------------*/
 
-    private void uponPrepareOkMessage(PrepareOkMessage msg, Host host, short sourceProto, int channelId) {
-        //TODO: uponPrepareOkMessage
-    }
-
     private void uponPrepareMessage(PrepareMessage msg, Host host, short sourceProto, int channelId) {
+        //TODO: uponPrepareMessage Verify is correct
         //Each acceptor that receives the PREPARE message looks at the ID in the message and decides
         UUID msgUUID = msg.getOpId();
 
         //Is this ID bigger than any round I have previously received?
-        if(msgUUID.compareTo(maxUUID) > 0){
+        if( acceptUUID(msgUUID) ){
             //store the ID number, max_id = ID
             //respond with a PrepareOk message
             maxUUID = msgUUID;
@@ -111,6 +112,18 @@ public class Paxos extends GenericProtocol {
         }else{
             /*do not respond (or respond with a "fail" message)*/
         }
+    }
+
+    private void uponPrepareOkMessage(PrepareOkMessage msg, Host host, short sourceProto, int channelId) {
+        //TODO: uponPrepareOkMessage
+    }
+
+    private void uponAcceptMessage(AcceptMessage msg, Host host, short sourceProto, int channelId) {
+        //TODO: uponAcceptMessage
+    }
+
+    private void uponAcceptOkMessage(AcceptOkMessage msg, Host host, short sourceProto, int channelId) {
+        //TODO: uponAcceptOkMessage
     }
 
     /*----------------------------------------REQUESTS------------------------------------------------*/
@@ -145,6 +158,12 @@ public class Paxos extends GenericProtocol {
     private void uponMsgFail(ProtoMessage msg, Host host, short destProto, Throwable throwable, int channelId) {
         //If a message fails to be sent, for whatever reason, log the message and the reason
         logger.error("Message {} to {} failed, reason: {}", msg, host, throwable);
+    }
+
+    /*----------------------------------------AUXILIARIES------------------------------------------------*/
+
+    private boolean acceptUUID(UUID uuid){
+        return uuid.compareTo(maxUUID) > 0;
     }
 
 }
