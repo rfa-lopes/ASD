@@ -10,24 +10,34 @@ public class AcceptOkMessage extends ProtoMessage {
 
     public final static short MSG_CODE = 9025;
 
-    public AcceptOkMessage() {
+    private final int sequenceNumber;
+
+    public AcceptOkMessage(int sequenceNumber) {
         super(MSG_CODE);
+        this.sequenceNumber = sequenceNumber;
+    }
+
+    public int getSequenceNumber() {
+        return sequenceNumber;
     }
 
     @Override
     public String toString() {
         return "AcceptOkMessage{" +
+                "sequenceNumber: " + sequenceNumber +
                 "}";
     }
 
     public static final ISerializer<AcceptOkMessage> serializer = new ISerializer<AcceptOkMessage>()  {
         @Override
         public void serialize(AcceptOkMessage acceptMessage, ByteBuf out) throws IOException {
+            out.writeInt(acceptMessage.getSequenceNumber());
         }
 
         @Override
         public AcceptOkMessage deserialize(ByteBuf in) throws IOException {
-            return new AcceptOkMessage();
+            int sequenceNumber = in.readInt();
+            return new AcceptOkMessage(sequenceNumber);
         }
     };
 }

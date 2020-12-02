@@ -69,7 +69,7 @@ public class IncorrectAgreement extends GenericProtocol {
         registerMessageSerializer(cId, BroadcastMessage.MSG_ID, BroadcastMessage.serializer);
         /*---------------------- Register Message Handlers -------------------------- */
         try {
-              registerMessageHandler(cId, BroadcastMessage.MSG_ID, this::uponBroadcastMessage, this::uponMsgFail);
+            registerMessageHandler(cId, BroadcastMessage.MSG_ID, this::uponBroadcastMessage, this::uponMsgFail);
         } catch (HandlerRegistrationException e) {
             throw new AssertionError("Error registering message handler.", e);
         }
@@ -79,7 +79,9 @@ public class IncorrectAgreement extends GenericProtocol {
     private void uponBroadcastMessage(BroadcastMessage msg, Host host, short sourceProto, int channelId) {
         if(joinedInstance >= 0 ){
             //Obviously your agreement protocols will not decide things as soon as you receive the first message
+            //triggerNotification(new DecidedNotification(msg.getInstance(), msg.getOpId(), msg.getOp()));
             triggerNotification(new DecidedNotification(msg.getInstance(), msg.getOpId(), msg.getOp()));
+
         } else {
             //We have not yet received a JoinedNotification, but we are already receiving messages from the other
             //agreement instances, maybe we should do something with them...?

@@ -5,6 +5,7 @@ import protocols.agreement.notifications.DecidedNotification;
 import protocols.agreement.notifications.JoinedNotification;
 import protocols.agreement.requests.AddReplicaRequest;
 import protocols.agreement.requests.RemoveReplicaRequest;
+import protocols.agreement.timers.AckTimer;
 import pt.unl.fct.di.novasys.babel.core.GenericProtocol;
 import pt.unl.fct.di.novasys.babel.exceptions.HandlerRegistrationException;
 import pt.unl.fct.di.novasys.babel.generic.ProtoMessage;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.*;
 
 /*Made by Rodrigo*/
+@SuppressWarnings("ALL")
 public class Paxos extends GenericProtocol {
 
     private static final Logger logger = LogManager.getLogger(MultiPaxos.class);
@@ -29,16 +31,37 @@ public class Paxos extends GenericProtocol {
     private Host myself;
     private int joinedInstance;
     private List<Host> membership;
-    private UUID maxUUID;
+    private List<Host> quorumMembership;
+    private Map<Host, PrepareOkMessage> prepareOkMessagesReceived;
+    private Map<Host, AcceptOkMessage> acceptOkMessagesReceived;
+    private final Random rnd;
+
+    private int sequenceNumber;
+    private UUID opId;
+    private byte[] operation;
+
+    private final int ACK_TIME;
+    private long ackTimer;
 
     public Paxos(Properties properties) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
 
         joinedInstance = -1; //-1 means we have not yet joined the system
         membership = null;
-        maxUUID = new UUID(0,1); //TODO: How this works (UUID)?
+        quorumMembership = null;
+        sequenceNumber = 0;
+        operation = null;
+        opId = null;
+        prepareOkMessagesReceived = null;
+        acceptOkMessagesReceived = null;
+        rnd = new Random();
+        ackTimer = -1;
+
+        //Get some configurations from the Properties object
+        ACK_TIME =  Integer.parseInt(properties.getProperty("prepareTimer", "3000"));
 
         /* Register Timer Handlers ----------------------------- */
+        registerTimerHandler(AckTimer.TIMER_ID, this::uponPrepareTimer);
 
         /* Register Request Handlers --------------------------- */
         registerRequestHandler(ProposeRequest.REQUEST_ID, this::uponProposeRequest);
@@ -50,11 +73,10 @@ public class Paxos extends GenericProtocol {
         subscribeNotification(JoinedNotification.NOTIFICATION_ID, this::uponJoinedNotification);
     }
 
+
     @Override
     public void init(Properties props) {
         //Nothing to do here, we just wait for events from the application or agreement
-        //TODO: How send notification to State Machine ->
-        //triggerNotification(new DecidedNotification(joinedInstance, maxUUID, null));
     }
 
     /*----------------------------------------NOTIFICATIONS------------------------------------------------*/
@@ -74,7 +96,6 @@ public class Paxos extends GenericProtocol {
         registerMessageSerializer(cId, PrepareOkMessage.MSG_CODE, PrepareOkMessage.serializer);
         registerMessageSerializer(cId, AcceptMessage.MSG_CODE, AcceptMessage.serializer);
         registerMessageSerializer(cId, AcceptOkMessage.MSG_CODE, AcceptOkMessage.serializer);
-        //TODO: registerMessageSerializer
 
         /* Register Message Handlers -------------------------- */
         try {
@@ -82,7 +103,6 @@ public class Paxos extends GenericProtocol {
             registerMessageHandler(cId, PrepareOkMessage.MSG_CODE, this::uponPrepareOkMessage, this::uponMsgFail);
             registerMessageHandler(cId, AcceptMessage.MSG_CODE, this::uponAcceptMessage, this::uponMsgFail);
             registerMessageHandler(cId, AcceptOkMessage.MSG_CODE, this::uponAcceptOkMessage, this::uponMsgFail);
-            //TODO: registerMessageHandler
         } catch (HandlerRegistrationException e) {
             throw new AssertionError("Error registering message handler.", e);
         }
@@ -92,38 +112,8 @@ public class Paxos extends GenericProtocol {
         //We joined the system and can now start doing things
         joinedInstance = notification.getJoinInstance();
         membership = new LinkedList<>(notification.getMembership());
+        prepareOkMessagesReceived = new HashMap<>(membership.size());
         logger.info("Agreement starting at instance {},  membership: {}", joinedInstance, membership);
-    }
-
-    /*----------------------------------------MESSAGES HANDLERS------------------------------------------------*/
-
-    private void uponPrepareMessage(PrepareMessage msg, Host host, short sourceProto, int channelId) {
-        //TODO: uponPrepareMessage Verify is correct
-        //Each acceptor that receives the PREPARE message looks at the ID in the message and decides
-        UUID msgUUID = msg.getOpId();
-
-        //Is this ID bigger than any round I have previously received?
-        if( acceptUUID(msgUUID) ){
-            //store the ID number, max_id = ID
-            //respond with a PrepareOk message
-            maxUUID = msgUUID;
-            PrepareOkMessage prepareMessage = new PrepareOkMessage(msgUUID);
-            sendMessage(prepareMessage, host);
-        }else{
-            /*do not respond (or respond with a "fail" message)*/
-        }
-    }
-
-    private void uponPrepareOkMessage(PrepareOkMessage msg, Host host, short sourceProto, int channelId) {
-        //TODO: uponPrepareOkMessage
-    }
-
-    private void uponAcceptMessage(AcceptMessage msg, Host host, short sourceProto, int channelId) {
-        //TODO: uponAcceptMessage
-    }
-
-    private void uponAcceptOkMessage(AcceptOkMessage msg, Host host, short sourceProto, int channelId) {
-        //TODO: uponAcceptOkMessage
     }
 
     /*----------------------------------------REQUESTS------------------------------------------------*/
@@ -134,9 +124,18 @@ public class Paxos extends GenericProtocol {
         message to at least a majority of acceptors.*/
 
         logger.debug("Received " + request);
-        PrepareMessage prepareMessage = new PrepareMessage(request.getOpId());
+
+        sequenceNumber= request.getInstance();
+        opId = request.getOpId();
+        operation = request.getOperation();
+        PrepareMessage prepareMessage = new PrepareMessage(sequenceNumber);
+
         logger.debug("Sending to: " + membership);
+
+        //TODO: Sending to only a majority of the accepters is enough, assuming they will all respond?
+        //getQuorumFromMembership().forEach(h -> sendMessage(prepareMessage, h));
         membership.forEach(h -> sendMessage(prepareMessage, h));
+        ackTimer = setupPeriodicTimer(new AckTimer(), ACK_TIME, ACK_TIME);
     }
 
     private void uponAddReplica(AddReplicaRequest request, short sourceProto) {
@@ -153,6 +152,69 @@ public class Paxos extends GenericProtocol {
         membership.remove(request.getReplica());
     }
 
+    /*----------------------------------------MESSAGES HANDLERS------------------------------------------------*/
+
+    private void uponPrepareMessage(PrepareMessage msg, Host host, short sourceProto, int channelId) {
+        logger.debug("Received " + msg);
+        int receivedSequenceNumber = msg.getSequenceNumber();
+        if( receivedSequenceNumber > sequenceNumber ){
+            sequenceNumber = receivedSequenceNumber;
+            PrepareOkMessage prepareMessage = new PrepareOkMessage(sequenceNumber);
+            logger.debug("Sending to: {}, prepareMessage: {}", host, prepareMessage);
+            sendMessage(prepareMessage, host);
+        }/*else{
+            //TODO: do not respond (or respond with a "fail" message)
+        }*/
+    }
+
+    private void uponPrepareOkMessage(PrepareOkMessage msg, Host host, short sourceProto, int channelId) {
+        logger.debug("Received " + msg);
+        prepareOkMessagesReceived.put(host, msg);
+        if(prepareOkMessagesReceived.size() >= getQuorumSize()){
+            cancelTimer(ackTimer);
+            AcceptMessage acceptMessage = new AcceptMessage(sequenceNumber, opId, operation);
+            logger.debug("Sending to: {}, prepareMessage: {}", getQuorumFromMembership(), acceptMessage);
+            getQuorumFromMembership().forEach(h -> sendMessage(acceptMessage, h));
+            ackTimer = setupPeriodicTimer(new AckTimer(), ACK_TIME, ACK_TIME);
+        }
+    }
+
+    private void uponAcceptMessage(AcceptMessage msg, Host host, short sourceProto, int channelId) {
+        logger.debug("Received " + msg);
+        int receivedSequenceNumber = msg.getSequenceNumber();
+        UUID receivedOpId = msg.getOpId();
+        if( receivedSequenceNumber >= sequenceNumber ){
+            sequenceNumber = receivedSequenceNumber;
+            opId = receivedOpId;
+            AcceptOkMessage acceptOkMessage = new AcceptOkMessage(sequenceNumber);
+            logger.debug("Sending to: {}, prepareMessage: {}", host, acceptOkMessage);
+            sendMessage(acceptOkMessage, host);
+        }
+    }
+
+    private void uponAcceptOkMessage(AcceptOkMessage msg, Host host, short sourceProto, int channelId) {
+        logger.debug("Received " + msg);
+        acceptOkMessagesReceived.put(host, msg);
+        if(acceptOkMessagesReceived.size() >= getQuorumSize()){
+            cancelTimer(ackTimer);
+            DecidedNotification decidedNotification = new DecidedNotification(joinedInstance, opId, operation);
+            triggerNotification(decidedNotification);
+            logger.debug("Trigger DecidedNotification: " + decidedNotification);
+        }
+    }
+
+    /*----------------------------------------TIMERS------------------------------------------------*/
+
+    private void uponPrepareTimer(AckTimer v, long timerId) {
+        //TODO: uponPrepareTimer -> Reset algorithm using a larger sequence number (n)
+        sequenceNumber = getNextSequenceNumber();
+        acceptOkMessagesReceived.clear();
+        prepareOkMessagesReceived.clear();
+
+        ProposeRequest proposeRequest = new ProposeRequest(sequenceNumber, opId, operation);
+        uponProposeRequest(proposeRequest, PROTOCOL_ID);
+    }
+
     /*----------------------------------------FAILS------------------------------------------------*/
 
     private void uponMsgFail(ProtoMessage msg, Host host, short destProto, Throwable throwable, int channelId) {
@@ -162,8 +224,24 @@ public class Paxos extends GenericProtocol {
 
     /*----------------------------------------AUXILIARIES------------------------------------------------*/
 
-    private boolean acceptUUID(UUID uuid){
-        return uuid.compareTo(maxUUID) > 0;
+    private int getNextSequenceNumber() {
+        //TODO: Verify sff
+        return this.sequenceNumber + membership.size();
+    }
+
+    private List<Host> getQuorumFromMembership() {
+        if(quorumMembership == null) {
+            List<Host> aux = membership;
+            List<Host> quorum = new LinkedList<>();
+            for (int i = 0; i < getQuorumSize(); i++)
+                quorum.add(aux.remove(rnd.nextInt(aux.size())));
+            quorumMembership = quorum;
+        }
+        return quorumMembership;
+    }
+
+    private int getQuorumSize(){
+        return (membership.size() / 2) + 1;
     }
 
 }

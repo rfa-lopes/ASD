@@ -11,36 +11,34 @@ public class PrepareMessage extends ProtoMessage {
 
     public final static short MSG_CODE = 9022;
 
-    private final UUID opId;
+    private final int sequenceNumber;
 
-    public PrepareMessage(UUID opId) {
+    public PrepareMessage(int sequenceNumber) {
         super(MSG_CODE);
-        this.opId = opId;
+        this.sequenceNumber = sequenceNumber;
     }
 
-    public UUID getOpId() {
-        return opId;
+    public int getSequenceNumber() {
+        return sequenceNumber;
     }
 
     @Override
     public String toString() {
         return "PrepareMessage{" +
-                "opId: " + opId +
+                "sequenceNumber: " + sequenceNumber +
                 "}";
     }
 
     public static final ISerializer<PrepareMessage> serializer = new ISerializer<PrepareMessage>()  {
         @Override
         public void serialize(PrepareMessage prepareMessage, ByteBuf out) throws IOException {
-            out.writeLong(prepareMessage.getOpId().getMostSignificantBits());
-            out.writeLong(prepareMessage.getOpId().getLeastSignificantBits());
+            out.writeInt(prepareMessage.getSequenceNumber());
         }
 
         @Override
         public PrepareMessage deserialize(ByteBuf in) throws IOException {
-            long high = in.readLong();
-            long low = in.readLong();
-            return new PrepareMessage(new UUID(high, low));
+            int sequenceNumber = in.readInt();
+            return new PrepareMessage(sequenceNumber);
         }
     };
 }
