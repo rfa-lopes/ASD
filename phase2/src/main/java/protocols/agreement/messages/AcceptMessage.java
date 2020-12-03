@@ -50,6 +50,7 @@ public class AcceptMessage extends ProtoMessage {
             out.writeInt(acceptMessage.getSequenceNumber());
             out.writeLong(acceptMessage.getOpId().getLeastSignificantBits());
             out.writeLong(acceptMessage.getOpId().getMostSignificantBits());
+            out.writeBytes(acceptMessage.getOperation());
         }
 
         @Override
