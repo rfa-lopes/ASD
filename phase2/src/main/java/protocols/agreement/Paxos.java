@@ -5,6 +5,7 @@ import protocols.agreement.notifications.DecidedNotification;
 import protocols.agreement.notifications.JoinedNotification;
 import protocols.agreement.requests.AddReplicaRequest;
 import protocols.agreement.requests.RemoveReplicaRequest;
+import protocols.agreement.timers.AcceptTimer;
 import protocols.agreement.timers.PrepareTimer;
 import pt.unl.fct.di.novasys.babel.core.GenericProtocol;
 import pt.unl.fct.di.novasys.babel.exceptions.HandlerRegistrationException;
@@ -14,12 +15,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocols.statemachine.notifications.ChannelReadyNotification;
 import protocols.agreement.requests.ProposeRequest;
-
-import java.io.IOException;
 import java.util.*;
 
 /*Made by Rodrigo*/
-@SuppressWarnings("ALL")
 public class Paxos extends GenericProtocol {
 
     private static final Logger logger = LogManager.getLogger(MultiPaxos.class);
@@ -28,13 +26,13 @@ public class Paxos extends GenericProtocol {
     public final static short PROTOCOL_ID = 9020;
     public final static String PROTOCOL_NAME = "Paxos";
 
+    @SuppressWarnings("FieldCanBeLocal")
     private Host myself;
     private int joinedInstance;
     private List<Host> membership;
-    private List<Host> quorumMembership;
-    private Map<Host, PrepareOkMessage> prepareOkMessagesReceived;
-    private Map<Host, AcceptOkMessage> acceptedMessages;
-    private final Random rnd;
+
+    private int prepareOkMessagesReceived;
+    private int acceptedMessages;
 
     private int sequenceNumber;
     private UUID opId;
@@ -43,25 +41,32 @@ public class Paxos extends GenericProtocol {
     private final int PREPARE_TIME;
     private long prepareTimer;
 
-    public Paxos(Properties properties) throws IOException, HandlerRegistrationException {
+    private final int ACCEPT_TIME;
+    private long acceptTimer;
+
+    public Paxos(Properties properties) throws HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
 
         joinedInstance = -1; //-1 means we have not yet joined the system
         membership = null;
-        quorumMembership = null;
+
         sequenceNumber = 0;
         operation = null;
         opId = null;
-        prepareOkMessagesReceived = null;
-        acceptedMessages = null;
-        rnd = new Random();
+
+        prepareOkMessagesReceived = 0;
+        acceptedMessages = 0;
+
         prepareTimer = -1;
+        acceptTimer = -1;
 
         //Get some configurations from the Properties object
         PREPARE_TIME =  Integer.parseInt(properties.getProperty("prepareTime", "3000"));
+        ACCEPT_TIME =  Integer.parseInt(properties.getProperty("acceptTime", "3000"));
 
         /* Register Timer Handlers ----------------------------- */
-        registerTimerHandler(PrepareTimer.TIMER_ID, this::uponPrepareTimer);
+        registerTimerHandler(PrepareTimer.TIMER_ID, this::uponResetTimer);
+        registerTimerHandler(AcceptTimer.TIMER_ID, this::uponResetTimer);
 
         /* Register Request Handlers --------------------------- */
         registerRequestHandler(ProposeRequest.REQUEST_ID, this::uponProposeRequest);
@@ -112,27 +117,26 @@ public class Paxos extends GenericProtocol {
         //We joined the system and can now start doing things
         joinedInstance = notification.getJoinInstance();
         membership = new LinkedList<>(notification.getMembership());
-        prepareOkMessagesReceived = new HashMap<>(membership.size());
         logger.info("Agreement starting at instance {},  membership: {}", joinedInstance, membership);
     }
 
     /*----------------------------------------REQUESTS------------------------------------------------*/
 
+    //Proposer
     private void uponProposeRequest(ProposeRequest request, short sourceProto) {
         /* A proposer receives a consensus request for a VALUE from a client.
         It creates a unique proposal number, ID, and sends a PREPARE(ID)
         message to at least a majority of acceptors.*/
 
         logger.debug("Received " + request);
-
         sequenceNumber= request.getInstance();
         opId = request.getOpId();
         operation = request.getOperation();
-        PrepareMessage prepareMessage = new PrepareMessage(sequenceNumber);
 
         logger.debug("Sending to: " + membership);
-
+        PrepareMessage prepareMessage = new PrepareMessage(sequenceNumber);
         membership.forEach(h -> sendMessage(prepareMessage, h));
+
         prepareTimer = setupPeriodicTimer(new PrepareTimer(), PREPARE_TIME, PREPARE_TIME);
     }
 
@@ -152,37 +156,48 @@ public class Paxos extends GenericProtocol {
 
     /*----------------------------------------MESSAGES HANDLERS------------------------------------------------*/
 
+    //Accepter
     private void uponPrepareMessage(PrepareMessage msg, Host host, short sourceProto, int channelId) {
         logger.debug("Received " + msg);
         int receivedSequenceNumber = msg.getSequenceNumber();
+
+        //if n > np then
         if( receivedSequenceNumber > sequenceNumber ){
+            //np = n // will not accept anything < n
             sequenceNumber = receivedSequenceNumber;
+
+            //reply <PREPARE_OK,na,va>
             PrepareOkMessage prepareMessage = new PrepareOkMessage(sequenceNumber);
             logger.debug("Sending to: {}, prepareMessage: {}", host, prepareMessage);
             sendMessage(prepareMessage, host);
         }
     }
 
+    //Proposer
     private void uponPrepareOkMessage(PrepareOkMessage msg, Host host, short sourceProto, int channelId) {
         logger.debug("Received " + msg);
-        prepareOkMessagesReceived.put(host, msg);
-        if(prepareOkMessagesReceived.size() == getQuorumSize()){
+
+        if( ++prepareOkMessagesReceived == getQuorumSize()){
             cancelTimer(prepareTimer);
+
             AcceptMessage acceptMessage = new AcceptMessage(sequenceNumber, opId, operation);
             logger.debug("Sending to: {}, prepareMessage: {}", membership, acceptMessage);
             membership.forEach(h -> sendMessage(acceptMessage, h));
+
+            acceptTimer = setupPeriodicTimer(new AcceptTimer(), ACCEPT_TIME, ACCEPT_TIME);
         }
     }
 
+    //Accepter
     private void uponAcceptMessage(AcceptMessage msg, Host host, short sourceProto, int channelId) {
         logger.debug("Received " + msg);
+
         int receivedSequenceNumber = msg.getSequenceNumber();
         UUID receivedOpId = msg.getOpId();
         byte[] receivedOperation = msg.getOperation();
 
         //if n >= np then
         if( receivedSequenceNumber >= sequenceNumber ){
-
             //na = n
             //va = v
             sequenceNumber = receivedSequenceNumber;
@@ -201,6 +216,7 @@ public class Paxos extends GenericProtocol {
         }
     }
 
+    //Proposer / Learner
     private void uponAcceptOkMessage(AcceptOkMessage msg, Host host, short sourceProto, int channelId) {
         logger.debug("Received " + msg);
 
@@ -209,40 +225,42 @@ public class Paxos extends GenericProtocol {
         byte[] receivedOperation = msg.getOperation();
 
         if(receivedSequenceNumber > sequenceNumber){
-
             //na = n
             //va = v
             sequenceNumber = receivedSequenceNumber;
             opId = receivedOpId;
             operation = receivedOperation;
-            acceptedMessages.clear();
+            acceptedMessages = 1;
 
-        }else if(receivedSequenceNumber < sequenceNumber)
-            return;
-
-        //aset.add(a)
-        acceptedMessages.put(host, msg);
-
-        //if aset is a (majority) quorum
-        //  decision = va
-        if(haveMajorityQuorum()){
-            DecidedNotification decidedNotification = new DecidedNotification(sequenceNumber, opId, operation);
-            triggerNotification(decidedNotification);
-            logger.debug("Trigger DecidedNotification: " + decidedNotification);
+        }else {
+            if (receivedSequenceNumber < sequenceNumber)
+                return;
         }
 
+        //aset.add(a)
+        acceptedMessages++;
+
+        //if aset is a (majority) quorum
+        if(acceptedMessages == getQuorumSize()) {
+            //  decision = va
+            cancelTimer(acceptTimer);
+
+            //send DECIDED(va) to client
+            DecidedNotification decidedNotification = new DecidedNotification(sequenceNumber, opId, operation);
+            logger.debug("Trigger DecidedNotification: " + decidedNotification);
+            triggerNotification(decidedNotification);
+        }
     }
 
     /*----------------------------------------TIMERS------------------------------------------------*/
 
-    private void uponPrepareTimer(PrepareTimer v, long timerId) {
-        //TODO: uponPrepareTimer -> Reset algorithm using a larger sequence number (n)
+    private void uponResetTimer(PrepareTimer v, long timerId) {
+        //Reset algorithm using a larger sequence number (n)
+        logger.debug("Reset Timer.");
         sequenceNumber = getNextSequenceNumber();
-        acceptedMessages.clear();
-        prepareOkMessagesReceived.clear();
-
-        ProposeRequest proposeRequest = new ProposeRequest(sequenceNumber, opId, operation);
-        uponProposeRequest(proposeRequest, PROTOCOL_ID);
+        acceptedMessages = 0;
+        prepareOkMessagesReceived = 0;
+        uponProposeRequest(new ProposeRequest(sequenceNumber, opId, operation), PROTOCOL_ID);
     }
 
     /*----------------------------------------FAILS------------------------------------------------*/
@@ -261,11 +279,4 @@ public class Paxos extends GenericProtocol {
     private int getQuorumSize(){
         return (membership.size() / 2) + 1;
     }
-
-    private boolean haveMajorityQuorum() {
-        if(acceptedMessages.size() <= 2)
-            return membership.size() == acceptedMessages.size();
-        return acceptedMessages.size() >= (membership.size() / 2) + 1;
-    }
-
 }
