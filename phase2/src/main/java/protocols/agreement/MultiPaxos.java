@@ -166,8 +166,8 @@ public class MultiPaxos extends GenericProtocol {
             }else{
 
                 //forwards the request to lider since we are a comun replica
-               ForwardRequestMessage forwardRequestMessage = new ForwardRequestMessage(request.getInstance(), request.getOpId(), request.getOperation());
-               //TODO : Should we setup time now? or replicas should just send no matter what, and keep verifying liveness?
+                ForwardRequestMessage forwardRequestMessage = new ForwardRequestMessage(request.getInstance(), request.getOpId(), request.getOperation());
+                //TODO : Should we setup time now? or replicas should just send no matter what, and keep verifying liveness?
                 logger.debug("Sending to: {}, forwardRequestMessage: {}", membership, forwardRequestMessage);
                 sendMessage(forwardRequestMessage, lider);
 
