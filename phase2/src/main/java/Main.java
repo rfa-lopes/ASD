@@ -1,9 +1,12 @@
+import protocols.agreement.MultiPaxos;
+import protocols.agreement.Paxos;
 import pt.unl.fct.di.novasys.babel.core.Babel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocols.agreement.IncorrectAgreement;
 import protocols.app.HashApp;
 import protocols.statemachine.StateMachine;
+import pt.unl.fct.di.novasys.babel.core.GenericProtocol;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -27,6 +30,9 @@ public class Main {
     //Default babel configuration file (can be overridden by the "-config" launch argument)
     private static final String DEFAULT_CONF = "config.properties";
 
+    private static final String PAXOS = "PAXOS";
+    private static final String MULTI_PAXOS = "MULTI_PAXOS";
+
     public static void main(String[] args) throws Exception {
 
         //Get the (singleton) babel instance
@@ -40,12 +46,27 @@ public class Main {
         // IP of that interface and create a property "address=ip" to be used later by the channels.
         addInterfaceIp(props);
 
+        //Lets run the algorithms from props
+        String agreementProtocol = props.getProperty("agreement", PAXOS);
+
         // Application
         HashApp hashApp = new HashApp(props);
+
         // StateMachine Protocol
         StateMachine sm = new StateMachine(props);
+
         // Agreement Protocol
-        IncorrectAgreement agreement = new IncorrectAgreement(props);
+        GenericProtocol agreement;
+        switch (agreementProtocol.toUpperCase()) {
+            case PAXOS:
+                agreement = new Paxos(props);
+                break;
+            case MULTI_PAXOS:
+                agreement = new MultiPaxos(props);
+                break;
+            default:
+                agreement = new IncorrectAgreement(props);
+        }
 
         //Register applications in babel
         babel.registerProtocol(hashApp);

@@ -216,7 +216,12 @@ public class Paxos extends GenericProtocol {
         }
     }
 
-    //Proposer / Learner
+    //Learner (Regular approach)
+    //Ha duas alternativas chave:
+    // distinguished proposer, em que o proposer quando recebe a maioria de AcceptOK manda decided para todos os learners,
+    // ou o regular em que os acceptors mandam os accept ok para todas as replicas,
+    // e quando um learner observa uma maioria de accepts iguais, decretam a decisão.
+    //Estamos a usar o regular.
     private void uponAcceptOkMessage(AcceptOkMessage msg, Host host, short sourceProto, int channelId) {
         logger.debug("Received " + msg);
 
@@ -241,7 +246,7 @@ public class Paxos extends GenericProtocol {
         acceptedMessages++;
 
         //if aset is a (majority) quorum
-        if(acceptedMessages == getQuorumSize()) {
+        if(acceptedMessages >= getQuorumSize()) {
             //  decision = va
             cancelTimer(acceptTimer);
 
