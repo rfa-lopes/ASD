@@ -64,16 +64,16 @@ public class Paxos extends GenericProtocol {
         PREPARE_TIME =  Integer.parseInt(properties.getProperty("prepareTime", "3000"));
         ACCEPT_TIME =  Integer.parseInt(properties.getProperty("acceptTime", "3000"));
 
-        /* Register Timer Handlers ----------------------------- */
+        // Register Timer Handlers
         registerTimerHandler(PrepareTimer.TIMER_ID, this::uponResetTimer);
         registerTimerHandler(AcceptTimer.TIMER_ID, this::uponResetTimer);
 
-        /* Register Request Handlers --------------------------- */
+        // Register Request Handlers
         registerRequestHandler(ProposeRequest.REQUEST_ID, this::uponProposeRequest);
         registerRequestHandler(AddReplicaRequest.REQUEST_ID, this::uponAddReplica);
         registerRequestHandler(RemoveReplicaRequest.REQUEST_ID, this::uponRemoveReplica);
 
-        /* Register Notification Handlers ---------------------- */
+        // Register Notification Handlers
         subscribeNotification(ChannelReadyNotification.NOTIFICATION_ID, this::uponChannelCreated);
         subscribeNotification(JoinedNotification.NOTIFICATION_ID, this::uponJoinedNotification);
     }
@@ -87,6 +87,7 @@ public class Paxos extends GenericProtocol {
     /*----------------------------------------NOTIFICATIONS------------------------------------------------*/
 
     //Upon receiving the channelId from the membership, register our own callbacks and serializers
+    @SuppressWarnings("DuplicatedCode")
     private void uponChannelCreated(ChannelReadyNotification notification, short sourceProto) {
         int cId = notification.getChannelId();
         myself = notification.getMyself();
@@ -96,13 +97,13 @@ public class Paxos extends GenericProtocol {
         // Allows this protocol to receive events from this channel.
         registerSharedChannel(cId);
 
-        /* Register Message Serializers ---------------------- */
+        // Register Message Serializers
         registerMessageSerializer(cId, PrepareMessage.MSG_CODE, PrepareMessage.serializer);
         registerMessageSerializer(cId, PrepareOkMessage.MSG_CODE, PrepareOkMessage.serializer);
         registerMessageSerializer(cId, AcceptMessage.MSG_CODE, AcceptMessage.serializer);
         registerMessageSerializer(cId, AcceptOkMessage.MSG_CODE, AcceptOkMessage.serializer);
 
-        /* Register Message Handlers -------------------------- */
+        // Register Message Handlers
         try {
             registerMessageHandler(cId, PrepareMessage.MSG_CODE, this::uponPrepareMessage, this::uponMsgFail);
             registerMessageHandler(cId, PrepareOkMessage.MSG_CODE, this::uponPrepareOkMessage, this::uponMsgFail);
@@ -124,12 +125,10 @@ public class Paxos extends GenericProtocol {
     /*----------------------------------------REQUESTS------------------------------------------------*/
 
     //Proposer
+    @SuppressWarnings("DuplicatedCode")
     private void uponProposeRequest(ProposeRequest request, short sourceProto) {
-        /* A proposer receives a consensus request for a VALUE from a client.
-        It creates a unique proposal number, ID, and sends a PREPARE(ID)
-        message to at least a majority of acceptors.*/
-
         logger.debug("Received " + request);
+
         sequenceNumber= request.getInstance();
         opId = request.getOpId();
         operation = request.getOperation();
@@ -164,12 +163,9 @@ public class Paxos extends GenericProtocol {
         logger.debug("Received " + msg);
         int receivedSequenceNumber = msg.getSequenceNumber();
 
-        //if n > np then
         if( receivedSequenceNumber > sequenceNumber ){
-            //np = n // will not accept anything < n
             sequenceNumber = receivedSequenceNumber;
 
-            //reply <PREPARE_OK,na,va>
             PrepareOkMessage prepareMessage = new PrepareOkMessage(sequenceNumber);
             logger.debug("Sending to: {}, prepareMessage: {}", host, prepareMessage);
             sendMessage(prepareMessage, host);
@@ -196,23 +192,12 @@ public class Paxos extends GenericProtocol {
         logger.debug("Received " + msg);
 
         int receivedSequenceNumber = msg.getSequenceNumber();
-        UUID receivedOpId = msg.getOpId();
-        byte[] receivedOperation = msg.getOperation();
 
-        //if n >= np then
         if( receivedSequenceNumber >= sequenceNumber ){
-            //na = n
-            //va = v
             sequenceNumber = receivedSequenceNumber;
-            opId = receivedOpId;
-            operation = receivedOperation;
+            opId = msg.getOpId();
+            operation = msg.getOperation();
 
-            //reply with <ACCEPT_OK,n>
-            AcceptOkMessage acceptOkMessage = new AcceptOkMessage(sequenceNumber);
-            logger.debug("Sending to: {}, prepareMessage: {}", host, acceptOkMessage);
-            sendMessage(acceptOkMessage, host);
-
-            //send <ACCEPT_OK,na,va> to all learners
             AcceptOkMessage acceptOkMessageToLearners = new AcceptOkMessage(sequenceNumber, opId, operation);
             logger.debug("Sending to: {}, prepareMessage: {}", membership, acceptOkMessageToLearners);
             membership.forEach(h -> sendMessage(acceptOkMessageToLearners, h));
@@ -220,40 +205,29 @@ public class Paxos extends GenericProtocol {
     }
 
     //Learner (Regular approach)
-    //Ha duas alternativas chave:
-    // distinguished proposer, em que o proposer quando recebe a maioria de AcceptOK manda decided para todos os learners,
-    // ou o regular em que os acceptors mandam os accept ok para todas as replicas,
-    // e quando um learner observa uma maioria de accepts iguais, decretam a decisão.
-    //Estamos a usar o regular.
     private void uponAcceptOkMessage(AcceptOkMessage msg, Host host, short sourceProto, int channelId) {
+
+        //Ha duas alternativas chave:
+        // distinguished proposer, em que o proposer quando recebe a maioria de AcceptOK manda decided para todos os learners,
+        // ou o regular em que os acceptors mandam os accept ok para todas as replicas,
+        // e quando um learner observa uma maioria de accepts iguais, decretam a decisão.
+        //Estamos a usar o regular.
+
         logger.debug("Received " + msg);
 
         int receivedSequenceNumber = msg.getSequenceNumber();
-        UUID receivedOpId = msg.getOpId();
-        byte[] receivedOperation = msg.getOperation();
 
         if(receivedSequenceNumber > sequenceNumber){
-            //na = n
-            //va = v
             sequenceNumber = receivedSequenceNumber;
-            opId = receivedOpId;
-            operation = receivedOperation;
+            opId = msg.getOpId();
+            operation = msg.getOperation();
             acceptedMessages = 1;
+        }else if (receivedSequenceNumber < sequenceNumber)
+            return;
 
-        }else {
-            if (receivedSequenceNumber < sequenceNumber)
-                return;
-        }
-
-        //aset.add(a)
-        acceptedMessages++;
-
-        //if aset is a (majority) quorum
-        if(acceptedMessages >= getQuorumSize()) {
-            //  decision = va
+        if( ++acceptedMessages == getQuorumSize()) {
             cancelTimer(acceptTimer);
 
-            //send DECIDED(va) to client
             DecidedNotification decidedNotification = new DecidedNotification(sequenceNumber, opId, operation);
             logger.debug("Trigger DecidedNotification: " + decidedNotification);
             triggerNotification(decidedNotification);

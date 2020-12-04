@@ -23,13 +23,6 @@ public class AcceptOkMessage extends ProtoMessage {
         this.operation = operation;
     }
 
-    public AcceptOkMessage(int sequenceNumber) {
-        super(MSG_CODE);
-        this.sequenceNumber = sequenceNumber;
-        this.opId = null;
-        this.operation = null;
-    }
-
     public int getSequenceNumber() {
         return sequenceNumber;
     }
@@ -44,38 +37,36 @@ public class AcceptOkMessage extends ProtoMessage {
 
     @Override
     public String toString() {
-        return opId != null && operation != null ?
-                "AcceptOkMessage{" +
-                        "sequenceNumber= " + sequenceNumber +
-                        ", opId= " + opId +
-                        ", operation=" + Hex.encodeHexString(operation) +
-                        "}"
-                :
-                "AcceptOkMessage{" +
-                        "sequenceNumber= " + sequenceNumber +
-                        "}";
+        return "AcceptOkMessage{" +
+                "sequenceNumber= " + sequenceNumber +
+                ", opId= " + opId +
+                ", operation=" + Hex.encodeHexString(operation) +
+                "}";
     }
 
     public static final ISerializer<AcceptOkMessage> serializer = new ISerializer<AcceptOkMessage>()  {
         @Override
-        public void serialize(AcceptOkMessage acceptMessage, ByteBuf out) throws IOException {
-            out.writeInt(acceptMessage.getSequenceNumber());
-            if(acceptMessage.getOpId() != null && acceptMessage.getOperation() != null) {
-                out.writeLong(acceptMessage.getOpId().getLeastSignificantBits());
-                out.writeLong(acceptMessage.getOpId().getMostSignificantBits());
-                out.writeBytes(acceptMessage.getOperation());
+        public void serialize(AcceptOkMessage acceptOkMessage, ByteBuf out) throws IOException {
+            out.writeInt(acceptOkMessage.getSequenceNumber());
+            if(acceptOkMessage.getOpId() != null && acceptOkMessage.getOperation() != null) {
+                out.writeLong(acceptOkMessage.getOpId().getLeastSignificantBits());
+                out.writeLong(acceptOkMessage.getOpId().getMostSignificantBits());
+                out.writeInt(acceptOkMessage.getOperation().length);
+                out.writeBytes(acceptOkMessage.getOperation());
             }
         }
 
         @Override
         public AcceptOkMessage deserialize(ByteBuf in) throws IOException {
             int sequenceNumber = in.readInt();
-            if(in.readableBytes() > 0) {
-                UUID opId = new UUID(in.readLong(), in.readLong());
-                byte[] operation = in.array();
-                return new AcceptOkMessage(sequenceNumber, opId, operation);
-            }
-            return new AcceptOkMessage(sequenceNumber);
+            UUID opId = new UUID(in.readLong(), in.readLong());
+            int bytesLength = in.readInt();
+
+            byte[] operation = new byte[bytesLength];
+            for(int i = 0; i < bytesLength; i++)
+                operation[i] = in.readByte();
+
+            return new AcceptOkMessage(sequenceNumber, opId, operation);
         }
     };
 }

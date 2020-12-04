@@ -50,6 +50,7 @@ public class AcceptMessage extends ProtoMessage {
             out.writeInt(acceptMessage.getSequenceNumber());
             out.writeLong(acceptMessage.getOpId().getLeastSignificantBits());
             out.writeLong(acceptMessage.getOpId().getMostSignificantBits());
+            out.writeInt(acceptMessage.getOperation().length);
             out.writeBytes(acceptMessage.getOperation());
         }
 
@@ -57,7 +58,12 @@ public class AcceptMessage extends ProtoMessage {
         public AcceptMessage deserialize(ByteBuf in) throws IOException {
             int sequenceNumber = in.readInt();
             UUID opId = new UUID(in.readLong(), in.readLong());
-            byte[] operation = in.array();
+            int bytesLength = in.readInt();
+
+            byte[] operation = new byte[bytesLength];
+            for(int i = 0; i < bytesLength; i++)
+                operation[i] = in.readByte();
+
             return new AcceptMessage(sequenceNumber, opId, operation);
         }
     };

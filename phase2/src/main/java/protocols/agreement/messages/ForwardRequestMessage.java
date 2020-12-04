@@ -52,6 +52,7 @@ public class ForwardRequestMessage extends ProtoMessage {
             out.writeInt(forwardRequest.getSequenceNumber());
             out.writeLong(forwardRequest.getOpId().getLeastSignificantBits());
             out.writeLong(forwardRequest.getOpId().getMostSignificantBits());
+            out.writeInt(forwardRequest.getOperation().length);
             out.writeBytes(forwardRequest.getOperation());
         }
 
@@ -59,7 +60,11 @@ public class ForwardRequestMessage extends ProtoMessage {
         public ForwardRequestMessage deserialize(ByteBuf in) throws IOException {
             int sequenceNumber = in.readInt();
             UUID opId = new UUID(in.readLong(), in.readLong());
-            byte[] operation = in.array();
+            int bytesLength = in.readInt();
+
+            byte[] operation = new byte[bytesLength];
+            for(int i = 0; i < bytesLength; i++)
+                operation[i] = in.readByte();
             return new ForwardRequestMessage(sequenceNumber, opId, operation);
         }
     };
