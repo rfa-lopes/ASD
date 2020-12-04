@@ -117,6 +117,7 @@ public class Paxos extends GenericProtocol {
         //We joined the system and can now start doing things
         joinedInstance = notification.getJoinInstance();
         membership = new LinkedList<>(notification.getMembership());
+        membership.forEach(this::openConnection); // TODO: Tenho que fazer isto?
         logger.info("Agreement starting at instance {},  membership: {}", joinedInstance, membership);
     }
 
@@ -145,6 +146,7 @@ public class Paxos extends GenericProtocol {
         //The AddReplicaRequest contains an "instance" field, which we ignore in this incorrect protocol.
         //You should probably take it into account while doing whatever you do here.
         membership.add(request.getReplica());
+        openConnection(request.getReplica());// TODO: Tenho que fazer isto?
     }
 
     private void uponRemoveReplica(RemoveReplicaRequest request, short sourceProto) {
@@ -152,6 +154,7 @@ public class Paxos extends GenericProtocol {
         //The RemoveReplicaRequest contains an "instance" field, which we ignore in this incorrect protocol.
         //You should probably take it into account while doing whatever you do here.
         membership.remove(request.getReplica());
+        closeConnection(request.getReplica());// TODO: Tenho que fazer isto?
     }
 
     /*----------------------------------------MESSAGES HANDLERS------------------------------------------------*/
@@ -177,7 +180,7 @@ public class Paxos extends GenericProtocol {
     private void uponPrepareOkMessage(PrepareOkMessage msg, Host host, short sourceProto, int channelId) {
         logger.debug("Received " + msg);
 
-        if( ++prepareOkMessagesReceived == getQuorumSize()){
+        if( prepareOkMessagesReceived == getQuorumSize()){
             cancelTimer(prepareTimer);
 
             AcceptMessage acceptMessage = new AcceptMessage(sequenceNumber, opId, operation);
