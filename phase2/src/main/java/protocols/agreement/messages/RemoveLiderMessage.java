@@ -11,15 +11,15 @@ import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-public class InformLiderMessage extends ProtoMessage {
+public class RemoveLiderMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 9026;
+    public final static short MSG_CODE = 9126;
 
     private final Host host;
 
 
 
-    public InformLiderMessage(Host host) {
+    public RemoveLiderMessage(Host host) {
         super(MSG_CODE);
         this.host = host;
     }
@@ -30,26 +30,26 @@ public class InformLiderMessage extends ProtoMessage {
 
     @Override
     public String toString() {
-        return "InformLider{" +
+        return "Remove Lider{" +
                 "Host: " + host +
                 "}";
     }
 
-    public static final ISerializer<InformLiderMessage> serializer = new ISerializer<InformLiderMessage>() {
+    public static final ISerializer<RemoveLiderMessage> serializer = new ISerializer<RemoveLiderMessage>() {
         @Override
-        public void serialize(InformLiderMessage msg, ByteBuf out) {
+        public void serialize(RemoveLiderMessage msg, ByteBuf out) {
             InetAddress tosend = msg.getHost().getAddress();
             out.writeBytes(tosend.getAddress());
             out.writeShort(msg.getHost().getPort());
         }
 
         @Override
-        public InformLiderMessage deserialize(ByteBuf in) throws UnknownHostException {
+        public RemoveLiderMessage deserialize(ByteBuf in) throws UnknownHostException {
             byte[] addrBytes = new byte[4];
             in.readBytes(addrBytes);
             int port = in.readShort() & '\uffff';
             InetAddress received = InetAddress.getByAddress(addrBytes);
-            return new InformLiderMessage(new Host(received, port));
+            return new RemoveLiderMessage(new Host(received, port));
         }
     };
 
