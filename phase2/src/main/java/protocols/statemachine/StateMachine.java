@@ -1,6 +1,16 @@
 package protocols.statemachine;
 
+import org.apache.commons.lang3.tuple.Pair;
+import protocols.agreement.MultiPaxos;
+import protocols.agreement.Paxos;
+import protocols.agreement.messages.PrepareMessage;
 import protocols.agreement.notifications.JoinedNotification;
+import protocols.app.HashApp;
+import protocols.app.messages.RequestMessage;
+import protocols.app.requests.CurrentStateReply;
+import protocols.app.requests.CurrentStateRequest;
+import protocols.app.utils.Operation;
+import protocols.statemachine.utils.Operation;
 import pt.unl.fct.di.novasys.babel.core.GenericProtocol;
 import pt.unl.fct.di.novasys.babel.exceptions.HandlerRegistrationException;
 import pt.unl.fct.di.novasys.babel.generic.ProtoMessage;
@@ -16,22 +26,21 @@ import protocols.agreement.requests.ProposeRequest;
 import protocols.statemachine.notifications.ExecuteNotification;
 import protocols.statemachine.requests.OrderRequest;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
+import java.text.ParseException;
+import java.util.*;
 
 /**
  * This is NOT fully functional StateMachine implementation.
  * This is simply an example of things you can do, and can be used as a starting point.
- *
+ * <p>
  * You are free to change/delete anything in this class, including its fields.
  * The only thing that you cannot change are the notifications/requests between the StateMachine and the APPLICATION
  * You can change the requests/notification between the StateMachine and AGREEMENT protocol, however make sure it is
  * coherent with the specification shown in the project description.
- *
+ * <p>
  * Do not assume that any logic implemented here is correct, think for yourself!
  */
 public class StateMachine extends GenericProtocol {
@@ -50,9 +59,22 @@ public class StateMachine extends GenericProtocol {
     private List<Host> membership;
     private int nextInstance;
 
+    private int executedOps;
+    private final Map<String, byte[]> data;
+    private byte[] cumulativeHash;
+
+    private List<UUID> opsToBe;
+    private Map<UUID, Operation> operationMap;
+    private String agreement;
+
     public StateMachine(Properties props) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
         nextInstance = 0;
+        executedOps = 0;
+        data = new HashMap<>();
+        cumulativeHash = new byte[1];
+        this.agreement = props.getProperty("agreement");
+
 
         String address = props.getProperty("address");
         String port = props.getProperty("p2p_port");
@@ -67,6 +89,11 @@ public class StateMachine extends GenericProtocol {
         channelProps.setProperty(TCPChannel.HEARTBEAT_TOLERANCE_KEY, "3000");
         channelProps.setProperty(TCPChannel.CONNECT_TIMEOUT_KEY, "1000");
         channelId = createChannel(TCPChannel.NAME, channelProps);
+
+
+        /*-------------------- Register Reply Handler ----------------------- */
+        registerReplyHandler(CurrentStateReply.REQUEST_ID, this::uponStateReply);
+
 
         /*-------------------- Register Channel Events ------------------------------- */
         registerChannelEventHandler(channelId, OutConnectionDown.EVENT_ID, this::uponOutConnectionDown);
@@ -111,25 +138,71 @@ public class StateMachine extends GenericProtocol {
         } else {
             state = State.JOINING;
             logger.info("Starting in JOINING as I am not part of initial membership");
+
+            sendRequest(new CurrentStateRequest(nextInstance - 1), PROTOCOL_ID);
+
             //You have to do something to join the system and know which instance you joined
             // (and copy the state of that instance)
         }
 
     }
 
+    /*--------------------------------- Reply ---------------------------------------- */
+    private void uponStateReply(CurrentStateReply reply, short sourceProto) {
+        byte[] tempState = reply.getState();
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(tempState);
+        DataInputStream dis = new DataInputStream(bais);
+        try {
+            this.executedOps = dis.readInt();
+            this.cumulativeHash = new byte[dis.readInt()];
+            dis.read(this.cumulativeHash);
+            int mapSize = dis.readInt();
+            for (int i = 0; i < mapSize; i++) {
+                String key = dis.readUTF();
+                byte[] value = new byte[dis.readInt()];
+                dis.read(value);
+                data.put(key, value);
+            }
+
+            this.state = State.ACTIVE;
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+
     /*--------------------------------- Requests ---------------------------------------- */
     private void uponOrderRequest(OrderRequest request, short sourceProto) {
         logger.debug("Received request: " + request);
         if (state == State.JOINING) {
-            //Do something smart (like buffering the requests)
+            opsToBe.add(request.getOpId());
+
+            try {
+                operationMap.put(request.getOpId(), Operation.fromByteArray(request.getOperation()));
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
         } else if (state == State.ACTIVE) {
             //Also do something starter, we don't want an infinite number of instances active
-        	//Maybe you should modify what is it that you are proposing so that you remember that this
-        	//operation was issued by the application (and not an internal operation, check the uponDecidedNotification)
-            sendRequest(new ProposeRequest(nextInstance++, request.getOpId(), request.getOperation()),
-                    IncorrectAgreement.PROTOCOL_ID);
+            //Maybe you should modify what is it that you are proposing so that you remember that this
+            //operation was issued by the application (and not an internal operation, check the uponDecidedNotification)
+
+
+
+            if(agreement.equalsIgnoreCase("paxos")){
+                sendRequest(new ProposeRequest(nextInstance++, request.getOpId(), request.getOperation()),
+                        Paxos.PROTOCOL_ID);
+            }else{
+                sendRequest(new ProposeRequest(nextInstance++, request.getOpId(), request.getOperation()),
+                        MultiPaxos.PROTOCOL_ID);
+            }
+
         }
     }
+
 
     /*--------------------------------- Notifications ---------------------------------------- */
     private void uponDecidedNotification(DecidedNotification notification, short sourceProto) {
@@ -159,7 +232,7 @@ public class StateMachine extends GenericProtocol {
         logger.debug("Connection to {} failed, cause: {}", event.getNode(), event.getCause());
         //Maybe we don't want to do this forever. At some point we assume he is no longer there.
         //Also, maybe wait a little bit before retrying, or else you'll be trying 1000s of times per second
-        if(membership.contains(event.getNode()))
+        if (membership.contains(event.getNode()))
             openConnection(event.getNode());
     }
 
