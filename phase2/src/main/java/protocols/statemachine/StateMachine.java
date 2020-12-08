@@ -1,35 +1,32 @@
 package protocols.statemachine;
 
-import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import protocols.agreement.MultiPaxos;
 import protocols.agreement.Paxos;
-import protocols.agreement.messages.PrepareMessage;
+import protocols.agreement.notifications.DecidedNotification;
 import protocols.agreement.notifications.JoinedNotification;
-import protocols.app.HashApp;
-import protocols.app.messages.RequestMessage;
+import protocols.agreement.requests.ProposeRequest;
 import protocols.app.requests.CurrentStateReply;
 import protocols.app.requests.CurrentStateRequest;
 import protocols.app.utils.Operation;
-import protocols.statemachine.utils.Operation;
+import protocols.statemachine.messages.InformMembership;
+import protocols.statemachine.messages.RequestMembership;
+import protocols.statemachine.notifications.ChannelReadyNotification;
+import protocols.statemachine.notifications.ExecuteNotification;
+import protocols.statemachine.requests.OrderRequest;
 import pt.unl.fct.di.novasys.babel.core.GenericProtocol;
 import pt.unl.fct.di.novasys.babel.exceptions.HandlerRegistrationException;
 import pt.unl.fct.di.novasys.babel.generic.ProtoMessage;
 import pt.unl.fct.di.novasys.channel.tcp.TCPChannel;
 import pt.unl.fct.di.novasys.channel.tcp.events.*;
 import pt.unl.fct.di.novasys.network.data.Host;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import protocols.agreement.IncorrectAgreement;
-import protocols.statemachine.notifications.ChannelReadyNotification;
-import protocols.agreement.notifications.DecidedNotification;
-import protocols.agreement.requests.ProposeRequest;
-import protocols.statemachine.notifications.ExecuteNotification;
-import protocols.statemachine.requests.OrderRequest;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -45,6 +42,8 @@ import java.util.*;
  */
 public class StateMachine extends GenericProtocol {
     private static final Logger logger = LogManager.getLogger(StateMachine.class);
+
+    private final int MAX_INSTANCES = 1000;
 
     private enum State {JOINING, ACTIVE}
 
@@ -67,6 +66,12 @@ public class StateMachine extends GenericProtocol {
     private Map<UUID, Operation> operationMap;
     private String agreement;
 
+    private boolean hasState;
+    private boolean hasMembership;
+
+    private Map<Integer, Operation> paxosInstances;
+    private List<Integer> instancesInUse;
+
     public StateMachine(Properties props) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
         nextInstance = 0;
@@ -74,7 +79,7 @@ public class StateMachine extends GenericProtocol {
         data = new HashMap<>();
         cumulativeHash = new byte[1];
         this.agreement = props.getProperty("agreement");
-
+        this.paxosInstances = new HashMap<>();
 
         String address = props.getProperty("address");
         String port = props.getProperty("p2p_port");
@@ -90,10 +95,16 @@ public class StateMachine extends GenericProtocol {
         channelProps.setProperty(TCPChannel.CONNECT_TIMEOUT_KEY, "1000");
         channelId = createChannel(TCPChannel.NAME, channelProps);
 
+        /*-------------------- Register Message Serializers ----------------------- */
+        registerMessageSerializer(channelId, RequestMembership.MSG_CODE, RequestMembership.serializer);
+        registerMessageSerializer(channelId, InformMembership.MSG_CODE, InformMembership.serializer);
+
+        /*-------------------- Register Message Handler ----------------------- */
+        registerMessageHandler(channelId, RequestMembership.MSG_CODE, this::uponMembershipRequest, this::uponMsgFail);
+        registerMessageHandler(channelId, InformMembership.MSG_CODE, this::uponInformMembership, this::uponMsgFail);
 
         /*-------------------- Register Reply Handler ----------------------- */
         registerReplyHandler(CurrentStateReply.REQUEST_ID, this::uponStateReply);
-
 
         /*-------------------- Register Channel Events ------------------------------- */
         registerChannelEventHandler(channelId, OutConnectionDown.EVENT_ID, this::uponOutConnectionDown);
@@ -139,10 +150,11 @@ public class StateMachine extends GenericProtocol {
             state = State.JOINING;
             logger.info("Starting in JOINING as I am not part of initial membership");
 
+            membership = new LinkedList<>(initialMembership);
+            membership.forEach(this::openConnection);
+            sendMessage(new RequestMembership(), membership.get(0));
             sendRequest(new CurrentStateRequest(nextInstance - 1), PROTOCOL_ID);
-
-            //You have to do something to join the system and know which instance you joined
-            // (and copy the state of that instance)
+            //TODO: Timer for membership request
         }
 
     }
@@ -165,10 +177,18 @@ public class StateMachine extends GenericProtocol {
                 data.put(key, value);
             }
 
-            this.state = State.ACTIVE;
+            this.hasState = true;
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
+        }
+
+        if (this.hasMembership && this.hasState) {
+            this.state = State.ACTIVE;
+
+            triggerNotification(new JoinedNotification(membership, this.membership.size()));
+
+            //TODO: WHEN JOINED RUN OPS
         }
     }
 
@@ -185,21 +205,39 @@ public class StateMachine extends GenericProtocol {
                 e.printStackTrace();
                 System.exit(1);
             }
+
         } else if (state == State.ACTIVE) {
             //Also do something starter, we don't want an infinite number of instances active
             //Maybe you should modify what is it that you are proposing so that you remember that this
             //operation was issued by the application (and not an internal operation, check the uponDecidedNotification)
 
-
-
-            if(agreement.equalsIgnoreCase("paxos")){
-                sendRequest(new ProposeRequest(nextInstance++, request.getOpId(), request.getOperation()),
-                        Paxos.PROTOCOL_ID);
-            }else{
-                sendRequest(new ProposeRequest(nextInstance++, request.getOpId(), request.getOperation()),
-                        MultiPaxos.PROTOCOL_ID);
+            while (instancesInUse.contains(nextInstance)) {
+                if (nextInstance == MAX_INSTANCES)
+                    nextInstance = 0;
+                else
+                    nextInstance++;
             }
 
+            if (agreement.equalsIgnoreCase("paxos")) {
+                sendRequest(new ProposeRequest(nextInstance, request.getOpId(), request.getOperation()),
+                        Paxos.PROTOCOL_ID);
+                instancesInUse.add(nextInstance);
+                try {
+                    paxosInstances.put(nextInstance++, Operation.fromByteArray(request.getOperation()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    //TODO: this and receive message from paxos and delete from list and paxosInstances after sending
+                }
+            } else {
+                sendRequest(new ProposeRequest(nextInstance, request.getOpId(), request.getOperation()),
+                        MultiPaxos.PROTOCOL_ID);
+                instancesInUse.add(nextInstance);
+                try {
+                    paxosInstances.put(nextInstance++, Operation.fromByteArray(request.getOperation()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -210,6 +248,8 @@ public class StateMachine extends GenericProtocol {
         //Maybe we should make sure operations are executed in order?
         //You should be careful and check if this operation if an application operation (and send it up)
         //or if this is an operations that was executed by the state machine itself (in which case you should execute)
+
+
         triggerNotification(new ExecuteNotification(notification.getOpId(), notification.getOperation()));
     }
 
@@ -217,6 +257,32 @@ public class StateMachine extends GenericProtocol {
     private void uponMsgFail(ProtoMessage msg, Host host, short destProto, Throwable throwable, int channelId) {
         //If a message fails to be sent, for whatever reason, log the message and the reason
         logger.error("Message {} to {} failed, reason: {}", msg, host, throwable);
+    }
+
+    private void uponInformMembership(InformMembership msg, Host host, short sourceProto, int channelId) {
+        logger.debug("Received membership: " + msg);
+
+        this.membership = msg.getMembership();
+
+        membership.forEach(this::openConnection);
+
+        this.membership.add(self);
+
+        this.hasMembership = true;
+
+        if (this.hasMembership && this.hasState) {
+            this.state = State.ACTIVE;
+
+            triggerNotification(new JoinedNotification(membership, this.membership.size()));
+
+            //TODO: WHEN JOINED RUN OPS
+        }
+    }
+
+    private void uponMembershipRequest(RequestMembership msg, Host host, short sourceProto, int channelId) {
+        logger.debug("Membership requested by ", host);
+
+        sendMessage(new InformMembership(membership), host);
     }
 
     /* --------------------------------- TCPChannel Events ---------------------------- */
@@ -237,7 +303,11 @@ public class StateMachine extends GenericProtocol {
     }
 
     private void uponInConnectionUp(InConnectionUp event, int channelId) {
+        //When new machine joins receives in connection
+        //send membership
         logger.trace("Connection from {} is up", event.getNode());
+
+        openConnection(event.getNode()); //FIXME: might be bugged and need channelId
     }
 
     private void uponInConnectionDown(InConnectionDown event, int channelId) {
