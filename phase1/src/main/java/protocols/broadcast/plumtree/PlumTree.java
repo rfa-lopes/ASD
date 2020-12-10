@@ -124,7 +124,7 @@ public class PlumTree extends GenericProtocol {
     private void eagerPush(GossipMessage message, Host from, short sourceProto, int channelId) {
 
         for (Host h : eagerPushPeers) {
-            if (h != myself) {
+            if (h != from) {
                 sendMessage(message, h); //rever
             }
         }

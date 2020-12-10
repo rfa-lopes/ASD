@@ -62,6 +62,7 @@ public class StateMachine extends GenericProtocol {
     private final Map<String, byte[]> data;
     private byte[] cumulativeHash;
 
+    //Operation Buffer
     private List<UUID> opsToBe;
     private Map<UUID, Operation> operationMap;
     private String agreement;
@@ -69,8 +70,11 @@ public class StateMachine extends GenericProtocol {
     private boolean hasState;
     private boolean hasMembership;
 
+    //Paxos operations buffer
     private Map<Integer, Operation> paxosInstances;
     private List<Integer> instancesInUse;
+    private Queue<UUID> operationQueue;
+    private Map<UUID, Operation> operationsDecided;
 
     public StateMachine(Properties props) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
@@ -80,6 +84,7 @@ public class StateMachine extends GenericProtocol {
         cumulativeHash = new byte[1];
         this.agreement = props.getProperty("agreement");
         this.paxosInstances = new HashMap<>();
+        this.operationQueue = new ArrayDeque<>();
 
         String address = props.getProperty("address");
         String port = props.getProperty("p2p_port");
@@ -222,16 +227,18 @@ public class StateMachine extends GenericProtocol {
                 sendRequest(new ProposeRequest(nextInstance, request.getOpId(), request.getOperation()),
                         Paxos.PROTOCOL_ID);
                 instancesInUse.add(nextInstance);
+                operationQueue.add(request.getOpId());
                 try {
                     paxosInstances.put(nextInstance++, Operation.fromByteArray(request.getOperation()));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    //TODO: this and receive message from paxos and delete from list and paxosInstances after sending
+                    //TODO: this
                 }
             } else {
                 sendRequest(new ProposeRequest(nextInstance, request.getOpId(), request.getOperation()),
                         MultiPaxos.PROTOCOL_ID);
                 instancesInUse.add(nextInstance);
+                operationQueue.add(request.getOpId());
                 try {
                     paxosInstances.put(nextInstance++, Operation.fromByteArray(request.getOperation()));
                 } catch (IOException e) {
@@ -245,12 +252,30 @@ public class StateMachine extends GenericProtocol {
     /*--------------------------------- Notifications ---------------------------------------- */
     private void uponDecidedNotification(DecidedNotification notification, short sourceProto) {
         logger.debug("Received notification: " + notification);
+
+        if (operationQueue.peek().equals(notification.getOpId())) {
+            triggerNotification(new ExecuteNotification(notification.getOpId(), notification.getOperation()));
+            operationQueue.remove(notification.getOpId());
+            try {
+                operationsDecided.remove(notification.getOpId(), Operation.fromByteArray(notification.getOperation()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                operationsDecided.put(notification.getOpId(), Operation.fromByteArray(notification.getOperation()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //TODO: Isto tem de comunicar com as outras state machines? O que e uma operation da state machine?
+
         //Maybe we should make sure operations are executed in order?
         //You should be careful and check if this operation if an application operation (and send it up)
         //or if this is an operations that was executed by the state machine itself (in which case you should execute)
 
 
-        triggerNotification(new ExecuteNotification(notification.getOpId(), notification.getOperation()));
     }
 
     /*--------------------------------- Messages ---------------------------------------- */
