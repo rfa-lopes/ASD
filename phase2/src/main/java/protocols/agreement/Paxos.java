@@ -176,7 +176,12 @@ public class Paxos extends GenericProtocol {
     private void uponPrepareOkMessage(PrepareOkMessage msg, Host host, short sourceProto, int channelId) {
         logger.debug("Received " + msg);
 
-        if( prepareOkMessagesReceived == getQuorumSize()){
+        if(msg.getSequenceNumber() != sequenceNumber)
+            return;
+
+        prepareOkMessagesReceived++;
+
+        if( prepareOkMessagesReceived == getQuorumSize() ){
             cancelTimer(prepareTimer);
 
             AcceptMessage acceptMessage = new AcceptMessage(sequenceNumber, opId, operation);
@@ -254,8 +259,13 @@ public class Paxos extends GenericProtocol {
 
     /*----------------------------------------AUXILIARIES------------------------------------------------*/
 
+    //For the case when maxSeqNumber==100 and nextSeqNumberOfInstance==3 -> nextSeqNumberOfInstance==103
     private int getNextSequenceNumber() {
-        return this.sequenceNumber + membership.size();
+        int nextSequenceNumber = this.joinedInstance + membership.size();
+        //Maybe exists a more mathematical and efficient way to do this, but for now this works pretty fine :)
+        while(nextSequenceNumber <= sequenceNumber)
+            nextSequenceNumber += membership.size();
+        return nextSequenceNumber;
     }
 
     private int getQuorumSize(){
