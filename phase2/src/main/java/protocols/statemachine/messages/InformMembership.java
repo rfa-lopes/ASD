@@ -35,8 +35,6 @@ public class InformMembership extends ProtoMessage {
     public static final ISerializer<InformMembership> serializer = new ISerializer<InformMembership>() {
         @Override
         public void serialize(InformMembership informMembership, ByteBuf out) throws IOException {
-            String listString = informMembership.getMembership().stream().map(Host::toString).collect(Collectors.joining(", "));
-
             out.writeInt(informMembership.getMembership().size());
 
             for(Host h : informMembership.getMembership()){

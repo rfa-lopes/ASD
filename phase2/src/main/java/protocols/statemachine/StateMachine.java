@@ -7,9 +7,11 @@ import protocols.agreement.Paxos;
 import protocols.agreement.notifications.DecidedNotification;
 import protocols.agreement.notifications.JoinedNotification;
 import protocols.agreement.requests.ProposeRequest;
+import protocols.app.messages.RequestMessage;
 import protocols.app.requests.CurrentStateReply;
 import protocols.app.requests.CurrentStateRequest;
 import protocols.app.utils.Operation;
+import protocols.statemachine.messages.DecidedMessage;
 import protocols.statemachine.messages.InformMembership;
 import protocols.statemachine.messages.RequestMembership;
 import protocols.statemachine.notifications.ChannelReadyNotification;
@@ -22,11 +24,11 @@ import pt.unl.fct.di.novasys.channel.tcp.TCPChannel;
 import pt.unl.fct.di.novasys.channel.tcp.events.*;
 import pt.unl.fct.di.novasys.network.data.Host;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
@@ -58,12 +60,13 @@ public class StateMachine extends GenericProtocol {
     private List<Host> membership;
     private int nextInstance;
 
+    //State
     private int executedOps;
     private final Map<String, byte[]> data;
     private byte[] cumulativeHash;
 
     //Operation Buffer
-    private List<UUID> opsToBe;
+    private Queue<UUID> opsToBe;
     private Map<UUID, Operation> operationMap;
     private String agreement;
 
@@ -85,6 +88,8 @@ public class StateMachine extends GenericProtocol {
         this.agreement = props.getProperty("agreement");
         this.paxosInstances = new HashMap<>();
         this.operationQueue = new ArrayDeque<>();
+        opsToBe = new ArrayDeque<>();
+        operationMap = new HashMap<>();
 
         String address = props.getProperty("address");
         String port = props.getProperty("p2p_port");
@@ -164,6 +169,34 @@ public class StateMachine extends GenericProtocol {
 
     }
 
+    //TODO: buffer requests if too many
+
+    private void executeBufferedOps() throws IOException {
+
+        while (instancesInUse.contains(nextInstance)) {
+            if (nextInstance == MAX_INSTANCES)
+                nextInstance = 0;
+            else
+                nextInstance++;
+        }
+
+        UUID opId = opsToBe.poll();
+        Operation op = operationMap.get(opId);
+        short agId;
+
+        if (agreement.equalsIgnoreCase("paxos")) {
+            agId = Paxos.PROTOCOL_ID;
+        } else {
+            agId = MultiPaxos.PROTOCOL_ID;
+        }
+
+        sendRequest(new ProposeRequest(nextInstance, opId, op.toByteArray()), agId);
+        instancesInUse.add(nextInstance);
+        operationQueue.add(opId);
+        operationMap.remove(opId, op);
+        paxosInstances.put(nextInstance++, op);
+    }
+
     /*--------------------------------- Reply ---------------------------------------- */
     private void uponStateReply(CurrentStateReply reply, short sourceProto) {
         byte[] tempState = reply.getState();
@@ -193,7 +226,11 @@ public class StateMachine extends GenericProtocol {
 
             triggerNotification(new JoinedNotification(membership, this.membership.size()));
 
-            //TODO: WHEN JOINED RUN OPS
+            try {
+                executeBufferedOps();
+            } catch (IOException e) {
+                e.printStackTrace(); //FIXME: THIS
+            }
         }
     }
 
@@ -255,6 +292,16 @@ public class StateMachine extends GenericProtocol {
 
         if (operationQueue.peek().equals(notification.getOpId())) {
             triggerNotification(new ExecuteNotification(notification.getOpId(), notification.getOperation()));
+            byte[] state = null;
+
+            try {
+                state = getCurrentState();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            for (Host h : membership)
+                sendMessage(new DecidedMessage(state, notification.getInstance(), notification.getOpId(), notification.getOperation()), h);
             operationQueue.remove(notification.getOpId());
             try {
                 operationsDecided.remove(notification.getOpId(), Operation.fromByteArray(notification.getOperation()));
@@ -263,18 +310,31 @@ public class StateMachine extends GenericProtocol {
             }
         } else {
             try {
+                //TODO:Tratar deste buffer de ops
                 operationsDecided.put(notification.getOpId(), Operation.fromByteArray(notification.getOperation()));
+
+                Operation op = null;
+                try {
+                    op = Operation.fromByteArray(notification.getOperation());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                this.cumulativeHash = appendOpToHash(this.cumulativeHash, op.getData());
+
+                if (op.getOpType() == RequestMessage.WRITE)
+                    this.data.put(op.getKey(), op.getData());
+
+                this.executedOps++;
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        //TODO: Isto tem de comunicar com as outras state machines? O que e uma operation da state machine?
-
         //Maybe we should make sure operations are executed in order?
         //You should be careful and check if this operation if an application operation (and send it up)
         //or if this is an operations that was executed by the state machine itself (in which case you should execute)
-
 
     }
 
@@ -300,8 +360,47 @@ public class StateMachine extends GenericProtocol {
 
             triggerNotification(new JoinedNotification(membership, this.membership.size()));
 
-            //TODO: WHEN JOINED RUN OPS
+            try {
+                executeBufferedOps();
+            } catch (IOException e) {
+                e.printStackTrace(); //FIXME: THIS
+            }
         }
+    }
+
+    private void uponDecidedMessage(DecidedMessage msg, Host host, short sourceProto, int channelId) {
+        logger.debug("Decided Message received from ", host);
+
+        Operation op = null;
+        try {
+            op = Operation.fromByteArray(msg.getOperation());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(msg.getState());
+        DataInputStream dis = new DataInputStream(bais);
+        int executedOps = 0;
+        byte[] cumulativeHash = null;
+        Map<String, byte[]> data = null;
+
+        try {
+            executedOps = dis.readInt();
+            cumulativeHash = new byte[dis.readInt()];
+            data = new HashMap<>();
+            dis.read(cumulativeHash);
+            int mapSize = dis.readInt();
+            for (int i = 0; i < mapSize; i++) {
+                String key = dis.readUTF();
+                byte[] value = new byte[dis.readInt()];
+                dis.read(value);
+                data.put(key, value);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        execute(op, cumulativeHash, executedOps, data);
     }
 
     private void uponMembershipRequest(RequestMembership msg, Host host, short sourceProto, int channelId) {
@@ -337,6 +436,56 @@ public class StateMachine extends GenericProtocol {
 
     private void uponInConnectionDown(InConnectionDown event, int channelId) {
         logger.trace("Connection from {} is down, cause: {}", event.getNode(), event.getCause());
+    }
+
+    private byte[] appendOpToHash(byte[] hash, byte[] op) {
+        MessageDigest mDigest;
+        try {
+            mDigest = MessageDigest.getInstance("sha-256");
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("sha-256 not available...");
+            throw new AssertionError("sha-256 not available...");
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            baos.write(hash);
+            baos.write(op);
+            return mDigest.digest(baos.toByteArray());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+            throw new AssertionError();
+        }
+    }
+
+    private void execute(Operation op, byte[] cumulativeHash, int executedOps, Map<String, byte[]> data) {
+        if (!Arrays.equals(this.cumulativeHash, cumulativeHash)) {
+            this.cumulativeHash = cumulativeHash;
+            this.data.clear();
+            this.data.putAll(data);
+            this.executedOps = executedOps;
+        }
+
+        this.cumulativeHash = appendOpToHash(this.cumulativeHash, op.getData());
+
+        if (op.getOpType() == RequestMessage.WRITE)
+            this.data.put(op.getKey(), op.getData());
+
+        this.executedOps++;
+    }
+
+    private byte[] getCurrentState() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(baos);
+        dos.writeInt(executedOps);
+        dos.writeInt(cumulativeHash.length);
+        dos.write(cumulativeHash);
+        dos.writeInt(data.size());
+        for (Map.Entry<String, byte[]> entry : data.entrySet()) {
+            dos.writeUTF(entry.getKey());
+            dos.writeInt(entry.getValue().length);
+            dos.write(entry.getValue());
+        }
+        return baos.toByteArray();
     }
 
 }
