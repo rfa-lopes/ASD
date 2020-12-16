@@ -229,7 +229,8 @@ public class StateMachine extends GenericProtocol {
             try {
                 executeBufferedOps();
             } catch (IOException e) {
-                e.printStackTrace(); //FIXME: THIS
+                e.printStackTrace();
+                System.exit(1);
             }
         }
     }
@@ -269,7 +270,7 @@ public class StateMachine extends GenericProtocol {
                     paxosInstances.put(nextInstance++, Operation.fromByteArray(request.getOperation()));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    //TODO: this
+                    System.exit(1);
                 }
             } else {
                 sendRequest(new ProposeRequest(nextInstance, request.getOpId(), request.getOperation()),
@@ -363,7 +364,8 @@ public class StateMachine extends GenericProtocol {
             try {
                 executeBufferedOps();
             } catch (IOException e) {
-                e.printStackTrace(); //FIXME: THIS
+                e.printStackTrace();
+                System.exit(1);
             }
         }
     }
