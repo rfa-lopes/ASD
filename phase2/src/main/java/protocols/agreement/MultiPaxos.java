@@ -86,8 +86,8 @@ public class MultiPaxos extends GenericProtocol {
         //Get some configurations from the Properties object
         PREPARE_TIME = Integer.parseInt(properties.getProperty("prepareTime", "3000"));
         ACCEPT_TIME = Integer.parseInt(properties.getProperty("acceptTime", "3000"));
-        HB_TIME = Integer.parseInt(properties.getProperty("acceptTime", "3000"));
-        HB_TIMEOUT = Integer.parseInt(properties.getProperty("acceptTime", "3000"));
+        HB_TIME = Integer.parseInt(properties.getProperty("hbtime", "3000"));
+        HB_TIMEOUT = Integer.parseInt(properties.getProperty("hbtimeout", "3000"));
 
         /* Register Timer Handlers ----------------------------- */
         registerTimerHandler(PrepareTimer.TIMER_ID, this::uponResetTimer);
@@ -278,7 +278,13 @@ public class MultiPaxos extends GenericProtocol {
 
         logger.debug("Received " + msg);
 
-        if (++prepareOkMessagesReceived == getQuorumSize()) {
+        if (msg.getSequenceNumber() != sequenceNumber)
+            return;
+
+        prepareOkMessagesReceived++;
+
+
+        if (prepareOkMessagesReceived == getQuorumSize()) {
             cancelTimer(prepareTimer);
 
             AcceptMessage acceptMessage = new AcceptMessage(sequenceNumber, opId, operation);
@@ -487,8 +493,13 @@ public class MultiPaxos extends GenericProtocol {
     /*----------------------------------------AUXILIARIES------------------------------------------------*/
 
     private int getNextSequenceNumber() {
-        return this.sequenceNumber + membership.size();
+        int nextSequenceNumber = this.joinedInstance + membership.size();
+        //Maybe exists a more mathematical and efficient way to do this, but for now this works pretty fine :) -> 10/10 
+        while(nextSequenceNumber <= sequenceNumber)
+            nextSequenceNumber += membership.size();
+        return nextSequenceNumber;
     }
+
 
     private int getQuorumSize() {
         return (membership.size() / 2) + 1;
