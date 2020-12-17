@@ -51,7 +51,7 @@ public class StateMachine extends GenericProtocol {
 
     //Protocol information, to register in babel
     public static final String PROTOCOL_NAME = "StateMachine";
-    public static final short PROTOCOL_ID = 200;
+    public static final short PROTOCOL_ID = 6912;
 
     private final Host self;     //My own address/port
     private final int channelId; //Id of the created channel
@@ -90,6 +90,9 @@ public class StateMachine extends GenericProtocol {
         this.operationQueue = new ArrayDeque<>();
         opsToBe = new ArrayDeque<>();
         operationMap = new HashMap<>();
+        this.instancesInUse = new LinkedList<>();
+        this.operationsDecided = new HashMap<>();
+
 
         String address = props.getProperty("address");
         String port = props.getProperty("p2p_port");
@@ -108,10 +111,14 @@ public class StateMachine extends GenericProtocol {
         /*-------------------- Register Message Serializers ----------------------- */
         registerMessageSerializer(channelId, RequestMembership.MSG_CODE, RequestMembership.serializer);
         registerMessageSerializer(channelId, InformMembership.MSG_CODE, InformMembership.serializer);
+        registerMessageSerializer(channelId, DecidedMessage.MSG_CODE, DecidedMessage.serializer);
+
 
         /*-------------------- Register Message Handler ----------------------- */
         registerMessageHandler(channelId, RequestMembership.MSG_CODE, this::uponMembershipRequest, this::uponMsgFail);
         registerMessageHandler(channelId, InformMembership.MSG_CODE, this::uponInformMembership, this::uponMsgFail);
+        registerMessageHandler(channelId, DecidedMessage.MSG_CODE, this::uponDecidedMessage, this::uponMsgFail);
+
 
         /*-------------------- Register Reply Handler ----------------------- */
         registerReplyHandler(CurrentStateReply.REQUEST_ID, this::uponStateReply);
@@ -254,7 +261,7 @@ public class StateMachine extends GenericProtocol {
             //Maybe you should modify what is it that you are proposing so that you remember that this
             //operation was issued by the application (and not an internal operation, check the uponDecidedNotification)
 
-            while (instancesInUse.contains(nextInstance)) {
+            while (instancesInUse.contains(nextInstance)) { //FIXME:watch for null apparently
                 if (nextInstance == MAX_INSTANCES)
                     nextInstance = 0;
                 else
