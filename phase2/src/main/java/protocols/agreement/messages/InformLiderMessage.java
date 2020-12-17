@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class InformLiderMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 9026;
+    public final static short MSG_CODE = 9032;
 
     private final Host host;
 

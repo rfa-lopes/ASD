@@ -29,7 +29,7 @@ public class MultiPaxos extends GenericProtocol {
     private static final Logger logger = LogManager.getLogger(MultiPaxos.class);
 
     //Protocol information, to register in babel
-    public final static short PROTOCOL_ID = 9021;
+    public final static short PROTOCOL_ID = 9020;
     public final static String PROTOCOL_NAME = "MultiPaxos";
 
 
@@ -494,7 +494,7 @@ public class MultiPaxos extends GenericProtocol {
 
     private int getNextSequenceNumber() {
         int nextSequenceNumber = this.joinedInstance + membership.size();
-        //Maybe exists a more mathematical and efficient way to do this, but for now this works pretty fine :) -> 10/10 
+        //Maybe exists a more mathematical and efficient way to do this, but for now this works pretty fine :) -> 10/10
         while(nextSequenceNumber <= sequenceNumber)
             nextSequenceNumber += membership.size();
         return nextSequenceNumber;

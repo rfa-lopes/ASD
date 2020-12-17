@@ -10,7 +10,7 @@ import pt.unl.fct.di.novasys.network.ISerializer;
 
 public class RequestMessage extends ProtoMessage {
 
-    public final static short MSG_ID = 301;
+    public final static short MSG_ID = 305;
 
     public final static byte READ = 0;
     public final static byte WRITE = 1;

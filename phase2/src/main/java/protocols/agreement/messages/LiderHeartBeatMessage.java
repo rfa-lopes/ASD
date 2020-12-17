@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class LiderHeartBeatMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 9028;
+    public final static short MSG_CODE = 9033;
 
     public LiderHeartBeatMessage() {
         super(MSG_CODE);

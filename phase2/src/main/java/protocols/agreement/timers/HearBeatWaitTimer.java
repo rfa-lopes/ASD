@@ -4,7 +4,7 @@ import pt.unl.fct.di.novasys.babel.generic.ProtoTimer;
 
 public class HearBeatWaitTimer extends ProtoTimer {
 
-    public static final short TIMER_ID = 9129;
+    public static final short TIMER_ID = 9130;
 
     public HearBeatWaitTimer() {
         super(TIMER_ID);

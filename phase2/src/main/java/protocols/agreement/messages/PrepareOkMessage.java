@@ -9,7 +9,7 @@ import java.util.UUID;
 /*Made by Rodrigo*/
 public class PrepareOkMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 9023;
+    public final static short MSG_CODE = 9035;
 
     private final int sequenceNumber;
 
