@@ -1,3 +1,6 @@
-2020-12-17 11:26:54:419 0 sec: 0 operations; est completion in 0 second 
-2020-12-17 11:26:59:381 5 sec: 0 operations; est completion in 106751991167300 days 15 hours 
-2020-12-17 11:27:04:382 10 sec: 0 operations; est completion in 106751991167300 days 15 hours 
+Exception in thread "main" java.lang.NumberFormatException: For input string: "--nclients"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.base/java.lang.Integer.parseInt(Integer.java:652)
+	at java.base/java.lang.Integer.parseInt(Integer.java:770)
+	at site.ycsb.Client.parseArguments(Client.java:554)
+	at site.ycsb.Client.main(Client.java:278)
