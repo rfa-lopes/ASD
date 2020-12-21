@@ -20,7 +20,7 @@ import java.util.*;
 /*Made by Rodrigo*/
 public class Paxos extends GenericProtocol {
 
-    private static final Logger logger = LogManager.getLogger(MultiPaxos.class);
+    private static final Logger logger = LogManager.getLogger(Paxos.class);
 
     //Protocol information, to register in babel
     public final static short PROTOCOL_ID = 9020;

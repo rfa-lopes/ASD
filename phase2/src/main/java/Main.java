@@ -1,5 +1,6 @@
 import protocols.agreement.MultiPaxos;
 import protocols.agreement.Paxos;
+import protocols.statemachine.StateMachineInitial;
 import pt.unl.fct.di.novasys.babel.core.Babel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,9 @@ public class Main {
     private static final String PAXOS = "PAXOS";
     private static final String MULTI_PAXOS = "MULTI_PAXOS";
 
+    private static final String STATEMACHINE = "STATEMACHINE";
+    private static final String STATEMACHINEINITIAL = "STATEMACHINEINITIAL";
+
     public static void main(String[] args) throws Exception {
 
         //Get the (singleton) babel instance
@@ -47,13 +51,19 @@ public class Main {
         addInterfaceIp(props);
 
         //Lets run the algorithms from props
-        String agreementProtocol = props.getProperty("agreement");
+        String agreementProtocol = props.getProperty("agreement", PAXOS);
+        String smProtocol = props.getProperty("sm", STATEMACHINE);
 
         // Application
         HashApp hashApp = new HashApp(props);
 
         // StateMachine Protocol
-        StateMachine sm = new StateMachine(props);
+        GenericProtocol sm;
+        if (STATEMACHINE.equalsIgnoreCase(smProtocol))
+            sm = new StateMachine(props);
+        else
+            sm = new StateMachineInitial(props);
+
 
         // Agreement Protocol
         GenericProtocol agreement;
