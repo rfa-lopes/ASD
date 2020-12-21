@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class DecidedMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 6934;
+    public final static short MSG_CODE = 203;
 
     private byte[] state;
     private int instance;

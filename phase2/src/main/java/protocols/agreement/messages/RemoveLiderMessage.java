@@ -13,11 +13,9 @@ import java.util.UUID;
 
 public class RemoveLiderMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 9136;
+    public final static short MSG_CODE = 109;
 
     private final Host host;
-
-
 
     public RemoveLiderMessage(Host host) {
         super(MSG_CODE);

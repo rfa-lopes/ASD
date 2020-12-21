@@ -29,7 +29,7 @@ public class MultiPaxos extends GenericProtocol {
     private static final Logger logger = LogManager.getLogger(MultiPaxos.class);
 
     //Protocol information, to register in babel
-    public final static short PROTOCOL_ID = 9020;
+    public final static short PROTOCOL_ID = 100;
     public final static String PROTOCOL_NAME = "MultiPaxos";
 
 

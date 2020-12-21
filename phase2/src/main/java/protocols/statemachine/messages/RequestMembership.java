@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class RequestMembership extends ProtoMessage {
 
-    public static final short MSG_CODE = 6906;
+    public static final short MSG_CODE = 201;
 
     public RequestMembership() {
         super(MSG_CODE);

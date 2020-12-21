@@ -10,7 +10,7 @@ import java.util.UUID;
 /*Made by Rodrigo*/
 public class AcceptMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 9024;
+    public final static short MSG_CODE = 102;
 
     private final int sequenceNumber;
     private final UUID opId;

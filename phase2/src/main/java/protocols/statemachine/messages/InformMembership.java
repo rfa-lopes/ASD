@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class InformMembership extends ProtoMessage {
 
-    public final static short MSG_CODE = 6905;
+    public final static short MSG_CODE = 202;
 
     private List<Host> membership;
 

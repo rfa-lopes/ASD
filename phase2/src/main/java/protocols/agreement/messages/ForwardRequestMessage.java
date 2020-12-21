@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class ForwardRequestMessage extends ProtoMessage {
 
-    public final static short MSG_CODE = 9031;
+    public final static short MSG_CODE = 104;
 
     private final int sequenceNumber;
 

@@ -3,7 +3,7 @@ package protocols.agreement.timers;
 import pt.unl.fct.di.novasys.babel.generic.ProtoTimer;
 
 public class LiderHeartBeatTimer extends ProtoTimer {
-    public static final short TIMER_ID = 9029;
+    public static final short TIMER_ID = 103;
 
     public LiderHeartBeatTimer() {
         super(TIMER_ID);
