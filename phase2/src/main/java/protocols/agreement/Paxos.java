@@ -10,6 +10,7 @@ import protocols.agreement.timers.PrepareTimer;
 import pt.unl.fct.di.novasys.babel.core.GenericProtocol;
 import pt.unl.fct.di.novasys.babel.exceptions.HandlerRegistrationException;
 import pt.unl.fct.di.novasys.babel.generic.ProtoMessage;
+import pt.unl.fct.di.novasys.babel.generic.ProtoTimer;
 import pt.unl.fct.di.novasys.network.data.Host;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -242,12 +243,13 @@ public class Paxos extends GenericProtocol {
 
     /*----------------------------------------TIMERS------------------------------------------------*/
 
-    private void uponResetTimer(PrepareTimer v, long timerId) {
+    private void uponResetTimer(ProtoTimer v, long timerId) {
         //Reset algorithm using a larger sequence number (n)
         logger.debug("Reset Timer.");
         sequenceNumber = getNextSequenceNumber();
         acceptedMessages = 0;
         prepareOkMessagesReceived = 0;
+        cancelTimer(timerId);
         uponProposeRequest(new ProposeRequest(sequenceNumber, opId, operation), PROTOCOL_ID);
     }
 

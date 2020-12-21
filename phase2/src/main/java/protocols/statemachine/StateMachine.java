@@ -334,7 +334,9 @@ public class StateMachine extends GenericProtocol {
 
             //operationsDecided.put(decided, op);
 
-            //noinspection ConstantConditions
+            if(opExecuting == null)
+                return;
+
             if (opExecuting.equals(decided)) {
                 opExecuting = null;
                 currentOp = null;
