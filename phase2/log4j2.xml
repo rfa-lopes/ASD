@@ -8,14 +8,14 @@
     </Appenders>
 
     <Loggers>
-        <Logger level="debug" name="HashApp.java"/>
+        <Logger level="all" name="HashApp.java"/>
         <Logger level="info" name="io.netty"/>
         <Logger level="info" name="pt.unl.fct.di.novasys.network"/>
         <Logger level="info" name="pt.unl.fct.di.novasys.channel"/>
         <Logger level="info" name="pt.unl.fct.di.novasys.babel"/>
 
-        <Root level="debug">
-            <AppenderRef ref="Console" level="info"/>
+        <Root level="all">
+            <AppenderRef ref="Console" level="all"/>
         </Root>
     </Loggers>
 

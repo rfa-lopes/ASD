@@ -33,7 +33,6 @@ public class PrepareOkMessage extends ProtoMessage {
         @Override
         public void serialize(PrepareOkMessage prepareOkMessage, ByteBuf out) throws IOException {
             out.writeInt(prepareOkMessage.getSequenceNumber());
-            out.writeInt(prepareOkMessage.getSequenceNumber());
         }
 
         @Override

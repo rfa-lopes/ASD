@@ -35,7 +35,7 @@ import java.util.Properties;
  * Do not assume that any logic implemented here is correct, think for yourself!
  */
 public class StateMachineInitial extends GenericProtocol {
-    private static final Logger logger = LogManager.getLogger(StateMachine.class);
+    private static final Logger logger = LogManager.getLogger(StateMachineInitial.class);
 
     private enum State {JOINING, ACTIVE}
 

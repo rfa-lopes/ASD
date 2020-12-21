@@ -51,7 +51,7 @@ public class StateMachine extends GenericProtocol {
 
     //Protocol information, to register in babel
     public static final String PROTOCOL_NAME = "StateMachine";
-    public static final short PROTOCOL_ID = 6912;
+    public static final short PROTOCOL_ID = 200;
 
     private final Host self;     //My own address/port
     private final int channelId; //Id of the created channel

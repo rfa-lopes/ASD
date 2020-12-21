@@ -116,6 +116,7 @@ public class Paxos extends GenericProtocol {
 
     private void uponJoinedNotification(JoinedNotification notification, short sourceProto) {
         //We joined the system and can now start doing things
+        logger.info("Join Notification: " + notification);
         joinedInstance = notification.getJoinInstance();
         membership = new LinkedList<>(notification.getMembership());
         membership.forEach(this::openConnection); // TODO: Tenho que fazer isto?
