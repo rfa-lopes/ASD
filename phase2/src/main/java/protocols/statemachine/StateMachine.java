@@ -4,7 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocols.agreement.MultiPaxos;
 import protocols.agreement.Paxos;
+import protocols.agreement.messages.InformLiderMessage;
 import protocols.agreement.notifications.DecidedNotification;
+import protocols.agreement.notifications.InformeLiderNotification;
 import protocols.agreement.notifications.JoinedNotification;
 import protocols.agreement.requests.ProposeRequest;
 import protocols.app.messages.RequestMessage;
@@ -20,6 +22,7 @@ import protocols.statemachine.requests.OrderRequest;
 import pt.unl.fct.di.novasys.babel.core.GenericProtocol;
 import pt.unl.fct.di.novasys.babel.exceptions.HandlerRegistrationException;
 import pt.unl.fct.di.novasys.babel.generic.ProtoMessage;
+import pt.unl.fct.di.novasys.babel.generic.ProtoNotification;
 import pt.unl.fct.di.novasys.channel.tcp.TCPChannel;
 import pt.unl.fct.di.novasys.channel.tcp.events.*;
 import pt.unl.fct.di.novasys.network.data.Host;
@@ -46,6 +49,7 @@ public class StateMachine extends GenericProtocol {
     private static final Logger logger = LogManager.getLogger(StateMachine.class);
 
     private final int MAX_INSTANCES = 3;
+    private Host paxosLider;
 
     private enum State {JOINING, ACTIVE}
 
@@ -95,6 +99,7 @@ public class StateMachine extends GenericProtocol {
         operationMap = new HashMap<>();
         opExecuting = null;
         currentOp = null;
+        paxosLider = null;
 
 
         String address = props.getProperty("address");
@@ -138,7 +143,11 @@ public class StateMachine extends GenericProtocol {
 
         /*--------------------- Register Notification Handlers ----------------------------- */
         subscribeNotification(DecidedNotification.NOTIFICATION_ID, this::uponDecidedNotification);
+        subscribeNotification(InformeLiderNotification.NOTIFICATION_ID, this::uponLiderNotification);
+
     }
+
+
 
 
     @Override
@@ -379,6 +388,10 @@ public class StateMachine extends GenericProtocol {
                 e.printStackTrace();
             }
     }*/
+    }
+
+    private void uponLiderNotification(InformeLiderNotification informeLiderNotification, short sourceProto) {
+        paxosLider = informeLiderNotification.getLider();
     }
 
     /*--------------------------------- Messages ---------------------------------------- */

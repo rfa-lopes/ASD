@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocols.agreement.messages.*;
 import protocols.agreement.notifications.DecidedNotification;
+import protocols.agreement.notifications.InformeLiderNotification;
 import protocols.agreement.notifications.JoinedNotification;
 import protocols.agreement.requests.AddReplicaRequest;
 import protocols.agreement.requests.ProposeRequest;
@@ -80,7 +81,7 @@ public class MultiPaxos extends GenericProtocol {
         hb = -1;
         hbtimeout = -1;
 
-        changed = false;
+        changed = true;
 
 
         //Get some configurations from the Properties object
@@ -304,6 +305,8 @@ public class MultiPaxos extends GenericProtocol {
                 //im the king of westeros now, all bend the knee
                 membership.remove(lider);
                 lider = myself;
+                changed = false;
+                triggerNotification(new InformeLiderNotification(lider));
 
 
             }
