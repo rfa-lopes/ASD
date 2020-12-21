@@ -45,7 +45,7 @@ import java.util.*;
 public class StateMachine extends GenericProtocol {
     private static final Logger logger = LogManager.getLogger(StateMachine.class);
 
-    private final int MAX_INSTANCES = 1000;
+    private final int MAX_INSTANCES = 3;
 
     private enum State {JOINING, ACTIVE}
 
@@ -81,7 +81,7 @@ public class StateMachine extends GenericProtocol {
 
     public StateMachine(Properties props) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
-        nextInstance = new Random().nextInt();
+        nextInstance = 0;
         executedOps = 0;
         data = new HashMap<>();
         cumulativeHash = new byte[1];
@@ -157,12 +157,15 @@ public class StateMachine extends GenericProtocol {
             initialMembership.add(h);
         }
 
+        //TODO: REVER
+        initialMembership.remove(0);
+
         if (initialMembership.contains(self)) {
             state = State.ACTIVE;
             logger.info("Starting in ACTIVE as I am part of initial membership");
             //I'm part of the initial membership, so I'm assuming the system is bootstrapping
             membership = new LinkedList<>(initialMembership);
-//            membership.forEach(this::openConnection);
+            membership.forEach(this::openConnection);
             logger.info("Memb " + membership);
             triggerNotification(new JoinedNotification(membership, 0));
         } else {
@@ -266,7 +269,7 @@ public class StateMachine extends GenericProtocol {
             //Maybe you should modify what is it that you are proposing so that you remember that this
             //operation was issued by the application (and not an internal operation, check the uponDecidedNotification)
 
-            while (instancesInUse.contains(nextInstance)) { //FIXME:watch for null apparently
+            while (instancesInUse.contains(nextInstance) || nextInstance == MAX_INSTANCES) { //FIXME:watch for null apparently
                 if (nextInstance == MAX_INSTANCES)
                     nextInstance = 0;
                 else
@@ -303,6 +306,39 @@ public class StateMachine extends GenericProtocol {
     private void uponDecidedNotification(DecidedNotification notification, short sourceProto) {
         logger.debug("Received notification: " + notification);
 
+        try {
+            triggerNotification(new ExecuteNotification(notification.getOpId(), notification.getOperation()));
+
+            Operation op = Operation.fromByteArray(notification.getOperation());
+
+            //State update
+            this.executedOps++;
+            this.cumulativeHash = appendOpToHash(this.cumulativeHash, op.getData());
+            if (op.getOpType() == RequestMessage.WRITE)
+                this.data.put(op.getKey(), op.getData());
+
+            UUID myOperation = operationQueue.peek();
+            UUID decided = notification.getOpId();
+
+            operationsDecided.put(decided, op);
+
+            //noinspection ConstantConditions
+            if(myOperation.equals(decided)){
+                operationQueue.remove();
+            }else{
+                //Try again
+                uponOrderRequest(new OrderRequest(myOperation, /*TODO: Operacao*/ null), sourceProto);
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+/*
+
         if (operationQueue.peek().equals(notification.getOpId())) {
             triggerNotification(new ExecuteNotification(notification.getOpId(), notification.getOperation()));
             byte[] state = null;
@@ -313,8 +349,8 @@ public class StateMachine extends GenericProtocol {
                 e.printStackTrace();
             }
 
-            for (Host h : membership)
-                sendMessage(new DecidedMessage(state, notification.getInstance(), notification.getOpId(), notification.getOperation()), h);
+            //for (Host h : membership)
+              //  sendMessage(new DecidedMessage(state, notification.getInstance(), notification.getOpId(), notification.getOperation()), h);
             operationQueue.remove(notification.getOpId());
             try {
                 operationsDecided.remove(notification.getOpId(), Operation.fromByteArray(notification.getOperation()));
@@ -344,7 +380,7 @@ public class StateMachine extends GenericProtocol {
                 e.printStackTrace();
             }
         }
-
+*/
         //Maybe we should make sure operations are executed in order?
         //You should be careful and check if this operation if an application operation (and send it up)
         //or if this is an operations that was executed by the state machine itself (in which case you should execute)
