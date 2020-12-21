@@ -66,18 +66,22 @@ public class StateMachine extends GenericProtocol {
     private byte[] cumulativeHash;
 
     //Operation Buffer
+    private UUID opExecuting;
+    private Operation currentOp;
     private Queue<UUID> opsToBe;
     private Map<UUID, Operation> operationMap;
-    private String agreement;
 
+    //MISC
+    private String agreement;
     private boolean hasState;
     private boolean hasMembership;
 
-    //Paxos operations buffer
+    //Paxos operations buffer --- provavelmente vai tudo de vela
     private Map<Integer, Operation> paxosInstances;
     private List<Integer> instancesInUse;
-    private Queue<UUID> operationQueue;
     private Map<UUID, Operation> operationsDecided;
+    private Queue<UUID> operationQueue;
+
 
     public StateMachine(Properties props) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
@@ -86,12 +90,11 @@ public class StateMachine extends GenericProtocol {
         data = new HashMap<>();
         cumulativeHash = new byte[1];
         this.agreement = props.getProperty("agreement");
-        this.paxosInstances = new HashMap<>();
         this.operationQueue = new ArrayDeque<>();
         opsToBe = new ArrayDeque<>();
         operationMap = new HashMap<>();
-        this.instancesInUse = new LinkedList<>();
-        this.operationsDecided = new HashMap<>();
+        opExecuting = null;
+        currentOp = null;
 
 
         String address = props.getProperty("address");
@@ -210,6 +213,7 @@ public class StateMachine extends GenericProtocol {
     }
 
     /*--------------------------------- Reply ---------------------------------------- */
+    @SuppressWarnings("DuplicatedCode")
     private void uponStateReply(CurrentStateReply reply, short sourceProto) {
         byte[] tempState = reply.getState();
         logger.info("crash?2");
@@ -242,7 +246,12 @@ public class StateMachine extends GenericProtocol {
             triggerNotification(new JoinedNotification(membership, this.membership.size()));
 
             try {
-                executeBufferedOps();
+                //try executing a buffered op if any exist
+                if (!opsToBe.isEmpty()) {
+                    //maybe tentar correr do buffer de operacoes
+                    uponOrderRequest(new OrderRequest(opsToBe.peek(), operationMap.get(opsToBe.peek()).toByteArray()), PROTOCOL_ID);
+                }
+                //executeBufferedOps();
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
@@ -265,38 +274,33 @@ public class StateMachine extends GenericProtocol {
             }
 
         } else if (state == State.ACTIVE) {
-            //Also do something starter, we don't want an infinite number of instances active
-            //Maybe you should modify what is it that you are proposing so that you remember that this
-            //operation was issued by the application (and not an internal operation, check the uponDecidedNotification)
+            try {
+                if (opExecuting == null) {
+                    if (agreement.equalsIgnoreCase("paxos")) {
+                        sendRequest(new ProposeRequest(nextInstance++, request.getOpId(), request.getOperation()),
+                                Paxos.PROTOCOL_ID);
+                        //instancesInUse.add(nextInstance);
+                        //operationQueue.add(request.getOpId());
+                        //paxosInstances.put(nextInstance++, Operation.fromByteArray(request.getOperation()));
+                    } else {
+                        sendRequest(new ProposeRequest(nextInstance++, request.getOpId(), request.getOperation()),
+                                MultiPaxos.PROTOCOL_ID);
+                    }
+                    opExecuting = request.getOpId();
+                    currentOp = Operation.fromByteArray(request.getOperation());
 
-            while (instancesInUse.contains(nextInstance) || nextInstance == MAX_INSTANCES) { //FIXME:watch for null apparently
-                if (nextInstance == MAX_INSTANCES)
-                    nextInstance = 0;
-                else
-                    nextInstance++;
-            }
-
-            if (agreement.equalsIgnoreCase("paxos")) {
-                sendRequest(new ProposeRequest(nextInstance, request.getOpId(), request.getOperation()),
-                        Paxos.PROTOCOL_ID);
-                instancesInUse.add(nextInstance);
-                operationQueue.add(request.getOpId());
-                try {
-                    paxosInstances.put(nextInstance++, Operation.fromByteArray(request.getOperation()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.exit(1);
+                    if (sourceProto == PROTOCOL_ID) {
+                        opsToBe.remove();
+                        operationMap.remove(opExecuting, currentOp);
+                    }
+                } else if(sourceProto != PROTOCOL_ID){
+                    //put operation in buffer
+                    opsToBe.add(request.getOpId());
+                    operationMap.put(request.getOpId(), Operation.fromByteArray(request.getOperation()));
                 }
-            } else {
-                sendRequest(new ProposeRequest(nextInstance, request.getOpId(), request.getOperation()),
-                        MultiPaxos.PROTOCOL_ID);
-                instancesInUse.add(nextInstance);
-                operationQueue.add(request.getOpId());
-                try {
-                    paxosInstances.put(nextInstance++, Operation.fromByteArray(request.getOperation()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
             }
         }
     }
@@ -317,40 +321,40 @@ public class StateMachine extends GenericProtocol {
             if (op.getOpType() == RequestMessage.WRITE)
                 this.data.put(op.getKey(), op.getData());
 
-            UUID myOperation = operationQueue.peek();
             UUID decided = notification.getOpId();
 
-            operationsDecided.put(decided, op);
+            //operationsDecided.put(decided, op);
 
             //noinspection ConstantConditions
-            if(myOperation.equals(decided)){
-                operationQueue.remove();
-            }else{
+            if (opExecuting.equals(decided)) {
+                opExecuting = null;
+                currentOp = null;
+
+                if (!opsToBe.isEmpty()) {
+                    //maybe tentar correr do buffer de operacoes
+                    uponOrderRequest(new OrderRequest(opsToBe.peek(), operationMap.get(opsToBe.peek()).toByteArray()), PROTOCOL_ID);
+                }
+            } else {
                 //Try again
-                uponOrderRequest(new OrderRequest(myOperation, /*TODO: Operacao*/ null), sourceProto);
+                uponOrderRequest(new OrderRequest(opExecuting, currentOp.toByteArray()), PROTOCOL_ID);
             }
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-
 /*
-
         if (operationQueue.peek().equals(notification.getOpId())) {
             triggerNotification(new ExecuteNotification(notification.getOpId(), notification.getOperation()));
             byte[] state = null;
-
             try {
                 state = getCurrentState();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             //for (Host h : membership)
-              //  sendMessage(new DecidedMessage(state, notification.getInstance(), notification.getOpId(), notification.getOperation()), h);
+            //  sendMessage(new DecidedMessage(state, notification.getInstance(), notification.getOpId(), notification.getOperation()), h);
             operationQueue.remove(notification.getOpId());
             try {
                 operationsDecided.remove(notification.getOpId(), Operation.fromByteArray(notification.getOperation()));
@@ -361,30 +365,20 @@ public class StateMachine extends GenericProtocol {
             try {
                 //TODO:Tratar deste buffer de ops
                 operationsDecided.put(notification.getOpId(), Operation.fromByteArray(notification.getOperation()));
-
                 Operation op = null;
                 try {
                     op = Operation.fromByteArray(notification.getOperation());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 this.cumulativeHash = appendOpToHash(this.cumulativeHash, op.getData());
-
                 if (op.getOpType() == RequestMessage.WRITE)
                     this.data.put(op.getKey(), op.getData());
-
                 this.executedOps++;
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-*/
-        //Maybe we should make sure operations are executed in order?
-        //You should be careful and check if this operation if an application operation (and send it up)
-        //or if this is an operations that was executed by the state machine itself (in which case you should execute)
-
+    }*/
     }
 
     /*--------------------------------- Messages ---------------------------------------- */
@@ -393,6 +387,7 @@ public class StateMachine extends GenericProtocol {
         logger.error("Message {} to {} failed, reason: {}", msg, host, throwable);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void uponInformMembership(InformMembership msg, Host host, short sourceProto, int channelId) {
         logger.info("Received membership: " + msg);
 
@@ -410,7 +405,12 @@ public class StateMachine extends GenericProtocol {
             triggerNotification(new JoinedNotification(membership, this.membership.size()));
 
             try {
-                executeBufferedOps();
+                //try executing a buffered op if any exist
+                if (!opsToBe.isEmpty()) {
+                    //maybe tentar correr do buffer de operacoes
+                    uponOrderRequest(new OrderRequest(opsToBe.peek(), operationMap.get(opsToBe.peek()).toByteArray()), PROTOCOL_ID);
+                }
+                //executeBufferedOps();
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
