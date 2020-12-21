@@ -8,7 +8,7 @@ import pt.unl.fct.di.novasys.network.ISerializer;
 
 public class ResponseMessage extends ProtoMessage {
 
-    public final static short MSG_ID = 304;
+    public final static short MSG_ID = 302;
 
     private final long opId;
     private final byte[] data;

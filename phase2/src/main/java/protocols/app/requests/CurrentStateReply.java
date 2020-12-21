@@ -4,11 +4,11 @@ import pt.unl.fct.di.novasys.babel.generic.ProtoReply;
 
 public class CurrentStateReply extends ProtoReply {
 
-    public static final short REQUEST_ID = 303;
+    public static final short REQUEST_ID = 301;
 
     private int instance;
     private byte[] state;
-
+    
     public CurrentStateReply(int instance, byte[] state) {
         super(REQUEST_ID);
         this.instance = instance;
@@ -18,7 +18,7 @@ public class CurrentStateReply extends ProtoReply {
     public int getInstance() {
     	return this.instance;
     }
-
+    
     public byte[] getState() {
     	return this.state;
     }

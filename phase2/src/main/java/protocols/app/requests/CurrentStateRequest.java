@@ -4,10 +4,10 @@ import pt.unl.fct.di.novasys.babel.generic.ProtoRequest;
 
 public class CurrentStateRequest extends ProtoRequest {
 
-    public static final short REQUEST_ID = 302;
+    public static final short REQUEST_ID = 301;
 
     private int instance;
-
+    
     public CurrentStateRequest(int instance) {
         super(REQUEST_ID);
         this.instance = instance;

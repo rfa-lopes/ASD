@@ -71,7 +71,6 @@ public class HashApp extends GenericProtocol {
         registerMessageSerializer(channelId, RequestMessage.MSG_ID, RequestMessage.serializer);
         registerMessageSerializer(channelId, ResponseMessage.MSG_ID, ResponseMessage.serializer);
 
-
         /*-------------------- Register Message Handlers -------------------------- */
         registerMessageHandler(channelId, RequestMessage.MSG_ID, this::uponRequestMessage);
         //We never receive a ResponseMessage, so just register the failure handler.
@@ -94,7 +93,6 @@ public class HashApp extends GenericProtocol {
         byte[] state;
         try {
             state = this.getCurrentState();
-            logger.info("State + " + Arrays.toString(this.getCurrentState()));
         } catch (IOException e) {
             throw new AssertionError("Could not get current state of the application.", e);
         }
