@@ -1,6 +1,11 @@
 package protocols.app.requests;
 
+import io.netty.buffer.ByteBuf;
+import protocols.app.messages.RequestMessage;
 import pt.unl.fct.di.novasys.babel.generic.ProtoRequest;
+import pt.unl.fct.di.novasys.network.ISerializer;
+
+import java.nio.charset.StandardCharsets;
 
 public class InstallStateRequest extends ProtoRequest {
 
@@ -24,4 +29,5 @@ public class InstallStateRequest extends ProtoRequest {
                 "number of bytes=" + state.length +
                 '}';
     }
+
 }

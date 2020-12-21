@@ -81,7 +81,7 @@ public class StateMachine extends GenericProtocol {
 
     public StateMachine(Properties props) throws IOException, HandlerRegistrationException {
         super(PROTOCOL_NAME, PROTOCOL_ID);
-        nextInstance = 0;
+        nextInstance = new Random().nextInt();
         executedOps = 0;
         data = new HashMap<>();
         cumulativeHash = new byte[1];
@@ -137,6 +137,7 @@ public class StateMachine extends GenericProtocol {
         subscribeNotification(DecidedNotification.NOTIFICATION_ID, this::uponDecidedNotification);
     }
 
+
     @Override
     public void init(Properties props) {
         //Inform the state machine protocol about the channel we created in the constructor
@@ -161,7 +162,8 @@ public class StateMachine extends GenericProtocol {
             logger.info("Starting in ACTIVE as I am part of initial membership");
             //I'm part of the initial membership, so I'm assuming the system is bootstrapping
             membership = new LinkedList<>(initialMembership);
-            membership.forEach(this::openConnection);
+//            membership.forEach(this::openConnection);
+            logger.info("Memb " + membership);
             triggerNotification(new JoinedNotification(membership, 0));
         } else {
             state = State.JOINING;
@@ -179,7 +181,7 @@ public class StateMachine extends GenericProtocol {
     //TODO: buffer requests if too many
 
     private void executeBufferedOps() throws IOException {
-
+        logger.info("here==???????????????????????????????");
         while (instancesInUse.contains(nextInstance)) {
             if (nextInstance == MAX_INSTANCES)
                 nextInstance = 0;
@@ -207,6 +209,7 @@ public class StateMachine extends GenericProtocol {
     /*--------------------------------- Reply ---------------------------------------- */
     private void uponStateReply(CurrentStateReply reply, short sourceProto) {
         byte[] tempState = reply.getState();
+        logger.info("crash?2");
 
         ByteArrayInputStream bais = new ByteArrayInputStream(tempState);
         DataInputStream dis = new DataInputStream(bais);
@@ -229,6 +232,8 @@ public class StateMachine extends GenericProtocol {
         }
 
         if (this.hasMembership && this.hasState) {
+            logger.info("crash?");
+
             this.state = State.ACTIVE;
 
             triggerNotification(new JoinedNotification(membership, this.membership.size()));
@@ -353,7 +358,7 @@ public class StateMachine extends GenericProtocol {
     }
 
     private void uponInformMembership(InformMembership msg, Host host, short sourceProto, int channelId) {
-        logger.debug("Received membership: " + msg);
+        logger.info("Received membership: " + msg);
 
         this.membership = msg.getMembership();
 
@@ -413,7 +418,7 @@ public class StateMachine extends GenericProtocol {
     }
 
     private void uponMembershipRequest(RequestMembership msg, Host host, short sourceProto, int channelId) {
-        logger.debug("Membership requested by ", host);
+        logger.info("Membership requested by ", host);
 
         sendMessage(new InformMembership(membership), host);
     }
@@ -440,7 +445,7 @@ public class StateMachine extends GenericProtocol {
         //send membership
         logger.trace("Connection from {} is up", event.getNode());
 
-        openConnection(event.getNode()); //FIXME: might be bugged and need channelId
+        openConnection(event.getNode(), channelId); //FIXME: might be bugged and need channelId
     }
 
     private void uponInConnectionDown(InConnectionDown event, int channelId) {

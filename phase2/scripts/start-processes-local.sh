@@ -13,13 +13,14 @@ base_server_port=6000
 
 membership="localhost:${base_p2p_port}"
 
-read -p "------------- Press enter start. After starting, press enter to kill all servers --------------------"
+read -p "------------- Press enter start. After starting, press enter to kill all servers --------------------" myp
 
-i=1
+
 while [ $i -lt $processes ]; do
     membership="${membership},localhost:$(($base_p2p_port + $i))"
     i=$(($i + 1))
 done
+
 
 i=0
 while [ $i -lt $processes ]; do
@@ -30,8 +31,9 @@ while [ $i -lt $processes ]; do
 done
 
 sleep 2
-read -p "------------- Press enter to kill servers. --------------------"
+read -p "------------- Press enter to kill servers. --------------------" myp
 
+# shellcheck disable=SC2046
 kill $(ps aux | grep 'asdProj2.jar' | awk '{print $2}')
 
 echo "All processes done!"

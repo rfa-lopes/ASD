@@ -47,7 +47,7 @@ public class Main {
         addInterfaceIp(props);
 
         //Lets run the algorithms from props
-        String agreementProtocol = props.getProperty("agreement", PAXOS);
+        String agreementProtocol = props.getProperty("agreement");
 
         // Application
         HashApp hashApp = new HashApp(props);
@@ -82,7 +82,7 @@ public class Main {
         //Start babel and protocol threads
         babel.start();
 
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> logger.info("Goodbye")));
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> logger.info("Goodbye" )));
 
     }
 

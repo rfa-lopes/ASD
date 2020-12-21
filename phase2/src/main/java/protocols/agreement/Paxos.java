@@ -141,7 +141,7 @@ public class Paxos extends GenericProtocol {
     }
 
     private void uponAddReplica(AddReplicaRequest request, short sourceProto) {
-        logger.debug("Received " + request);
+        logger.info("Received " + request);
         //The AddReplicaRequest contains an "instance" field, which we ignore in this incorrect protocol.
         //You should probably take it into account while doing whatever you do here.
         membership.add(request.getReplica());
