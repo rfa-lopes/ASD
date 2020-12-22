@@ -333,9 +333,9 @@ public class MultiPaxos extends GenericProtocol {
             operation = receivedOperation;
 
             //reply with <ACCEPT_OK,n>
-            AcceptOkMessage acceptOkMessage = new AcceptOkMessage(sequenceNumber, opId, operation);
-            logger.debug("Sending to: {}, prepareMessage: {}", host, acceptOkMessage);
-            sendMessage(acceptOkMessage, host);
+//            AcceptOkMessage acceptOkMessage = new AcceptOkMessage(sequenceNumber, opId, operation);
+//            logger.debug("Sending to: {}, prepareMessage: {}", host, acceptOkMessage);
+//            sendMessage(acceptOkMessage, host);
 
             //send <ACCEPT_OK,na,va> to all learners
             AcceptOkMessage acceptOkMessageToLearners = new AcceptOkMessage(sequenceNumber, opId, operation);

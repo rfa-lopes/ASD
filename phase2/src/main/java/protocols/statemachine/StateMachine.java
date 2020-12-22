@@ -179,7 +179,7 @@ public class StateMachine extends GenericProtocol {
             membership = new LinkedList<>(initialMembership);
             membership.forEach(this::openConnection);
             logger.info("Memb " + membership);
-            triggerNotification(new JoinedNotification(membership, nextInstance));
+            triggerNotification(new JoinedNotification(membership, 0));
         } else {
             state = State.JOINING;
             logger.info("Starting in JOINING as I am not part of initial membership");
