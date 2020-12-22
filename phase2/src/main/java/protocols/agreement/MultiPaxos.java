@@ -399,11 +399,11 @@ public class MultiPaxos extends GenericProtocol {
             opId = receivedOpId;
             operation = receivedOperation;
 
-            //Send the accepts to all replicas
 
-            AcceptMessage acceptMessage = new AcceptMessage(sequenceNumber, opId, operation);
-            logger.debug("Sending to: {}, AcceptMessage: {}", membership, acceptMessage);
-            membership.forEach(h -> sendMessage(acceptMessage, h));
+//
+//            AcceptMessage acceptMessage = new AcceptMessage(sequenceNumber, opId, operation);
+//            logger.debug("Sending to: {}, AcceptMessage: {}", membership, acceptMessage);
+//            membership.forEach(h -> sendMessage(acceptMessage, h));
 
             //send <ACCEPT_OK,na,va> to all learners
             AcceptOkMessage acceptOkMessageToLearners = new AcceptOkMessage(sequenceNumber, opId, operation);
@@ -419,7 +419,7 @@ public class MultiPaxos extends GenericProtocol {
         logger.debug("Received " + msg);
 
         //the process updates the informed lider
-        lider = new Host(msg.getHost().getAddress(), msg.getHost().getPort());
+        lider = msg.getHost();
 
         //TODO :should we now inform lider that we still have a client request?
 
@@ -466,7 +466,7 @@ public class MultiPaxos extends GenericProtocol {
         logger.debug("Lider propose" + sequenceNumber);
 
         logger.debug("Sending to: " + membership);
-        PrepareMessage prepareMessage = new PrepareMessage(sequenceNumber);
+        PrepareMessage prepareMessage = new PrepareMessage(getNextSequenceNumber());
         membership.forEach(h -> sendMessage(prepareMessage, h));
 
         prepareTimer = setupPeriodicTimer(new PrepareTimer(), PREPARE_TIME, PREPARE_TIME);

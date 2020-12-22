@@ -179,7 +179,7 @@ public class StateMachine extends GenericProtocol {
             membership = new LinkedList<>(initialMembership);
             membership.forEach(this::openConnection);
             logger.info("Memb " + membership);
-            triggerNotification(new JoinedNotification(membership, 0));
+            triggerNotification(new JoinedNotification(membership, nextInstance));
         } else {
             state = State.JOINING;
             logger.info("Starting in JOINING as I am not part of initial membership");
@@ -486,9 +486,11 @@ public class StateMachine extends GenericProtocol {
     private void uponOutConnectionFailed(OutConnectionFailed<ProtoMessage> event, int channelId) {
         logger.debug("Connection to {} failed, cause: {}", event.getNode(), event.getCause());
         //Maybe we don't want to do this forever. At some point we assume he is no longer there.
-        //Also, maybe wait a little bit before retrying, or else you'll be trying 1000s of times per second
-        if (membership.contains(event.getNode()))
-            openConnection(event.getNode());
+//        //Also, maybe wait a little bit before retrying, or else you'll be trying 1000s of times per second
+
+        //FIXME: WAas bugging here ->commented
+//        if (membership.contains(event.getNode()))
+//            openConnection(event.getNode());
     }
 
     private void uponInConnectionUp(InConnectionUp event, int channelId) {
