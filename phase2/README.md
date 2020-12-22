@@ -19,17 +19,14 @@ $ mvn clean package
 ```
 
 ### Run
-```bash
-$ java -jar target/asdProj.jar -conf config.properties port=5000
-```
 
-#### Servidores
+#### Servers
 ```bash
 $ sed -i 's/\r$//' scripts/start-processes-local.sh
 $ ./scripts/start-processes-local.sh 3
 ```
 
-#### Cliente
+#### Client
 ```bash
 $ cd client
 $ sed -i 's/\r$//' exec.sh
@@ -62,12 +59,6 @@ asd04@cluster.di.fct.unl.pt's password: UlTrAsEcReTpAsSwoRd
 ```bash
 $ oarsub -l nodes=2 -I
 $ oarsub -l nodes=2,walltime=08:00:00 -I
-```
-
-### Run all tests (and wait 4 hours)
-```bash
-$ sed -i 's/\r$//' deploy/deploy.sh deploy/log.sh docker/start.sh docker/setupTc.sh deploy/setup.sh deploy/runTest.sh deploy/runAll.sh deploy/checkLogs.sh
-$ ./deploy/runAll.sh
 ```
 
 ### Download files
